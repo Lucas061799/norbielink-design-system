@@ -1,0 +1,339 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Alert — Norbielink Design System</title>
+<link rel="stylesheet" href="ds-shared.css">
+<style>
+.alert{display:flex;gap:12px;padding:14px 16px;border-radius:8px;margin-bottom:8px;width:100%;max-width:560px;font-family:'Montserrat',sans-serif;box-sizing:border-box;}
+.alert:last-child{margin-bottom:0;}
+.alert-icon{font-size:20px!important;flex-shrink:0;position:relative;top:1px;}
+.alert-title{font-weight:700;font-size:13px;line-height:1.4;}
+.alert-desc{font-size:12px;opacity:.85;margin-top:2px;line-height:1.5;}
+.alert-info{background:rgba(41,128,185,.08);border-left:3px solid #2980B9;}
+.alert-info .alert-icon,.alert-info .alert-title,.alert-info .alert-desc{color:#2980B9;}
+.alert-success{background:rgba(29,158,107,.08);border-left:3px solid #1D9E6B;}
+.alert-success .alert-icon,.alert-success .alert-title,.alert-success .alert-desc{color:#1D9E6B;}
+.alert-warning{background:rgba(230,168,23,.08);border-left:3px solid #E6A817;}
+.alert-warning .alert-icon,.alert-warning .alert-title,.alert-warning .alert-desc{color:#B87A00;}
+.alert-error{background:rgba(192,57,43,.08);border-left:3px solid #C0392B;}
+.alert-error .alert-icon,.alert-error .alert-title,.alert-error .alert-desc{color:#C0392B;}
+.alert-dk{border-radius:8px;margin-bottom:8px;}
+.alert-dk:last-child{margin-bottom:0;}
+.alert-info-dk{background:rgba(41,128,185,.18);border-left:3px solid #2980B9;}
+.alert-success-dk{background:rgba(29,158,107,.18);border-left:3px solid #1D9E6B;}
+.alert-warning-dk{background:rgba(230,168,23,.18);border-left:3px solid #E6A817;}
+.alert-error-dk{background:rgba(192,57,43,.18);border-left:3px solid #C0392B;}
+.alert-dk .alert-title{color:rgba(255,255,255,.88);}
+.alert-dk .alert-desc{color:rgba(255,255,255,.55);}
+.alert-info-dk .alert-icon{color:#5aaae0;}
+.alert-success-dk .alert-icon{color:#3dc98a;}
+.alert-warning-dk .alert-icon{color:#f0bb3c;}
+.alert-error-dk .alert-icon{color:#e05d4b;}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
+</head>
+<body class="btis-layout">
+<header class="btis-header">
+  <div class="btis-header-inner">
+    <a class="btis-brand" href="ds-00-home.html">
+      <img src="BTIS.png" class="btis-logo-img" alt="NorbieLink">
+    </a>
+    <nav class="btis-top-nav">
+      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>
+      <a class="btis-top-nav-link" href="ds-nav-styles.html">Styles</a>
+      <a class="btis-top-nav-link active" href="ds-nav-components.html">Components</a>
+      <a class="btis-top-nav-link" href="ds-nav-resources.html">Resources</a>
+    </nav>
+    <div class="btis-header-right">
+      <button class="btis-icon-btn" onclick="openSearch()"><span class="material-icons-round">search</span></button>
+      <button class="btis-theme-pill" id="darkModeBtn" onclick="toggleDarkMode()">
+        <span class="material-icons-round" id="darkModeIcon">dark_mode</span>
+        <span>Theme</span>
+      </button>
+    </div>
+  </div>
+</header>
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay" onclick="if(event.target===this)closeSearch()">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <span class="material-icons-round">search</span>
+      <input id="search-input" type="text" placeholder="Search components, foundations…"
+        oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
+      <span class="material-icons-round search-close" onclick="closeSearch()">close</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+    <div class="search-hint">
+      <span>Press</span><kbd>↑</kbd><kbd>↓</kbd><span>to navigate</span>
+      <kbd>↵</kbd><span>to open</span><kbd>Esc</kbd><span>to close</span>
+    </div>
+  </div>
+</div>
+<!-- END SEARCH -->
+<div class="ds-shell">
+<nav class="ds-sidenav">
+  <div class="ds-sidenav-group">
+    <div class="ds-sidenav-group-title">Getting Started</div>
+    <a class="ds-sidenav-item" href="ds-00-home.html">Introduction</a>
+    <a class="ds-sidenav-item" href="ds-01-color.html">Colors</a>
+    <a class="ds-sidenav-item" href="ds-02-typography.html">Typography</a>
+    <a class="ds-sidenav-item" href="ds-03-elevation.html">Elevation</a>
+    <a class="ds-sidenav-item" href="ds-04-shape.html">Shape</a>
+    <a class="ds-sidenav-item" href="ds-05-spacing.html">Spacing</a>
+  </div>
+  <div class="ds-sidenav-group">
+    <div class="ds-sidenav-group-title">Components</div>
+    <a class="ds-sidenav-item" href="ds-26-accordion.html">Accordion</a>
+    <a class="ds-sidenav-item active" href="ds-27-alert.html">Alert</a>
+    <a class="ds-sidenav-item" href="ds-28-alert-dialog.html">Alert Dialog</a>
+    <a class="ds-sidenav-item" href="ds-14-appbar.html">App Bars</a>
+    <a class="ds-sidenav-item" href="ds-29-avatar.html">Avatar</a>
+    <a class="ds-sidenav-item" href="ds-09-badges.html">Badge</a>
+    <a class="ds-sidenav-item" href="ds-30-breadcrumb.html">Breadcrumb</a>
+    <a class="ds-sidenav-item" href="ds-06-buttons.html">Button</a>
+    <a class="ds-sidenav-item" href="ds-31-button-group.html">Button Group</a>
+    <a class="ds-sidenav-item" href="ds-32-calendar.html">Calendar</a>
+    <a class="ds-sidenav-item" href="ds-10-cards.html">Card</a>
+    <a class="ds-sidenav-item" href="ds-33-carousel.html">Carousel</a>
+    <a class="ds-sidenav-item" href="ds-34-chart.html">Chart</a>
+    <a class="ds-sidenav-item" href="ds-15-checkbox.html">Checkbox</a>
+    <a class="ds-sidenav-item" href="ds-16-chips.html">Chips</a>
+    <a class="ds-sidenav-item" href="ds-35-collapsible.html">Collapsible</a>
+    <a class="ds-sidenav-item" href="ds-36-combobox.html">Combobox</a>
+<a class="ds-sidenav-item" href="ds-38-context-menu.html">Context Menu</a>
+    <a class="ds-sidenav-item" href="ds-13-datatable.html">Data Table</a>
+    <a class="ds-sidenav-item" href="ds-39-date-picker.html">Date Picker</a>
+    <a class="ds-sidenav-item" href="ds-17-dialogs.html">Dialog</a>
+    <a class="ds-sidenav-item" href="ds-18-divider.html">Divider</a>
+    <a class="ds-sidenav-item" href="ds-40-drawer.html">Drawer</a>
+    <a class="ds-sidenav-item" href="ds-41-dropdown.html">Dropdown Menu</a>
+    <a class="ds-sidenav-item" href="ds-42-empty-state.html">Empty State</a>
+    <a class="ds-sidenav-item" href="ds-43-hover-card.html">Hover Card</a>
+    <a class="ds-sidenav-item" href="ds-44-input-otp.html">Input OTP</a>
+<a class="ds-sidenav-item" href="ds-46-label.html">Label</a>
+    <a class="ds-sidenav-item" href="ds-19-lists.html">Lists</a>
+    <a class="ds-sidenav-item" href="ds-20-progress.html">Loading & Progress</a>
+    <a class="ds-sidenav-item" href="ds-47-menubar.html">Menubar</a>
+    <a class="ds-sidenav-item" href="ds-21-menus.html">Menus</a>
+    <a class="ds-sidenav-item" href="ds-07-navigation.html">Navigation</a>
+    <a class="ds-sidenav-item" href="ds-48-pagination.html">Pagination</a>
+    <a class="ds-sidenav-item" href="ds-49-popover.html">Popover</a>
+    <a class="ds-sidenav-item" href="ds-22-radio.html">Radio Group</a>
+    <a class="ds-sidenav-item" href="ds-50-resizable.html">Resizable</a>
+    <a class="ds-sidenav-item" href="ds-51-scroll-area.html">Scroll Area</a>
+    <a class="ds-sidenav-item" href="ds-52-select.html">Select</a>
+    <a class="ds-sidenav-item" href="ds-53-sheet.html">Sheet</a>
+    <a class="ds-sidenav-item" href="ds-54-skeleton.html">Skeleton</a>
+    <a class="ds-sidenav-item" href="ds-23-sliders.html">Slider</a>
+    <a class="ds-sidenav-item" href="ds-24-snackbar.html">Snackbar</a>
+    <a class="ds-sidenav-item" href="ds-55-spinner.html">Spinner</a>
+    <a class="ds-sidenav-item" href="ds-12-switches.html">Switch</a>
+    <a class="ds-sidenav-item" href="ds-11-tabs.html">Tabs</a>
+    <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
+    <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
+    <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
+    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
+    <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
+  </div>
+</nav>
+<aside class="ds-toc">
+  <div class="ds-toc-title">On this page</div>
+  <a class="ds-toc-item active" href="#overview">Overview</a>
+  <a class="ds-toc-item" href="#installation">Installation</a>
+  <a class="ds-toc-item" href="#usage">Usage</a>
+  <a class="ds-toc-item" href="#examples">Examples</a>
+  <a class="ds-toc-item" href="#api">Api</a>
+</aside>
+<main class="ds-main">
+  <div class="ds-content">
+    <div class="ds-breadcrumb">
+      <a href="ds-00-home.html">Home</a>
+      <span class="ds-breadcrumb-sep">›</span>
+      <a href="ds-nav-components.html">Components</a>
+      <span class="ds-breadcrumb-sep">›</span>
+      <span>Alert</span>
+    </div>
+    <div class="ds-title-row">
+    <h1 class="ds-page-title">Alert</h1>
+    <div class="ds-title-actions">
+      <button class="ds-copy-page-btn" onclick="copyPageLink()">
+        <span class="material-icons-round">content_copy</span> Copy Page
+        <span class="material-icons-round chevron">expand_more</span>
+      </button>
+      <a class="ds-nav-arrow-btn" href="ds-26-accordion.html" title="Previous"><span class="material-icons-round">arrow_back</span></a>
+      <a class="ds-nav-arrow-btn" href="ds-28-alert-dialog.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
+    </div>
+  </div>
+    <p class="ds-page-desc">Displays a callout for user attention — informational, success, warning, or error.</p>
+    <div class="ds-section" id="overview">
+      <div class="ds-preview-wrap">
+        <div class="ds-preview-tabbar">
+          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
+          <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
+        </div>
+        <div class="ds-preview-pane" id="prev-main" style="align-items:center;justify-content:center;">
+          <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0;width:100%;max-width:560px;">
+            <div class="alert alert-info"><span class="material-icons-round alert-icon">info</span><div><div class="alert-title">Information</div><div class="alert-desc">Your account settings have been updated successfully.</div></div></div>
+            <div class="alert alert-success"><span class="material-icons-round alert-icon">check_circle</span><div><div class="alert-title">Success</div><div class="alert-desc">Your project was published and is now live.</div></div></div>
+            <div class="alert alert-warning"><span class="material-icons-round alert-icon">warning</span><div><div class="alert-title">Warning</div><div class="alert-desc">You are approaching your storage limit.</div></div></div>
+            <div class="alert alert-error"><span class="material-icons-round alert-icon">error</span><div><div class="alert-title">Error</div><div class="alert-desc">Unable to save changes. Check your connection.</div></div></div>
+          </div>
+        </div>
+        <div class="ds-code-pane" id="code-main">
+          <button class="ds-copy-btn" onclick="copyCode(this,'code-main')"><span class="material-icons-round">content_copy</span> Copy</button>
+          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"alert alert-info"</span><span class="c-tag">&gt;</span>
+  <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"material-icons-round alert-icon"</span><span class="c-tag">&gt;</span>info<span class="c-tag">&lt;/span&gt;</span>
+  <span class="c-tag">&lt;div</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"alert-title"</span><span class="c-tag">&gt;</span>Information<span class="c-tag">&lt;/div&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"alert-desc"</span><span class="c-tag">&gt;</span>Your account settings have been updated.<span class="c-tag">&lt;/div&gt;</span>
+  <span class="c-tag">&lt;/div&gt;</span>
+<span class="c-tag">&lt;/div&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="ds-divider"></div>
+    <div class="ds-section" id="installation">
+      <h2 class="ds-section-title">Installation</h2>
+      <p class="ds-section-desc">Built with pure HTML and CSS. Include <span class="ds-inline-code">ds-shared.css</span> in your project.</p>
+      <div class="ds-install-wrap">
+        <div class="ds-install-tabbar">
+          <button class="ds-install-tab active" onclick="switchInstall(this,'pnpm')">pnpm</button>
+          <button class="ds-install-tab" onclick="switchInstall(this,'npm')">npm</button>
+          <button class="ds-install-tab" onclick="switchInstall(this,'yarn')">yarn</button>
+          <button class="ds-install-tab" onclick="switchInstall(this,'bun')">bun</button>
+        </div>
+        <div class="ds-install-code">
+          <span class="ds-install-cmd" id="install-cmd"><span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span></span>
+          <button class="ds-copy-btn" style="position:static;" onclick="copyInstall(this)"><span class="material-icons-round">content_copy</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="ds-divider"></div>
+    <div class="ds-section" id="usage">
+      <h2 class="ds-section-title">Usage</h2>
+      <div class="ds-usage-title">Import</div>
+      <div class="ds-preview-wrap">
+        <div class="ds-code-pane visible">
+          <button class="ds-copy-btn" onclick="copyCode(this,'code-import')"><span class="material-icons-round">content_copy</span> Copy</button>
+          <pre class="ds-code-block" id="code-import"><span class="c-tag">&lt;link</span> <span class="c-attr">rel</span>=<span class="c-str">"stylesheet"</span> <span class="c-attr">href</span>=<span class="c-str">"ds-shared.css"</span><span class="c-tag">&gt;</span></pre>
+        </div>
+      </div>
+      <div class="ds-usage-title">Basic structure</div>
+      <div class="ds-preview-wrap">
+        <div class="ds-code-pane visible">
+          <button class="ds-copy-btn" onclick="copyCode(this,'code-usage')"><span class="material-icons-round">content_copy</span> Copy</button>
+          <pre class="ds-code-block" id="code-usage"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"alert alert-info"</span><span class="c-tag">&gt;</span>
+  <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"material-icons-round alert-icon"</span><span class="c-tag">&gt;</span>info<span class="c-tag">&lt;/span&gt;</span>
+  <span class="c-tag">&lt;div</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"alert-title"</span><span class="c-tag">&gt;</span>Title<span class="c-tag">&lt;/div&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"alert-desc"</span><span class="c-tag">&gt;</span>Description text here.<span class="c-tag">&lt;/div&gt;</span>
+  <span class="c-tag">&lt;/div&gt;</span>
+<span class="c-tag">&lt;/div&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="ds-divider"></div>
+    <div class="ds-section" id="examples">
+      <h2 class="ds-section-title">Examples</h2>
+      <h3 class="ds-subsection-title">Inline with dismiss button</h3>
+      <div class="ds-preview-wrap">
+        <div class="ds-preview-tabbar">
+          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-ex1')">Preview</button>
+          <button class="ds-preview-tab" onclick="switchTab(this,'code-ex1')">Code</button>
+        </div>
+        <div class="ds-preview-pane" id="prev-ex1" style="align-items:center;justify-content:center;">
+          <div style="display:flex;flex-direction:column;width:100%;max-width:560px;">
+            <div class="alert alert-info" style="align-items:center;">
+              <span class="material-icons-round alert-icon" style="top:0">info</span>
+              <div style="flex:1"><div class="alert-title">New version v2.4.0 is available.</div></div>
+              <span class="material-icons-round" style="font-size:18px;color:#2980B9;opacity:.6;cursor:pointer;">close</span>
+            </div>
+            <div class="alert alert-success" style="align-items:center;">
+              <span class="material-icons-round alert-icon" style="top:0">check_circle</span>
+              <div style="flex:1"><div class="alert-title">Password changed successfully.</div></div>
+              <span class="material-icons-round" style="font-size:18px;color:#1D9E6B;opacity:.6;cursor:pointer;">close</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-code-pane" id="code-ex1">
+          <button class="ds-copy-btn" onclick="copyCode(this,'code-ex1')"><span class="material-icons-round">content_copy</span> Copy</button>
+          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"alert alert-info"</span> <span class="c-attr">style</span>=<span class="c-str">"align-items:center;"</span><span class="c-tag">&gt;</span>
+  <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"material-icons-round alert-icon"</span><span class="c-tag">&gt;</span>info<span class="c-tag">&lt;/span&gt;</span>
+  <span class="c-tag">&lt;div</span> <span class="c-attr">style</span>=<span class="c-str">"flex:1"</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"alert-title"</span><span class="c-tag">&gt;</span>New version available.<span class="c-tag">&lt;/div&gt;</span>
+  <span class="c-tag">&lt;/div&gt;</span>
+  <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"material-icons-round"</span> <span class="c-attr">style</span>=<span class="c-str">"font-size:18px;color:#2980B9;cursor:pointer;"</span><span class="c-tag">&gt;</span>close<span class="c-tag">&lt;/span&gt;</span>
+<span class="c-tag">&lt;/div&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+    <div class="ds-divider"></div>
+        <div class="ds-section" id="api">
+      <h2 class="ds-section-title">API Reference</h2>
+      <h3 class="ds-subsection-title">Variant classes</h3>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Color</th><th>Use case</th></tr></thead><tbody><tr><td><code>alert-info</code></td><td>Blue (#2980B9)</td><td>Informational messages</td></tr><tr><td><code>alert-success</code></td><td>Green (#1D9E6B)</td><td>Success confirmations</td></tr><tr><td><code>alert-warning</code></td><td>Amber (#E6A817)</td><td>Warnings and cautions</td></tr><tr><td><code>alert-error</code></td><td>Red (#C0392B)</td><td>Errors and failures</td></tr></tbody></table></div>
+      <h3 class="ds-subsection-title" style="margin-top:24px;">Dark variants</h3>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Notes</th></tr></thead><tbody><tr><td><code>alert-dk alert-info-dk</code></td><td>Dark info variant</td></tr><tr><td><code>alert-dk alert-success-dk</code></td><td>Dark success variant</td></tr><tr><td><code>alert-dk alert-warning-dk</code></td><td>Dark warning variant</td></tr><tr><td><code>alert-dk alert-error-dk</code></td><td>Dark error variant</td></tr></tbody></table></div>
+    </div>
+
+  
+    <!-- ── Prev / Next navigation ── -->
+        <div class="ds-page-nav">
+    <a class="ds-page-nav-btn prev" href="ds-26-accordion.html">
+      <span class="ds-page-nav-label">← Previous</span>
+      <span class="ds-page-nav-name">Accordion</span>
+    </a>
+    <a class="ds-page-nav-btn next" href="ds-28-alert-dialog.html">
+      <span class="ds-page-nav-label">Next →</span>
+      <span class="ds-page-nav-name">Alert Dialog</span>
+    </a>
+    </div>
+
+  
+  </div>
+</main>
+</div>
+
+<script>
+function toggleDarkMode(){
+  const b=document.body,ic=document.getElementById('darkModeIcon'),bt=document.getElementById('darkModeBtn');
+  b.classList.toggle('dark-mode');
+  if(b.classList.contains('dark-mode')){ic.textContent='light_mode';bt.classList.add('active');}
+  else{ic.textContent='dark_mode';bt.classList.remove('active');}
+}
+function switchTab(btn,id){
+  const w=btn.closest('.ds-preview-wrap');
+  w.querySelectorAll('.ds-preview-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const isC=btn.textContent.trim()==='Code';
+  w.querySelectorAll('.ds-preview-pane').forEach(p=>{
+    if(!p.classList.contains('dark-bg-pane'))p.style.display=isC?'none':'';
+  });
+  w.querySelectorAll('.ds-preview-pane.dark-bg-pane').forEach(p=>{
+    p.style.display=(!isC&&document.body.classList.contains('dark-mode'))?'flex':'none';
+  });
+  w.querySelectorAll('.ds-code-pane').forEach(c=>c.classList.remove('visible'));
+  if(isC){const cp=w.querySelector('.ds-code-pane');if(cp)cp.classList.add('visible');}
+}
+const IC={pnpm:'<span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span>',npm:'<span class="c-kw">npm</span> install <span class="c-pkg">@norbielink/ds</span>',yarn:'<span class="c-kw">yarn</span> add <span class="c-pkg">@norbielink/ds</span>',bun:'<span class="c-kw">bun</span> add <span class="c-pkg">@norbielink/ds</span>'};
+function switchInstall(btn,p){
+  btn.closest('.ds-install-tabbar').querySelectorAll('.ds-install-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('install-cmd').innerHTML=IC[p];
+}
+function copyCode(btn,id){
+  const el=document.getElementById(id)||btn.closest('.ds-preview-wrap,.ds-code-pane').querySelector('.ds-code-block');
+  navigator.clipboard.writeText(el?el.innerText:'').then(()=>{
+    btn.classList.add('copied');btn.innerHTML='<span class="material-icons-round">check</span> Copied!';
+    setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML='<span class="material-icons-round">content_copy</span> Copy';},2000);
+  });
+}
+function copyInstall(btn){
+  navigator.clipboard.writeText(document.getElementById('install-cmd').innerText).then(()=>{
+    btn.classList.add('copied');btn.innerHTML='<span class="material-icons-round">check</span>';
+    setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML='<span class="material-icons-round">content_copy</span>';},2000);
+  });
+}
+
+</script>
+<script src="ds-shared.js"></script>
+</body></html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cards — Norbielink Design System</title>
+<link rel="stylesheet" href="ds-shared.css">
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<style>
+.tile-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.tile { background: white; border-radius: 12px; padding: 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 10px; box-shadow: 0 1px 3px rgba(0,0,0,.07); cursor: pointer; border: 1.5px solid transparent; }
+.tile:hover { border-color: var(--gray-200); }
+.tile.active { border-color: var(--teal-700); box-shadow: 0 0 0 3px rgba(44,185,168,.15); }
+.tile-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--gray-100); display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.tile-label { font-size: 11px; font-weight: 500; color: var(--gray-700); text-align: center; line-height: 1.3; }
+
+.feature-card { background: white; border-radius: 16px; padding: 24px; border: 1.5px solid var(--gray-200); width: 220px; flex-shrink: 0; }
+.feature-icon-bg { width: 44px; height: 44px; border-radius: 10px; background: var(--teal-50); display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px; }
+.feature-title { font-size: 14px; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
+.feature-desc { font-size: 12px; color: var(--gray-500); line-height: 1.5; margin-bottom: 14px; }
+.feature-link { font-size: 12px; font-weight: 700; color: var(--teal-700); display: flex; align-items: center; gap: 4px; }
+
+.info-card { background: white; border-radius: 16px; border: 1.5px solid var(--gray-200); overflow: hidden; width: 260px; }
+.info-card-top { height: 80px; display: flex; align-items: center; justify-content: center; }
+.info-card-body { padding: 20px; }
+.info-card-title { font-size: 15px; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
+.info-card-desc { font-size: 12px; color: var(--gray-500); line-height: 1.5; margin-bottom: 14px; }
+.info-card-link { font-size: 13px; font-weight: 700; color: var(--teal-700); }
+
+.dark-tile { background: rgba(255,255,255,.06); border-radius: 12px; border: 1px solid rgba(255,255,255,.1); padding: 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; }
+.dark-tile-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; font-size: 22px; }
+.dark-tile.active { border-color: var(--teal-300); background: rgba(44,185,168,.15); }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
+</head>
+<body class="btis-layout">
+<header class="btis-header">
+  <div class="btis-header-inner">
+    <a class="btis-brand" href="ds-00-home.html">
+      <img src="BTIS.png" class="btis-logo-img" alt="NorbieLink">
+    </a>
+    <nav class="btis-top-nav">
+      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>
+      <a class="btis-top-nav-link" href="ds-nav-styles.html">Styles</a>
+      <a class="btis-top-nav-link active" href="ds-nav-components.html">Components</a>
+      <a class="btis-top-nav-link" href="ds-nav-resources.html">Resources</a>
+    </nav>
+    <div class="btis-header-right">
+      <button class="btis-icon-btn" onclick="openSearch()"><span class="material-icons-round">search</span></button>
+      <button class="btis-theme-pill" id="darkModeBtn" onclick="toggleDarkMode()">
+        <span class="material-icons-round" id="darkModeIcon">dark_mode</span>
+        <span>Theme</span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="ds-shell">
+
+
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay" onclick="if(event.target===this)closeSearch()">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <span class="material-icons-round">search</span>
+      <input id="search-input" type="text" placeholder="Search components, foundations, styles…" oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
+      <span class="material-icons-round search-close" onclick="closeSearch()">close</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+  </div>
+</div>
+<!-- END SEARCH -->
+
+
+<!-- SUB-NAV -->
+<nav class="ds-sidenav">
+  <div class="ds-sidenav-group">
+    <div class="ds-sidenav-group-title">Getting Started</div>
+    <a class="ds-sidenav-item" href="ds-00-home.html">Introduction</a>
+    <a class="ds-sidenav-item" href="ds-01-color.html">Colors</a>
+    <a class="ds-sidenav-item" href="ds-02-typography.html">Typography</a>
+    <a class="ds-sidenav-item" href="ds-03-elevation.html">Elevation</a>
+    <a class="ds-sidenav-item" href="ds-04-shape.html">Shape</a>
+    <a class="ds-sidenav-item" href="ds-05-spacing.html">Spacing</a>
+  </div>
+  <div class="ds-sidenav-group">
+    <div class="ds-sidenav-group-title">Components</div>
+    <a class="ds-sidenav-item" href="ds-26-accordion.html">Accordion</a>
+    <a class="ds-sidenav-item" href="ds-27-alert.html">Alert</a>
+    <a class="ds-sidenav-item" href="ds-28-alert-dialog.html">Alert Dialog</a>
+    <a class="ds-sidenav-item" href="ds-14-appbar.html">App Bars</a>
+    <a class="ds-sidenav-item" href="ds-29-avatar.html">Avatar</a>
+    <a class="ds-sidenav-item" href="ds-09-badges.html">Badge</a>
+    <a class="ds-sidenav-item" href="ds-30-breadcrumb.html">Breadcrumb</a>
+    <a class="ds-sidenav-item" href="ds-06-buttons.html">Button</a>
+    <a class="ds-sidenav-item" href="ds-31-button-group.html">Button Group</a>
+    <a class="ds-sidenav-item" href="ds-32-calendar.html">Calendar</a>
+    <a class="ds-sidenav-item active" href="ds-10-cards.html">Card</a>
+    <a class="ds-sidenav-item" href="ds-33-carousel.html">Carousel</a>
+    <a class="ds-sidenav-item" href="ds-34-chart.html">Chart</a>
+    <a class="ds-sidenav-item" href="ds-15-checkbox.html">Checkbox</a>
+    <a class="ds-sidenav-item" href="ds-16-chips.html">Chips</a>
+    <a class="ds-sidenav-item" href="ds-35-collapsible.html">Collapsible</a>
+    <a class="ds-sidenav-item" href="ds-36-combobox.html">Combobox</a>
+<a class="ds-sidenav-item" href="ds-38-context-menu.html">Context Menu</a>
+    <a class="ds-sidenav-item" href="ds-13-datatable.html">Data Table</a>
+    <a class="ds-sidenav-item" href="ds-39-date-picker.html">Date Picker</a>
+    <a class="ds-sidenav-item" href="ds-17-dialogs.html">Dialog</a>
+    <a class="ds-sidenav-item" href="ds-18-divider.html">Divider</a>
+    <a class="ds-sidenav-item" href="ds-40-drawer.html">Drawer</a>
+    <a class="ds-sidenav-item" href="ds-41-dropdown.html">Dropdown Menu</a>
+    <a class="ds-sidenav-item" href="ds-42-empty-state.html">Empty State</a>
+    <a class="ds-sidenav-item" href="ds-43-hover-card.html">Hover Card</a>
+    <a class="ds-sidenav-item" href="ds-44-input-otp.html">Input OTP</a>
+<a class="ds-sidenav-item" href="ds-46-label.html">Label</a>
+    <a class="ds-sidenav-item" href="ds-19-lists.html">Lists</a>
+    <a class="ds-sidenav-item" href="ds-20-progress.html">Loading & Progress</a>
+    <a class="ds-sidenav-item" href="ds-47-menubar.html">Menubar</a>
+    <a class="ds-sidenav-item" href="ds-21-menus.html">Menus</a>
+    <a class="ds-sidenav-item" href="ds-07-navigation.html">Navigation</a>
+    <a class="ds-sidenav-item" href="ds-48-pagination.html">Pagination</a>
+    <a class="ds-sidenav-item" href="ds-49-popover.html">Popover</a>
+    <a class="ds-sidenav-item" href="ds-22-radio.html">Radio Group</a>
+    <a class="ds-sidenav-item" href="ds-50-resizable.html">Resizable</a>
+    <a class="ds-sidenav-item" href="ds-51-scroll-area.html">Scroll Area</a>
+    <a class="ds-sidenav-item" href="ds-52-select.html">Select</a>
+    <a class="ds-sidenav-item" href="ds-53-sheet.html">Sheet</a>
+    <a class="ds-sidenav-item" href="ds-54-skeleton.html">Skeleton</a>
+    <a class="ds-sidenav-item" href="ds-23-sliders.html">Slider</a>
+    <a class="ds-sidenav-item" href="ds-24-snackbar.html">Snackbar</a>
+    <a class="ds-sidenav-item" href="ds-55-spinner.html">Spinner</a>
+    <a class="ds-sidenav-item" href="ds-12-switches.html">Switch</a>
+    <a class="ds-sidenav-item" href="ds-11-tabs.html">Tabs</a>
+    <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
+    <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
+    <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
+    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
+    <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
+  </div>
+</nav>
+<main class="ds-main"><div class="ds-content">
+  <div class="ds-breadcrumb"><a href="ds-00-home.html">Home</a><span class="ds-breadcrumb-sep">›</span><a href="ds-nav-components.html">Components</a><span class="ds-breadcrumb-sep">›</span><span>Cards</span></div>
+  <div class="ds-title-row">
+    <h1 class="ds-page-title">Cards</h1>
+    <div class="ds-title-actions">
+      <button class="ds-copy-page-btn" onclick="copyPageLink()">
+        <span class="material-icons-round">content_copy</span> Copy Page
+        <span class="material-icons-round chevron">expand_more</span>
+      </button>
+      <a class="ds-nav-arrow-btn" href="ds-32-calendar.html" title="Previous"><span class="material-icons-round">arrow_back</span></a>
+      <a class="ds-nav-arrow-btn" href="ds-33-carousel.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
+    </div>
+  </div>
+  <p class="ds-page-desc">Norbielink uses three card types: <strong>Marketplace tiles</strong> for LOB navigation, <strong>Feature cards</strong> for ProSuite content, and <strong>Info cards</strong> for contextual promotions and onboarding. All use <code>shape.lg</code> (16px) or <code>shape.md</code> (12px).</p>
+
+  <!-- HERO: marketplace tiles -->
+  <div class="ds-example" style="flex-direction:column; align-items:stretch; padding:40px 48px; gap:24px;">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400);">Marketplace tiles</div>
+    <div class="tile-grid">
+      <div class="tile active">
+        <div class="tile-icon">🏠</div>
+        <div class="tile-label">General Liability</div>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">👷</div>
+        <div class="tile-label">Worker's Comp</div>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">🏢</div>
+        <div class="tile-label">Business Owners</div>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">💼</div>
+        <div class="tile-label">Professional Liability</div>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">🛡️</div>
+        <div class="tile-label">Excess</div>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">🔗</div>
+        <div class="tile-label">Bonds</div>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">🚗</div>
+        <div class="tile-label">Commercial Auto</div>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">🔨</div>
+        <div class="tile-label">Builders Risk</div>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">🌿</div>
+        <div class="tile-label">Cannabis</div>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">💻</div>
+        <div class="tile-label">Cyber</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- MARKETPLACE TILES -->
+  <div class="ds-section" id="marketplace-tile">
+    <h2 class="ds-section-title">Marketplace tile</h2>
+    <p class="ds-section-desc">Used on the Marketplace page to navigate to each Line of Business. Square card with centered icon (circle) and label. Three states: rest, hover, and selected.</p>
+
+    <div class="ds-example" style="gap:24px; padding:40px;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+        <div class="tile" style="width:110px;">
+          <div class="tile-icon">🏠</div>
+          <div class="tile-label">General Liability</div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--gray-400);">Rest</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+        <div class="tile" style="width:110px;border-color:var(--gray-300);box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+          <div class="tile-icon">👷</div>
+          <div class="tile-label">Worker's Comp</div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--gray-400);">Hover</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+        <div class="tile active" style="width:110px;">
+          <div class="tile-icon">🏢</div>
+          <div class="tile-label">Business Owners</div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--gray-400);">Selected</div>
+      </div>
+    </div>
+
+    <div class="ds-table-wrap" style="margin-top:24px;">
+      <table class="ds-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Shape</td><td><code>shape.md</code> (12px)</td></tr>
+          <tr><td>Padding</td><td>16px 12px</td></tr>
+          <tr><td>Icon container</td><td>56×56px circle · background: gray-100</td></tr>
+          <tr><td>Label</td><td>11px / Medium 500 / gray-700 / centered</td></tr>
+          <tr><td>Selected border</td><td>1.5px solid <code>color.primary</code></td></tr>
+          <tr><td>Selected ring</td><td><code>0 0 0 3px rgba(#2CB9A8, 10%)</code></td></tr>
+          <tr><td>Shadow</td><td><code>elevation.1</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- FEATURE CARDS -->
+  <div class="ds-section" id="feature-card-prosuite">
+    <h2 class="ds-section-title">Feature card (ProSuite)</h2>
+    <p class="ds-section-desc">Used in ProSuite and onboarding contexts. Contains an icon, title, description, and a text link. Uses <code>shape.lg</code> (16px).</p>
+
+    <div class="ds-example" style="gap:16px; flex-wrap:wrap; align-items:flex-start; padding:40px;">
+      <div class="feature-card">
+        <div class="feature-icon-bg">📊</div>
+        <div class="feature-title">Compare Quotes</div>
+        <div class="feature-desc">Compare quotes side-by-side with AI-powered insights to find the best option.</div>
+        <div class="feature-link">Compare Quotes →</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-bg">🔗</div>
+        <div class="feature-title">NowCerts Integration</div>
+        <div class="feature-desc">Instant COIs to help you serve clients faster and work smarter every day.</div>
+        <div class="feature-link">Launch Integration →</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-bg">📅</div>
+        <div class="feature-title">ProSessions</div>
+        <div class="feature-desc">Book a 1:1 session to unlock ProSuite and grow your business faster.</div>
+        <div class="feature-link">Schedule Session →</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-bg">📚</div>
+        <div class="feature-title">Document Library</div>
+        <div class="feature-desc">Access essential documents to save time and reduce operational costs.</div>
+        <div class="feature-link">Access Library →</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- INFO CARDS -->
+  <div class="ds-section" id="info-card">
+    <h2 class="ds-section-title">Info card</h2>
+    <p class="ds-section-desc">Appears on the Marketplace alongside tiles — used for contextual promotions, onboarding tours, and feature announcements. Uses a colored header zone.</p>
+
+    <div class="ds-example" style="gap:20px; flex-wrap:wrap; align-items:flex-start; padding:40px; background:var(--surface-container-low);">
+      <div class="info-card">
+        <div class="info-card-top" style="background:linear-gradient(135deg,#E6F9F7,#E9D5FF);">
+          <span style="font-size:32px;">🏆</span>
+        </div>
+        <div class="info-card-body">
+          <div class="info-card-title">NorbieLink Tour</div>
+          <div class="info-card-desc"><strong>New to the dashboard?</strong> Take a guided tour to explore features and capabilities.</div>
+          <div class="info-card-link">Launch Tour →</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-top" style="background:linear-gradient(135deg,#CCFBF1,#99F6E4);">
+          <span style="font-size:32px;">🔍</span>
+        </div>
+        <div class="info-card-body">
+          <div class="info-card-title">Appetite Search</div>
+          <div class="info-card-desc"><strong>Not sure if we have a market?</strong> Search our appetite to find coverage options.</div>
+          <div class="info-card-link">Search Appetite →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- ── Prev / Next navigation ── -->
+        <div class="ds-page-nav">
+    <a class="ds-page-nav-btn prev" href="ds-32-calendar.html">
+      <span class="ds-page-nav-label">← Previous</span>
+      <span class="ds-page-nav-name">Calendar</span>
+    </a>
+    <a class="ds-page-nav-btn next" href="ds-33-carousel.html">
+      <span class="ds-page-nav-label">Next →</span>
+      <span class="ds-page-nav-name">Carousel</span>
+    </a>
+    </div>
+</main>
+</div>
+
+<aside class="ds-toc">
+  <div class="ds-toc-title">In this article</div>
+  <a class="ds-toc-item active" href="#marketplace-tile">Marketplace tile</a>
+  <a class="ds-toc-item" href="#feature-card">Feature card</a>
+  <a class="ds-toc-item" href="#info-card">Info card</a>
+</aside>
+
+
+
+
+
+<script>
+const DS_PAGES = [
+  {t:'Color',section:'Styles',url:'ds-01-color.html',icon:'palette'},
+  {t:'Typography',section:'Styles',url:'ds-02-typography.html',icon:'text_fields'},
+  {t:'Elevation',section:'Foundations',url:'ds-03-elevation.html',icon:'layers'},
+  {t:'Shape',section:'Foundations',url:'ds-04-shape.html',icon:'rounded_corner'},
+  {t:'Spacing',section:'Foundations',url:'ds-05-spacing.html',icon:'space_bar'},
+  {t:'Badges',section:'Components',url:'ds-09-badges.html',icon:'fiber_manual_record'},
+  {t:'Buttons',section:'Components',url:'ds-06-buttons.html',icon:'smart_button'},
+  {t:'Cards',section:'Components',url:'ds-10-cards.html',icon:'crop_square'},
+  {t:'Checkbox',section:'Components',url:'ds-14-checkbox.html',icon:'check_box'},
+  {t:'Chips',section:'Components',url:'ds-16-chips.html',icon:'label'},
+  {t:'Data Tables',section:'Components',url:'ds-13-datatable.html',icon:'table_chart'},
+  {t:'Dialogs',section:'Components',url:'ds-17-dialogs.html',icon:'open_in_new'},
+  {t:'Lists',section:'Components',url:'ds-21-lists.html',icon:'format_list_bulleted'},
+  {t:'Menus',section:'Components',url:'ds-22-menus.html',icon:'menu'},
+  {t:'Navigation',section:'Components',url:'ds-07-navigation.html',icon:'navigation'},
+  {t:'Progress',section:'Components',url:'ds-18-progress.html',icon:'hourglass_empty'},
+  {t:'Radio',section:'Components',url:'ds-15-radio.html',icon:'radio_button_checked'},
+  {t:'Sliders',section:'Components',url:'ds-19-slider.html',icon:'tune'},
+  {t:'Snackbar',section:'Components',url:'ds-20-snackbar.html',icon:'notifications'},
+  {t:'Switches',section:'Components',url:'ds-12-switches.html',icon:'toggle_on'},
+  {t:'Tabs',section:'Components',url:'ds-11-tabs.html',icon:'tab'},
+  {t:'Text Fields',section:'Components',url:'ds-08-textfields.html',icon:'input'}
+];
+let searchIdx = -1;
+function openSearch(){
+  document.getElementById('search-overlay').classList.add('open');
+  document.getElementById('search-input').value='';
+  document.getElementById('search-input').focus();
+  renderResults('');
+  searchIdx=-1;
+}
+function closeSearch(){
+  document.getElementById('search-overlay').classList.remove('open');
+}
+function renderResults(q){
+  searchIdx=-1;
+  const res=DS_PAGES.filter(p=>p.t.toLowerCase().includes(q.toLowerCase())||p.section.toLowerCase().includes(q.toLowerCase()));
+  const c=document.getElementById('search-results');
+  if(res.length===0){c.innerHTML='<div class="search-empty">No results for "'+q+'"</div>';return;}
+  c.innerHTML=res.map((p,i)=>`<div class="search-result-item" data-i="${i}" data-url="${p.url}" onclick="location.href='${p.url}'">
+    <div class="sri-icon"><span class="material-icons-round">${p.icon}</span></div>
+    <div><div class="search-result-title">${p.t}</div><div class="search-result-section">${p.section}</div></div>
+    <span class="material-icons-round sri-arrow">arrow_forward</span>
+  </div>`).join('');
+}
+function searchKeydown(e){
+  const items=document.querySelectorAll('.search-result-item');
+  if(e.key==='ArrowDown'){e.preventDefault();searchIdx=Math.min(searchIdx+1,items.length-1);}
+  else if(e.key==='ArrowUp'){e.preventDefault();searchIdx=Math.max(searchIdx-1,0);}
+  else if(e.key==='Enter'&&searchIdx>=0){items[searchIdx].click();return;}
+  else if(e.key==='Escape'){closeSearch();return;}
+  items.forEach((el,i)=>el.classList.toggle('focused',i===searchIdx));
+  if(searchIdx>=0)items[searchIdx].scrollIntoView({block:'nearest'});
+}
+document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}if(e.key==='Escape')closeSearch();});
+</script>
+<script src="ds-search.js"></script>
+<script src="ds-shared.js"></script>
+</body></html>

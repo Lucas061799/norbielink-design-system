@@ -1,0 +1,424 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Navigation — Norbielink Design System</title>
+<link rel="stylesheet" href="ds-shared.css">
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<style>
+.nav-states { display: flex; flex-direction: column; gap: 4px; }
+.state-row { display: flex; align-items: center; gap: 16px; }
+.state-label { font-size: 11px; font-weight: 700; color: var(--gray-400); width: 80px; flex-shrink: 0; text-transform: uppercase; letter-spacing: .08em; }
+.demo-item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; margin: 0; border-radius: 50px; font-size: 14px; font-weight: 500; width: 200px; }
+.demo-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+.top-bar { background: #09090b; height: 56px; border-radius: 12px 12px 0 0; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.search-pill { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 50px; padding: 8px 16px; width: 280px; font-size: 13px; color: rgba(255,255,255,0.4); }
+
+.full-sidebar { width: 240px; background: #09090b; border-radius: 0 0 0 12px; padding: 16px 0 0; min-height: 520px; position: relative; display: flex; flex-direction: column; }
+.full-sidebar-logo { font-size: 16px; font-weight: 800; color: white; padding: 0 20px 16px; letter-spacing: .04em; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 8px; }
+.full-sidebar-user { display: flex; align-items: center; gap: 10px; padding: 8px 20px 12px; }
+.sidebar-avatar { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg,#2CB9A8,#4ECBA1); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white; flex-shrink: 0; }
+.sidebar-nav { flex: 1; padding: 4px 0; }
+.s-item { display: flex; align-items: center; gap: 10px; padding: 9px 16px; margin: 1px 8px; border-radius: 50px; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.6); cursor: pointer; }
+.s-item.active { background: linear-gradient(135deg,#007D6E,#2CB9A8,#48C8BC); color: white; font-weight: 600; box-shadow: 0 4px 12px rgba(44,185,168,0.35); }
+.s-item .icon { width: 16px; height: 16px; opacity: .7; flex-shrink: 0; }
+.s-item.active .icon { opacity: 1; }
+.sidebar-footer { padding: 12px 20px; border-top: 1px solid rgba(255,255,255,0.07); }
+.toggle-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.mini-toggle { width: 36px; height: 20px; border-radius: 10px; position: relative; flex-shrink: 0; }
+.mini-thumb { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: white; top: 3px; }
+
+.collapsed-sidebar { width: 72px; background: #09090b; border-radius: 0 0 0 12px; padding: 12px 0; min-height: 520px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.c-item { width: 48px; height: 48px; border-radius: 50px; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; color: rgba(255,255,255,0.5); }
+.c-item.active { background: linear-gradient(135deg,#007D6E,#2CB9A8); color: white; box-shadow: 0 4px 12px rgba(44,185,168,0.35); }
+
+.header-bar { background: white; height: 56px; border-radius: 12px 12px 0 0; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; border-bottom: 1px solid var(--gray-200); }
+.header-search { display: flex; align-items: center; gap: 10px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 50px; padding: 8px 16px; width: 280px; font-size: 13px; color: var(--gray-400); }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
+</head>
+<body class="btis-layout">
+<header class="btis-header">
+  <div class="btis-header-inner">
+    <a class="btis-brand" href="ds-00-home.html">
+      <img src="BTIS.png" class="btis-logo-img" alt="NorbieLink">
+    </a>
+    <nav class="btis-top-nav">
+      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>
+      <a class="btis-top-nav-link" href="ds-nav-styles.html">Styles</a>
+      <a class="btis-top-nav-link active" href="ds-nav-components.html">Components</a>
+      <a class="btis-top-nav-link" href="ds-nav-resources.html">Resources</a>
+    </nav>
+    <div class="btis-header-right">
+      <button class="btis-icon-btn" onclick="openSearch()"><span class="material-icons-round">search</span></button>
+      <button class="btis-theme-pill" id="darkModeBtn" onclick="toggleDarkMode()">
+        <span class="material-icons-round" id="darkModeIcon">dark_mode</span>
+        <span>Theme</span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="ds-shell">
+
+
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay" onclick="if(event.target===this)closeSearch()">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <span class="material-icons-round">search</span>
+      <input id="search-input" type="text" placeholder="Search components, foundations, styles…" oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
+      <span class="material-icons-round search-close" onclick="closeSearch()">close</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+  </div>
+</div>
+<!-- END SEARCH -->
+
+
+<!-- SUB-NAV -->
+<nav class="ds-sidenav">
+  <div class="ds-sidenav-group">
+    <div class="ds-sidenav-group-title">Getting Started</div>
+    <a class="ds-sidenav-item" href="ds-00-home.html">Introduction</a>
+    <a class="ds-sidenav-item" href="ds-01-color.html">Colors</a>
+    <a class="ds-sidenav-item" href="ds-02-typography.html">Typography</a>
+    <a class="ds-sidenav-item" href="ds-03-elevation.html">Elevation</a>
+    <a class="ds-sidenav-item" href="ds-04-shape.html">Shape</a>
+    <a class="ds-sidenav-item" href="ds-05-spacing.html">Spacing</a>
+  </div>
+  <div class="ds-sidenav-group">
+    <div class="ds-sidenav-group-title">Components</div>
+    <a class="ds-sidenav-item" href="ds-26-accordion.html">Accordion</a>
+    <a class="ds-sidenav-item" href="ds-27-alert.html">Alert</a>
+    <a class="ds-sidenav-item" href="ds-28-alert-dialog.html">Alert Dialog</a>
+    <a class="ds-sidenav-item" href="ds-14-appbar.html">App Bars</a>
+    <a class="ds-sidenav-item" href="ds-29-avatar.html">Avatar</a>
+    <a class="ds-sidenav-item" href="ds-09-badges.html">Badge</a>
+    <a class="ds-sidenav-item" href="ds-30-breadcrumb.html">Breadcrumb</a>
+    <a class="ds-sidenav-item" href="ds-06-buttons.html">Button</a>
+    <a class="ds-sidenav-item" href="ds-31-button-group.html">Button Group</a>
+    <a class="ds-sidenav-item" href="ds-32-calendar.html">Calendar</a>
+    <a class="ds-sidenav-item" href="ds-10-cards.html">Card</a>
+    <a class="ds-sidenav-item" href="ds-33-carousel.html">Carousel</a>
+    <a class="ds-sidenav-item" href="ds-34-chart.html">Chart</a>
+    <a class="ds-sidenav-item" href="ds-15-checkbox.html">Checkbox</a>
+    <a class="ds-sidenav-item" href="ds-16-chips.html">Chips</a>
+    <a class="ds-sidenav-item" href="ds-35-collapsible.html">Collapsible</a>
+    <a class="ds-sidenav-item" href="ds-36-combobox.html">Combobox</a>
+<a class="ds-sidenav-item" href="ds-38-context-menu.html">Context Menu</a>
+    <a class="ds-sidenav-item" href="ds-13-datatable.html">Data Table</a>
+    <a class="ds-sidenav-item" href="ds-39-date-picker.html">Date Picker</a>
+    <a class="ds-sidenav-item" href="ds-17-dialogs.html">Dialog</a>
+    <a class="ds-sidenav-item" href="ds-18-divider.html">Divider</a>
+    <a class="ds-sidenav-item" href="ds-40-drawer.html">Drawer</a>
+    <a class="ds-sidenav-item" href="ds-41-dropdown.html">Dropdown Menu</a>
+    <a class="ds-sidenav-item" href="ds-42-empty-state.html">Empty State</a>
+    <a class="ds-sidenav-item" href="ds-43-hover-card.html">Hover Card</a>
+    <a class="ds-sidenav-item" href="ds-44-input-otp.html">Input OTP</a>
+<a class="ds-sidenav-item" href="ds-46-label.html">Label</a>
+    <a class="ds-sidenav-item" href="ds-19-lists.html">Lists</a>
+    <a class="ds-sidenav-item" href="ds-20-progress.html">Loading & Progress</a>
+    <a class="ds-sidenav-item" href="ds-47-menubar.html">Menubar</a>
+    <a class="ds-sidenav-item" href="ds-21-menus.html">Menus</a>
+    <a class="ds-sidenav-item active" href="ds-07-navigation.html">Navigation</a>
+    <a class="ds-sidenav-item" href="ds-48-pagination.html">Pagination</a>
+    <a class="ds-sidenav-item" href="ds-49-popover.html">Popover</a>
+    <a class="ds-sidenav-item" href="ds-22-radio.html">Radio Group</a>
+    <a class="ds-sidenav-item" href="ds-50-resizable.html">Resizable</a>
+    <a class="ds-sidenav-item" href="ds-51-scroll-area.html">Scroll Area</a>
+    <a class="ds-sidenav-item" href="ds-52-select.html">Select</a>
+    <a class="ds-sidenav-item" href="ds-53-sheet.html">Sheet</a>
+    <a class="ds-sidenav-item" href="ds-54-skeleton.html">Skeleton</a>
+    <a class="ds-sidenav-item" href="ds-23-sliders.html">Slider</a>
+    <a class="ds-sidenav-item" href="ds-24-snackbar.html">Snackbar</a>
+    <a class="ds-sidenav-item" href="ds-55-spinner.html">Spinner</a>
+    <a class="ds-sidenav-item" href="ds-12-switches.html">Switch</a>
+    <a class="ds-sidenav-item" href="ds-11-tabs.html">Tabs</a>
+    <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
+    <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
+    <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
+    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
+    <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
+  </div>
+</nav>
+<main class="ds-main"><div class="ds-content">
+  <div class="ds-breadcrumb"><a href="ds-00-home.html">Home</a><span class="ds-breadcrumb-sep">›</span><a href="ds-nav-components.html">Components</a><span class="ds-breadcrumb-sep">›</span><span>Navigation</span></div>
+  <div class="ds-title-row">
+    <h1 class="ds-page-title">Navigation</h1>
+    <div class="ds-title-actions">
+      <button class="ds-copy-page-btn" onclick="copyPageLink()">
+        <span class="material-icons-round">content_copy</span> Copy Page
+        <span class="material-icons-round chevron">expand_more</span>
+      </button>
+      <a class="ds-nav-arrow-btn" href="ds-21-menus.html" title="Previous"><span class="material-icons-round">arrow_back</span></a>
+      <a class="ds-nav-arrow-btn" href="ds-48-pagination.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
+    </div>
+  </div>
+  <p class="ds-page-desc">Norbielink uses a collapsible side navigation drawer as the primary navigation pattern. The active item uses a purple gradient pill. A persistent top bar contains search and partner branding.</p>
+
+  <!-- HERO: Full sidebar preview -->
+  <div class="ds-example" style="padding:0; overflow:hidden; border-radius:16px; align-items:stretch; flex-direction:column; gap:0; background:#F0F0F0;">
+    <!-- Top bar dark -->
+    <div class="top-bar">
+      <div class="search-pill">🔍&nbsp; Search clients, quotes or policies...</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.35);font-weight:600;letter-spacing:.05em;">POWERED BY <span style="color:rgba(255,255,255,0.6);font-size:14px;font-weight:700;">btis</span></div>
+    </div>
+    <div style="display:flex;">
+      <!-- Full Sidebar -->
+      <div class="full-sidebar">
+        <div class="full-sidebar-logo">NORBIE<span style="background:linear-gradient(135deg,#0E9680,#2CB9A8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">LINK</span></div>
+        <div class="full-sidebar-user">
+          <div class="sidebar-avatar">JS</div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:white;">John Smith <span style="border:1px solid #2CB9A8;color:#2CB9A8;font-size:9px;padding:1px 5px;border-radius:10px;font-weight:700;">PRO</span></div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.4);">ProSuite Member</div>
+          </div>
+        </div>
+        <div class="sidebar-nav">
+          <div class="s-item active">
+            <svg class="icon" fill="currentColor" viewBox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 8a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zm6-6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zm0 8a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+            Marketplace
+          </div>
+          <div class="s-item"><svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg> Appetite Assistant</div>
+          <div class="s-item"><svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12"/></svg> Quotes</div>
+          <div class="s-item"><svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75"/></svg> Policies</div>
+          <div class="s-item">ProSuite <span style="border:1px solid #2CB9A8;color:#2CB9A8;font-size:9px;padding:1px 5px;border-radius:10px;font-weight:700;margin-left:4px;">PRO</span></div>
+          <div class="s-item">Make a Payment</div>
+          <div class="s-item">Accounting</div>
+          <div class="s-item">Endorsements</div>
+          <div class="s-item">Tools &amp; Resources</div>
+          <div class="s-item">Support</div>
+          <div class="s-item">Admin</div>
+        </div>
+        <div class="sidebar-footer">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#0E9680,#2CB9A8);display:flex;align-items:center;justify-content:center;font-size:14px;">🤖</div>
+            <div><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);">Chat with Norbie</div><div style="font-size:9px;color:rgba(255,255,255,0.35);">AI Assistant</div></div>
+          </div>
+          <div class="toggle-row">
+            <div class="mini-toggle" style="background:#F97316;"><div class="mini-thumb" style="right:3px;"></div></div>
+            <span style="font-size:11px;color:rgba(255,255,255,0.45);">Dark Mode</span>
+          </div>
+          <div class="toggle-row">
+            <div class="mini-toggle" style="background:rgba(255,255,255,0.15);"><div class="mini-thumb" style="left:3px;"></div></div>
+            <span style="font-size:11px;color:rgba(255,255,255,0.45);">Legacy View</span>
+          </div>
+        </div>
+      </div>
+      <!-- Content placeholder -->
+      <div style="flex:1;background:#F9FAFB;padding:28px;border-radius:0 0 12px 0;">
+        <div style="font-size:24px;font-weight:700;color:#1A1A2E;margin-bottom:8px;">Marketplace</div>
+        <div style="font-size:13px;color:#9CA3AF;">Content area</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- NAV ITEM STATES -->
+  <div class="ds-section" id="nav-item-states">
+    <h2 class="ds-section-title">Nav item states</h2>
+    <p class="ds-section-desc">Each nav item has four states. Only one item can be active at a time. The pill shape is always applied — only the fill changes between states.</p>
+
+    <div class="ds-example" style="flex-direction:column; align-items:flex-start; gap:0; padding:40px; background:var(--dark-bg);">
+      <div class="nav-states">
+        <div class="state-row">
+          <div class="state-label" style="color:rgba(255,255,255,0.3);">Rest</div>
+          <div class="demo-item" style="color:rgba(255,255,255,0.6);">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20" style="opacity:.6;"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5z"/></svg>
+            Marketplace
+          </div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.2);font-family:monospace;">color: rgba(FFF, 60%)</div>
+        </div>
+        <div class="state-row">
+          <div class="state-label" style="color:rgba(255,255,255,0.3);">Hover</div>
+          <div class="demo-item" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.85);">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5z"/></svg>
+            Marketplace
+          </div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.2);font-family:monospace;">bg: rgba(FFF, 6%)</div>
+        </div>
+        <div class="state-row">
+          <div class="state-label" style="color:rgba(255,255,255,0.3);">Active</div>
+          <div class="demo-item" style="background:linear-gradient(135deg,#007D6E,#2CB9A8,#48C8BC);color:white;font-weight:600;box-shadow:0 4px 12px rgba(44,185,168,0.35);">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5z"/></svg>
+            Marketplace
+          </div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.2);font-family:monospace;">bg: gradient purple · shadow: elev.nav-active</div>
+        </div>
+        <div class="state-row">
+          <div class="state-label" style="color:rgba(255,255,255,0.3);">Disabled</div>
+          <div class="demo-item" style="color:rgba(255,255,255,0.2);cursor:not-allowed;">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20" style="opacity:.3;"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5z"/></svg>
+            Marketplace
+          </div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.2);font-family:monospace;">color: rgba(FFF, 20%)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- COLLAPSED STATE -->
+  <div class="ds-section" id="collapsed-sidebar">
+    <h2 class="ds-section-title">Collapsed sidebar</h2>
+    <p class="ds-section-desc">When collapsed, only icons are shown. Hovering reveals a tooltip with the item label. Active state maintains the purple gradient pill — scaled to a circle.</p>
+    <div class="ds-example" style="padding:0; overflow:hidden; border-radius:16px; align-items:stretch; background:#F0F0F0; gap:0;">
+      <div class="collapsed-sidebar">
+        <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#0E9680,#2CB9A8);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:white;margin-bottom:12px;">N</div>
+        <div class="c-item active" title="Marketplace">⊞</div>
+        <div class="c-item" title="Appetite Assistant">✦</div>
+        <div class="c-item" title="Quotes">📄</div>
+        <div class="c-item" title="Policies">📋</div>
+        <div class="c-item" title="ProSuite">💎</div>
+        <div class="c-item" title="Accounting">📊</div>
+        <div class="c-item" title="Support">💬</div>
+      </div>
+      <div style="flex:1;background:#F9FAFB;padding:28px;border-radius:0 0 12px 0;">
+        <div style="font-size:13px;color:#9CA3AF;">Content expands to fill available space when sidebar is collapsed.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- AVATAR -->
+  <div class="ds-section" id="avatar">
+    <h2 class="ds-section-title">Avatar</h2>
+    <p class="ds-section-desc">User avatars use initials on a Teal gradient background. Four sizes are available across the system.</p>
+    <div class="ds-example" style="gap:32px;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#2CB9A8,#4ECBA1);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:white;">JS</div>
+        <div style="font-size:11px;font-weight:700;color:var(--gray-600);">XL — 56px</div>
+        <div style="font-size:10px;color:var(--gray-400);">Profile page</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#2CB9A8,#4ECBA1);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:white;">JS</div>
+        <div style="font-size:11px;font-weight:700;color:var(--gray-600);">LG — 44px</div>
+        <div style="font-size:10px;color:var(--gray-400);">Dropdown header</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2CB9A8,#4ECBA1);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;">JS</div>
+        <div style="font-size:11px;font-weight:700;color:var(--gray-600);">MD — 36px</div>
+        <div style="font-size:10px;color:var(--gray-400);">Sidebar user row</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#2CB9A8,#4ECBA1);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;">JS</div>
+        <div style="font-size:11px;font-weight:700;color:var(--gray-600);">SM — 28px</div>
+        <div style="font-size:10px;color:var(--gray-400);">Table rows, inline</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- SPECS -->
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Element</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Sidebar width (expanded)</td><td>245px</td></tr>
+          <tr><td>Sidebar width (collapsed)</td><td>72px</td></tr>
+          <tr><td>Sidebar background</td><td><code>#09090b</code> (dark-bg)</td></tr>
+          <tr><td>Nav item shape</td><td><code>shape.full</code> (pill)</td></tr>
+          <tr><td>Nav item height</td><td>40px</td></tr>
+          <tr><td>Nav item margin</td><td>2px 8px (8px horizontal inset)</td></tr>
+          <tr><td>Active background</td><td><code>linear-gradient(135deg, #007D6E, #2CB9A8, #48C8BC)</code></td></tr>
+          <tr><td>Active shadow</td><td><code>0 4px 12px rgba(#2CB9A8, 35%)</code></td></tr>
+          <tr><td>Top bar height</td><td>56px</td></tr>
+          <tr><td>Top bar background</td><td><code>#09090b</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+    <!-- ── Prev / Next navigation ── -->
+        <div class="ds-page-nav">
+    <a class="ds-page-nav-btn prev" href="ds-21-menus.html">
+      <span class="ds-page-nav-label">← Previous</span>
+      <span class="ds-page-nav-name">Menus</span>
+    </a>
+    <a class="ds-page-nav-btn next" href="ds-48-pagination.html">
+      <span class="ds-page-nav-label">Next →</span>
+      <span class="ds-page-nav-name">Pagination</span>
+    </a>
+    </div>
+
+  </div></main>
+
+<aside class="ds-toc">
+  <div class="ds-toc-title">In this article</div>
+  <a class="ds-toc-item active" href="#nav-item-states">Nav item states</a>
+  <a class="ds-toc-item" href="#collapsed-sidebar">Collapsed sidebar</a>
+  <a class="ds-toc-item" href="#avatar">Avatar</a>
+  <a class="ds-toc-item" href="#specs">Specs</a>
+</aside>
+
+
+
+</div>
+
+<script>
+const DS_PAGES = [
+  {t:'Color',section:'Styles',url:'ds-01-color.html',icon:'palette'},
+  {t:'Typography',section:'Styles',url:'ds-02-typography.html',icon:'text_fields'},
+  {t:'Elevation',section:'Foundations',url:'ds-03-elevation.html',icon:'layers'},
+  {t:'Shape',section:'Foundations',url:'ds-04-shape.html',icon:'rounded_corner'},
+  {t:'Spacing',section:'Foundations',url:'ds-05-spacing.html',icon:'space_bar'},
+  {t:'Badges',section:'Components',url:'ds-09-badges.html',icon:'fiber_manual_record'},
+  {t:'Buttons',section:'Components',url:'ds-06-buttons.html',icon:'smart_button'},
+  {t:'Cards',section:'Components',url:'ds-10-cards.html',icon:'crop_square'},
+  {t:'Checkbox',section:'Components',url:'ds-14-checkbox.html',icon:'check_box'},
+  {t:'Chips',section:'Components',url:'ds-16-chips.html',icon:'label'},
+  {t:'Data Tables',section:'Components',url:'ds-13-datatable.html',icon:'table_chart'},
+  {t:'Dialogs',section:'Components',url:'ds-17-dialogs.html',icon:'open_in_new'},
+  {t:'Lists',section:'Components',url:'ds-21-lists.html',icon:'format_list_bulleted'},
+  {t:'Menus',section:'Components',url:'ds-22-menus.html',icon:'menu'},
+  {t:'Navigation',section:'Components',url:'ds-07-navigation.html',icon:'navigation'},
+  {t:'Progress',section:'Components',url:'ds-18-progress.html',icon:'hourglass_empty'},
+  {t:'Radio',section:'Components',url:'ds-15-radio.html',icon:'radio_button_checked'},
+  {t:'Sliders',section:'Components',url:'ds-19-slider.html',icon:'tune'},
+  {t:'Snackbar',section:'Components',url:'ds-20-snackbar.html',icon:'notifications'},
+  {t:'Switches',section:'Components',url:'ds-12-switches.html',icon:'toggle_on'},
+  {t:'Tabs',section:'Components',url:'ds-11-tabs.html',icon:'tab'},
+  {t:'Text Fields',section:'Components',url:'ds-08-textfields.html',icon:'input'}
+];
+let searchIdx = -1;
+function openSearch(){
+  document.getElementById('search-overlay').classList.add('open');
+  document.getElementById('search-input').value='';
+  document.getElementById('search-input').focus();
+  renderResults('');
+  searchIdx=-1;
+}
+function closeSearch(){
+  document.getElementById('search-overlay').classList.remove('open');
+}
+function renderResults(q){
+  searchIdx=-1;
+  const res=DS_PAGES.filter(p=>p.t.toLowerCase().includes(q.toLowerCase())||p.section.toLowerCase().includes(q.toLowerCase()));
+  const c=document.getElementById('search-results');
+  if(res.length===0){c.innerHTML='<div class="search-empty">No results for "'+q+'"</div>';return;}
+  c.innerHTML=res.map((p,i)=>`<div class="search-result-item" data-i="${i}" data-url="${p.url}" onclick="location.href='${p.url}'">
+    <div class="sri-icon"><span class="material-icons-round">${p.icon}</span></div>
+    <div><div class="search-result-title">${p.t}</div><div class="search-result-section">${p.section}</div></div>
+    <span class="material-icons-round sri-arrow">arrow_forward</span>
+  </div>`).join('');
+}
+function searchKeydown(e){
+  const items=document.querySelectorAll('.search-result-item');
+  if(e.key==='ArrowDown'){e.preventDefault();searchIdx=Math.min(searchIdx+1,items.length-1);}
+  else if(e.key==='ArrowUp'){e.preventDefault();searchIdx=Math.max(searchIdx-1,0);}
+  else if(e.key==='Enter'&&searchIdx>=0){items[searchIdx].click();return;}
+  else if(e.key==='Escape'){closeSearch();return;}
+  items.forEach((el,i)=>el.classList.toggle('focused',i===searchIdx));
+  if(searchIdx>=0)items[searchIdx].scrollIntoView({block:'nearest'});
+}
+document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}if(e.key==='Escape')closeSearch();});
+</script>
+<script src="ds-search.js"></script>
+<script src="ds-shared.js"></script>
+</body></html>

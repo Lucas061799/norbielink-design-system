@@ -1,0 +1,377 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Badges — Norbielink Design System</title>
+<link rel="stylesheet" href="ds-shared.css">
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<style>
+.badge-showcase { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+.badge-group { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.badge-group-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 4px; }
+.b { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 100px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .03em; }
+.b-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.b-desc { font-size: 11px; color: var(--gray-400); }
+
+.status-table-demo { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid var(--gray-200); }
+.std-header { display: grid; grid-template-columns: 1fr 1fr 1fr; background: var(--gray-50); border-bottom: 1px solid var(--gray-200); }
+.std-th { padding: 10px 16px; font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--gray-400); }
+.std-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--gray-100); }
+.std-row:last-child { border-bottom: none; }
+.std-td { padding: 12px 16px; font-size: 13px; color: var(--gray-700); display: flex; align-items: center; }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
+</head>
+<body class="btis-layout">
+<header class="btis-header">
+  <div class="btis-header-inner">
+    <a class="btis-brand" href="ds-00-home.html">
+      <img src="BTIS.png" class="btis-logo-img" alt="NorbieLink">
+    </a>
+    <nav class="btis-top-nav">
+      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>
+      <a class="btis-top-nav-link" href="ds-nav-styles.html">Styles</a>
+      <a class="btis-top-nav-link active" href="ds-nav-components.html">Components</a>
+      <a class="btis-top-nav-link" href="ds-nav-resources.html">Resources</a>
+    </nav>
+    <div class="btis-header-right">
+      <button class="btis-icon-btn" onclick="openSearch()"><span class="material-icons-round">search</span></button>
+      <button class="btis-theme-pill" id="darkModeBtn" onclick="toggleDarkMode()">
+        <span class="material-icons-round" id="darkModeIcon">dark_mode</span>
+        <span>Theme</span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="ds-shell">
+
+
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay" onclick="if(event.target===this)closeSearch()">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <span class="material-icons-round">search</span>
+      <input id="search-input" type="text" placeholder="Search components, foundations, styles…" oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
+      <span class="material-icons-round search-close" onclick="closeSearch()">close</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+  </div>
+</div>
+<!-- END SEARCH -->
+
+
+<!-- SUB-NAV -->
+<nav class="ds-sidenav">
+  <div class="ds-sidenav-group">
+    <div class="ds-sidenav-group-title">Getting Started</div>
+    <a class="ds-sidenav-item" href="ds-00-home.html">Introduction</a>
+    <a class="ds-sidenav-item" href="ds-01-color.html">Colors</a>
+    <a class="ds-sidenav-item" href="ds-02-typography.html">Typography</a>
+    <a class="ds-sidenav-item" href="ds-03-elevation.html">Elevation</a>
+    <a class="ds-sidenav-item" href="ds-04-shape.html">Shape</a>
+    <a class="ds-sidenav-item" href="ds-05-spacing.html">Spacing</a>
+  </div>
+  <div class="ds-sidenav-group">
+    <div class="ds-sidenav-group-title">Components</div>
+    <a class="ds-sidenav-item" href="ds-26-accordion.html">Accordion</a>
+    <a class="ds-sidenav-item" href="ds-27-alert.html">Alert</a>
+    <a class="ds-sidenav-item" href="ds-28-alert-dialog.html">Alert Dialog</a>
+    <a class="ds-sidenav-item" href="ds-14-appbar.html">App Bars</a>
+    <a class="ds-sidenav-item" href="ds-29-avatar.html">Avatar</a>
+    <a class="ds-sidenav-item active" href="ds-09-badges.html">Badge</a>
+    <a class="ds-sidenav-item" href="ds-30-breadcrumb.html">Breadcrumb</a>
+    <a class="ds-sidenav-item" href="ds-06-buttons.html">Button</a>
+    <a class="ds-sidenav-item" href="ds-31-button-group.html">Button Group</a>
+    <a class="ds-sidenav-item" href="ds-32-calendar.html">Calendar</a>
+    <a class="ds-sidenav-item" href="ds-10-cards.html">Card</a>
+    <a class="ds-sidenav-item" href="ds-33-carousel.html">Carousel</a>
+    <a class="ds-sidenav-item" href="ds-34-chart.html">Chart</a>
+    <a class="ds-sidenav-item" href="ds-15-checkbox.html">Checkbox</a>
+    <a class="ds-sidenav-item" href="ds-16-chips.html">Chips</a>
+    <a class="ds-sidenav-item" href="ds-35-collapsible.html">Collapsible</a>
+    <a class="ds-sidenav-item" href="ds-36-combobox.html">Combobox</a>
+<a class="ds-sidenav-item" href="ds-38-context-menu.html">Context Menu</a>
+    <a class="ds-sidenav-item" href="ds-13-datatable.html">Data Table</a>
+    <a class="ds-sidenav-item" href="ds-39-date-picker.html">Date Picker</a>
+    <a class="ds-sidenav-item" href="ds-17-dialogs.html">Dialog</a>
+    <a class="ds-sidenav-item" href="ds-18-divider.html">Divider</a>
+    <a class="ds-sidenav-item" href="ds-40-drawer.html">Drawer</a>
+    <a class="ds-sidenav-item" href="ds-41-dropdown.html">Dropdown Menu</a>
+    <a class="ds-sidenav-item" href="ds-42-empty-state.html">Empty State</a>
+    <a class="ds-sidenav-item" href="ds-43-hover-card.html">Hover Card</a>
+    <a class="ds-sidenav-item" href="ds-44-input-otp.html">Input OTP</a>
+<a class="ds-sidenav-item" href="ds-46-label.html">Label</a>
+    <a class="ds-sidenav-item" href="ds-19-lists.html">Lists</a>
+    <a class="ds-sidenav-item" href="ds-20-progress.html">Loading & Progress</a>
+    <a class="ds-sidenav-item" href="ds-47-menubar.html">Menubar</a>
+    <a class="ds-sidenav-item" href="ds-21-menus.html">Menus</a>
+    <a class="ds-sidenav-item" href="ds-07-navigation.html">Navigation</a>
+    <a class="ds-sidenav-item" href="ds-48-pagination.html">Pagination</a>
+    <a class="ds-sidenav-item" href="ds-49-popover.html">Popover</a>
+    <a class="ds-sidenav-item" href="ds-22-radio.html">Radio Group</a>
+    <a class="ds-sidenav-item" href="ds-50-resizable.html">Resizable</a>
+    <a class="ds-sidenav-item" href="ds-51-scroll-area.html">Scroll Area</a>
+    <a class="ds-sidenav-item" href="ds-52-select.html">Select</a>
+    <a class="ds-sidenav-item" href="ds-53-sheet.html">Sheet</a>
+    <a class="ds-sidenav-item" href="ds-54-skeleton.html">Skeleton</a>
+    <a class="ds-sidenav-item" href="ds-23-sliders.html">Slider</a>
+    <a class="ds-sidenav-item" href="ds-24-snackbar.html">Snackbar</a>
+    <a class="ds-sidenav-item" href="ds-55-spinner.html">Spinner</a>
+    <a class="ds-sidenav-item" href="ds-12-switches.html">Switch</a>
+    <a class="ds-sidenav-item" href="ds-11-tabs.html">Tabs</a>
+    <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
+    <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
+    <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
+    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
+    <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
+  </div>
+</nav>
+<main class="ds-main"><div class="ds-content">
+  <div class="ds-breadcrumb"><a href="ds-00-home.html">Home</a><span class="ds-breadcrumb-sep">›</span><a href="ds-nav-components.html">Components</a><span class="ds-breadcrumb-sep">›</span><span>Badges</span></div>
+  <div class="ds-title-row">
+    <h1 class="ds-page-title">Badges</h1>
+    <div class="ds-title-actions">
+      <button class="ds-copy-page-btn" onclick="copyPageLink()">
+        <span class="material-icons-round">content_copy</span> Copy Page
+        <span class="material-icons-round chevron">expand_more</span>
+      </button>
+      <a class="ds-nav-arrow-btn" href="ds-29-avatar.html" title="Previous"><span class="material-icons-round">arrow_back</span></a>
+      <a class="ds-nav-arrow-btn" href="ds-30-breadcrumb.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
+    </div>
+  </div>
+  <p class="ds-page-desc">Badges communicate membership tiers, system capabilities, and record statuses. All badges use <code>shape.full</code> (pill) and Montserrat Bold. They are non-interactive and purely informational.</p>
+
+  <!-- HERO -->
+  <div class="ds-example" style="gap:14px; flex-wrap:wrap; padding:48px; justify-content:flex-start;">
+    <span class="b" style="border:1.5px solid #2CB9A8;color:#2CB9A8;background:transparent;">PRO</span>
+    <span class="b" style="background:rgba(44,185,168,.1);border:1px solid #2CB9A8;color:#0E9680;font-size:10px;">✦ AI ASSISTANT</span>
+    <span class="b" style="background:rgba(16,185,129,.1);color:#059669;">● Sold/Issued</span>
+    <span class="b" style="background:rgba(249,115,22,.1);color:#EA580C;">● Upcoming Renewals</span>
+    <span class="b" style="background:rgba(239,68,68,.1);color:#DC2626;">● Declined</span>
+    <span class="b" style="background:#F3F4F6;color:#6B7280;">● Incomplete</span>
+    <span class="b" style="background:rgba(59,130,246,.1);color:#2563EB;">● Add'l Insured Request</span>
+    <span style="font-size:13px;font-weight:700;color:#F97316;font-family:Montserrat,sans-serif;">RENEW</span>
+    <span class="b" style="background:rgba(249,115,22,.1);color:#EA580C;">● Pending/Action Req.</span>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- MEMBERSHIP BADGES -->
+  <div class="ds-section" id="membership-amp-system-badges">
+    <h2 class="ds-section-title">Membership &amp; system badges</h2>
+    <p class="ds-section-desc">Indicate user tier and system-level features. Appear inline next to user names, nav items, and section headings.</p>
+
+    <div class="ds-example" style="flex-direction:column; align-items:flex-start; gap:32px; padding:40px;">
+      <div>
+        <div class="badge-group-label">PRO Badge</div>
+        <div class="b-row">
+          <span class="b" style="border:1.5px solid #2CB9A8;color:#2CB9A8;background:transparent;">PRO</span>
+          <div class="b-desc">Teal outlined · used next to "ProSuite" nav item and user name</div>
+        </div>
+      </div>
+      <div>
+        <div class="badge-group-label">AI Assistant Badge</div>
+        <div class="b-row">
+          <span class="b" style="background:rgba(44,185,168,.1);border:1px solid rgba(44,185,168,.4);color:#0E9680;font-size:10px;">✦ AI ASSISTANT</span>
+          <div class="b-desc">Teal tonal · used next to Appetite Assistant nav item</div>
+        </div>
+      </div>
+      <div>
+        <div class="badge-group-label">Partner branding</div>
+        <div class="b-row">
+          <span style="font-size:12px;font-weight:700;color:#9CA3AF;letter-spacing:.06em;font-family:Montserrat,sans-serif;">POWERED BY <span style="font-size:15px;font-weight:800;color:#374151;">btis</span></span>
+          <div class="b-desc">Top-right of header · not a pill shape — typographic treatment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- STATUS BADGES -->
+  <div class="ds-section" id="status-badges">
+    <h2 class="ds-section-title">Status badges</h2>
+    <p class="ds-section-desc">Used in data tables to communicate the current state of a quote, policy, or submission. Each status maps to a semantic color role.</p>
+
+    <div class="ds-example" style="flex-direction:column; align-items:flex-start; gap:16px; padding:40px;">
+      <div class="b-row" style="gap:24px; flex-wrap:wrap;">
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
+          <span class="b" style="background:rgba(16,185,129,.1);color:#059669;">● Sold/Issued</span>
+          <div style="font-size:11px;color:var(--gray-400);">color.success · bg 10%</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
+          <span class="b" style="background:rgba(249,115,22,.1);color:#EA580C;">● Upcoming Renewals</span>
+          <div style="font-size:11px;color:var(--gray-400);">color.warning · bg 10%</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
+          <span class="b" style="background:rgba(249,115,22,.1);color:#EA580C;">● Pending/Action Req.</span>
+          <div style="font-size:11px;color:var(--gray-400);">color.warning · bg 10%</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
+          <span class="b" style="background:rgba(239,68,68,.1);color:#DC2626;">● Declined</span>
+          <div style="font-size:11px;color:var(--gray-400);">color.error · bg 10%</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
+          <span class="b" style="background:#F3F4F6;color:#6B7280;">● Incomplete</span>
+          <div style="font-size:11px;color:var(--gray-400);">gray-100 bg · gray-500 text</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
+          <span class="b" style="background:rgba(59,130,246,.1);color:#2563EB;">● Add'l Insured Request</span>
+          <div style="font-size:11px;color:var(--gray-400);">color.info · bg 10%</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
+          <span style="font-size:13px;font-weight:700;color:#F97316;font-family:Montserrat,sans-serif;">RENEW</span>
+          <div style="font-size:11px;color:var(--gray-400);">text-only · warning orange · uppercase</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- STATUS IN CONTEXT -->
+  <div class="ds-section" id="in-context-data-table">
+    <h2 class="ds-section-title">In context — Data table</h2>
+    <p class="ds-section-desc">Status badges appear in the Status column of data tables. They are always left-aligned and paired with a bullet dot prefix.</p>
+    <div class="status-table-demo">
+      <div class="std-header">
+        <div class="std-th">Applicant</div>
+        <div class="std-th">LOB</div>
+        <div class="std-th">Status</div>
+      </div>
+      <div class="std-row">
+        <div class="std-td">Jane Smith</div>
+        <div class="std-td">Worker's Comp</div>
+        <div class="std-td"><span class="b" style="background:rgba(16,185,129,.1);color:#059669;font-size:12px;">● Sold/Issued</span></div>
+      </div>
+      <div class="std-row">
+        <div class="std-td">Elvis Pressley</div>
+        <div class="std-td">Vacant Risks</div>
+        <div class="std-td"><span class="b" style="background:rgba(249,115,22,.1);color:#EA580C;font-size:12px;">● Upcoming Renewals</span></div>
+      </div>
+      <div class="std-row">
+        <div class="std-td">Joe Smith</div>
+        <div class="std-td">General Liability</div>
+        <div class="std-td"><span class="b" style="background:rgba(239,68,68,.1);color:#DC2626;font-size:12px;">● Declined</span></div>
+      </div>
+      <div class="std-row">
+        <div class="std-td">Elvis Pressley</div>
+        <div class="std-td">Worker's Comp</div>
+        <div class="std-td"><span class="b" style="background:#F3F4F6;color:#6B7280;font-size:12px;">● Incomplete</span></div>
+      </div>
+      <div class="std-row">
+        <div class="std-td">Joe Smith</div>
+        <div class="std-td">General Liability</div>
+        <div class="std-td"><span class="b" style="background:rgba(59,130,246,.1);color:#2563EB;font-size:12px;">● Add'l Insured Request</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- SPECS -->
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Shape</td><td><code>shape.full</code> (pill)</td></tr>
+          <tr><td>Padding</td><td>4px 12px</td></tr>
+          <tr><td>Font size</td><td>11px</td></tr>
+          <tr><td>Font weight</td><td>700 (Bold)</td></tr>
+          <tr><td>Letter spacing</td><td>0.03em</td></tr>
+          <tr><td>Background opacity</td><td>10% of the semantic color</td></tr>
+          <tr><td>PRO badge border</td><td>1.5px solid <code>color.secondary</code> (#2CB9A8)</td></tr>
+          <tr><td>RENEW text</td><td>13px / Bold / <code>color.warning</code> / uppercase / no background</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+    <!-- ── Prev / Next navigation ── -->
+        <div class="ds-page-nav">
+    <a class="ds-page-nav-btn prev" href="ds-29-avatar.html">
+      <span class="ds-page-nav-label">← Previous</span>
+      <span class="ds-page-nav-name">Avatar</span>
+    </a>
+    <a class="ds-page-nav-btn next" href="ds-30-breadcrumb.html">
+      <span class="ds-page-nav-label">Next →</span>
+      <span class="ds-page-nav-name">Breadcrumb</span>
+    </a>
+    </div>
+
+  </div></main>
+
+<aside class="ds-toc">
+  <div class="ds-toc-title">In this article</div>
+  <a class="ds-toc-item active" href="#membership-badges">Membership badges</a>
+  <a class="ds-toc-item" href="#status-badges">Status badges</a>
+  <a class="ds-toc-item" href="#in-context">In context</a>
+  <a class="ds-toc-item" href="#specs">Specs</a>
+</aside>
+
+
+
+</div>
+
+<script>
+const DS_PAGES = [
+  {t:'Color',section:'Styles',url:'ds-01-color.html',icon:'palette'},
+  {t:'Typography',section:'Styles',url:'ds-02-typography.html',icon:'text_fields'},
+  {t:'Elevation',section:'Foundations',url:'ds-03-elevation.html',icon:'layers'},
+  {t:'Shape',section:'Foundations',url:'ds-04-shape.html',icon:'rounded_corner'},
+  {t:'Spacing',section:'Foundations',url:'ds-05-spacing.html',icon:'space_bar'},
+  {t:'Badges',section:'Components',url:'ds-09-badges.html',icon:'fiber_manual_record'},
+  {t:'Buttons',section:'Components',url:'ds-06-buttons.html',icon:'smart_button'},
+  {t:'Cards',section:'Components',url:'ds-10-cards.html',icon:'crop_square'},
+  {t:'Checkbox',section:'Components',url:'ds-14-checkbox.html',icon:'check_box'},
+  {t:'Chips',section:'Components',url:'ds-16-chips.html',icon:'label'},
+  {t:'Data Tables',section:'Components',url:'ds-13-datatable.html',icon:'table_chart'},
+  {t:'Dialogs',section:'Components',url:'ds-17-dialogs.html',icon:'open_in_new'},
+  {t:'Lists',section:'Components',url:'ds-21-lists.html',icon:'format_list_bulleted'},
+  {t:'Menus',section:'Components',url:'ds-22-menus.html',icon:'menu'},
+  {t:'Navigation',section:'Components',url:'ds-07-navigation.html',icon:'navigation'},
+  {t:'Progress',section:'Components',url:'ds-18-progress.html',icon:'hourglass_empty'},
+  {t:'Radio',section:'Components',url:'ds-15-radio.html',icon:'radio_button_checked'},
+  {t:'Sliders',section:'Components',url:'ds-19-slider.html',icon:'tune'},
+  {t:'Snackbar',section:'Components',url:'ds-20-snackbar.html',icon:'notifications'},
+  {t:'Switches',section:'Components',url:'ds-12-switches.html',icon:'toggle_on'},
+  {t:'Tabs',section:'Components',url:'ds-11-tabs.html',icon:'tab'},
+  {t:'Text Fields',section:'Components',url:'ds-08-textfields.html',icon:'input'}
+];
+let searchIdx = -1;
+function openSearch(){
+  document.getElementById('search-overlay').classList.add('open');
+  document.getElementById('search-input').value='';
+  document.getElementById('search-input').focus();
+  renderResults('');
+  searchIdx=-1;
+}
+function closeSearch(){
+  document.getElementById('search-overlay').classList.remove('open');
+}
+function renderResults(q){
+  searchIdx=-1;
+  const res=DS_PAGES.filter(p=>p.t.toLowerCase().includes(q.toLowerCase())||p.section.toLowerCase().includes(q.toLowerCase()));
+  const c=document.getElementById('search-results');
+  if(res.length===0){c.innerHTML='<div class="search-empty">No results for "'+q+'"</div>';return;}
+  c.innerHTML=res.map((p,i)=>`<div class="search-result-item" data-i="${i}" data-url="${p.url}" onclick="location.href='${p.url}'">
+    <div class="sri-icon"><span class="material-icons-round">${p.icon}</span></div>
+    <div><div class="search-result-title">${p.t}</div><div class="search-result-section">${p.section}</div></div>
+    <span class="material-icons-round sri-arrow">arrow_forward</span>
+  </div>`).join('');
+}
+function searchKeydown(e){
+  const items=document.querySelectorAll('.search-result-item');
+  if(e.key==='ArrowDown'){e.preventDefault();searchIdx=Math.min(searchIdx+1,items.length-1);}
+  else if(e.key==='ArrowUp'){e.preventDefault();searchIdx=Math.max(searchIdx-1,0);}
+  else if(e.key==='Enter'&&searchIdx>=0){items[searchIdx].click();return;}
+  else if(e.key==='Escape'){closeSearch();return;}
+  items.forEach((el,i)=>el.classList.toggle('focused',i===searchIdx));
+  if(searchIdx>=0)items[searchIdx].scrollIntoView({block:'nearest'});
+}
+document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}if(e.key==='Escape')closeSearch();});
+</script>
+<script src="ds-search.js"></script>
+<script src="ds-shared.js"></script>
+</body></html>

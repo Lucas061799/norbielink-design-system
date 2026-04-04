@@ -1,0 +1,2045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Norbielink Design System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #F0F0F5;
+      color: #1A1A2E;
+    }
+
+    /* ─── SECTION WRAPPER ─────────────────────────────── */
+    .ds-page {
+      width: 1440px;
+      margin: 0 auto;
+      padding: 64px 80px;
+      background: #F0F0F5;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #7B2FBE;
+      margin-bottom: 12px;
+    }
+
+    .section-heading {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1A1A2E;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      font-size: 15px;
+      font-weight: 400;
+      color: #6B7280;
+      margin-bottom: 48px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #E5E7EB;
+      margin: 72px 0;
+    }
+
+    /* ─── COVER ───────────────────────────────────────── */
+    .cover {
+      width: 1440px;
+      height: 320px;
+      background: linear-gradient(135deg, #0D0E22 0%, #1A1050 50%, #2D1060 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 80px;
+      margin-bottom: 0;
+    }
+
+    .cover-logo {
+      font-size: 36px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: 0.04em;
+    }
+
+    .cover-logo span {
+      background: linear-gradient(135deg, #7B2FBE, #A855F7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cover-right {
+      text-align: right;
+    }
+
+    .cover-right h1 {
+      font-size: 48px;
+      font-weight: 800;
+      color: white;
+      line-height: 1.1;
+    }
+
+    .cover-right p {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.6);
+      margin-top: 12px;
+    }
+
+    .cover-version {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(123, 47, 190, 0.4);
+      border: 1px solid #7B2FBE;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #C084FC;
+      margin-top: 12px;
+    }
+
+    /* ─── COLOR PALETTE ───────────────────────────────── */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .color-group-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9CA3AF;
+      margin-bottom: 16px;
+      margin-top: 32px;
+      grid-column: 1 / -1;
+    }
+
+    .color-swatch {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .swatch-block {
+      height: 80px;
+    }
+
+    .swatch-info {
+      padding: 12px 14px;
+    }
+
+    .swatch-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1A1A2E;
+      margin-bottom: 3px;
+    }
+
+    .swatch-hex {
+      font-size: 12px;
+      font-weight: 400;
+      color: #6B7280;
+      font-family: 'Courier New', monospace;
+    }
+
+    .swatch-desc {
+      font-size: 11px;
+      color: #9CA3AF;
+      margin-top: 2px;
+    }
+
+    /* ─── TYPOGRAPHY ──────────────────────────────────── */
+    .type-table {
+      width: 100%;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .type-row {
+      display: grid;
+      grid-template-columns: 200px 1fr 80px 100px;
+      padding: 24px 32px;
+      border-bottom: 1px solid #F3F4F6;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .type-row:last-child { border-bottom: none; }
+
+    .type-meta {
+      font-size: 12px;
+      color: #6B7280;
+    }
+
+    .type-meta strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1A1A2E;
+      margin-bottom: 2px;
+    }
+
+    .type-size {
+      font-size: 12px;
+      color: #6B7280;
+      text-align: center;
+    }
+
+    .type-lh {
+      font-size: 12px;
+      color: #6B7280;
+      text-align: center;
+    }
+
+    /* ─── SPACING ─────────────────────────────────────── */
+    .spacing-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .spacing-item {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      min-width: 160px;
+    }
+
+    .spacing-bar {
+      background: linear-gradient(135deg, #7B2FBE, #A855F7);
+      border-radius: 3px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    .spacing-label {
+      font-size: 12px;
+    }
+
+    .spacing-label strong {
+      display: block;
+      font-weight: 700;
+      color: #1A1A2E;
+    }
+
+    .spacing-label span {
+      color: #6B7280;
+    }
+
+    /* ─── BUTTONS ─────────────────────────────────────── */
+    .component-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 32px;
+    }
+
+    .component-card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .component-card.dark {
+      background: #0D0E22;
+    }
+
+    .component-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9CA3AF;
+      margin-bottom: 20px;
+    }
+
+    .component-label.dark { color: rgba(255,255,255,0.4); }
+
+    /* Button styles */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-lg { padding: 12px 24px; font-size: 15px; border-radius: 10px; }
+    .btn-md { padding: 9px 20px; font-size: 14px; border-radius: 8px; }
+    .btn-sm { padding: 6px 16px; font-size: 13px; border-radius: 6px; }
+
+    /* Light mode buttons */
+    .btn-primary-teal {
+      background: linear-gradient(135deg, #4ECBA1, #2CB9A8);
+      color: white;
+      box-shadow: 0 2px 8px rgba(44, 191, 174, 0.35);
+    }
+
+    .btn-primary-teal:hover {
+      background: linear-gradient(135deg, #3DBD93, #22A89A);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #1A1A2E;
+      border: 1.5px solid #E5E7EB;
+    }
+
+    .btn-ghost-teal {
+      background: transparent;
+      color: #2CB9A8;
+      border: 1.5px solid #2CB9A8;
+    }
+
+    .btn-ghost-purple {
+      background: transparent;
+      color: #7B2FBE;
+      border: 1.5px solid #7B2FBE;
+    }
+
+    .btn-disabled {
+      background: #F3F4F6;
+      color: #9CA3AF;
+      cursor: not-allowed;
+    }
+
+    .btn-text-purple {
+      background: transparent;
+      color: #7B2FBE;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 4px 0;
+      border: none;
+    }
+
+    /* Dark mode buttons */
+    .btn-primary-purple {
+      background: linear-gradient(135deg, #5A1F8C, #7B2FBE, #9B4DCA);
+      color: white;
+      box-shadow: 0 2px 12px rgba(123, 47, 190, 0.45);
+    }
+
+    .btn-secondary-dark {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.85);
+      border: 1.5px solid rgba(255,255,255,0.15);
+    }
+
+    .btn-ghost-dark {
+      background: transparent;
+      color: #A855F7;
+      border: 1.5px solid #7B2FBE;
+    }
+
+    .btn-disabled-dark {
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.25);
+      cursor: not-allowed;
+    }
+
+    /* ─── FORM INPUTS ─────────────────────────────────── */
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 320px;
+    }
+
+    .input-field-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .input-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .input-label.dark { color: rgba(255,255,255,0.75); }
+
+    .input-field {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1.5px solid #E5E7EB;
+      background: white;
+      color: #1A1A2E;
+      outline: none;
+      width: 100%;
+    }
+
+    .input-field::placeholder { color: #9CA3AF; }
+
+    .input-field.focus {
+      border-color: #2CB9A8;
+      box-shadow: 0 0 0 3px rgba(44,185,168,0.12);
+    }
+
+    .input-field.error-state {
+      border-color: #EF4444;
+      box-shadow: 0 0 0 3px rgba(239,68,68,0.10);
+    }
+
+    .input-field.disabled-state {
+      background: #F9FAFB;
+      color: #9CA3AF;
+      cursor: not-allowed;
+    }
+
+    .input-field.dark-field {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .input-field.dark-focus {
+      background: rgba(255,255,255,0.08);
+      border-color: #2CB9A8;
+      color: rgba(255,255,255,0.9);
+      box-shadow: 0 0 0 3px rgba(44,185,168,0.15);
+    }
+
+    .input-helper {
+      font-size: 12px;
+      color: #6B7280;
+    }
+
+    .input-error-text {
+      font-size: 12px;
+      color: #EF4444;
+    }
+
+    /* Search bar */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 16px;
+      border-radius: 50px;
+      border: 1.5px solid #E5E7EB;
+      background: white;
+      width: 360px;
+    }
+
+    .search-bar.focus-state {
+      border-color: #2CB9A8;
+      box-shadow: 0 0 0 3px rgba(44,185,168,0.12);
+    }
+
+    .search-icon {
+      color: #9CA3AF;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .search-input {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      border: none;
+      outline: none;
+      color: #1A1A2E;
+      width: 100%;
+      background: transparent;
+    }
+
+    .search-input::placeholder { color: #9CA3AF; }
+
+    /* Dropdown */
+    .dropdown-field {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1.5px solid #E5E7EB;
+      background: white;
+      color: #1A1A2E;
+      outline: none;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .chevron { color: #9CA3AF; font-size: 12px; }
+
+    /* ─── BADGES ──────────────────────────────────────── */
+    .badges-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-pro {
+      background: transparent;
+      border: 1.5px solid #2CB9A8;
+      color: #2CB9A8;
+    }
+
+    .badge-ai {
+      background: rgba(44,185,168,0.12);
+      border: 1px solid #2CB9A8;
+      color: #0E9680;
+      font-size: 10px;
+    }
+
+    .badge-success {
+      background: rgba(16,185,129,0.1);
+      color: #059669;
+    }
+
+    .badge-warning {
+      background: rgba(249,115,22,0.1);
+      color: #EA6E0A;
+    }
+
+    .badge-error {
+      background: rgba(239,68,68,0.1);
+      color: #DC2626;
+    }
+
+    .badge-neutral {
+      background: #F3F4F6;
+      color: #6B7280;
+    }
+
+    .badge-info {
+      background: rgba(59,130,246,0.1);
+      color: #2563EB;
+    }
+
+    .badge-renew {
+      background: transparent;
+      color: #F97316;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 0;
+    }
+
+    /* ─── NAVIGATION ──────────────────────────────────── */
+    .sidebar-demo {
+      width: 245px;
+      background: #0D0E22;
+      border-radius: 16px;
+      padding: 24px 0;
+      min-height: 580px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sidebar-logo {
+      font-size: 18px;
+      font-weight: 800;
+      color: white;
+      padding: 0 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+    }
+
+    .sidebar-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px 16px;
+    }
+
+    .avatar-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2CB9A8, #4ECBA1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .user-info strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .user-info span {
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.65);
+      cursor: pointer;
+      border-radius: 0;
+      margin: 1px 8px;
+      border-radius: 8px;
+    }
+
+    .nav-item:hover {
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .nav-item.active {
+      background: linear-gradient(135deg, #5A1F8C, #7B2FBE, #9B4DCA);
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(123,47,190,0.35);
+    }
+
+    .nav-icon {
+      width: 18px;
+      height: 18px;
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+
+    .nav-item.active .nav-icon { opacity: 1; }
+
+    .sidebar-palm {
+      position: absolute;
+      bottom: 80px;
+      left: -20px;
+      width: 160px;
+      opacity: 0.05;
+      pointer-events: none;
+    }
+
+    .sidebar-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 20px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .chat-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .chat-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #7B2FBE, #A855F7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    /* Toggle */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .toggle {
+      width: 40px;
+      height: 22px;
+      border-radius: 11px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .toggle-on {
+      background: #F97316;
+    }
+
+    .toggle-off {
+      background: rgba(255,255,255,0.15);
+    }
+
+    .toggle-thumb {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: white;
+      top: 3px;
+    }
+
+    .toggle-on .toggle-thumb { right: 3px; }
+    .toggle-off .toggle-thumb { left: 3px; }
+
+    .toggle-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ─── CARDS ───────────────────────────────────────── */
+    .marketplace-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    .marketplace-tile {
+      background: white;
+      border-radius: 12px;
+      padding: 20px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+      cursor: pointer;
+    }
+
+    .marketplace-tile.active {
+      border: 2px solid #7B2FBE;
+      box-shadow: 0 0 0 3px rgba(123,47,190,0.12);
+    }
+
+    .tile-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #F3F4F6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .tile-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #374151;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    /* ProSuite feature card */
+    .feature-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      border: 1.5px solid #E5E7EB;
+      width: 280px;
+    }
+
+    .feature-icon-bg {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(123,47,190,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 14px;
+    }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1A1A2E;
+      margin-bottom: 6px;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: #6B7280;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .feature-link {
+      font-size: 13px;
+      font-weight: 700;
+      color: #7B2FBE;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+    }
+
+    /* ─── DATA TABLE ──────────────────────────────────── */
+    .data-table {
+      width: 100%;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .table-header {
+      display: grid;
+      grid-template-columns: 120px 160px 150px 150px 110px 150px 140px 150px;
+      background: white;
+      border-bottom: 2px solid #F3F4F6;
+      padding: 0 24px;
+    }
+
+    .th {
+      padding: 14px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #6B7280;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .sort-icon { color: #9CA3AF; font-size: 10px; }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 120px 160px 150px 150px 110px 150px 140px 150px;
+      padding: 0 24px;
+      border-bottom: 1px solid #F9FAFB;
+      transition: background 0.1s;
+    }
+
+    .table-row:hover { background: #FAFAFA; }
+
+    .td {
+      padding: 14px 8px;
+      font-size: 13px;
+      color: #374151;
+      display: flex;
+      align-items: center;
+    }
+
+    .td-link {
+      color: #2CB9A8;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .table-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+      border-top: 1px solid #F3F4F6;
+    }
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .page-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid #E5E7EB;
+      background: white;
+      color: #374151;
+    }
+
+    .page-btn.active {
+      background: #2CB9A8;
+      color: white;
+      border-color: #2CB9A8;
+    }
+
+    .page-btn.arrow { color: #9CA3AF; }
+
+    .per-page-select {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      padding: 4px 8px;
+      border: 1px solid #E5E7EB;
+      border-radius: 6px;
+      color: #374151;
+      background: white;
+    }
+
+    /* ─── TABS ────────────────────────────────────────── */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid #E5E7EB;
+      margin-bottom: 24px;
+    }
+
+    .tab {
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #6B7280;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+
+    .tab.active {
+      color: #2CB9A8;
+      border-bottom-color: #2CB9A8;
+    }
+
+    /* ─── AVATAR ──────────────────────────────────────── */
+    .avatars-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .avatar {
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .avatar-xl { width: 56px; height: 56px; font-size: 20px; }
+    .avatar-lg { width: 44px; height: 44px; font-size: 16px; }
+    .avatar-md { width: 36px; height: 36px; font-size: 13px; }
+    .avatar-sm { width: 28px; height: 28px; font-size: 11px; }
+
+    .avatar-teal { background: linear-gradient(135deg, #2CB9A8, #4ECBA1); }
+    .avatar-purple { background: linear-gradient(135deg, #7B2FBE, #A855F7); }
+
+    /* ─── ICON LIBRARY ────────────────────────────────── */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 16px;
+    }
+
+    .icon-item {
+      background: white;
+      border-radius: 10px;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+    }
+
+    .icon-item span { font-size: 22px; }
+
+    .icon-name {
+      font-size: 10px;
+      color: #9CA3AF;
+      text-align: center;
+    }
+
+    /* ─── DARK SECTION ────────────────────────────────── */
+    .dark-section {
+      background: #0D0E22;
+      padding: 48px 80px;
+      margin: 0 -80px;
+    }
+
+    .dark-section .section-title { color: #A855F7; }
+    .dark-section .section-heading { color: white; }
+    .dark-section .section-sub { color: rgba(255,255,255,0.5); }
+    .dark-section .divider { background: rgba(255,255,255,0.08); }
+
+    .dark-color-swatch {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .dark-color-swatch .swatch-name { color: rgba(255,255,255,0.85); }
+    .dark-color-swatch .swatch-hex { color: rgba(255,255,255,0.4); }
+    .dark-color-swatch .swatch-desc { color: rgba(255,255,255,0.3); }
+
+    .dark-component-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    /* ─── GRID SYSTEM ─────────────────────────────────── */
+    .grid-demo {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .grid-cols {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .grid-col {
+      background: rgba(123,47,190,0.08);
+      border: 1px solid rgba(123,47,190,0.2);
+      border-radius: 4px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #7B2FBE;
+      font-weight: 600;
+    }
+
+    /* ─── PAGE LAYOUT ─────────────────────────────────── */
+    .section-block {
+      margin-bottom: 80px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     COVER
+═══════════════════════════════════════════════════ -->
+<div class="cover">
+  <div>
+    <div class="cover-logo">NORBIE<span>LINK</span></div>
+    <div style="margin-top: 12px; font-size: 13px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase;">Insurance Technology Platform</div>
+  </div>
+  <div class="cover-right">
+    <h1 style="font-size: 42px; font-weight: 800; color: white;">Design System</h1>
+    <p>Colors · Typography · Spacing · Components</p>
+    <div class="cover-version">v1.0 · 2025</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     MAIN CONTENT
+═══════════════════════════════════════════════════ -->
+<div class="ds-page">
+
+  <!-- ── 1. COLORS ──────────────────────────────────── -->
+  <div class="section-block">
+    <div class="section-title">Foundation</div>
+    <div class="section-heading">Color Tokens</div>
+    <div class="section-sub">All color decisions stem from these core tokens. Use semantic names — never raw hex in product code.</div>
+
+    <!-- Brand -->
+    <div class="color-group-label">Brand Colors</div>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: linear-gradient(135deg, #5A1F8C, #7B2FBE, #9B4DCA);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Primary Purple</div>
+          <div class="swatch-hex">#7B2FBE</div>
+          <div class="swatch-desc">Brand identity, nav active state</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #A855F7;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Purple Light</div>
+          <div class="swatch-hex">#A855F7</div>
+          <div class="swatch-desc">Hover states, gradient end</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #5A1F8C;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Purple Dark</div>
+          <div class="swatch-hex">#5A1F8C</div>
+          <div class="swatch-desc">Pressed states, gradient start</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: rgba(123,47,190,0.08);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Purple Tint</div>
+          <div class="swatch-hex">rgba(#7B2FBE, 8%)</div>
+          <div class="swatch-desc">Icon backgrounds, subtle fills</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accent -->
+    <div class="color-group-label">Accent / Action</div>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: linear-gradient(135deg, #4ECBA1, #2CB9A8);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Teal (CTA)</div>
+          <div class="swatch-hex">#2CB9A8</div>
+          <div class="swatch-desc">Primary buttons, links, focus ring</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #4ECBA1;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Teal Light</div>
+          <div class="swatch-hex">#4ECBA1</div>
+          <div class="swatch-desc">Button gradient start</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #0E9680;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Teal Dark</div>
+          <div class="swatch-hex">#0E9680</div>
+          <div class="swatch-desc">Hover on teal elements</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: rgba(44,185,168,0.1);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Teal Tint</div>
+          <div class="swatch-hex">rgba(#2CB9A8, 10%)</div>
+          <div class="swatch-desc">Badge backgrounds</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Neutrals -->
+    <div class="color-group-label">Neutrals</div>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #1A1A2E;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Gray 900</div>
+          <div class="swatch-hex">#1A1A2E</div>
+          <div class="swatch-desc">Primary text</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #374151;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Gray 700</div>
+          <div class="swatch-hex">#374151</div>
+          <div class="swatch-desc">Secondary text, table cells</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #6B7280;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Gray 500</div>
+          <div class="swatch-hex">#6B7280</div>
+          <div class="swatch-desc">Placeholder, captions</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #9CA3AF;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Gray 400</div>
+          <div class="swatch-hex">#9CA3AF</div>
+          <div class="swatch-desc">Icons, disabled text</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #E5E7EB;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Gray 200</div>
+          <div class="swatch-hex">#E5E7EB</div>
+          <div class="swatch-desc">Borders, dividers</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #F3F4F6;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Gray 100</div>
+          <div class="swatch-hex">#F3F4F6</div>
+          <div class="swatch-desc">Disabled bg, tile icons</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #F9FAFB;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Gray 50</div>
+          <div class="swatch-hex">#F9FAFB</div>
+          <div class="swatch-desc">Table row hover</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #FFFFFF; border: 1px solid #E5E7EB;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">White</div>
+          <div class="swatch-hex">#FFFFFF</div>
+          <div class="swatch-desc">Cards, inputs, sidebar</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Semantic -->
+    <div class="color-group-label">Semantic / Status</div>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #10B981;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Success</div>
+          <div class="swatch-hex">#10B981</div>
+          <div class="swatch-desc">Sold/Issued, positive states</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #F97316;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Warning</div>
+          <div class="swatch-hex">#F97316</div>
+          <div class="swatch-desc">Renew, upcoming, attention</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #EF4444;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Error / Danger</div>
+          <div class="swatch-hex">#EF4444</div>
+          <div class="swatch-desc">Declined, destructive actions</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #3B82F6;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Info</div>
+          <div class="swatch-hex">#3B82F6</div>
+          <div class="swatch-desc">Informational states, links</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark Mode Colors -->
+    <div class="color-group-label" style="margin-top: 48px;">Dark Mode Surfaces</div>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #0D0E22;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Surface / Background</div>
+          <div class="swatch-hex">#0D0E22</div>
+          <div class="swatch-desc">Main page background</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #111228;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Sidebar</div>
+          <div class="swatch-hex">#111228</div>
+          <div class="swatch-desc">Navigation sidebar bg</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: #1A1B3A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Surface Raised</div>
+          <div class="swatch-hex">#1A1B3A</div>
+          <div class="swatch-desc">Cards, modal surfaces</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Surface Overlay</div>
+          <div class="swatch-hex">rgba(#FFF, 6%)</div>
+          <div class="swatch-desc">Input backgrounds dark</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── 2. TYPOGRAPHY ───────────────────────────────── -->
+  <div class="section-block">
+    <div class="section-title">Foundation</div>
+    <div class="section-heading">Typography</div>
+    <div class="section-sub">Montserrat is the sole typeface across all Norbielink interfaces — chosen for its geometric clarity and professionalism.</div>
+
+    <div class="type-table">
+      <div class="type-row" style="background: #F9FAFB;">
+        <div class="th" style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #9CA3AF;">Style</div>
+        <div class="th" style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #9CA3AF;">Preview</div>
+        <div class="th" style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #9CA3AF; text-align:center;">Size</div>
+        <div class="th" style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #9CA3AF; text-align:center;">Line Height</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>H1 — Semibold</strong>Montserrat / 700</div>
+        <div style="font-size: 27px; font-weight: 700; color: #1A1A2E; font-family: 'Montserrat', sans-serif;">Display Heading</div>
+        <div class="type-size">27px</div>
+        <div class="type-lh">31px</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>H2 — Regular</strong>Montserrat / 400</div>
+        <div style="font-size: 24px; font-weight: 400; color: #1A1A2E; font-family: 'Montserrat', sans-serif;">Section Heading</div>
+        <div class="type-size">24px</div>
+        <div class="type-lh">28px</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>H3 — Regular</strong>Montserrat / 400</div>
+        <div style="font-size: 20px; font-weight: 400; color: #1A1A2E; font-family: 'Montserrat', sans-serif;">Sub-section Heading</div>
+        <div class="type-size">20px</div>
+        <div class="type-lh">24px</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>H4 — Medium</strong>Montserrat / 500</div>
+        <div style="font-size: 18px; font-weight: 500; color: #1A1A2E; font-family: 'Montserrat', sans-serif;">Card Title</div>
+        <div class="type-size">18px</div>
+        <div class="type-lh">22px</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>Body L — Regular</strong>Montserrat / 400</div>
+        <div style="font-size: 18px; font-weight: 400; color: #374151; font-family: 'Montserrat', sans-serif;">Large body text for introductions</div>
+        <div class="type-size">18px</div>
+        <div class="type-lh">26px</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>Body M — Regular</strong>Montserrat / 400</div>
+        <div style="font-size: 16px; font-weight: 400; color: #374151; font-family: 'Montserrat', sans-serif;">Standard body text for most content</div>
+        <div class="type-size">16px</div>
+        <div class="type-lh">24px</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>Body S — Regular</strong>Montserrat / 400</div>
+        <div style="font-size: 14px; font-weight: 400; color: #374151; font-family: 'Montserrat', sans-serif;">Navigation items, table cells, form elements</div>
+        <div class="type-size">14px</div>
+        <div class="type-lh">20px</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>Label M — Regular</strong>Montserrat / 400</div>
+        <div style="font-size: 13px; font-weight: 400; color: #374151; font-family: 'Montserrat', sans-serif;">Form labels, secondary info</div>
+        <div class="type-size">13px</div>
+        <div class="type-lh">18px</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>Label S — Regular</strong>Montserrat / 400</div>
+        <div style="font-size: 12px; font-weight: 400; color: #374151; font-family: 'Montserrat', sans-serif;">Captions, helper text, metadata</div>
+        <div class="type-size">12px</div>
+        <div class="type-lh">16px</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>Overline — Bold</strong>Montserrat / 700</div>
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #7B2FBE; font-family: 'Montserrat', sans-serif;">SECTION LABEL / TAG</div>
+        <div class="type-size">11px</div>
+        <div class="type-lh">14px</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── 3. SPACING ─────────────────────────────────── -->
+  <div class="section-block">
+    <div class="section-title">Foundation</div>
+    <div class="section-heading">Spacing Scale</div>
+    <div class="section-sub">4px base unit. All layout spacing should use multiples of 4px.</div>
+
+    <div class="spacing-grid">
+      <div class="spacing-item">
+        <div class="spacing-bar" style="width: 4px;"></div>
+        <div class="spacing-label"><strong>space-1</strong><span>4px</span></div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-bar" style="width: 8px;"></div>
+        <div class="spacing-label"><strong>space-2</strong><span>8px</span></div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-bar" style="width: 12px;"></div>
+        <div class="spacing-label"><strong>space-3</strong><span>12px</span></div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-bar" style="width: 16px;"></div>
+        <div class="spacing-label"><strong>space-4</strong><span>16px</span></div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-bar" style="width: 20px;"></div>
+        <div class="spacing-label"><strong>space-5</strong><span>20px</span></div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-bar" style="width: 24px;"></div>
+        <div class="spacing-label"><strong>space-6</strong><span>24px</span></div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-bar" style="width: 32px;"></div>
+        <div class="spacing-label"><strong>space-8</strong><span>32px</span></div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-bar" style="width: 40px;"></div>
+        <div class="spacing-label"><strong>space-10</strong><span>40px</span></div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-bar" style="width: 48px;"></div>
+        <div class="spacing-label"><strong>space-12</strong><span>48px</span></div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-bar" style="width: 64px;"></div>
+        <div class="spacing-label"><strong>space-16</strong><span>64px</span></div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-bar" style="width: 80px;"></div>
+        <div class="spacing-label"><strong>space-20</strong><span>80px</span></div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-bar" style="width: 96px;"></div>
+        <div class="spacing-label"><strong>space-24</strong><span>96px</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px;">
+      <div class="component-label">Border Radius</div>
+      <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 8px;">
+        <div style="background: white; border-radius: 4px; width: 80px; height: 80px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;">
+          <div style="font-size: 11px; font-weight: 700; color: #1A1A2E;">4px</div>
+          <div style="font-size: 10px; color: #9CA3AF;">radius-sm</div>
+        </div>
+        <div style="background: white; border-radius: 6px; width: 80px; height: 80px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;">
+          <div style="font-size: 11px; font-weight: 700; color: #1A1A2E;">6px</div>
+          <div style="font-size: 10px; color: #9CA3AF;">radius-md</div>
+        </div>
+        <div style="background: white; border-radius: 8px; width: 80px; height: 80px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;">
+          <div style="font-size: 11px; font-weight: 700; color: #1A1A2E;">8px</div>
+          <div style="font-size: 10px; color: #9CA3AF;">radius-lg</div>
+        </div>
+        <div style="background: white; border-radius: 12px; width: 80px; height: 80px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;">
+          <div style="font-size: 11px; font-weight: 700; color: #1A1A2E;">12px</div>
+          <div style="font-size: 10px; color: #9CA3AF;">radius-xl</div>
+        </div>
+        <div style="background: white; border-radius: 16px; width: 80px; height: 80px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;">
+          <div style="font-size: 11px; font-weight: 700; color: #1A1A2E;">16px</div>
+          <div style="font-size: 10px; color: #9CA3AF;">radius-2xl</div>
+        </div>
+        <div style="background: white; border-radius: 50px; width: 120px; height: 80px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;">
+          <div style="font-size: 11px; font-weight: 700; color: #1A1A2E;">9999px</div>
+          <div style="font-size: 10px; color: #9CA3AF;">radius-full (pill)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── 4. BUTTONS ─────────────────────────────────── -->
+  <div class="section-block">
+    <div class="section-title">Components</div>
+    <div class="section-heading">Buttons</div>
+    <div class="section-sub">All interactive actions use Montserrat Semibold. Always pair Primary CTA with a clear label.</div>
+
+    <!-- Light Mode Buttons -->
+    <div class="component-card" style="margin-bottom: 24px;">
+      <div class="component-label">Light Mode — Button Variants</div>
+      <div class="component-row" style="margin-bottom: 24px;">
+        <div>
+          <div style="font-size: 11px; color: #9CA3AF; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Large</div>
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <button class="btn btn-primary-teal btn-lg">+ Start a Quote</button>
+            <button class="btn btn-secondary btn-lg">Back</button>
+            <button class="btn btn-ghost-teal btn-lg">Export</button>
+            <button class="btn btn-ghost-purple btn-lg">Compare</button>
+            <button class="btn btn-disabled btn-lg" disabled>Disabled</button>
+          </div>
+        </div>
+      </div>
+      <div class="component-row" style="margin-bottom: 24px;">
+        <div>
+          <div style="font-size: 11px; color: #9CA3AF; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Medium</div>
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <button class="btn btn-primary-teal btn-md">Add User</button>
+            <button class="btn btn-secondary btn-md">Cancel</button>
+            <button class="btn btn-ghost-teal btn-md">Submit</button>
+            <button class="btn btn-ghost-purple btn-md">View More</button>
+            <button class="btn btn-disabled btn-md" disabled>Disabled</button>
+          </div>
+        </div>
+      </div>
+      <div class="component-row">
+        <div>
+          <div style="font-size: 11px; color: #9CA3AF; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Small</div>
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <button class="btn btn-primary-teal btn-sm">Save</button>
+            <button class="btn btn-secondary btn-sm">Cancel</button>
+            <button class="btn btn-ghost-teal btn-sm">Print</button>
+            <button class="btn btn-text-purple btn-sm">Launch Tour →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark Mode Buttons -->
+    <div class="component-card dark">
+      <div class="component-label dark">Dark Mode — Button Variants</div>
+      <div class="component-row" style="margin-bottom: 24px;">
+        <div>
+          <div style="font-size: 11px; color: rgba(255,255,255,0.3); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Large</div>
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <button class="btn btn-primary-purple btn-lg">+ Start a Quote</button>
+            <button class="btn btn-secondary-dark btn-lg">Back</button>
+            <button class="btn btn-ghost-dark btn-lg">Export</button>
+            <button class="btn btn-disabled-dark btn-lg" disabled>Disabled</button>
+          </div>
+        </div>
+      </div>
+      <div class="component-row">
+        <div>
+          <div style="font-size: 11px; color: rgba(255,255,255,0.3); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Medium</div>
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <button class="btn btn-primary-purple btn-md">Add User</button>
+            <button class="btn btn-secondary-dark btn-md">Cancel</button>
+            <button class="btn btn-ghost-dark btn-md">Submit</button>
+            <button class="btn btn-disabled-dark btn-md" disabled>Disabled</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── 5. FORM INPUTS ─────────────────────────────── -->
+  <div class="section-block">
+    <div class="section-title">Components</div>
+    <div class="section-heading">Form Inputs</div>
+    <div class="section-sub">Consistent focus state using Teal. Error state uses Error Red. All inputs use 8px radius.</div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+      <!-- Light Mode Inputs -->
+      <div class="component-card">
+        <div class="component-label">Light Mode — Input States</div>
+        <div class="input-group">
+          <div class="input-field-wrapper">
+            <div class="input-label">Default</div>
+            <input class="input-field" type="text" placeholder="e.g. Producer">
+            <div class="input-helper">Helper text here</div>
+          </div>
+          <div class="input-field-wrapper">
+            <div class="input-label">Focus</div>
+            <input class="input-field focus" type="text" value="">
+          </div>
+          <div class="input-field-wrapper">
+            <div class="input-label">Filled</div>
+            <input class="input-field focus" type="text" value="John Smith">
+          </div>
+          <div class="input-field-wrapper">
+            <div class="input-label">Error</div>
+            <input class="input-field error-state" type="text" value="invalid@">
+            <div class="input-error-text">Please enter a valid email address</div>
+          </div>
+          <div class="input-field-wrapper">
+            <div class="input-label" style="color: #9CA3AF;">Disabled</div>
+            <input class="input-field disabled-state" type="text" placeholder="Not editable" disabled>
+          </div>
+        </div>
+
+        <div style="margin-top: 32px;">
+          <div class="component-label">Dropdown / Select</div>
+          <div class="input-group">
+            <div class="input-field-wrapper">
+              <div class="input-label">Default</div>
+              <div class="dropdown-field"><span style="color:#9CA3AF;">Select a role...</span><span class="chevron">▾</span></div>
+            </div>
+            <div class="input-field-wrapper">
+              <div class="input-label">Selected</div>
+              <div class="dropdown-field" style="border-color: #2CB9A8;"><span>Producer</span><span class="chevron">▾</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dark Mode Inputs -->
+      <div class="component-card dark">
+        <div class="component-label dark">Dark Mode — Input States</div>
+        <div class="input-group">
+          <div class="input-field-wrapper">
+            <div class="input-label dark">Default</div>
+            <input class="input-field dark-field" type="text" placeholder="e.g. Producer">
+          </div>
+          <div class="input-field-wrapper">
+            <div class="input-label dark">Focus</div>
+            <input class="input-field dark-focus" type="text" value="">
+          </div>
+          <div class="input-field-wrapper">
+            <div class="input-label dark">Filled</div>
+            <input class="input-field dark-focus" type="text" value="John Smith">
+          </div>
+          <div class="input-field-wrapper">
+            <div class="input-label dark" style="color: rgba(255,255,255,0.3);">Disabled</div>
+            <input class="input-field" type="text" placeholder="Not editable" disabled style="background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); color: rgba(255,255,255,0.2);">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div style="margin-top: 32px;">
+      <div class="component-card">
+        <div class="component-label">Search Bar States</div>
+        <div style="display: flex; flex-direction: column; gap: 16px; align-items: flex-start;">
+          <div>
+            <div style="font-size: 11px; color: #9CA3AF; margin-bottom: 8px;">Default</div>
+            <div class="search-bar">
+              <span class="search-icon">🔍</span>
+              <input class="search-input" placeholder="Search clients, quotes or policies..." readonly>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 11px; color: #9CA3AF; margin-bottom: 8px;">Focus / Active</div>
+            <div class="search-bar focus-state">
+              <span class="search-icon">🔍</span>
+              <input class="search-input" value="VRG Plumbing" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── 6. BADGES & STATUS ──────────────────────────── -->
+  <div class="section-block">
+    <div class="section-title">Components</div>
+    <div class="section-heading">Badges & Status Labels</div>
+    <div class="section-sub">Used for membership tiers, AI indicators, and record statuses throughout the platform.</div>
+
+    <div class="component-card">
+      <div class="component-label">Membership & System Badges</div>
+      <div class="badges-row" style="margin-bottom: 32px;">
+        <span class="badge badge-pro">PRO</span>
+        <span class="badge badge-ai">✦ AI ASSISTANT</span>
+        <span style="background: rgba(44,185,168,0.1); border: 1px solid #2CB9A8; color: #0E9680; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700;">POWERED BY btis</span>
+      </div>
+      <div class="component-label">Record Status Labels</div>
+      <div class="badges-row">
+        <span class="badge badge-success">● Sold/Issued</span>
+        <span class="badge badge-warning">● Upcoming Renewals</span>
+        <span class="badge badge-warning">● Pending/Action Req.</span>
+        <span class="badge badge-error">● Declined</span>
+        <span class="badge badge-neutral">● Incomplete</span>
+        <span class="badge badge-info">● Add'l Insured Request</span>
+        <span class="badge-renew">RENEW</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── 7. NAVIGATION ──────────────────────────────── -->
+  <div class="section-block">
+    <div class="section-title">Components</div>
+    <div class="section-heading">Navigation</div>
+    <div class="section-sub">Collapsible sidebar with dark background. Active item uses the primary purple gradient pill.</div>
+
+    <div style="display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap;">
+      <!-- Full Sidebar Demo -->
+      <div class="sidebar-demo">
+        <div class="sidebar-logo">NORBIE<span style="background: linear-gradient(135deg, #7B2FBE, #A855F7); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">LINK</span></div>
+        <div class="sidebar-user">
+          <div class="avatar-circle">JS</div>
+          <div class="user-info">
+            <strong>John Smith <span class="badge badge-pro" style="font-size: 9px; padding: 1px 6px; vertical-align: middle;">PRO</span></strong>
+            <span>ProSuite Member</span>
+          </div>
+        </div>
+        <nav style="padding: 4px 0;">
+          <div class="nav-item active">
+            <svg class="nav-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            Marketplace
+          </div>
+          <div class="nav-item">
+            <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+            Appetite Assistant
+          </div>
+          <div class="nav-item">
+            <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+            Quotes
+          </div>
+          <div class="nav-item">
+            <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z"/></svg>
+            Policies
+          </div>
+          <div class="nav-item">
+            <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 2.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"/></svg>
+            ProSuite <span class="badge badge-pro" style="font-size: 9px; padding: 1px 6px; margin-left: 4px;">PRO</span>
+          </div>
+          <div class="nav-item">Accounting</div>
+          <div class="nav-item">Endorsements</div>
+          <div class="nav-item">Tools & Resources</div>
+          <div class="nav-item">Support</div>
+          <div class="nav-item">Admin</div>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="chat-btn">
+            <div class="chat-avatar">🤖</div>
+            <div>
+              <div style="font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8);">Chat with Norbie</div>
+              <div style="font-size: 10px; color: rgba(255,255,255,0.4);">AI Assistant</div>
+            </div>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle toggle-on"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">Dark Mode</span>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle toggle-off"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">Legacy View</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nav item states breakdown -->
+      <div style="flex: 1; min-width: 300px;">
+        <div class="component-card">
+          <div class="component-label">Nav Item States</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="nav-item active" style="background: linear-gradient(135deg, #5A1F8C, #7B2FBE, #9B4DCA); border-radius: 8px; color: white;">
+              ■ Active / Selected
+            </div>
+            <div class="nav-item" style="background: rgba(0,0,0,0.04); border-radius: 8px; color: #374151;">
+              ■ Hover
+            </div>
+            <div class="nav-item" style="border-radius: 8px; color: #6B7280;">
+              ■ Default / Rest
+            </div>
+          </div>
+          <div style="margin-top: 24px;">
+            <div class="component-label">Avatar Variants</div>
+            <div class="avatars-row">
+              <div>
+                <div class="avatar avatar-xl avatar-teal">JS</div>
+                <div style="font-size: 10px; color: #9CA3AF; text-align: center; margin-top: 6px;">XL 56px</div>
+              </div>
+              <div>
+                <div class="avatar avatar-lg avatar-teal">JS</div>
+                <div style="font-size: 10px; color: #9CA3AF; text-align: center; margin-top: 6px;">LG 44px</div>
+              </div>
+              <div>
+                <div class="avatar avatar-md avatar-teal">JS</div>
+                <div style="font-size: 10px; color: #9CA3AF; text-align: center; margin-top: 6px;">MD 36px</div>
+              </div>
+              <div>
+                <div class="avatar avatar-sm avatar-teal">JS</div>
+                <div style="font-size: 10px; color: #9CA3AF; text-align: center; margin-top: 6px;">SM 28px</div>
+              </div>
+              <div>
+                <div class="avatar avatar-md avatar-purple">NB</div>
+                <div style="font-size: 10px; color: #9CA3AF; text-align: center; margin-top: 6px;">Purple</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── 8. CARDS ────────────────────────────────────── -->
+  <div class="section-block">
+    <div class="section-title">Components</div>
+    <div class="section-heading">Cards</div>
+    <div class="section-sub">Two main card types: Marketplace tiles for navigation, and Feature cards for ProSuite content.</div>
+
+    <!-- Marketplace Tiles -->
+    <div class="component-card" style="margin-bottom: 24px;">
+      <div class="component-label">Marketplace Tiles (Light Mode)</div>
+      <div class="marketplace-grid">
+        <div class="marketplace-tile active">
+          <div class="tile-icon">🏠</div>
+          <div class="tile-label">General Liability</div>
+        </div>
+        <div class="marketplace-tile">
+          <div class="tile-icon">👷</div>
+          <div class="tile-label">Worker's Comp</div>
+        </div>
+        <div class="marketplace-tile">
+          <div class="tile-icon">🏢</div>
+          <div class="tile-label">Business Owners</div>
+        </div>
+        <div class="marketplace-tile">
+          <div class="tile-icon">💼</div>
+          <div class="tile-label">Professional Liability</div>
+        </div>
+        <div class="marketplace-tile">
+          <div class="tile-icon">🛡️</div>
+          <div class="tile-label">Excess</div>
+        </div>
+        <div class="marketplace-tile">
+          <div class="tile-icon">🔗</div>
+          <div class="tile-label">Bonds</div>
+        </div>
+        <div class="marketplace-tile">
+          <div class="tile-icon">🚗</div>
+          <div class="tile-label">Commercial Auto</div>
+        </div>
+        <div class="marketplace-tile">
+          <div class="tile-icon">🔨</div>
+          <div class="tile-label">Builders Risk</div>
+        </div>
+        <div class="marketplace-tile">
+          <div class="tile-icon">🌿</div>
+          <div class="tile-label">Cannabis</div>
+        </div>
+        <div class="marketplace-tile">
+          <div class="tile-icon">💻</div>
+          <div class="tile-label">Cyber</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ProSuite Feature Cards -->
+    <div class="component-card">
+      <div class="component-label">ProSuite Feature Cards</div>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <div class="feature-card">
+          <div class="feature-icon-bg">📊</div>
+          <div class="feature-title">Compare Quotes</div>
+          <div class="feature-desc">Compare quotes side-by-side with AI insights.</div>
+          <a class="feature-link" href="#">Compare Quotes →</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-bg">🔗</div>
+          <div class="feature-title">NowCerts Integration</div>
+          <div class="feature-desc">Instant COIs to serve faster and work smarter.</div>
+          <a class="feature-link" href="#">Launch Integration →</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-bg">📅</div>
+          <div class="feature-title">ProSessions</div>
+          <div class="feature-desc">Book a 1:1 to unlock ProSuite and grow.</div>
+          <a class="feature-link" href="#">Schedule Session →</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-bg">📚</div>
+          <div class="feature-title">Document Library</div>
+          <div class="feature-desc">Get essential docs to save time and cut costs.</div>
+          <a class="feature-link" href="#">Access Library →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── 9. DATA TABLE ──────────────────────────────── -->
+  <div class="section-block">
+    <div class="section-title">Components</div>
+    <div class="section-heading">Data Table</div>
+    <div class="section-sub">Used across Quotes, Policies, and Endorsements. Row links use Teal. Status labels are color-coded.</div>
+
+    <div class="data-table">
+      <div class="table-header">
+        <div class="th">CREATED <span class="sort-icon">↑</span></div>
+        <div class="th">SUBMISSION ID <span class="sort-icon">↑</span></div>
+        <div class="th">APPLICANT <span class="sort-icon">↑</span></div>
+        <div class="th">DBA <span class="sort-icon">↑</span></div>
+        <div class="th">EFFECTIVE <span class="sort-icon">↑</span></div>
+        <div class="th">LOB <span class="sort-icon">↑</span></div>
+        <div class="th">STATUS <span class="sort-icon">↑</span></div>
+        <div class="th">PRODUCER <span class="sort-icon">↑</span></div>
+      </div>
+      <div class="table-row">
+        <div class="td">05/01/2024</div>
+        <div class="td"><span class="td-link">QAA0234567B9</span></div>
+        <div class="td">Elvis Pressley</div>
+        <div class="td">NASA</div>
+        <div class="td">05/01/2024</div>
+        <div class="td">General Liability</div>
+        <div class="td"><span class="badge badge-info" style="font-size: 12px;">Add'l Insured Req.</span></div>
+        <div class="td">Elvis Pressley</div>
+      </div>
+      <div class="table-row">
+        <div class="td">01/01/2024</div>
+        <div class="td"><span class="td-link">QAN556666123</span></div>
+        <div class="td">Jane Smith</div>
+        <div class="td">VRG Plumbing, LLC</div>
+        <div class="td">01/01/2024</div>
+        <div class="td">Worker's Comp</div>
+        <div class="td"><span class="badge badge-success" style="font-size: 12px;">Sold/Issued</span></div>
+        <div class="td">Jane Smith</div>
+      </div>
+      <div class="table-row">
+        <div class="td">06/15/2024</div>
+        <div class="td"><span class="td-link">QAWWC523456789</span></div>
+        <div class="td">Joe Smith</div>
+        <div class="td">California Auto Sales</div>
+        <div class="td">06/15/2024</div>
+        <div class="td">General Liability</div>
+        <div class="td"><span class="badge badge-error" style="font-size: 12px;">Declined</span></div>
+        <div class="td">Joe Smith</div>
+      </div>
+      <div class="table-row">
+        <div class="td">07/01/2024</div>
+        <div class="td"><span class="td-link">QMWCTR1222333</span></div>
+        <div class="td">Elvis Pressley</div>
+        <div class="td">Restaurant R' Us</div>
+        <div class="td">07/01/2024</div>
+        <div class="td">Vacant Risks</div>
+        <div class="td"><span class="badge badge-neutral" style="font-size: 12px;">Incomplete</span></div>
+        <div class="td">Elvis Pressley</div>
+      </div>
+      <div class="table-row">
+        <div class="td">03/01/2025</div>
+        <div class="td"><span class="td-link">QAA987654321-1</span></div>
+        <div class="td">Elvis Pressley</div>
+        <div class="td">Iron Gate Fencing</div>
+        <div class="td">03/01/2025</div>
+        <div class="td">Vacant Risks</div>
+        <div class="td"><span class="badge badge-warning" style="font-size: 12px;">Upcoming Renewals</span></div>
+        <div class="td">Elvis Pressley</div>
+      </div>
+      <div class="table-footer">
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #6B7280;">
+          Show <select class="per-page-select"><option>10</option><option>25</option><option>50</option></select> per page
+        </div>
+        <div style="font-size: 12px; color: #6B7280;">Page 1 of 1</div>
+        <div class="pagination">
+          <div class="page-btn arrow">‹</div>
+          <div class="page-btn active">1</div>
+          <div class="page-btn">2</div>
+          <div class="page-btn">3</div>
+          <div class="page-btn arrow">›</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── 10. TABS & TOGGLES ─────────────────────────── -->
+  <div class="section-block">
+    <div class="section-title">Components</div>
+    <div class="section-heading">Tabs, Toggles & Controls</div>
+    <div class="section-sub">Tabs use Teal as active color. Toggles are used for Dark Mode and Legacy View settings.</div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+      <div class="component-card">
+        <div class="component-label">Tabs</div>
+        <div class="tabs">
+          <div class="tab active">UW Comments</div>
+          <div class="tab">Documents</div>
+          <div class="tab">History</div>
+        </div>
+        <div style="padding: 16px; background: #F9FAFB; border-radius: 8px; font-size: 13px; color: #6B7280;">
+          Tab content area
+        </div>
+      </div>
+
+      <div class="component-card">
+        <div class="component-label">Toggle Switches</div>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 14px; font-weight: 500; color: #374151;">Dark Mode</span>
+            <div style="width: 44px; height: 24px; border-radius: 12px; background: #F97316; position: relative; cursor: pointer;">
+              <div style="position: absolute; right: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: white;"></div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 14px; font-weight: 500; color: #374151;">Legacy View</span>
+            <div style="width: 44px; height: 24px; border-radius: 12px; background: #E5E7EB; position: relative; cursor: pointer;">
+              <div style="position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.2);"></div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 14px; font-weight: 500; color: #374151;">Notifications</span>
+            <div style="width: 44px; height: 24px; border-radius: 12px; background: #2CB9A8; position: relative; cursor: pointer;">
+              <div style="position: absolute; right: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: white;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── 11. SHADOWS & ELEVATION ────────────────────── -->
+  <div class="section-block">
+    <div class="section-title">Foundation</div>
+    <div class="section-heading">Elevation & Shadows</div>
+    <div class="section-sub">Three elevation levels. Dark mode uses purple-tinted shadows for primary actions.</div>
+
+    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+      <div style="background: white; border-radius: 16px; padding: 32px 40px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); display: flex; flex-direction: column; align-items: center; gap: 12px;">
+        <div style="font-size: 12px; font-weight: 700; color: #374151;">shadow-sm</div>
+        <div style="font-size: 11px; color: #9CA3AF; font-family: monospace;">0 1px 3px rgba(0,0,0,0.08)</div>
+        <div style="font-size: 11px; color: #6B7280;">Cards, inputs, tiles</div>
+      </div>
+      <div style="background: white; border-radius: 16px; padding: 32px 40px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); display: flex; flex-direction: column; align-items: center; gap: 12px;">
+        <div style="font-size: 12px; font-weight: 700; color: #374151;">shadow-md</div>
+        <div style="font-size: 11px; color: #9CA3AF; font-family: monospace;">0 4px 16px rgba(0,0,0,0.12)</div>
+        <div style="font-size: 11px; color: #6B7280;">Dropdowns, popovers</div>
+      </div>
+      <div style="background: white; border-radius: 16px; padding: 32px 40px; box-shadow: 0 8px 32px rgba(0,0,0,0.18); display: flex; flex-direction: column; align-items: center; gap: 12px;">
+        <div style="font-size: 12px; font-weight: 700; color: #374151;">shadow-lg</div>
+        <div style="font-size: 11px; color: #9CA3AF; font-family: monospace;">0 8px 32px rgba(0,0,0,0.18)</div>
+        <div style="font-size: 11px; color: #6B7280;">Modals, dialogs</div>
+      </div>
+      <div style="background: white; border-radius: 16px; padding: 32px 40px; box-shadow: 0 2px 12px rgba(123,47,190,0.35); display: flex; flex-direction: column; align-items: center; gap: 12px;">
+        <div style="font-size: 12px; font-weight: 700; color: #7B2FBE;">shadow-purple</div>
+        <div style="font-size: 11px; color: #9CA3AF; font-family: monospace;">0 2px 12px rgba(#7B2FBE,35%)</div>
+        <div style="font-size: 11px; color: #6B7280;">Dark mode primary btn</div>
+      </div>
+      <div style="background: white; border-radius: 16px; padding: 32px 40px; box-shadow: 0 2px 8px rgba(44,185,168,0.35); display: flex; flex-direction: column; align-items: center; gap: 12px;">
+        <div style="font-size: 12px; font-weight: 700; color: #2CB9A8;">shadow-teal</div>
+        <div style="font-size: 11px; color: #9CA3AF; font-family: monospace;">0 2px 8px rgba(#2CB9A8,35%)</div>
+        <div style="font-size: 11px; color: #6B7280;">Light mode primary btn</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- END DS PAGE -->
+
+</body>
+</html>

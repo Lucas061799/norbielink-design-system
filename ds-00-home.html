@@ -1,0 +1,1271 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Norbielink Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ds-shared.css">
+<style>
+/* ── Reset home layout ── */
+.ds-subnav { display: none !important; }
+.ds-toc    { display: none !important; }
+.ds-nav    { display: none !important; }
+.ds-main   { margin-left: 0 !important; margin-right: 0 !important; padding-top: 56px; }
+body        { background: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+.ds-shell  { background: #ffffff; min-height: 100vh; }
+
+/* ── Page wrapper ── */
+.home-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 64px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ════════════════════
+   HERO
+   ════════════════════ */
+.home-hero {
+  padding: 80px 0 64px;
+}
+.home-hero-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 20px;
+  font-family: 'Inter', sans-serif;
+}
+.home-hero-title {
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 800;
+  color: #0a0a0a;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  margin-bottom: 20px;
+  max-width: 640px;
+  font-family: 'Inter', sans-serif;
+}
+.home-hero-desc {
+  font-size: 15px;
+  color: #888;
+  line-height: 1.7;
+  max-width: 480px;
+  margin-bottom: 36px;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+}
+.home-hero-meta {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.home-hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #aaa;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+}
+.home-hero-meta-item .dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: #ccc;
+  flex-shrink: 0;
+}
+
+/* ════════════════════
+   SECTION HEADER
+   ════════════════════ */
+.home-sec-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  padding: 0;
+}
+.home-sec-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0a0a0a;
+  letter-spacing: -0.025em;
+  font-family: 'Inter', sans-serif;
+}
+.home-sec-link {
+  font-size: 13px;
+  color: #aaa;
+  text-decoration: none;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  transition: color .15s;
+}
+.home-sec-link:hover { color: #333; text-decoration: none; }
+
+/* ════════════════════
+   SECTION DIVIDER
+   ════════════════════ */
+.home-section {
+  padding: 56px 0;
+  border-top: 1px solid #ebebeb;
+}
+
+/* ════════════════════
+   CATEGORY CARDS (3-col)
+   like "Products" in the screenshot
+   ════════════════════ */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 900px) { .cat-grid { grid-template-columns: 1fr; } }
+
+.cat-card {
+  background: #fafafa;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .2s, box-shadow .2s;
+}
+.cat-card:hover {
+  border-color: #d8d8d8;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  text-decoration: none;
+}
+
+/* Tag row at top */
+.cat-card-tags {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 12px;
+  gap: 8px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.cat-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #999;
+  background: transparent;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 2px 7px;
+  font-family: 'Inter', sans-serif;
+}
+.cat-tag-row {
+  display: flex;
+  gap: 5px;
+}
+
+/* Preview area — full width, no inner margin */
+.cat-card-preview {
+  flex: 1;
+  background: #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  margin: 0;
+  border-radius: 0;
+  min-height: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Foundations preview */
+.prev-foundations {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 6px;
+  width: 100%;
+  max-width: 200px;
+}
+.prev-foundations .swatch {
+  border-radius: 6px;
+  aspect-ratio: 1;
+}
+.prev-foundations .swatch:nth-child(1) { background: #111; }
+.prev-foundations .swatch:nth-child(2) { background: #444; }
+.prev-foundations .swatch:nth-child(3) { background: #888; }
+.prev-foundations .swatch:nth-child(4) { background: #bbb; }
+.prev-foundations .swatch:nth-child(5) { background: #ddd; }
+.prev-foundations .swatch:nth-child(6) { background: #f0f0f0; border: 1px solid #e0e0e0; }
+.prev-foundations .swatch:nth-child(7) { background: #75C9B7; }
+.prev-foundations .swatch:nth-child(8) { background: #ACD697; }
+.prev-foundations .swatch:nth-child(9) { background: #C084FC; }
+
+/* Styles preview */
+.prev-styles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 200px;
+}
+.prev-type-line {
+  height: 10px;
+  background: #111;
+  border-radius: 3px;
+}
+.prev-type-line.xl { height: 18px; width: 70%; }
+.prev-type-line.lg { height: 13px; width: 55%; background: #555; }
+.prev-type-line.md { height: 9px;  width: 80%; background: #888; }
+.prev-type-line.sm { height: 7px;  width: 60%; background: #aaa; }
+.prev-type-line.xs { height: 6px;  width: 40%; background: #ccc; }
+
+/* Components preview — small UI mockup */
+.prev-components {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 200px;
+}
+.prev-ui-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.prev-ui-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Montserrat',sans-serif;
+  color: #fff;
+  background: #111;
+}
+.prev-ui-btn-ghost {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Montserrat',sans-serif;
+  color: #555;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+}
+.prev-ui-badge {
+  padding: 2px 7px;
+  border-radius: 20px;
+  font-size: 9px;
+  font-weight: 700;
+  background: #f0f0f0;
+  color: #777;
+  border: 1px solid #e0e0e0;
+}
+.prev-ui-input {
+  flex: 1;
+  height: 26px;
+  border-radius: 5px;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+.prev-ui-toggle {
+  width: 30px; height: 16px;
+  border-radius: 8px;
+  background: #111;
+  position: relative;
+}
+.prev-ui-toggle::after {
+  content: '';
+  position: absolute;
+  right: 2px; top: 2px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #fff;
+}
+.prev-ui-card {
+  width: 100%;
+  height: 30px;
+  border-radius: 6px;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+}
+
+/* Card footer */
+.cat-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 16px;
+  border-top: 1px solid #e5e5e5;
+}
+.cat-card-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0a0a0a;
+  font-family: 'Inter', sans-serif;
+}
+.cat-card-count {
+  font-size: 13px;
+  color: #aaa;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ════════════════════
+   FEATURED COMPONENTS  (asymmetric grid)
+   ════════════════════ */
+.feat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 900px) { .feat-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 600px) { .feat-grid { grid-template-columns: 1fr; } }
+
+.feat-card {
+  background: #fafafa;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  padding: 0;
+  overflow: hidden;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .2s, box-shadow .2s;
+}
+.feat-card:hover {
+  border-color: #d8d8d8;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  text-decoration: none;
+}
+/* Wide card spans 2 columns */
+.feat-card.wide { grid-column: span 2; }
+
+.feat-card-preview {
+  flex: 1;
+  background: #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  min-height: 140px;
+  position: relative;
+}
+.feat-card.wide .feat-card-preview { min-height: 160px; }
+
+.feat-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 14px;
+  border-top: 1px solid #e5e5e5;
+}
+.feat-card-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0a0a0a;
+  font-family: 'Inter', sans-serif;
+}
+.feat-card-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #bbb;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ── Mini preview: Accordion ── */
+.mini-acc { width: 100%; max-width: 280px; }
+.mini-acc-item { padding: 8px 12px; background: #fff; border: 1px solid #e8e8e8; border-radius: 6px; margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; font-weight: 600; color: #333; font-family: 'Montserrat',sans-serif; }
+.mini-acc-item .mi { font-size: 14px; color: #aaa; }
+.mini-acc-item.open { border-color: #ccc; }
+
+/* ── Mini preview: Button ── */
+.mini-btns { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.mini-btn { padding: 8px 18px; border-radius: 7px; font-size: 11px; font-weight: 700; font-family: 'Montserrat',sans-serif; border: none; cursor: default; }
+.mini-btn.solid { background: #111; color: #fff; }
+.mini-btn.outline { background: #fff; color: #333; border: 1.5px solid #ddd; }
+.mini-btn.ghost  { background: #f3f3f3; color: #555; }
+
+/* ── Mini preview: Badge ── */
+.mini-badges { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.mini-badge { padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; font-family: 'Montserrat',sans-serif; letter-spacing: .03em; }
+.mb-default { background: #111; color: #fff; }
+.mb-success { background: #dcfce7; color: #166534; }
+.mb-warning { background: #fef9c3; color: #854d0e; }
+.mb-error   { background: #fee2e2; color: #991b1b; }
+.mb-muted   { background: #f3f3f3; color: #666; }
+
+/* ── Mini preview: Card ── */
+.mini-card { width: 100%; max-width: 220px; background: #fff; border: 1px solid #e8e8e8; border-radius: 10px; overflow: hidden; }
+.mini-card-img { height: 80px; background: linear-gradient(135deg, #f0f0f0, #e5e5e5); display: flex; align-items: center; justify-content: center; }
+.mini-card-img .mi { font-size: 28px; color: #ccc; }
+.mini-card-body { padding: 12px 14px; }
+.mini-card-title { font-size: 12px; font-weight: 700; color: #111; font-family: 'Montserrat',sans-serif; margin-bottom: 4px; }
+.mini-card-sub { font-size: 10px; color: #aaa; font-family: 'Montserrat',sans-serif; }
+
+/* ── Mini preview: Select/Input ── */
+.mini-inputs { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 240px; }
+.mini-input-wrap { position: relative; }
+.mini-input { width: 100%; padding: 8px 12px; border: 1.5px solid #e0e0e0; border-radius: 7px; font-size: 11px; font-family: 'Montserrat',sans-serif; color: #333; background: #fff; box-sizing: border-box; }
+.mini-label { font-size: 10px; font-weight: 700; color: #888; font-family: 'Montserrat',sans-serif; margin-bottom: 4px; text-transform: uppercase; letter-spacing: .06em; }
+
+/* ── Mini preview: Tabs ── */
+.mini-tabs { width: 100%; max-width: 260px; }
+.mini-tab-bar { display: flex; border-bottom: 1.5px solid #e8e8e8; }
+.mini-tab-item { padding: 7px 14px; font-size: 11px; font-weight: 600; font-family: 'Montserrat',sans-serif; color: #aaa; cursor: default; }
+.mini-tab-item.active { color: #111; border-bottom: 2px solid #111; margin-bottom: -1.5px; }
+.mini-tab-content { padding: 12px 0; font-size: 11px; color: #aaa; font-family: 'Montserrat',sans-serif; }
+
+/* ── Mini preview: Dialog ── */
+.mini-dialog { width: 100%; max-width: 220px; background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.1); }
+.mini-dialog-title { font-size: 12px; font-weight: 700; color: #111; font-family: 'Montserrat',sans-serif; margin-bottom: 6px; }
+.mini-dialog-body { font-size: 10px; color: #888; font-family: 'Montserrat',sans-serif; line-height: 1.5; margin-bottom: 12px; }
+.mini-dialog-actions { display: flex; gap: 6px; justify-content: flex-end; }
+.mini-dialog-btn { padding: 5px 10px; border-radius: 5px; font-size: 10px; font-weight: 700; font-family: 'Montserrat',sans-serif; border: none; cursor: default; }
+.mini-dialog-btn.cancel { background: #f3f3f3; color: #555; }
+.mini-dialog-btn.confirm { background: #111; color: #fff; }
+
+/* ════════════════════
+   STATS ROW
+   ════════════════════ */
+.stats-row {
+  display: flex;
+  gap: 0;
+  border: 1px solid #ebebeb;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f7f7f7;
+}
+.stat-item {
+  flex: 1;
+  padding: 28px 32px;
+  border-right: 1px solid #ebebeb;
+}
+.stat-item:last-child { border-right: none; }
+.stat-n {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0a0a0a;
+  letter-spacing: -0.04em;
+  margin-bottom: 4px;
+  font-family: 'Inter', sans-serif;
+}
+.stat-l {
+  font-size: 11px;
+  font-weight: 600;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ════════════════════
+   DARK MODE
+   ════════════════════ */
+body.dark-mode { background: #0D1020; font-family: 'Inter', sans-serif; }
+body.dark-mode .ds-shell { background: #0D1020; }
+body.dark-mode .ds-nav { background: #18181b; border-right: 1px solid rgba(255,255,255,0.08); }
+body.dark-mode .ds-nav-search { background: rgba(255,255,255,.07); }
+body.dark-mode .ds-nav-search .material-icons-round { color: rgba(255,255,255,.5); }
+body.dark-mode .ds-nav-item { color: rgba(255,255,255,.6); }
+body.dark-mode .ds-nav-item:hover { background: rgba(255,255,255,.05); }
+body.dark-mode .ds-nav-item.active .ds-nav-pill { background: linear-gradient(88.09deg,#5C2ED4,#A614C3); box-shadow: 0 0 10px rgba(110,33,196,.55); }
+body.dark-mode .ds-nav-item.active .ds-nav-pill .material-icons-round { color: #fff; }
+body.dark-mode .ds-nav-pill .material-icons-round { color: rgba(255,255,255,.45); }
+body.dark-mode .ds-nav-label { color: rgba(255,255,255,.55); }
+body.dark-mode .ds-nav-icon-btn .material-icons-round { color: rgba(255,255,255,.4); }
+
+body.dark-mode .home-hero-eyebrow { color: rgba(255,255,255,.3); }
+body.dark-mode .home-hero-title { color: rgba(255,255,255,.92); }
+body.dark-mode .home-hero-desc { color: rgba(255,255,255,.38); }
+body.dark-mode .home-hero-meta-item { color: rgba(255,255,255,.25); }
+body.dark-mode .home-hero-meta-item .dot { background: rgba(255,255,255,.2); }
+
+body.dark-mode .home-section { border-top-color: rgba(255,255,255,0.08); }
+body.dark-mode .home-sec-title { color: rgba(255,255,255,.9); }
+body.dark-mode .home-sec-link { color: rgba(255,255,255,.25); }
+body.dark-mode .home-sec-link:hover { color: rgba(255,255,255,.6); }
+
+body.dark-mode .cat-card,
+body.dark-mode .feat-card { background: #18181b; border-color: rgba(255,255,255,0.07); }
+body.dark-mode .cat-card:hover,
+body.dark-mode .feat-card:hover { border-color: rgba(255,255,255,.2); box-shadow: 0 4px 24px rgba(0,0,0,.4); }
+body.dark-mode .cat-card-tags { border-bottom-color: rgba(255,255,255,0.08); }
+body.dark-mode .cat-tag { background: transparent; border-color: rgba(255,255,255,0.08); color: rgba(255,255,255,.35); }
+body.dark-mode .cat-card-preview,
+body.dark-mode .feat-card-preview { background: #09090b; }
+body.dark-mode .cat-card-footer { border-top-color: rgba(255,255,255,0.08); }
+body.dark-mode .cat-card-name { color: rgba(255,255,255,.88); }
+body.dark-mode .cat-card-count { color: rgba(255,255,255,.3); }
+body.dark-mode .feat-card-foot { border-top-color: rgba(255,255,255,0.06); }
+body.dark-mode .feat-card-name { color: rgba(255,255,255,.88); }
+body.dark-mode .feat-card-tag { color: rgba(255,255,255,.25); }
+
+body.dark-mode .prev-foundations .swatch:nth-child(1) { background: rgba(255,255,255,.9); }
+body.dark-mode .prev-foundations .swatch:nth-child(2) { background: rgba(255,255,255,.65); }
+body.dark-mode .prev-foundations .swatch:nth-child(3) { background: rgba(255,255,255,.35); }
+body.dark-mode .prev-foundations .swatch:nth-child(4) { background: rgba(255,255,255,.2); }
+body.dark-mode .prev-foundations .swatch:nth-child(5) { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,0.08); }
+body.dark-mode .prev-foundations .swatch:nth-child(6) { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.05); }
+body.dark-mode .prev-type-line { background: rgba(255,255,255,.85); }
+body.dark-mode .prev-type-line.lg { background: rgba(255,255,255,.5); }
+body.dark-mode .prev-type-line.md { background: rgba(255,255,255,.3); }
+body.dark-mode .prev-type-line.sm { background: rgba(255,255,255,.2); }
+body.dark-mode .prev-type-line.xs { background: rgba(255,255,255,.12); }
+body.dark-mode .prev-ui-btn { background: rgba(255,255,255,.9); color: #111; }
+body.dark-mode .prev-ui-btn-ghost { background: rgba(255,255,255,.07); color: rgba(255,255,255,.6); border-color: rgba(255,255,255,0.08); }
+body.dark-mode .prev-ui-input { background: #27272a; border-color: rgba(255,255,255,0.08); }
+body.dark-mode .prev-ui-toggle { background: #5C2ED4; }
+body.dark-mode .prev-ui-card { background: #27272a; border-color: rgba(255,255,255,0.08); }
+
+body.dark-mode .mini-acc-item { background: #27272a; border-color: rgba(255,255,255,0.08); color: rgba(255,255,255,.75); }
+body.dark-mode .mini-btn.solid { background: rgba(255,255,255,.9); color: #111; }
+body.dark-mode .mini-btn.outline { background: rgba(255,255,255,.05); color: rgba(255,255,255,.6); border-color: rgba(255,255,255,0.08); }
+body.dark-mode .mini-btn.ghost { background: rgba(255,255,255,.07); color: rgba(255,255,255,.5); }
+body.dark-mode .mb-default { background: rgba(255,255,255,.88); color: #111; }
+body.dark-mode .mb-success { background: #14532d; color: #86efac; }
+body.dark-mode .mb-warning { background: #713f12; color: #fde68a; }
+body.dark-mode .mb-error   { background: #7f1d1d; color: #fca5a5; }
+body.dark-mode .mb-muted   { background: rgba(255,255,255,.08); color: rgba(255,255,255,.45); }
+body.dark-mode .mini-card { background: #27272a; border-color: rgba(255,255,255,0.08); }
+body.dark-mode .mini-card-img { background: linear-gradient(135deg, #18181b, #27272a); }
+body.dark-mode .mini-card-title { color: rgba(255,255,255,.85); }
+body.dark-mode .mini-card-sub { color: rgba(255,255,255,.3); }
+body.dark-mode .mini-input { background: #27272a; border-color: rgba(255,255,255,0.08); color: rgba(255,255,255,.75); }
+body.dark-mode .mini-label { color: rgba(255,255,255,.3); }
+body.dark-mode .mini-tab-bar { border-bottom-color: rgba(255,255,255,0.08); }
+body.dark-mode .mini-tab-item { color: rgba(255,255,255,.3); }
+body.dark-mode .mini-tab-item.active { color: rgba(255,255,255,.9); border-bottom-color: rgba(255,255,255,.9); }
+body.dark-mode .mini-tab-content { color: rgba(255,255,255,.25); }
+body.dark-mode .mini-dialog { background: #27272a; border-color: rgba(255,255,255,0.08); box-shadow: 0 8px 32px rgba(0,0,0,.5); }
+body.dark-mode .mini-dialog-title { color: rgba(255,255,255,.88); }
+body.dark-mode .mini-dialog-body { color: rgba(255,255,255,.35); }
+body.dark-mode .mini-dialog-btn.cancel { background: rgba(255,255,255,.07); color: rgba(255,255,255,.55); }
+body.dark-mode .mini-dialog-btn.confirm { background: rgba(255,255,255,.9); color: #111; }
+
+body.dark-mode .home-section { border-top-color: rgba(255,255,255,0.08); }
+
+/* ════════════════════════════════════
+   BTIS HEADER — Top nav bar
+   ════════════════════════════════════ */
+.btis-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  z-index: 500;
+  font-family: 'Inter', sans-serif;
+}
+.btis-header-inner {
+  max-width: 100%;
+  padding: 0 40px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.btis-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+/* Logo image */
+.btis-logo-img {
+  height: 28px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+body.dark-mode .btis-logo-img { content: url('BTIS_Darkmode_Logo.png'); }
+.btis-top-nav {
+  display: flex;
+  gap: 2px;
+  margin-right: auto;
+}
+.btis-top-nav-link {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555555;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+.btis-top-nav-link:hover { background: #f0f0f0; color: #111111; text-decoration: none; }
+.btis-top-nav-link.active { background: transparent; color: #555555; font-weight: 500; }
+body.dark-mode .btis-top-nav-link.active { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.95); }
+.btis-header-right { display: flex; align-items: center; gap: 8px; }
+.btis-icon-btn {
+  width: 34px; height: 34px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  color: #666;
+  transition: background .15s, color .15s;
+}
+.btis-icon-btn:hover { background: rgba(0,0,0,0.05); color: #111; }
+.btis-icon-btn .material-icons-round { font-size: 20px; }
+.btis-theme-pill {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 14px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 20px;
+  background: transparent;
+  font-size: 12px; font-weight: 600;
+  color: #555; cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: border-color .15s, color .15s;
+}
+.btis-theme-pill:hover { border-color: #aaa; color: #111; }
+.btis-theme-pill .material-icons-round { font-size: 15px; }
+
+/* Dark mode — header */
+body.dark-mode .btis-header {
+  background: rgba(9,9,11,0.95);
+  border-bottom-color: rgba(255,255,255,0.07);
+}
+
+body.dark-mode .btis-top-nav-link { color: rgba(255,255,255,.5); }
+body.dark-mode .btis-top-nav-link:hover { color: rgba(255,255,255,.9); background: rgba(255,255,255,.07); }
+body.dark-mode .btis-icon-btn { color: rgba(255,255,255,.4); }
+body.dark-mode .btis-icon-btn:hover { background: rgba(255,255,255,.07); color: rgba(255,255,255,.85); }
+body.dark-mode .btis-theme-pill { border-color: rgba(255,255,255,0.08); color: rgba(255,255,255,.5); }
+body.dark-mode .btis-theme-pill:hover { border-color: rgba(255,255,255,.35); color: rgba(255,255,255,.9); }
+
+/* ════════════════════════════════════
+   HERO — Dot grid background (Miro / Atlassian style)
+   ════════════════════════════════════ */
+.home-hero {
+  position: relative;
+  padding-top: 80px;
+  padding-bottom: 72px;
+  overflow: visible;
+}
+.home-hero::before {
+  content: '';
+  position: absolute;
+  top: -56px;  /* covers under the fixed header */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300vw;
+  height: calc(100% + 56px);
+  background-color: #ffffff; /* light mode */
+  background-image: radial-gradient(circle, #c8c8c8 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  z-index: 0;
+  pointer-events: none;
+}
+body.dark-mode .home-hero::before {
+  background-color: #0D1020;
+  background-image: radial-gradient(circle, rgba(255,255,255,.13) 1.5px, transparent 1.5px);
+}
+/* Make all hero children sit above the dot bg */
+.home-hero > * { position: relative; z-index: 1; }
+
+/* ════════════════════════════════════
+   FLOATING COLLABORATIVE CURSORS  — each pointing different directions
+   ════════════════════════════════════ */
+@keyframes cur-float-a {
+  0%,100% { transform: translate(0px, 0px); }
+  33%      { transform: translate(3px, -10px); }
+  66%      { transform: translate(-2px, -6px); }
+}
+@keyframes cur-float-b {
+  0%,100% { transform: translate(0px, 0px); }
+  40%      { transform: translate(-4px, -8px); }
+  70%      { transform: translate(2px, -4px); }
+}
+@keyframes cur-float-c {
+  0%,100% { transform: translate(0px, 0px); }
+  50%      { transform: translate(-3px, -12px); }
+}
+@keyframes cur-float-d {
+  0%,100% { transform: translate(0px, 0px); }
+  45%      { transform: translate(4px, -7px); }
+  80%      { transform: translate(-1px, -3px); }
+}
+
+.hero-cursor {
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  pointer-events: none;
+  z-index: 3;
+  user-select: none;
+}
+.hero-cursor-badge {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap;
+  box-shadow: 0 3px 12px rgba(0,0,0,.2);
+  letter-spacing: 0.01em;
+  margin-top: 2px;
+}
+
+/* Lucas — top-left, arrow pointing ↘ (into the title) */
+.hero-cur-lucas {
+  top: 7%; left: 3%;
+  flex-direction: column;
+  align-items: flex-start;
+  animation: cur-float-a 4s ease-in-out infinite;
+}
+.hero-cur-lucas .hero-cursor-badge { margin-top: 0; margin-bottom: 4px; }
+
+/* BTIS — top-right, arrow pointing ↙ */
+.hero-cur-btis {
+  top: 5%; right: 8%;
+  flex-direction: column;
+  align-items: flex-end;
+  animation: cur-float-b 4.5s ease-in-out infinite 0.7s;
+}
+.hero-cur-btis .hero-cursor-badge { margin-top: 0; margin-bottom: 4px; }
+
+/* You — right side, arrow pointing ← */
+.hero-cur-you {
+  top: 50%; right: 5%;
+  flex-direction: row;
+  align-items: flex-start;
+  animation: cur-float-c 3.6s ease-in-out infinite 1.3s;
+}
+
+/* Design — bottom, arrow pointing ↑ */
+.hero-cur-build {
+  bottom: 6%; left: 50%;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  animation: cur-float-d 4.2s ease-in-out infinite 2s;
+}
+
+/* ════════════════════════════════════
+   USER CURSOR — follows mouse, shows "YOU"
+   ════════════════════════════════════ */
+.home-hero { cursor: none; }
+#user-cur {
+  position: fixed;
+  top: -100px; left: -100px;
+  pointer-events: none;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity .2s;
+}
+#user-cur .uc-badge {
+  padding: 5px 12px;
+  background: #4f46e5;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap;
+  box-shadow: 0 3px 12px rgba(79,70,229,.35);
+  letter-spacing: 0.04em;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ BTIS HEADER ═══════════ -->
+<header class="btis-header">
+  <div class="btis-header-inner">
+    <!-- Brand wordmark -->
+    <a class="btis-brand" href="ds-00-home.html">
+      <img src="BTIS.png" class="btis-logo-img" alt="NorbieLink">
+    </a>
+    <!-- Nav links -->
+    <nav class="btis-top-nav">
+      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>
+      <a class="btis-top-nav-link" href="ds-nav-styles.html">Styles</a>
+      <a class="btis-top-nav-link" href="ds-nav-components.html">Components</a>
+      <a class="btis-top-nav-link" href="ds-nav-resources.html">Resources</a>
+    </nav>
+    <!-- Right actions -->
+    <div class="btis-header-right">
+      <button class="btis-icon-btn" onclick="openSearch()"><span class="material-icons-round">search</span></button>
+      <button class="btis-theme-pill" id="darkModeBtn" onclick="toggleDarkMode()">
+        <span class="material-icons-round" id="darkModeIcon">dark_mode</span>
+        <span>Theme</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="ds-shell">
+
+<!-- LEFT RAIL NAV (hidden on homepage via CSS) -->
+<nav class="ds-nav">
+  <div class="ds-nav-search"><span class="material-icons-round">search</span></div>
+  <a class="ds-nav-item active" href="ds-00-home.html"><div class="ds-nav-pill"><span class="material-icons-round">home</span></div><span class="ds-nav-label">Home</span></a>
+  <a class="ds-nav-item" href="#"><div class="ds-nav-pill"><span class="material-icons-round">rocket_launch</span></div><span class="ds-nav-label">Get started</span></a>
+  <a class="ds-nav-item" href="#"><div class="ds-nav-pill"><span class="material-icons-round">code</span></div><span class="ds-nav-label">Develop</span></a>
+  <a class="ds-nav-item" href="ds-03-elevation.html"><div class="ds-nav-pill"><span class="material-icons-round">layers</span></div><span class="ds-nav-label">Foundations</span></a>
+  <a class="ds-nav-item" href="ds-01-color.html"><div class="ds-nav-pill"><span class="material-icons-round">palette</span></div><span class="ds-nav-label">Styles</span></a>
+  <a class="ds-nav-item" href="ds-06-buttons.html"><div class="ds-nav-pill"><span class="material-icons-round">widgets</span></div><span class="ds-nav-label">Components</span></a>
+  <div class="ds-nav-spacer"></div>
+  <a class="ds-nav-item" href="#"><div class="ds-nav-pill"><span class="material-icons-round">article</span></div><span class="ds-nav-label">Blog</span></a>
+  <div class="ds-nav-bottom-icons">
+    <button class="ds-nav-icon-btn"><span class="material-icons-round">grid_view</span></button>
+    <button class="ds-nav-icon-btn"><span class="material-icons-round">dark_mode</span></button>
+  </div>
+</nav>
+
+<main class="ds-main">
+<div class="home-wrap">
+
+  <!-- ════════ HERO ════════ -->
+  <div class="home-hero">
+
+    <!-- Floating collaborative cursors — each arrow points toward the hero title -->
+
+    <!-- Lucas: top-left → arrow points ↘ (down-right into title) -->
+    <div class="hero-cursor hero-cur-lucas">
+      <div class="hero-cursor-badge" style="background:#a855f7;">Lucas</div>
+      <svg width="26" height="32" viewBox="0 0 20 24" fill="#a855f7" style="transform:rotate(180deg);">
+        <path d="M2 2L2 20L5.5 14.5L8.5 22L11 21L8 13.5L16 13.5Z"/>
+      </svg>
+    </div>
+
+    <!-- BTIS: top-right → arrow points ↙ (down-left into title) -->
+    <div class="hero-cursor hero-cur-btis">
+      <div class="hero-cursor-badge" style="background:#2B2768;">BTIS</div>
+      <svg width="26" height="32" viewBox="0 0 20 24" fill="#2B2768" style="transform:rotate(90deg);">
+        <path d="M2 2L2 20L5.5 14.5L8.5 22L11 21L8 13.5L16 13.5Z"/>
+      </svg>
+    </div>
+
+    <!-- You: right side → arrow points ← (left into title) -->
+    <div class="hero-cursor hero-cur-you">
+      <svg width="26" height="32" viewBox="0 0 20 24" fill="#f59e0b" style="transform:rotate(-90deg);">
+        <path d="M2 2L2 20L5.5 14.5L8.5 22L11 21L8 13.5L16 13.5Z"/>
+      </svg>
+      <div class="hero-cursor-badge" style="background:#f59e0b;color:#111;">You</div>
+    </div>
+
+    <!-- Design: bottom → arrow points ↑ (up into title) -->
+    <div class="hero-cursor hero-cur-build">
+      <svg width="26" height="32" viewBox="0 0 20 24" fill="#0ea5e9">
+        <path d="M2 2L2 20L5.5 14.5L8.5 22L11 21L8 13.5L16 13.5Z"/>
+      </svg>
+      <div class="hero-cursor-badge" style="background:#0ea5e9;">Design</div>
+    </div>
+
+    <!-- Hero content -->
+    <div class="home-hero-eyebrow">BTIS Design System</div>
+    <h1 class="home-hero-title">Design at scale.<br>Build with consistency.</h1>
+    <p class="home-hero-desc">A complete design language with foundations, styles, and 53 components — everything your team needs to ship great products.</p>
+    <div class="home-hero-meta">
+      <div class="home-hero-meta-item"><span class="dot"></span>53 Components</div>
+      <div class="home-hero-meta-item"><span class="dot"></span>Light &amp; Dark Mode</div>
+      <div class="home-hero-meta-item"><span class="dot"></span>Figma kit</div>
+      <div class="home-hero-meta-item"><span class="dot"></span>Copy-ready code</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECTIONS ════════ -->
+  <div class="home-section">
+    <div class="home-sec-header">
+      <div class="home-sec-title">Design system sections</div>
+    </div>
+    <div class="cat-grid">
+
+      <!-- Foundations -->
+      <a class="cat-card" href="ds-03-elevation.html">
+        <div class="cat-card-tags">
+          <span class="cat-tag">Foundations</span>
+          <div class="cat-tag-row">
+            <span class="cat-tag">Elevation</span>
+            <span class="cat-tag">Shape</span>
+          </div>
+        </div>
+        <div class="cat-card-preview">
+          <div class="prev-foundations">
+            <div class="swatch"></div><div class="swatch"></div><div class="swatch"></div>
+            <div class="swatch"></div><div class="swatch"></div><div class="swatch"></div>
+            <div class="swatch"></div><div class="swatch"></div><div class="swatch"></div>
+          </div>
+        </div>
+        <div class="cat-card-footer">
+          <span class="cat-card-name">Foundations</span>
+          <span class="cat-card-count">3 pages</span>
+        </div>
+      </a>
+
+      <!-- Styles -->
+      <a class="cat-card" href="ds-01-color.html">
+        <div class="cat-card-tags">
+          <span class="cat-tag">Styles</span>
+          <div class="cat-tag-row">
+            <span class="cat-tag">Color</span>
+            <span class="cat-tag">Type</span>
+          </div>
+        </div>
+        <div class="cat-card-preview">
+          <div class="prev-styles">
+            <div class="prev-type-line xl"></div>
+            <div class="prev-type-line lg"></div>
+            <div class="prev-type-line md"></div>
+            <div class="prev-type-line sm"></div>
+            <div class="prev-type-line xs"></div>
+          </div>
+        </div>
+        <div class="cat-card-footer">
+          <span class="cat-card-name">Styles</span>
+          <span class="cat-card-count">2 pages</span>
+        </div>
+      </a>
+
+      <!-- Components -->
+      <a class="cat-card" href="ds-26-accordion.html">
+        <div class="cat-card-tags">
+          <span class="cat-tag">Components</span>
+          <div class="cat-tag-row">
+            <span class="cat-tag">UI Kit</span>
+          </div>
+        </div>
+        <div class="cat-card-preview">
+          <div class="prev-components">
+            <div class="prev-ui-row">
+              <div class="prev-ui-btn">Button</div>
+              <div class="prev-ui-btn-ghost">Outline</div>
+            </div>
+            <div class="prev-ui-row">
+              <div class="prev-ui-input"></div>
+              <div class="prev-ui-toggle"></div>
+            </div>
+            <div class="prev-ui-card"></div>
+          </div>
+        </div>
+        <div class="cat-card-footer">
+          <span class="cat-card-name">Components</span>
+          <span class="cat-card-count">53 items</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ════════ FEATURED COMPONENTS ════════ -->
+  <div class="home-section">
+    <div class="home-sec-header">
+      <div class="home-sec-title">Featured components</div>
+      <a class="home-sec-link" href="ds-26-accordion.html">View all →</a>
+    </div>
+    <div class="feat-grid">
+
+      <!-- Buttons — wide -->
+      <a class="feat-card wide" href="ds-06-buttons.html">
+        <div class="feat-card-preview">
+          <div class="mini-btns">
+            <div class="mini-btn solid">Primary</div>
+            <div class="mini-btn outline">Secondary</div>
+            <div class="mini-btn ghost">Ghost</div>
+          </div>
+        </div>
+        <div class="feat-card-foot">
+          <span class="feat-card-name">Button</span>
+          <span class="feat-card-tag">Action</span>
+        </div>
+      </a>
+
+      <!-- Badge -->
+      <a class="feat-card" href="ds-09-badges.html">
+        <div class="feat-card-preview">
+          <div class="mini-badges">
+            <span class="mini-badge mb-default">Default</span>
+            <span class="mini-badge mb-success">Success</span>
+            <span class="mini-badge mb-warning">Warning</span>
+            <span class="mini-badge mb-error">Error</span>
+            <span class="mini-badge mb-muted">Neutral</span>
+          </div>
+        </div>
+        <div class="feat-card-foot">
+          <span class="feat-card-name">Badge</span>
+          <span class="feat-card-tag">Status</span>
+        </div>
+      </a>
+
+      <!-- Card -->
+      <a class="feat-card" href="ds-10-cards.html">
+        <div class="feat-card-preview">
+          <div class="mini-card">
+            <div class="mini-card-img"><span class="material-icons-round mi">image</span></div>
+            <div class="mini-card-body">
+              <div class="mini-card-title">Card component</div>
+              <div class="mini-card-sub">Surface for grouping related content</div>
+            </div>
+          </div>
+        </div>
+        <div class="feat-card-foot">
+          <span class="feat-card-name">Card</span>
+          <span class="feat-card-tag">Container</span>
+        </div>
+      </a>
+
+      <!-- Dialog — wide (placed after Card so it fills col2-3 of row2) -->
+      <a class="feat-card wide" href="ds-17-dialogs.html">
+        <div class="feat-card-preview">
+          <div class="mini-dialog">
+            <div class="mini-dialog-title">Delete item?</div>
+            <div class="mini-dialog-body">This action cannot be undone. The item will be permanently removed from your workspace.</div>
+            <div class="mini-dialog-actions">
+              <div class="mini-dialog-btn cancel">Cancel</div>
+              <div class="mini-dialog-btn confirm">Delete</div>
+            </div>
+          </div>
+        </div>
+        <div class="feat-card-foot">
+          <span class="feat-card-name">Dialog</span>
+          <span class="feat-card-tag">Overlay</span>
+        </div>
+      </a>
+
+      <!-- Tabs -->
+      <a class="feat-card" href="ds-11-tabs.html">
+        <div class="feat-card-preview">
+          <div class="mini-tabs">
+            <div class="mini-tab-bar">
+              <div class="mini-tab-item active">Overview</div>
+              <div class="mini-tab-item">Details</div>
+              <div class="mini-tab-item">Settings</div>
+            </div>
+            <div class="mini-tab-content">Tab content appears here…</div>
+          </div>
+        </div>
+        <div class="feat-card-foot">
+          <span class="feat-card-name">Tabs</span>
+          <span class="feat-card-tag">Navigation</span>
+        </div>
+      </a>
+
+      <!-- Text Fields -->
+      <a class="feat-card" href="ds-08-textfields.html">
+        <div class="feat-card-preview">
+          <div class="mini-inputs">
+            <div>
+              <div class="mini-label">Email</div>
+              <input class="mini-input" value="hello@norbie.com" readonly>
+            </div>
+            <div>
+              <div class="mini-label">Password</div>
+              <input class="mini-input" type="password" value="••••••••" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="feat-card-foot">
+          <span class="feat-card-name">Text Fields</span>
+          <span class="feat-card-tag">Input</span>
+        </div>
+      </a>
+
+      <!-- Accordion -->
+      <a class="feat-card" href="ds-26-accordion.html">
+        <div class="feat-card-preview">
+          <div class="mini-acc">
+            <div class="mini-acc-item open">What is a design system? <span class="material-icons-round mi">expand_less</span></div>
+            <div class="mini-acc-item">How do I use it? <span class="material-icons-round mi">expand_more</span></div>
+            <div class="mini-acc-item">Is dark mode supported? <span class="material-icons-round mi">expand_more</span></div>
+          </div>
+        </div>
+        <div class="feat-card-foot">
+          <span class="feat-card-name">Accordion</span>
+          <span class="feat-card-tag">Disclosure</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+
+    <!-- ── Prev / Next navigation ── -->
+    <div class="ds-page-nav">
+    <span></span>
+  </div>
+
+  </div><!-- /home-wrap -->
+</main>
+</div>
+
+<!-- USER CURSOR — follows mouse in hero, shows "YOU" with indigo arrow -->
+<div id="user-cur">
+  <svg width="26" height="32" viewBox="0 0 20 24" fill="#4f46e5">
+    <path d="M2 2L2 20L5.5 14.5L8.5 22L11 21L8 13.5L16 13.5Z"/>
+  </svg>
+  <div class="uc-badge">YOU</div>
+
+
+
+</div>
+
+<script>
+function applyLogoTheme(isDark) {
+  const logos = document.querySelectorAll('.btis-logo-img');
+  logos.forEach(el => { el.src = isDark ? 'BTIS_Darkmode_Logo.png' : 'BTIS.png'; });
+}
+function fixInlineWhiteBgs(isDark) {
+  const sel = ['[style*="background:white"]','[style*="background: white"]','[style*="background:#fff"]','[style*="background: #fff"]','[style*="background:#ffffff"]','[style*="background-color:white"]','[style*="background-color: white"]'].join(',');
+  document.querySelectorAll(sel).forEach(el => {
+    if (isDark) { el.dataset.origBg = el.getAttribute('style'); el.style.setProperty('background','#1e1e22','important'); el.style.setProperty('border-color','rgba(255,255,255,0.08)','important'); }
+    else if (el.dataset.origBg !== undefined) { el.setAttribute('style', el.dataset.origBg); delete el.dataset.origBg; }
+  });
+}
+function toggleDarkMode() {
+  const b = document.body;
+  const i = document.getElementById('darkModeIcon');
+  const n = document.getElementById('darkModeBtn');
+  b.classList.toggle('dark-mode');
+  const isDark = b.classList.contains('dark-mode');
+  if (i) i.textContent = isDark ? 'light_mode' : 'dark_mode';
+  if (n) n.classList.toggle('active', isDark);
+  applyLogoTheme(isDark);
+  fixInlineWhiteBgs(isDark);
+  try { localStorage.setItem('ds-dark-mode', isDark ? '1' : '0'); } catch(e) {}
+}
+// Restore theme on load
+(function() {
+  try {
+    const isDark = localStorage.getItem('ds-dark-mode') === '1';
+    if (isDark) {
+      document.body.classList.add('dark-mode');
+      const i = document.getElementById('darkModeIcon');
+      const n = document.getElementById('darkModeBtn');
+      if (i) i.textContent = 'light_mode';
+      if (n) n.classList.add('active');
+      fixInlineWhiteBgs(true);
+    }
+    applyLogoTheme(isDark);
+  } catch(e) {}
+})();
+
+// Custom cursor — only active inside the hero section
+(function() {
+  const uc = document.getElementById('user-cur');
+  const hero = document.querySelector('.home-hero');
+  if (!uc || !hero) return;
+
+  let inside = false;
+
+  hero.addEventListener('mouseenter', () => {
+    inside = true;
+    uc.style.opacity = '1';
+  });
+  hero.addEventListener('mouseleave', () => {
+    inside = false;
+    uc.style.opacity = '0';
+  });
+  document.addEventListener('mousemove', (e) => {
+    if (!inside) return;
+    // Offset so the arrow tip is exactly at cursor position
+    uc.style.left = (e.clientX) + 'px';
+    uc.style.top  = (e.clientY) + 'px';
+  });
+})();
+
+function copyPageLink() {
+  const url = window.location.href.split('?')[0];
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.querySelector('.ds-copy-page-btn');
+    if (btn) {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<span class="material-icons-round">check</span> Copied!';
+      setTimeout(() => { btn.innerHTML = orig; }, 1800);
+    }
+  });
+}
+</script>
+<script>
+/* ── Hamburger + Footer for homepage (ds-shared.js not loaded here) ── */
+function openMobileMenu(){
+  document.querySelector('.btis-mobile-backdrop')?.classList.add('open');
+  document.getElementById('btis-mobile-drawer')?.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeMobileMenu(){
+  document.querySelector('.btis-mobile-backdrop')?.classList.remove('open');
+  document.getElementById('btis-mobile-drawer')?.classList.remove('open');
+  document.body.style.overflow='';
+}
+(function(){
+  /* Hamburger button */
+  const h=document.querySelector('.btis-header-inner');
+  if(h){
+    const btn=document.createElement('button');
+    btn.className='btis-ham-btn';btn.setAttribute('aria-label','Open menu');
+    btn.onclick=openMobileMenu;
+    btn.innerHTML='<svg width="18" height="14" viewBox="0 0 18 14" fill="none"><rect width="18" height="2" rx="1" fill="currentColor"/><rect y="6" width="14" height="2" rx="1" fill="currentColor"/><rect y="12" width="18" height="2" rx="1" fill="currentColor"/></svg>';
+    h.insertBefore(btn,h.firstChild);
+  }
+  /* Drawer — full section+subpage structure */
+  const isDark=document.body.classList.contains('dark-mode');
+  const logo=isDark?'BTIS_Darkmode_Logo.png':'BTIS.png';
+  const NAV=[
+    {l:'Foundations',u:'ds-nav-foundations.html',pages:[
+      {l:'Introduction',u:'ds-00-home.html'},{l:'Elevation',u:'ds-03-elevation.html'},
+      {l:'Shape',u:'ds-04-shape.html'},{l:'Spacing',u:'ds-05-spacing.html'}]},
+    {l:'Styles',u:'ds-nav-styles.html',pages:[
+      {l:'Color',u:'ds-01-color.html'},{l:'Typography',u:'ds-02-typography.html'}]},
+    {l:'Components',u:'ds-nav-components.html',pages:[
+      {l:'Accordion',u:'ds-26-accordion.html'},{l:'Alert',u:'ds-27-alert.html'},
+      {l:'Alert Dialog',u:'ds-28-alert-dialog.html'},{l:'App Bars',u:'ds-14-appbar.html'},
+      {l:'Avatar',u:'ds-29-avatar.html'},{l:'Badge',u:'ds-09-badges.html'},
+      {l:'Breadcrumb',u:'ds-30-breadcrumb.html'},{l:'Button',u:'ds-06-buttons.html'},
+      {l:'Button Group',u:'ds-31-button-group.html'},{l:'Calendar',u:'ds-32-calendar.html'},
+      {l:'Card',u:'ds-10-cards.html'},{l:'Carousel',u:'ds-33-carousel.html'},
+      {l:'Chart',u:'ds-34-chart.html'},{l:'Checkbox',u:'ds-15-checkbox.html'},
+      {l:'Chips',u:'ds-16-chips.html'},{l:'Collapsible',u:'ds-35-collapsible.html'},
+      {l:'Combobox',u:'ds-36-combobox.html'},{l:'Context Menu',u:'ds-38-context-menu.html'},
+      {l:'Data Table',u:'ds-13-datatable.html'},{l:'Date Picker',u:'ds-39-date-picker.html'},
+      {l:'Dialog',u:'ds-17-dialogs.html'},{l:'Divider',u:'ds-18-divider.html'},
+      {l:'Drawer',u:'ds-40-drawer.html'},{l:'Dropdown Menu',u:'ds-41-dropdown.html'},
+      {l:'Empty State',u:'ds-42-empty-state.html'},{l:'Hover Card',u:'ds-43-hover-card.html'},
+      {l:'Input OTP',u:'ds-44-input-otp.html'},{l:'Label',u:'ds-46-label.html'},
+      {l:'Lists',u:'ds-19-lists.html'},{l:'Loading & Progress',u:'ds-20-progress.html'},
+      {l:'Menubar',u:'ds-47-menubar.html'},{l:'Menus',u:'ds-21-menus.html'},
+      {l:'Navigation',u:'ds-07-navigation.html'},{l:'Pagination',u:'ds-48-pagination.html'},
+      {l:'Popover',u:'ds-49-popover.html'},{l:'Radio Group',u:'ds-22-radio.html'},
+      {l:'Resizable',u:'ds-50-resizable.html'},{l:'Scroll Area',u:'ds-51-scroll-area.html'},
+      {l:'Select',u:'ds-52-select.html'},{l:'Sheet',u:'ds-53-sheet.html'},
+      {l:'Skeleton',u:'ds-54-skeleton.html'},{l:'Slider',u:'ds-23-sliders.html'},
+      {l:'Snackbar',u:'ds-24-snackbar.html'},{l:'Spinner',u:'ds-55-spinner.html'},
+      {l:'Switch',u:'ds-12-switches.html'},{l:'Tabs',u:'ds-11-tabs.html'},
+      {l:'Text Fields',u:'ds-08-textfields.html'},{l:'Textarea',u:'ds-56-textarea.html'},
+      {l:'Toggle',u:'ds-57-toggle.html'},{l:'Toggle Group',u:'ds-58-toggle-group.html'},
+      {l:'Tooltip',u:'ds-25-tooltips.html'}]},
+    {l:'Resources',u:'ds-nav-resources.html',pages:[]}
+  ];
+  function buildSec(sec){
+    const subs=sec.pages.map(p=>`<a class="btis-mdr-sub" href="${p.u}">${p.l}</a>`).join('');
+    return `<div class="btis-mdr-sec"><div class="btis-mdr-sec-hd"><a class="btis-mdr-sec-link" href="${sec.u}">${sec.l}</a>${sec.pages.length?`<button class="btis-mdr-toggle" onclick="this.closest('.btis-mdr-sec').classList.toggle('open')"><svg class="btis-mdr-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`:''}</div>${sec.pages.length?`<div class="btis-mdr-sub-list">${subs}</div>`:''}</div>`;
+  }
+  const dr=document.createElement('div');
+  dr.className='btis-mobile-drawer';dr.id='btis-mobile-drawer';
+  dr.innerHTML=`<div class="btis-mdr-head"><a href="ds-00-home.html" style="display:flex;align-items:center;text-decoration:none;"><img class="btis-logo-img" src="${logo}" style="height:24px;width:auto;" alt="NorbieLink"></a><button class="btis-mdr-close" onclick="closeMobileMenu()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div><div class="btis-mdr-body">${NAV.map(buildSec).join('')}</div>`;
+  document.body.appendChild(dr);
+  const bd=document.createElement('div');bd.className='btis-mobile-backdrop';bd.onclick=closeMobileMenu;document.body.appendChild(bd);
+  /* Footer */
+  const ft=document.createElement('footer');ft.id='btis-footer';
+  ft.innerHTML=`<div class="btis-footer-inner"><div class="btis-footer-left"><a href="ds-00-home.html" class="btis-footer-brand"><img class="btis-logo-img" src="${logo}" style="height:20px;width:auto;" alt="NorbieLink"></a><span class="btis-footer-copy">© 2025 Norbielink. All rights reserved.</span></div><nav class="btis-footer-nav"><a class="btis-footer-link" href="ds-nav-foundations.html">Foundations</a><a class="btis-footer-link" href="ds-nav-styles.html">Styles</a><a class="btis-footer-link" href="ds-nav-components.html">Components</a><a class="btis-footer-link" href="ds-nav-resources.html">Resources</a></nav></div>`;
+  const shell=document.querySelector('.ds-shell');
+  if(shell)shell.after(ft);else document.body.appendChild(ft);
+  /* Esc key */
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMobileMenu();});
+})();
+</script>
+</body></html>

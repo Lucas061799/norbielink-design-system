@@ -1,0 +1,270 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Toggle — Norbielink Design System</title>
+<link rel="stylesheet" href="ds-shared.css">
+<style>
+.tog{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1.5px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;transition:all .15s;font-family:'Montserrat',sans-serif;}
+.tog:hover{border-color:#aaa;background:#f5f5f5;}
+.tog.active,.tog[aria-pressed="true"]{background:#111;border-color:#111;color:#fff;}
+.tog .material-icons-round{font-size:18px;color:#666;}
+.tog.active .material-icons-round,.tog[aria-pressed="true"] .material-icons-round{color:#fff;}
+.tog-outline{background:transparent;border-color:rgba(255,255,255,0.08);}
+.tog-outline .material-icons-round{color:rgba(255,255,255,.55);}
+.tog-outline.active{background:#5C2ED4;border-color:#5C2ED4;}
+.tog-outline.active .material-icons-round{color:#fff;}
+.tog-label-wrap{display:flex;align-items:center;gap:8px;font-family:'Montserrat',sans-serif;font-size:13px;color:#555;}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
+</head>
+<body class="btis-layout">
+<header class="btis-header">
+  <div class="btis-header-inner">
+    <a class="btis-brand" href="ds-00-home.html">
+      <img src="BTIS.png" class="btis-logo-img" alt="NorbieLink">
+    </a>
+    <nav class="btis-top-nav">
+      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>
+      <a class="btis-top-nav-link" href="ds-nav-styles.html">Styles</a>
+      <a class="btis-top-nav-link active" href="ds-nav-components.html">Components</a>
+      <a class="btis-top-nav-link" href="ds-nav-resources.html">Resources</a>
+    </nav>
+    <div class="btis-header-right">
+      <button class="btis-icon-btn" onclick="openSearch()"><span class="material-icons-round">search</span></button>
+      <button class="btis-theme-pill" id="darkModeBtn" onclick="toggleDarkMode()">
+        <span class="material-icons-round" id="darkModeIcon">dark_mode</span>
+        <span>Theme</span>
+      </button>
+    </div>
+  </div>
+</header>
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay" onclick="if(event.target===this)closeSearch()">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <span class="material-icons-round">search</span>
+      <input id="search-input" type="text" placeholder="Search components, foundations…"
+        oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
+      <span class="material-icons-round search-close" onclick="closeSearch()">close</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+    <div class="search-hint">
+      <span>Press</span><kbd>↑</kbd><kbd>↓</kbd><span>to navigate</span>
+      <kbd>↵</kbd><span>to open</span><kbd>Esc</kbd><span>to close</span>
+    </div>
+  </div>
+</div>
+<!-- END SEARCH -->
+<div class="ds-shell">
+<nav class="ds-sidenav">
+  <div class="ds-sidenav-group">
+    <div class="ds-sidenav-group-title">Getting Started</div>
+    <a class="ds-sidenav-item" href="ds-00-home.html">Introduction</a>
+    <a class="ds-sidenav-item" href="ds-01-color.html">Colors</a>
+    <a class="ds-sidenav-item" href="ds-02-typography.html">Typography</a>
+    <a class="ds-sidenav-item" href="ds-03-elevation.html">Elevation</a>
+    <a class="ds-sidenav-item" href="ds-04-shape.html">Shape</a>
+    <a class="ds-sidenav-item" href="ds-05-spacing.html">Spacing</a>
+  </div>
+  <div class="ds-sidenav-group">
+    <div class="ds-sidenav-group-title">Components</div>
+    <a class="ds-sidenav-item" href="ds-26-accordion.html">Accordion</a>
+    <a class="ds-sidenav-item" href="ds-27-alert.html">Alert</a>
+    <a class="ds-sidenav-item" href="ds-28-alert-dialog.html">Alert Dialog</a>
+    <a class="ds-sidenav-item" href="ds-14-appbar.html">App Bars</a>
+    <a class="ds-sidenav-item" href="ds-29-avatar.html">Avatar</a>
+    <a class="ds-sidenav-item" href="ds-09-badges.html">Badge</a>
+    <a class="ds-sidenav-item" href="ds-30-breadcrumb.html">Breadcrumb</a>
+    <a class="ds-sidenav-item" href="ds-06-buttons.html">Button</a>
+    <a class="ds-sidenav-item" href="ds-31-button-group.html">Button Group</a>
+    <a class="ds-sidenav-item" href="ds-32-calendar.html">Calendar</a>
+    <a class="ds-sidenav-item" href="ds-10-cards.html">Card</a>
+    <a class="ds-sidenav-item" href="ds-33-carousel.html">Carousel</a>
+    <a class="ds-sidenav-item" href="ds-34-chart.html">Chart</a>
+    <a class="ds-sidenav-item" href="ds-15-checkbox.html">Checkbox</a>
+    <a class="ds-sidenav-item" href="ds-16-chips.html">Chips</a>
+    <a class="ds-sidenav-item" href="ds-35-collapsible.html">Collapsible</a>
+    <a class="ds-sidenav-item" href="ds-36-combobox.html">Combobox</a>
+<a class="ds-sidenav-item" href="ds-38-context-menu.html">Context Menu</a>
+    <a class="ds-sidenav-item" href="ds-13-datatable.html">Data Table</a>
+    <a class="ds-sidenav-item" href="ds-39-date-picker.html">Date Picker</a>
+    <a class="ds-sidenav-item" href="ds-17-dialogs.html">Dialog</a>
+    <a class="ds-sidenav-item" href="ds-18-divider.html">Divider</a>
+    <a class="ds-sidenav-item" href="ds-40-drawer.html">Drawer</a>
+    <a class="ds-sidenav-item" href="ds-41-dropdown.html">Dropdown Menu</a>
+    <a class="ds-sidenav-item" href="ds-42-empty-state.html">Empty State</a>
+    <a class="ds-sidenav-item" href="ds-43-hover-card.html">Hover Card</a>
+    <a class="ds-sidenav-item" href="ds-44-input-otp.html">Input OTP</a>
+<a class="ds-sidenav-item" href="ds-46-label.html">Label</a>
+    <a class="ds-sidenav-item" href="ds-19-lists.html">Lists</a>
+    <a class="ds-sidenav-item" href="ds-20-progress.html">Loading & Progress</a>
+    <a class="ds-sidenav-item" href="ds-47-menubar.html">Menubar</a>
+    <a class="ds-sidenav-item" href="ds-21-menus.html">Menus</a>
+    <a class="ds-sidenav-item" href="ds-07-navigation.html">Navigation</a>
+    <a class="ds-sidenav-item" href="ds-48-pagination.html">Pagination</a>
+    <a class="ds-sidenav-item" href="ds-49-popover.html">Popover</a>
+    <a class="ds-sidenav-item" href="ds-22-radio.html">Radio Group</a>
+    <a class="ds-sidenav-item" href="ds-50-resizable.html">Resizable</a>
+    <a class="ds-sidenav-item" href="ds-51-scroll-area.html">Scroll Area</a>
+    <a class="ds-sidenav-item" href="ds-52-select.html">Select</a>
+    <a class="ds-sidenav-item" href="ds-53-sheet.html">Sheet</a>
+    <a class="ds-sidenav-item" href="ds-54-skeleton.html">Skeleton</a>
+    <a class="ds-sidenav-item" href="ds-23-sliders.html">Slider</a>
+    <a class="ds-sidenav-item" href="ds-24-snackbar.html">Snackbar</a>
+    <a class="ds-sidenav-item" href="ds-55-spinner.html">Spinner</a>
+    <a class="ds-sidenav-item" href="ds-12-switches.html">Switch</a>
+    <a class="ds-sidenav-item" href="ds-11-tabs.html">Tabs</a>
+    <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
+    <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
+    <a class="ds-sidenav-item active" href="ds-57-toggle.html">Toggle</a>
+    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
+    <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
+  </div>
+</nav>
+<aside class="ds-toc">
+  <div class="ds-toc-title">On this page</div>
+  <a class="ds-toc-item active" href="#overview">Overview</a>
+  <a class="ds-toc-item" href="#installation">Installation</a>
+  <a class="ds-toc-item" href="#api">Api</a>
+</aside>
+<main class="ds-main">
+  <div class="ds-content">
+    <div class="ds-breadcrumb">
+      <a href="ds-00-home.html">Home</a>
+      <span class="ds-breadcrumb-sep">›</span>
+      <a href="ds-nav-components.html">Components</a>
+      <span class="ds-breadcrumb-sep">›</span>
+      <span>Toggle</span>
+    </div>
+    <div class="ds-title-row">
+    <h1 class="ds-page-title">Toggle</h1>
+    <div class="ds-title-actions">
+      <button class="ds-copy-page-btn" onclick="copyPageLink()">
+        <span class="material-icons-round">content_copy</span> Copy Page
+        <span class="material-icons-round chevron">expand_more</span>
+      </button>
+      <a class="ds-nav-arrow-btn" href="ds-56-textarea.html" title="Previous"><span class="material-icons-round">arrow_back</span></a>
+      <a class="ds-nav-arrow-btn" href="ds-58-toggle-group.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
+    </div>
+  </div>
+    <p class="ds-page-desc">A two-state button that can be on or off.</p>
+    <div class="ds-section" id="overview">      <div class="ds-preview-wrap">
+        <div class="ds-preview-tabbar">
+          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
+          <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
+        </div>
+        <div class="ds-preview-pane" id="prev-main">
+          <div style="display:flex;flex-direction:column;gap:24px;align-items:center;">
+            <div style="display:flex;gap:8px;align-items:center;">
+              <div class="tog active" onclick="this.classList.toggle('active')"><span class="material-icons-round">format_bold</span></div>
+              <div class="tog" onclick="this.classList.toggle('active')"><span class="material-icons-round">format_italic</span></div>
+              <div class="tog" onclick="this.classList.toggle('active')"><span class="material-icons-round">format_underline</span></div>
+              <div style="width:1px;height:24px;background:#e0e0e0;margin:0 4px;"></div>
+              <div class="tog" onclick="this.classList.toggle('active')"><span class="material-icons-round">format_align_left</span></div>
+              <div class="tog active" onclick="this.classList.toggle('active')"><span class="material-icons-round">format_align_center</span></div>
+              <div class="tog" onclick="this.classList.toggle('active')"><span class="material-icons-round">format_align_right</span></div>
+            </div>
+            <div class="tog-label-wrap">
+              <div class="tog active" onclick="this.classList.toggle('active')"><span class="material-icons-round">star</span></div>
+              <span>Mark as favourite</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-code-pane" id="code-main">
+          <button class="ds-copy-btn" onclick="copyCode(this,'code-main')"><span class="material-icons-round">content_copy</span> Copy</button>
+          <pre class="ds-code-block"><span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-str">"tog"</span> <span class="c-attr">onclick</span>="this.classList.toggle('<span class="c-attr">active</span>')"<span class="c-tag">&gt;</span>
+  <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"material-icons-round"</span><span class="c-tag">&gt;</span>format_bold<span class="c-tag">&lt;/span&gt;</span>
+<span class="c-tag">&lt;/button&gt;</span>
+
+<span class="c-comment">&lt;!-- With label --&gt;</span>
+<span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"tog-label-wrap"</span><span class="c-tag">&gt;</span>
+  <span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-str">"tog active"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"material-icons-round"</span><span class="c-tag">&gt;</span>star<span class="c-tag">&lt;/span&gt;</span><span class="c-tag">&lt;/button&gt;</span>
+  <span class="c-tag">&lt;span</span><span class="c-tag">&gt;</span>Favourite<span class="c-tag">&lt;/span&gt;</span>
+<span class="c-tag">&lt;/div&gt;</span></pre>
+        </div>
+      </div>
+    </div><div class="ds-divider"></div>    <div class="ds-section" id="installation">
+      <h2 class="ds-section-title">Installation</h2>
+      <p class="ds-section-desc">Built with pure HTML and CSS. Include <span class="ds-inline-code">ds-shared.css</span> in your project.</p>
+      <div class="ds-install-wrap">
+        <div class="ds-install-tabbar">
+          <button class="ds-install-tab active" onclick="switchInstall(this,'pnpm')">pnpm</button>
+          <button class="ds-install-tab" onclick="switchInstall(this,'npm')">npm</button>
+          <button class="ds-install-tab" onclick="switchInstall(this,'yarn')">yarn</button>
+          <button class="ds-install-tab" onclick="switchInstall(this,'bun')">bun</button>
+        </div>
+        <div class="ds-install-code">
+          <span class="ds-install-cmd" id="install-cmd"><span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span></span>
+          <button class="ds-copy-btn" style="position:static;" onclick="copyInstall(this)"><span class="material-icons-round">content_copy</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="ds-divider"></div>
+            <div class="tog tog-outline" onclick="this.classList.toggle('active')"><span class="material-icons-round">format_italic</span></div>
+            <div class="tog tog-outline" onclick="this.classList.toggle('active')"><span class="material-icons-round">format_underline</span></div>
+      
+        <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
+      <h3 class="ds-subsection-title">Classes</h3>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>tog</code></td><td>Default toggle button (36×36px)</td></tr><tr><td><code>tog.active</code></td><td>Pressed / selected state (black bg)</td></tr><tr><td><code>tog-outline</code></td><td>Outline variant for dark surfaces</td></tr><tr><td><code>tog-outline.active</code></td><td>Pressed outline (purple bg)</td></tr><tr><td><code>tog-label-wrap</code></td><td>Flex row with toggle + text label</td></tr></tbody></table></div>    </div>
+
+  
+    <!-- ── Prev / Next navigation ── -->
+        <div class="ds-page-nav">
+    <a class="ds-page-nav-btn prev" href="ds-08-textfields.html">
+      <span class="ds-page-nav-label">← Previous</span>
+      <span class="ds-page-nav-name">Text Fields</span>
+    </a>
+    <a class="ds-page-nav-btn next" href="ds-58-toggle-group.html">
+      <span class="ds-page-nav-label">Next →</span>
+      <span class="ds-page-nav-name">Toggle Group</span>
+    </a>
+    </div>
+
+  
+  </div>
+</main>
+</div>
+
+<script>
+function toggleDarkMode(){
+  const b=document.body,ic=document.getElementById('darkModeIcon'),bt=document.getElementById('darkModeBtn');
+  b.classList.toggle('dark-mode');
+  if(b.classList.contains('dark-mode')){ic.textContent='light_mode';bt.classList.add('active');}
+  else{ic.textContent='dark_mode';bt.classList.remove('active');}
+}
+function switchTab(btn,id){
+  const w=btn.closest('.ds-preview-wrap');
+  w.querySelectorAll('.ds-preview-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const isC=btn.textContent.trim()==='Code';
+  w.querySelectorAll('.ds-preview-pane').forEach(p=>{
+    if(!p.classList.contains('dark-bg-pane'))p.style.display=isC?'none':'';
+  });
+  w.querySelectorAll('.ds-preview-pane.dark-bg-pane').forEach(p=>{
+    p.style.display=(!isC&&document.body.classList.contains('dark-mode'))?'flex':'none';
+  });
+  w.querySelectorAll('.ds-code-pane').forEach(c=>c.classList.remove('visible'));
+  if(isC){const cp=w.querySelector('.ds-code-pane');if(cp)cp.classList.add('visible');}
+}
+const IC={pnpm:'<span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span>',npm:'<span class="c-kw">npm</span> install <span class="c-pkg">@norbielink/ds</span>',yarn:'<span class="c-kw">yarn</span> add <span class="c-pkg">@norbielink/ds</span>',bun:'<span class="c-kw">bun</span> add <span class="c-pkg">@norbielink/ds</span>'};
+function switchInstall(btn,p){
+  btn.closest('.ds-install-tabbar').querySelectorAll('.ds-install-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('install-cmd').innerHTML=IC[p];
+}
+function copyCode(btn,id){
+  const el=document.getElementById(id)||btn.closest('.ds-preview-wrap,.ds-code-pane').querySelector('.ds-code-block');
+  navigator.clipboard.writeText(el?el.innerText:'').then(()=>{
+    btn.classList.add('copied');btn.innerHTML='<span class="material-icons-round">check</span> Copied!';
+    setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML='<span class="material-icons-round">content_copy</span> Copy';},2000);
+  });
+}
+function copyInstall(btn){
+  navigator.clipboard.writeText(document.getElementById('install-cmd').innerText).then(()=>{
+    btn.classList.add('copied');btn.innerHTML='<span class="material-icons-round">check</span>';
+    setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML='<span class="material-icons-round">content_copy</span>';},2000);
+  });
+}
+
+</script>
+<script src="ds-shared.js"></script>
+</body></html>

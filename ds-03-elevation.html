@@ -1,0 +1,382 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elevation — Norbielink Design System</title>
+<link rel="stylesheet" href="ds-shared.css">
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<style>
+.elev-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
+.elev-card {
+  background: white;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 32px 20px;
+  text-align: center;
+}
+.elev-label { font-size: 13px; font-weight: 700; color: var(--gray-700); }
+.elev-value { font-size: 11px; font-family: monospace; color: var(--gray-400); line-height: 1.5; }
+.elev-level { font-size: 22px; font-weight: 800; color: var(--teal-700); }
+
+.dark-elev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.dark-elev-card {
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
+</head>
+<body class="btis-layout">
+<header class="btis-header">
+  <div class="btis-header-inner">
+    <a class="btis-brand" href="ds-00-home.html">
+      <img src="BTIS.png" class="btis-logo-img" alt="NorbieLink">
+    </a>
+    <nav class="btis-top-nav">
+      <a class="btis-top-nav-link active" href="ds-nav-foundations.html">Foundations</a>
+      <a class="btis-top-nav-link" href="ds-nav-styles.html">Styles</a>
+      <a class="btis-top-nav-link" href="ds-nav-components.html">Components</a>
+      <a class="btis-top-nav-link" href="ds-nav-resources.html">Resources</a>
+    </nav>
+    <div class="btis-header-right">
+      <button class="btis-icon-btn" onclick="openSearch()"><span class="material-icons-round">search</span></button>
+      <button class="btis-theme-pill" id="darkModeBtn" onclick="toggleDarkMode()">
+        <span class="material-icons-round" id="darkModeIcon">dark_mode</span>
+        <span>Theme</span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="ds-shell">
+
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay" onclick="if(event.target===this)closeSearch()">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <span class="material-icons-round">search</span>
+      <input id="search-input" type="text" placeholder="Search components, foundations, styles…" oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
+      <span class="material-icons-round search-close" onclick="closeSearch()">close</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+  </div>
+</div>
+<!-- END SEARCH -->
+
+
+<!-- SUB-NAV -->
+<nav class="ds-sidenav">
+  <div class="ds-sidenav-group">
+    <div class="ds-sidenav-group-title">Getting Started</div>
+    <a class="ds-sidenav-item" href="ds-00-home.html">Introduction</a>
+    <a class="ds-sidenav-item" href="ds-01-color.html">Colors</a>
+    <a class="ds-sidenav-item" href="ds-02-typography.html">Typography</a>
+    <a class="ds-sidenav-item active" href="ds-03-elevation.html">Elevation</a>
+    <a class="ds-sidenav-item" href="ds-04-shape.html">Shape</a>
+    <a class="ds-sidenav-item" href="ds-05-spacing.html">Spacing</a>
+  </div>
+  <div class="ds-sidenav-group">
+    <div class="ds-sidenav-group-title">Components</div>
+    <a class="ds-sidenav-item" href="ds-26-accordion.html">Accordion</a>
+    <a class="ds-sidenav-item" href="ds-27-alert.html">Alert</a>
+    <a class="ds-sidenav-item" href="ds-28-alert-dialog.html">Alert Dialog</a>
+    <a class="ds-sidenav-item" href="ds-14-appbar.html">App Bars</a>
+    <a class="ds-sidenav-item" href="ds-29-avatar.html">Avatar</a>
+    <a class="ds-sidenav-item" href="ds-09-badges.html">Badge</a>
+    <a class="ds-sidenav-item" href="ds-30-breadcrumb.html">Breadcrumb</a>
+    <a class="ds-sidenav-item" href="ds-06-buttons.html">Button</a>
+    <a class="ds-sidenav-item" href="ds-31-button-group.html">Button Group</a>
+    <a class="ds-sidenav-item" href="ds-32-calendar.html">Calendar</a>
+    <a class="ds-sidenav-item" href="ds-10-cards.html">Card</a>
+    <a class="ds-sidenav-item" href="ds-33-carousel.html">Carousel</a>
+    <a class="ds-sidenav-item" href="ds-34-chart.html">Chart</a>
+    <a class="ds-sidenav-item" href="ds-15-checkbox.html">Checkbox</a>
+    <a class="ds-sidenav-item" href="ds-16-chips.html">Chips</a>
+    <a class="ds-sidenav-item" href="ds-35-collapsible.html">Collapsible</a>
+    <a class="ds-sidenav-item" href="ds-36-combobox.html">Combobox</a>
+<a class="ds-sidenav-item" href="ds-38-context-menu.html">Context Menu</a>
+    <a class="ds-sidenav-item" href="ds-13-datatable.html">Data Table</a>
+    <a class="ds-sidenav-item" href="ds-39-date-picker.html">Date Picker</a>
+    <a class="ds-sidenav-item" href="ds-17-dialogs.html">Dialog</a>
+    <a class="ds-sidenav-item" href="ds-18-divider.html">Divider</a>
+    <a class="ds-sidenav-item" href="ds-40-drawer.html">Drawer</a>
+    <a class="ds-sidenav-item" href="ds-41-dropdown.html">Dropdown Menu</a>
+    <a class="ds-sidenav-item" href="ds-42-empty-state.html">Empty State</a>
+    <a class="ds-sidenav-item" href="ds-43-hover-card.html">Hover Card</a>
+    <a class="ds-sidenav-item" href="ds-44-input-otp.html">Input OTP</a>
+<a class="ds-sidenav-item" href="ds-46-label.html">Label</a>
+    <a class="ds-sidenav-item" href="ds-19-lists.html">Lists</a>
+    <a class="ds-sidenav-item" href="ds-20-progress.html">Loading & Progress</a>
+    <a class="ds-sidenav-item" href="ds-47-menubar.html">Menubar</a>
+    <a class="ds-sidenav-item" href="ds-21-menus.html">Menus</a>
+    <a class="ds-sidenav-item" href="ds-07-navigation.html">Navigation</a>
+    <a class="ds-sidenav-item" href="ds-48-pagination.html">Pagination</a>
+    <a class="ds-sidenav-item" href="ds-49-popover.html">Popover</a>
+    <a class="ds-sidenav-item" href="ds-22-radio.html">Radio Group</a>
+    <a class="ds-sidenav-item" href="ds-50-resizable.html">Resizable</a>
+    <a class="ds-sidenav-item" href="ds-51-scroll-area.html">Scroll Area</a>
+    <a class="ds-sidenav-item" href="ds-52-select.html">Select</a>
+    <a class="ds-sidenav-item" href="ds-53-sheet.html">Sheet</a>
+    <a class="ds-sidenav-item" href="ds-54-skeleton.html">Skeleton</a>
+    <a class="ds-sidenav-item" href="ds-23-sliders.html">Slider</a>
+    <a class="ds-sidenav-item" href="ds-24-snackbar.html">Snackbar</a>
+    <a class="ds-sidenav-item" href="ds-55-spinner.html">Spinner</a>
+    <a class="ds-sidenav-item" href="ds-12-switches.html">Switch</a>
+    <a class="ds-sidenav-item" href="ds-11-tabs.html">Tabs</a>
+    <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
+    <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
+    <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
+    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
+    <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
+  </div>
+</nav>
+<main class="ds-main"><div class="ds-content">
+
+  <div class="ds-breadcrumb">
+    <a href="ds-00-home.html">Home</a><span class="ds-breadcrumb-sep">›</span>
+    <a href="ds-nav-foundations.html">Foundations</a><span class="ds-breadcrumb-sep">›</span>
+    <span>Elevation</span>
+  </div>
+
+  <div class="ds-title-row">
+    <h1 class="ds-page-title">Elevation</h1>
+    <div class="ds-title-actions">
+      <button class="ds-copy-page-btn" onclick="copyPageLink()">
+        <span class="material-icons-round">content_copy</span> Copy Page
+        <span class="material-icons-round chevron">expand_more</span>
+      </button>
+      <a class="ds-nav-arrow-btn" href="ds-02-typography.html" title="Previous"><span class="material-icons-round">arrow_back</span></a>
+      <a class="ds-nav-arrow-btn" href="ds-04-shape.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
+    </div>
+  </div>
+  <p class="ds-page-desc">Elevation is expressed through shadows, communicating the z-position of surfaces. Norbielink uses five elevation levels, plus two brand-tinted shadow variants for interactive elements.</p>
+
+  <!-- HERO -->
+  <div class="ds-example" style="background: var(--surface-container-low); padding: 56px 48px;">
+    <div class="elev-grid" style="width:100%;">
+      <div class="elev-card" style="box-shadow: none; border: 1px solid var(--gray-200);">
+        <div class="elev-level">0</div>
+        <div class="elev-label">Level 0</div>
+        <div class="elev-value">No shadow<br>border only</div>
+      </div>
+      <div class="elev-card" style="box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+        <div class="elev-level">1</div>
+        <div class="elev-label">Level 1</div>
+        <div class="elev-value">0 1px 3px<br>rgba(0,0,0,.08)</div>
+      </div>
+      <div class="elev-card" style="box-shadow: 0 4px 16px rgba(0,0,0,0.12);">
+        <div class="elev-level">2</div>
+        <div class="elev-label">Level 2</div>
+        <div class="elev-value">0 4px 16px<br>rgba(0,0,0,.12)</div>
+      </div>
+      <div class="elev-card" style="box-shadow: 0 8px 32px rgba(0,0,0,0.18);">
+        <div class="elev-level">3</div>
+        <div class="elev-label">Level 3</div>
+        <div class="elev-value">0 8px 32px<br>rgba(0,0,0,.18)</div>
+      </div>
+      <div class="elev-card" style="box-shadow: 0 16px 48px rgba(0,0,0,0.24);">
+        <div class="elev-level">4</div>
+        <div class="elev-label">Level 4</div>
+        <div class="elev-value">0 16px 48px<br>rgba(0,0,0,.24)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- LEVELS -->
+  <div class="ds-section" id="elevation-levels">
+    <h2 class="ds-section-title">Elevation levels</h2>
+    <p class="ds-section-desc">Each level corresponds to a specific UI context. Never skip levels — progression should always be sequential.</p>
+
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Level</th><th>Token</th><th>Shadow value</th><th>Used for</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Level 0</strong></td>
+            <td><code>elevation.0</code></td>
+            <td><code>none</code> + 1px border</td>
+            <td>Flat surfaces, input fields in outlined style</td>
+          </tr>
+          <tr>
+            <td><strong>Level 1</strong></td>
+            <td><code>elevation.1</code></td>
+            <td><code>0 1px 3px rgba(0,0,0,.08)</code></td>
+            <td>Cards, tiles, data table, icon containers</td>
+          </tr>
+          <tr>
+            <td><strong>Level 2</strong></td>
+            <td><code>elevation.2</code></td>
+            <td><code>0 4px 16px rgba(0,0,0,.12)</code></td>
+            <td>Dropdown menus, popovers, search results</td>
+          </tr>
+          <tr>
+            <td><strong>Level 3</strong></td>
+            <td><code>elevation.3</code></td>
+            <td><code>0 8px 32px rgba(0,0,0,.18)</code></td>
+            <td>Modals, dialogs, side sheets</td>
+          </tr>
+          <tr>
+            <td><strong>Level 4</strong></td>
+            <td><code>elevation.4</code></td>
+            <td><code>0 16px 48px rgba(0,0,0,.24)</code></td>
+            <td>Full-page overlays, tooltips at high z</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- BRAND SHADOWS -->
+  <div class="ds-section" id="brand-tinted-shadows">
+    <h2 class="ds-section-title">Brand-tinted shadows</h2>
+    <p class="ds-section-desc">Interactive elements use coloured shadows to reinforce brand identity. Only used on primary action buttons and active nav elements.</p>
+
+    <div class="ds-example" style="gap: 32px;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+        <div style="background:linear-gradient(135deg,#4ECBA1,#2CB9A8);color:white;padding:12px 28px;border-radius:100px;font-size:14px;font-weight:600;box-shadow:0 2px 8px rgba(44,185,168,0.45);">+ Start a Quote</div>
+        <div style="text-align:center;">
+          <div style="font-size:12px;font-weight:700;color:var(--gray-700);">Teal Button Shadow</div>
+          <div style="font-size:11px;font-family:monospace;color:var(--gray-400);">0 2px 8px rgba(#2CB9A8, 45%)</div>
+          <div style="font-size:11px;color:var(--gray-400);">elevation.teal</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+        <div style="background:linear-gradient(135deg,#007D6E,#2CB9A8);color:white;padding:12px 28px;border-radius:100px;font-size:14px;font-weight:600;box-shadow:0 2px 12px rgba(44,185,168,0.5);">+ Start a Quote</div>
+        <div style="text-align:center;">
+          <div style="font-size:12px;font-weight:700;color:var(--gray-700);">Purple Button Shadow</div>
+          <div style="font-size:11px;font-family:monospace;color:var(--gray-400);">0 2px 12px rgba(#2CB9A8, 50%)</div>
+          <div style="font-size:11px;color:var(--gray-400);">elevation.purple</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+        <div style="background:linear-gradient(135deg,#007D6E,#2CB9A8,#48C8BC);color:white;padding:10px 20px;border-radius:50px;font-size:14px;font-weight:600;box-shadow:0 4px 16px rgba(44,185,168,0.4);">Marketplace</div>
+        <div style="text-align:center;">
+          <div style="font-size:12px;font-weight:700;color:var(--gray-700);">Active Nav Shadow</div>
+          <div style="font-size:11px;font-family:monospace;color:var(--gray-400);">0 4px 16px rgba(#2CB9A8, 40%)</div>
+          <div style="font-size:11px;color:var(--gray-400);">elevation.nav-active</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- DARK MODE ELEVATION -->
+  <div class="ds-section" id="dark-mode-elevation">
+    <h2 class="ds-section-title">Dark mode elevation</h2>
+    <p class="ds-section-desc">In dark mode, elevation is expressed primarily through surface color lightness rather than shadow depth. Shadows use lower opacity.</p>
+          <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);">Background</div>
+          <div style="font-size:10px;font-family:monospace;color:rgba(255,255,255,0.3);">#09090b</div>
+        </div>
+        <div class="dark-elev-card" style="background:#18181b; box-shadow:0 1px 3px rgba(0,0,0,0.4);">
+          <div style="font-size:20px;font-weight:800;color:rgba(255,255,255,0.6);">1</div>
+          <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);">Surface</div>
+          <div style="font-size:10px;font-family:monospace;color:rgba(255,255,255,0.35);">#18181b</div>
+        </div>
+        <div class="dark-elev-card" style="background:#27272a; box-shadow:0 4px 16px rgba(0,0,0,0.5);">
+          <div style="font-size:20px;font-weight:800;color:rgba(255,255,255,0.7);">2</div>
+          <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);">Surface Raised</div>
+          <div style="font-size:10px;font-family:monospace;color:rgba(255,255,255,0.4);">#27272a</div>
+        </div>
+  
+
+
+    <!-- ── Prev / Next navigation ── -->
+        <div class="ds-page-nav">
+    <a class="ds-page-nav-btn prev" href="ds-02-typography.html">
+      <span class="ds-page-nav-label">← Previous</span>
+      <span class="ds-page-nav-name">Typography</span>
+    </a>
+    <a class="ds-page-nav-btn next" href="ds-04-shape.html">
+      <span class="ds-page-nav-label">Next →</span>
+      <span class="ds-page-nav-name">Shape</span>
+    </a>
+    </div>
+
+    </div>
+</main>
+</div>
+
+<aside class="ds-toc">
+  <div class="ds-toc-title">In this article</div>
+  <a class="ds-toc-item active" href="#elevation-levels">Elevation levels</a>
+  <a class="ds-toc-item" href="#brand-tinted-shadows">Brand-tinted shadows</a>
+  <a class="ds-toc-item" href="#dark-mode-elevation">Dark mode elevation</a>
+</aside>
+
+
+
+
+
+
+<script>
+const DS_PAGES = [
+  {t:'Color',section:'Styles',url:'ds-01-color.html',icon:'palette'},
+  {t:'Typography',section:'Styles',url:'ds-02-typography.html',icon:'text_fields'},
+  {t:'Elevation',section:'Foundations',url:'ds-03-elevation.html',icon:'layers'},
+  {t:'Shape',section:'Foundations',url:'ds-04-shape.html',icon:'rounded_corner'},
+  {t:'Spacing',section:'Foundations',url:'ds-05-spacing.html',icon:'space_bar'},
+  {t:'Badges',section:'Components',url:'ds-09-badges.html',icon:'fiber_manual_record'},
+  {t:'Buttons',section:'Components',url:'ds-06-buttons.html',icon:'smart_button'},
+  {t:'Cards',section:'Components',url:'ds-10-cards.html',icon:'crop_square'},
+  {t:'Checkbox',section:'Components',url:'ds-14-checkbox.html',icon:'check_box'},
+  {t:'Chips',section:'Components',url:'ds-16-chips.html',icon:'label'},
+  {t:'Data Tables',section:'Components',url:'ds-13-datatable.html',icon:'table_chart'},
+  {t:'Dialogs',section:'Components',url:'ds-17-dialogs.html',icon:'open_in_new'},
+  {t:'Lists',section:'Components',url:'ds-21-lists.html',icon:'format_list_bulleted'},
+  {t:'Menus',section:'Components',url:'ds-22-menus.html',icon:'menu'},
+  {t:'Navigation',section:'Components',url:'ds-07-navigation.html',icon:'navigation'},
+  {t:'Progress',section:'Components',url:'ds-18-progress.html',icon:'hourglass_empty'},
+  {t:'Radio',section:'Components',url:'ds-15-radio.html',icon:'radio_button_checked'},
+  {t:'Sliders',section:'Components',url:'ds-19-slider.html',icon:'tune'},
+  {t:'Snackbar',section:'Components',url:'ds-20-snackbar.html',icon:'notifications'},
+  {t:'Switches',section:'Components',url:'ds-12-switches.html',icon:'toggle_on'},
+  {t:'Tabs',section:'Components',url:'ds-11-tabs.html',icon:'tab'},
+  {t:'Text Fields',section:'Components',url:'ds-08-textfields.html',icon:'input'}
+];
+let searchIdx = -1;
+function openSearch(){
+  document.getElementById('search-overlay').classList.add('open');
+  document.getElementById('search-input').value='';
+  document.getElementById('search-input').focus();
+  renderResults('');
+  searchIdx=-1;
+}
+function closeSearch(){
+  document.getElementById('search-overlay').classList.remove('open');
+}
+function renderResults(q){
+  searchIdx=-1;
+  const res=DS_PAGES.filter(p=>p.t.toLowerCase().includes(q.toLowerCase())||p.section.toLowerCase().includes(q.toLowerCase()));
+  const c=document.getElementById('search-results');
+  if(res.length===0){c.innerHTML='<div class="search-empty">No results for "'+q+'"</div>';return;}
+  c.innerHTML=res.map((p,i)=>`<div class="search-result-item" data-i="${i}" data-url="${p.url}" onclick="location.href='${p.url}'">
+    <div class="sri-icon"><span class="material-icons-round">${p.icon}</span></div>
+    <div><div class="search-result-title">${p.t}</div><div class="search-result-section">${p.section}</div></div>
+    <span class="material-icons-round sri-arrow">arrow_forward</span>
+  </div>`).join('');
+}
+function searchKeydown(e){
+  const items=document.querySelectorAll('.search-result-item');
+  if(e.key==='ArrowDown'){e.preventDefault();searchIdx=Math.min(searchIdx+1,items.length-1);}
+  else if(e.key==='ArrowUp'){e.preventDefault();searchIdx=Math.max(searchIdx-1,0);}
+  else if(e.key==='Enter'&&searchIdx>=0){items[searchIdx].click();return;}
+  else if(e.key==='Escape'){closeSearch();return;}
+  items.forEach((el,i)=>el.classList.toggle('focused',i===searchIdx));
+  if(searchIdx>=0)items[searchIdx].scrollIntoView({block:'nearest'});
+}
+document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}if(e.key==='Escape')closeSearch();});
+</script>
+<script src="ds-search.js"></script>
+<script src="ds-shared.js"></script>
+</body></html>
