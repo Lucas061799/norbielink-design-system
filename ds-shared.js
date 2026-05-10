@@ -73,6 +73,11 @@ function openSearch() {
   setTimeout(() => document.getElementById('search-input').focus(), 50);
   renderResults('');
 }
+function toggleSearch() {
+  const overlay = document.getElementById('search-overlay');
+  if (!overlay) return;
+  if (overlay.classList.contains('open')) closeSearch(); else openSearch();
+}
 function closeSearch() {
   const overlay = document.getElementById('search-overlay');
   if (overlay) overlay.classList.remove('open');

@@ -1830,7 +1830,7 @@ body.dark-mode .hfp-empty { color: rgba(255,255,255,.25); }
     </nav>
     <!-- Right actions -->
     <div class="btis-header-right">
-      <button class="btis-icon-btn" onclick="openSearch()"><span class="material-icons-round">search</span></button>
+      <button class="btis-icon-btn" onclick="toggleSearch()"><span class="material-icons-round">search</span></button>
       <button class="btis-theme-pill" id="darkModeBtn" onclick="toggleDarkMode()">
         <span class="material-icons-round" id="darkModeIcon">dark_mode</span>
         <span>Theme</span>
@@ -2578,6 +2578,7 @@ const DS_SEARCH_INDEX = [
 ];
 let focusedIndex = -1;
 function openSearch(){const o=document.getElementById('search-overlay');if(!o)return;o.classList.add('open');setTimeout(()=>document.getElementById('search-input').focus(),50);renderResults('');}
+function toggleSearch(){const o=document.getElementById('search-overlay');if(!o)return;if(o.classList.contains('open'))closeSearch();else openSearch();}
 function closeSearch(){const o=document.getElementById('search-overlay');if(o)o.classList.remove('open');focusedIndex=-1;}
 function goTo(href){window.location.href=href;}
 function renderResults(query){const c=document.getElementById('search-results');if(!c)return;const q=(query||'').trim().toLowerCase();const f=q?DS_SEARCH_INDEX.filter(i=>i.title.toLowerCase().includes(q)||i.section.toLowerCase().includes(q)):DS_SEARCH_INDEX;if(!f.length){c.innerHTML='<div class="search-empty">No results for "'+query+'"</div>';return;}focusedIndex=-1;c.innerHTML=f.map(i=>`<div class="search-result-item" data-href="${i.href}" onclick="goTo('${i.href}')"><div class="sri-icon"><span class="material-icons-round">${i.icon}</span></div><div><div class="search-result-title">${i.title}</div><div class="search-result-section">${i.section}</div></div><span class="material-icons-round sri-arrow">arrow_forward</span></div>`).join('');}
