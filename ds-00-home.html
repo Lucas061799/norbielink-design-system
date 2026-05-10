@@ -2518,8 +2518,70 @@ function closeMobileMenu(){
   const shell=document.querySelector('.ds-shell');
   if(shell)shell.after(ft);else document.body.appendChild(ft);
   /* Esc key */
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMobileMenu();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMobileMenu();closeSearch();}if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}});
 })();
+
+/* ── SEARCH (inlined, since ds-shared.js isn't loaded on home) ── */
+const DS_SEARCH_INDEX = [
+  { title:'Color', section:'Foundations', href:'ds-01-color.html', icon:'palette' },
+  { title:'Typography', section:'Foundations', href:'ds-02-typography.html', icon:'text_fields' },
+  { title:'Elevation', section:'Foundations', href:'ds-03-elevation.html', icon:'flip_to_front' },
+  { title:'Shape', section:'Foundations', href:'ds-04-shape.html', icon:'rounded_corner' },
+  { title:'Spacing', section:'Foundations', href:'ds-05-spacing.html', icon:'space_bar' },
+  { title:'Buttons', section:'Components', href:'ds-06-buttons.html', icon:'smart_button' },
+  { title:'Navigation', section:'Components', href:'ds-07-navigation.html', icon:'menu' },
+  { title:'Text Fields', section:'Components', href:'ds-08-textfields.html', icon:'text_fields' },
+  { title:'Badges', section:'Components', href:'ds-09-badges.html', icon:'new_releases' },
+  { title:'Tabs', section:'Components', href:'ds-11-tabs.html', icon:'tab' },
+  { title:'Switches', section:'Components', href:'ds-12-switches.html', icon:'toggle_on' },
+  { title:'Data Tables', section:'Components', href:'ds-13-datatable.html', icon:'table_chart' },
+  { title:'Checkbox', section:'Components', href:'ds-15-checkbox.html', icon:'check_box' },
+  { title:'Chips', section:'Components', href:'ds-16-chips.html', icon:'label' },
+  { title:'Dialogs', section:'Components', href:'ds-17-dialogs.html', icon:'open_in_new' },
+  { title:'Divider', section:'Components', href:'ds-18-divider.html', icon:'horizontal_rule' },
+  { title:'Lists', section:'Components', href:'ds-19-lists.html', icon:'list' },
+  { title:'Progress', section:'Components', href:'ds-20-progress.html', icon:'hourglass_empty' },
+  { title:'Menus', section:'Components', href:'ds-21-menus.html', icon:'menu_open' },
+  { title:'Radio Button', section:'Components', href:'ds-22-radio.html', icon:'radio_button_checked' },
+  { title:'Sliders', section:'Components', href:'ds-23-sliders.html', icon:'linear_scale' },
+  { title:'Snackbar', section:'Components', href:'ds-24-snackbar.html', icon:'notifications' },
+  { title:'Tooltips', section:'Components', href:'ds-25-tooltips.html', icon:'tips_and_updates' },
+  { title:'Accordion', section:'Components', href:'ds-26-accordion.html', icon:'expand_more' },
+  { title:'Alert', section:'Components', href:'ds-27-alert.html', icon:'warning_amber' },
+  { title:'Alert Dialog', section:'Components', href:'ds-28-alert-dialog.html', icon:'report_problem' },
+  { title:'Avatar', section:'Components', href:'ds-29-avatar.html', icon:'account_circle' },
+  { title:'Breadcrumb', section:'Components', href:'ds-30-breadcrumb.html', icon:'chevron_right' },
+  { title:'Button Group', section:'Components', href:'ds-31-button-group.html', icon:'view_column' },
+  { title:'Calendar', section:'Components', href:'ds-32-calendar.html', icon:'calendar_today' },
+  { title:'Carousel', section:'Components', href:'ds-33-carousel.html', icon:'view_carousel' },
+  { title:'Collapsible', section:'Components', href:'ds-35-collapsible.html', icon:'unfold_more' },
+  { title:'Combobox', section:'Components', href:'ds-36-combobox.html', icon:'arrow_drop_down' },
+  { title:'Context Menu', section:'Components', href:'ds-38-context-menu.html', icon:'more_vert' },
+  { title:'Date Picker', section:'Components', href:'ds-39-date-picker.html', icon:'event' },
+  { title:'Drawer', section:'Components', href:'ds-40-drawer.html', icon:'menu_open' },
+  { title:'Dropdown', section:'Components', href:'ds-41-dropdown.html', icon:'arrow_drop_down_circle' },
+  { title:'Empty State', section:'Components', href:'ds-42-empty-state.html', icon:'inbox' },
+  { title:'Input OTP', section:'Components', href:'ds-44-input-otp.html', icon:'pin' },
+  { title:'Label', section:'Components', href:'ds-46-label.html', icon:'label_outline' },
+  { title:'Menubar', section:'Components', href:'ds-47-menubar.html', icon:'menu' },
+  { title:'Pagination', section:'Components', href:'ds-48-pagination.html', icon:'last_page' },
+  { title:'Popover', section:'Components', href:'ds-49-popover.html', icon:'chat_bubble_outline' },
+  { title:'Resizable', section:'Components', href:'ds-50-resizable.html', icon:'open_with' },
+  { title:'Scroll Area', section:'Components', href:'ds-51-scroll-area.html', icon:'swap_vert' },
+  { title:'Select', section:'Components', href:'ds-52-select.html', icon:'arrow_drop_down' },
+  { title:'Sheet', section:'Components', href:'ds-53-sheet.html', icon:'table_rows' },
+  { title:'Skeleton', section:'Components', href:'ds-54-skeleton.html', icon:'crop_landscape' },
+  { title:'Spinner', section:'Components', href:'ds-55-spinner.html', icon:'autorenew' },
+  { title:'Textarea', section:'Components', href:'ds-56-textarea.html', icon:'notes' },
+  { title:'Toggle', section:'Components', href:'ds-57-toggle.html', icon:'toggle_off' },
+  { title:'Toggle Group', section:'Components', href:'ds-58-toggle-group.html', icon:'view_stream' },
+];
+let focusedIndex = -1;
+function openSearch(){const o=document.getElementById('search-overlay');if(!o)return;o.classList.add('open');setTimeout(()=>document.getElementById('search-input').focus(),50);renderResults('');}
+function closeSearch(){const o=document.getElementById('search-overlay');if(o)o.classList.remove('open');focusedIndex=-1;}
+function goTo(href){window.location.href=href;}
+function renderResults(query){const c=document.getElementById('search-results');if(!c)return;const q=(query||'').trim().toLowerCase();const f=q?DS_SEARCH_INDEX.filter(i=>i.title.toLowerCase().includes(q)||i.section.toLowerCase().includes(q)):DS_SEARCH_INDEX;if(!f.length){c.innerHTML='<div class="search-empty">No results for "'+query+'"</div>';return;}focusedIndex=-1;c.innerHTML=f.map(i=>`<div class="search-result-item" data-href="${i.href}" onclick="goTo('${i.href}')"><div class="sri-icon"><span class="material-icons-round">${i.icon}</span></div><div><div class="search-result-title">${i.title}</div><div class="search-result-section">${i.section}</div></div><span class="material-icons-round sri-arrow">arrow_forward</span></div>`).join('');}
+function searchKeydown(e){const items=document.querySelectorAll('.search-result-item');if(e.key==='ArrowDown'){e.preventDefault();focusedIndex=Math.min(focusedIndex+1,items.length-1);}else if(e.key==='ArrowUp'){e.preventDefault();focusedIndex=Math.max(focusedIndex-1,0);}else if(e.key==='Enter'){if(focusedIndex>=0&&items[focusedIndex])goTo(items[focusedIndex].dataset.href);else if(items.length===1)goTo(items[0].dataset.href);return;}else if(e.key==='Escape'){closeSearch();return;}items.forEach((el,i)=>el.classList.toggle('focused',i===focusedIndex));if(items[focusedIndex])items[focusedIndex].scrollIntoView({block:'nearest'});}
 </script>
 </body></html>
 
