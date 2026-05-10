@@ -3,16 +3,57 @@
 <title>Chart — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.chart-wrap{width:100%;max-width:480px;font-family:'Montserrat',sans-serif;}
-.chart-title{font-size:13px;font-weight:700;color:#111;margin-bottom:16px;}
+:root{--ch-1:#A614C3;--ch-2:#5C2ED4;--ch-3:#C084FC;--ch-4:#4ECDC4;--ch-5:#E8622A;--ch-grid:#F3F4F6;--ch-text:#6B7280;--ch-axis:#E5E7EB;}
+body.dark-mode{--ch-grid:rgba(255,255,255,0.06);--ch-text:rgba(255,255,255,0.55);--ch-axis:rgba(255,255,255,0.10);}
+.chart-card{width:100%;max-width:480px;font-family:'Montserrat',sans-serif;background:transparent;}
+.chart-head{margin-bottom:18px;}
+.chart-title{font-size:14px;font-weight:600;color:#0F1120;letter-spacing:-0.01em;}
+.chart-desc{font-size:12px;color:#6B7280;margin-top:2px;}
+body.dark-mode .chart-title{color:rgba(255,255,255,0.92);}
+body.dark-mode .chart-desc{color:rgba(255,255,255,0.55);}
+/* Bar */
 .bar-chart{display:flex;align-items:flex-end;gap:10px;height:140px;padding:0 4px;}
-.bar-col{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;flex:1;height:100%;}
-.bar{border-radius:5px 5px 0 0;width:100%;transition:opacity .15s;}
-.bar:hover{opacity:.8;}
-.bar-label{font-size:10px;color:#aaa;font-weight:600;letter-spacing:.04em;}
-.chart-legend{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;}
-.legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#888;font-weight:600;}
-.legend-dot{width:8px;height:8px;border-radius:50%;}
+.bar-col{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px;flex:1;height:100%;}
+.bar{border-radius:5px 5px 0 0;width:100%;transition:opacity .15s;background:var(--ch-1);}
+.bar:hover{opacity:.85;}
+.bar-label{font-size:10.5px;color:var(--ch-text);font-weight:500;}
+/* Stacked Bar */
+.bar.stacked{border-radius:0;}
+.bar.stacked.top{border-radius:5px 5px 0 0;}
+.bar-stack{width:100%;display:flex;flex-direction:column-reverse;height:100%;}
+/* Horizontal */
+.hbar-chart{display:flex;flex-direction:column;gap:10px;}
+.hbar-row{display:grid;grid-template-columns:60px 1fr 36px;align-items:center;gap:12px;font-size:11px;color:var(--ch-text);font-weight:500;}
+.hbar-track{height:10px;background:var(--ch-grid);border-radius:99px;overflow:hidden;position:relative;}
+.hbar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#5C2ED4,#A614C3);}
+.hbar-val{font-size:11px;font-weight:600;color:#0F1120;text-align:right;}
+body.dark-mode .hbar-val{color:rgba(255,255,255,0.85);}
+/* Legend */
+.chart-legend{display:flex;gap:18px;margin-top:18px;padding-top:14px;border-top:1px solid var(--ch-axis);flex-wrap:wrap;}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ch-text);font-weight:500;}
+.legend-dot{width:9px;height:9px;border-radius:2px;}
+/* SVG charts */
+.chart-svg{width:100%;height:auto;display:block;font-family:'Montserrat',sans-serif;}
+.chart-svg .grid-line{stroke:var(--ch-grid);stroke-width:1;}
+.chart-svg .axis-text{fill:var(--ch-text);font-size:10px;font-weight:500;}
+.chart-svg .line-path{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.chart-svg .area-path{stroke-width:2;fill-opacity:.18;}
+.chart-svg .point{r:3.5;fill:#fff;stroke-width:2;}
+body.dark-mode .chart-svg .point{fill:#191D35;}
+/* Donut */
+.donut-wrap{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.donut-svg{width:140px;height:140px;flex-shrink:0;}
+.donut-bg{fill:none;stroke:var(--ch-grid);stroke-width:14;}
+.donut-seg{fill:none;stroke-width:14;stroke-linecap:butt;transform-origin:center;transform:rotate(-90deg);transition:opacity .15s;}
+.donut-seg:hover{opacity:.85;}
+.donut-center{font-size:22px;font-weight:700;text-anchor:middle;fill:#0F1120;font-family:'Montserrat',sans-serif;}
+.donut-center-sub{font-size:10px;font-weight:500;text-anchor:middle;fill:var(--ch-text);text-transform:uppercase;letter-spacing:.05em;font-family:'Montserrat',sans-serif;}
+body.dark-mode .donut-center{fill:rgba(255,255,255,0.92);}
+.donut-legend{display:flex;flex-direction:column;gap:8px;flex:1;min-width:140px;}
+.donut-row{display:grid;grid-template-columns:14px 1fr auto;align-items:center;gap:10px;font-size:12px;font-weight:500;color:var(--ch-text);}
+.donut-row .donut-row-val{color:#0F1120;font-weight:600;}
+body.dark-mode .donut-row .donut-row-val{color:rgba(255,255,255,0.92);}
+.donut-row .donut-swatch{width:10px;height:10px;border-radius:2px;}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -23,9 +64,7 @@
       <img src="BTIS.png" class="btis-logo-img" alt="NorbieLink">
     </a>
     <nav class="btis-top-nav">
-      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>
-      <a class="btis-top-nav-link" href="ds-nav-styles.html">Styles</a>
-      <a class="btis-top-nav-link active" href="ds-nav-components.html">Components</a>
+      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>      <a class="btis-top-nav-link active" href="ds-nav-components.html">Components</a>
       <a class="btis-top-nav-link" href="ds-nav-resources.html">Resources</a>
     </nav>
     <div class="btis-header-right">
@@ -70,16 +109,13 @@
     <a class="ds-sidenav-item" href="ds-26-accordion.html">Accordion</a>
     <a class="ds-sidenav-item" href="ds-27-alert.html">Alert</a>
     <a class="ds-sidenav-item" href="ds-28-alert-dialog.html">Alert Dialog</a>
-    <a class="ds-sidenav-item" href="ds-14-appbar.html">App Bars</a>
     <a class="ds-sidenav-item" href="ds-29-avatar.html">Avatar</a>
     <a class="ds-sidenav-item" href="ds-09-badges.html">Badge</a>
     <a class="ds-sidenav-item" href="ds-30-breadcrumb.html">Breadcrumb</a>
     <a class="ds-sidenav-item" href="ds-06-buttons.html">Button</a>
     <a class="ds-sidenav-item" href="ds-31-button-group.html">Button Group</a>
     <a class="ds-sidenav-item" href="ds-32-calendar.html">Calendar</a>
-    <a class="ds-sidenav-item" href="ds-10-cards.html">Card</a>
     <a class="ds-sidenav-item" href="ds-33-carousel.html">Carousel</a>
-    <a class="ds-sidenav-item active" href="ds-34-chart.html">Chart</a>
     <a class="ds-sidenav-item" href="ds-15-checkbox.html">Checkbox</a>
     <a class="ds-sidenav-item" href="ds-16-chips.html">Chips</a>
     <a class="ds-sidenav-item" href="ds-35-collapsible.html">Collapsible</a>
@@ -92,7 +128,6 @@
     <a class="ds-sidenav-item" href="ds-40-drawer.html">Drawer</a>
     <a class="ds-sidenav-item" href="ds-41-dropdown.html">Dropdown Menu</a>
     <a class="ds-sidenav-item" href="ds-42-empty-state.html">Empty State</a>
-    <a class="ds-sidenav-item" href="ds-43-hover-card.html">Hover Card</a>
     <a class="ds-sidenav-item" href="ds-44-input-otp.html">Input OTP</a>
 <a class="ds-sidenav-item" href="ds-46-label.html">Label</a>
     <a class="ds-sidenav-item" href="ds-19-lists.html">Lists</a>
@@ -124,6 +159,7 @@
   <div class="ds-toc-title">On this page</div>
   <a class="ds-toc-item active" href="#overview">Overview</a>
   <a class="ds-toc-item" href="#installation">Installation</a>
+  <a class="ds-toc-item" href="#examples">Examples</a>
   <a class="ds-toc-item" href="#api">Api</a>
 </aside>
 <main class="ds-main">
@@ -138,10 +174,6 @@
     <div class="ds-title-row">
     <h1 class="ds-page-title">Chart</h1>
     <div class="ds-title-actions">
-      <button class="ds-copy-page-btn" onclick="copyPageLink()">
-        <span class="material-icons-round">content_copy</span> Copy Page
-        <span class="material-icons-round chevron">expand_more</span>
-      </button>
       <a class="ds-nav-arrow-btn" href="ds-33-carousel.html" title="Previous"><span class="material-icons-round">arrow_back</span></a>
       <a class="ds-nav-arrow-btn" href="ds-15-checkbox.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
@@ -152,22 +184,23 @@
           <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
           <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
         </div>
-        <div class="ds-preview-pane" id="prev-main">
-          <div class="chart-wrap">
-            <div class="chart-title">Monthly components added</div>
+        <div class="ds-preview-pane" id="prev-main" style="padding:40px 32px;">
+          <div class="chart-card">
+            <div class="chart-head">
+              <div class="chart-title">Bar Chart — Monthly</div>
+              <div class="chart-desc">January – July 2025</div>
+            </div>
             <div class="bar-chart">
-              <div class="bar-col"><div class="bar" style="height:60%;background:#75C9B7;"></div><div class="bar-label">Jan</div></div>
-              <div class="bar-col"><div class="bar" style="height:80%;background:#75C9B7;"></div><div class="bar-label">Feb</div></div>
-              <div class="bar-col"><div class="bar" style="height:45%;background:#75C9B7;"></div><div class="bar-label">Mar</div></div>
-              <div class="bar-col"><div class="bar" style="height:90%;background:#75C9B7;"></div><div class="bar-label">Apr</div></div>
-              <div class="bar-col"><div class="bar" style="height:70%;background:#ACD697;"></div><div class="bar-label">May</div></div>
-              <div class="bar-col"><div class="bar" style="height:55%;background:#ACD697;"></div><div class="bar-label">Jun</div></div>
-              <div class="bar-col"><div class="bar" style="height:100%;background:#C084FC;"></div><div class="bar-label">Jul</div></div>
+              <div class="bar-col"><div class="bar" style="height:60%;"></div><div class="bar-label">Jan</div></div>
+              <div class="bar-col"><div class="bar" style="height:80%;"></div><div class="bar-label">Feb</div></div>
+              <div class="bar-col"><div class="bar" style="height:45%;"></div><div class="bar-label">Mar</div></div>
+              <div class="bar-col"><div class="bar" style="height:90%;"></div><div class="bar-label">Apr</div></div>
+              <div class="bar-col"><div class="bar" style="height:70%;"></div><div class="bar-label">May</div></div>
+              <div class="bar-col"><div class="bar" style="height:55%;"></div><div class="bar-label">Jun</div></div>
+              <div class="bar-col"><div class="bar" style="height:100%;"></div><div class="bar-label">Jul</div></div>
             </div>
             <div class="chart-legend">
-              <div class="legend-item"><div class="legend-dot" style="background:#75C9B7;"></div>Q1–Q2</div>
-              <div class="legend-item"><div class="legend-dot" style="background:#ACD697;"></div>Q2</div>
-              <div class="legend-item"><div class="legend-dot" style="background:#C084FC;"></div>Q3</div>
+              <div class="legend-item"><div class="legend-dot" style="background:var(--ch-1);"></div>Components</div>
             </div>
           </div>
         </div>
@@ -177,7 +210,7 @@
   <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"chart-title"</span><span class="c-tag">&gt;</span>Chart title<span class="c-tag">&lt;/div&gt;</span>
   <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"bar-chart"</span><span class="c-tag">&gt;</span>
     <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"bar-col"</span><span class="c-tag">&gt;</span>
-      <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"bar"</span> <span class="c-attr">style</span>=<span class="c-str">"height:60%;background:#75C9B7;"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span>
+      <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"bar"</span> <span class="c-attr">style</span>=<span class="c-str">"height:60%;background:#A614C3;"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span>
       <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"bar-label"</span><span class="c-tag">&gt;</span>Jan<span class="c-tag">&lt;/div&gt;</span>
     <span class="c-tag">&lt;/div&gt;</span>
     <span class="c-comment">&lt;!-- more bars --&gt;</span>
@@ -202,9 +235,244 @@
       </div>
     </div>
     <div class="ds-divider"></div>
+
+    <div class="ds-section" id="examples">
+      <h2 class="ds-section-title">Examples</h2>
+
+      <h3 class="ds-subsection-title">Line chart</h3>
+      <div class="ds-preview-wrap">
+        <div class="ds-preview-tabbar">
+          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-line')">Preview</button>
+          <button class="ds-preview-tab" onclick="switchTab(this,'code-line')">Code</button>
+        </div>
+        <div class="ds-preview-pane" id="prev-line" style="padding:40px 32px;">
+          <div class="chart-card">
+            <div class="chart-head">
+              <div class="chart-title">Line Chart — Linear</div>
+              <div class="chart-desc">Active users · last 7 days</div>
+            </div>
+            <svg class="chart-svg" viewBox="0 0 480 180" preserveAspectRatio="none">
+              <line class="grid-line" x1="40" y1="20" x2="460" y2="20"/>
+              <line class="grid-line" x1="40" y1="60" x2="460" y2="60"/>
+              <line class="grid-line" x1="40" y1="100" x2="460" y2="100"/>
+              <line class="grid-line" x1="40" y1="140" x2="460" y2="140"/>
+              <text class="axis-text" x="14" y="24">100</text>
+              <text class="axis-text" x="20" y="64">75</text>
+              <text class="axis-text" x="20" y="104">50</text>
+              <text class="axis-text" x="20" y="144">25</text>
+              <path class="line-path" stroke="#A614C3" d="M 60 90 L 120 70 L 180 110 L 240 50 L 300 80 L 360 40 L 420 65"/>
+              <circle class="point" cx="60" cy="90" stroke="#A614C3"/>
+              <circle class="point" cx="120" cy="70" stroke="#A614C3"/>
+              <circle class="point" cx="180" cy="110" stroke="#A614C3"/>
+              <circle class="point" cx="240" cy="50" stroke="#A614C3"/>
+              <circle class="point" cx="300" cy="80" stroke="#A614C3"/>
+              <circle class="point" cx="360" cy="40" stroke="#A614C3"/>
+              <circle class="point" cx="420" cy="65" stroke="#A614C3"/>
+              <text class="axis-text" x="60" y="170" text-anchor="middle">Mon</text>
+              <text class="axis-text" x="120" y="170" text-anchor="middle">Tue</text>
+              <text class="axis-text" x="180" y="170" text-anchor="middle">Wed</text>
+              <text class="axis-text" x="240" y="170" text-anchor="middle">Thu</text>
+              <text class="axis-text" x="300" y="170" text-anchor="middle">Fri</text>
+              <text class="axis-text" x="360" y="170" text-anchor="middle">Sat</text>
+              <text class="axis-text" x="420" y="170" text-anchor="middle">Sun</text>
+            </svg>
+            <div class="chart-legend">
+              <div class="legend-item"><div class="legend-dot" style="background:#A614C3;"></div>Active users</div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-code-pane" id="code-line">
+          <button class="ds-copy-btn" onclick="copyCode(this,'code-line')"><span class="material-icons-round">content_copy</span> Copy</button>
+          <pre class="ds-code-block"><span class="c-tag">&lt;svg</span> <span class="c-attr">class</span>=<span class="c-str">"chart-svg"</span> <span class="c-attr">viewBox</span>=<span class="c-str">"0 0 480 180"</span><span class="c-tag">&gt;</span>
+  <span class="c-tag">&lt;path</span> <span class="c-attr">class</span>=<span class="c-str">"line-path"</span> <span class="c-attr">stroke</span>=<span class="c-str">"#A614C3"</span>
+        <span class="c-attr">d</span>=<span class="c-str">"M 60 90 L 120 70 L 180 110 ..."</span><span class="c-tag">/&gt;</span>
+  <span class="c-tag">&lt;circle</span> <span class="c-attr">class</span>=<span class="c-str">"point"</span> <span class="c-attr">cx</span>=<span class="c-str">"60"</span> <span class="c-attr">cy</span>=<span class="c-str">"90"</span> <span class="c-attr">stroke</span>=<span class="c-str">"#A614C3"</span><span class="c-tag">/&gt;</span>
+  <span class="c-comment">&lt;!-- more points --&gt;</span>
+<span class="c-tag">&lt;/svg&gt;</span></pre>
+        </div>
+      </div>
+
+      <h3 class="ds-subsection-title">Area chart</h3>
+      <div class="ds-preview-wrap">
+        <div class="ds-preview-tabbar">
+          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-area')">Preview</button>
+          <button class="ds-preview-tab" onclick="switchTab(this,'code-area')">Code</button>
+        </div>
+        <div class="ds-preview-pane" id="prev-area" style="padding:40px 32px;">
+          <div class="chart-card">
+            <div class="chart-head">
+              <div class="chart-title">Area Chart — Stacked</div>
+              <div class="chart-desc">New vs returning users</div>
+            </div>
+            <svg class="chart-svg" viewBox="0 0 480 180" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="ar1" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#A614C3" stop-opacity=".35"/><stop offset="100%" stop-color="#A614C3" stop-opacity="0"/></linearGradient>
+                <linearGradient id="ar2" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#4ECDC4" stop-opacity=".35"/><stop offset="100%" stop-color="#4ECDC4" stop-opacity="0"/></linearGradient>
+              </defs>
+              <line class="grid-line" x1="40" y1="20" x2="460" y2="20"/>
+              <line class="grid-line" x1="40" y1="60" x2="460" y2="60"/>
+              <line class="grid-line" x1="40" y1="100" x2="460" y2="100"/>
+              <line class="grid-line" x1="40" y1="140" x2="460" y2="140"/>
+              <path class="area-path" fill="url(#ar2)" stroke="#4ECDC4" d="M 60 110 L 120 95 L 180 100 L 240 80 L 300 85 L 360 65 L 420 75 L 420 140 L 60 140 Z"/>
+              <path class="area-path" fill="url(#ar1)" stroke="#A614C3" d="M 60 75 L 120 55 L 180 85 L 240 35 L 300 60 L 360 30 L 420 45 L 420 140 L 60 140 Z"/>
+              <text class="axis-text" x="60" y="170" text-anchor="middle">Mon</text>
+              <text class="axis-text" x="120" y="170" text-anchor="middle">Tue</text>
+              <text class="axis-text" x="180" y="170" text-anchor="middle">Wed</text>
+              <text class="axis-text" x="240" y="170" text-anchor="middle">Thu</text>
+              <text class="axis-text" x="300" y="170" text-anchor="middle">Fri</text>
+              <text class="axis-text" x="360" y="170" text-anchor="middle">Sat</text>
+              <text class="axis-text" x="420" y="170" text-anchor="middle">Sun</text>
+            </svg>
+            <div class="chart-legend">
+              <div class="legend-item"><div class="legend-dot" style="background:#A614C3;"></div>New</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#4ECDC4;"></div>Returning</div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-code-pane" id="code-area">
+          <button class="ds-copy-btn" onclick="copyCode(this,'code-area')"><span class="material-icons-round">content_copy</span> Copy</button>
+          <pre class="ds-code-block"><span class="c-tag">&lt;svg</span> <span class="c-attr">class</span>=<span class="c-str">"chart-svg"</span> <span class="c-attr">viewBox</span>=<span class="c-str">"0 0 480 180"</span><span class="c-tag">&gt;</span>
+  <span class="c-tag">&lt;defs&gt;</span>
+    <span class="c-tag">&lt;linearGradient</span> <span class="c-attr">id</span>=<span class="c-str">"ar1"</span><span class="c-tag">&gt;</span>...<span class="c-tag">&lt;/linearGradient&gt;</span>
+  <span class="c-tag">&lt;/defs&gt;</span>
+  <span class="c-tag">&lt;path</span> <span class="c-attr">class</span>=<span class="c-str">"area-path"</span> <span class="c-attr">fill</span>=<span class="c-str">"url(#ar1)"</span> <span class="c-attr">stroke</span>=<span class="c-str">"#A614C3"</span> <span class="c-attr">d</span>=<span class="c-str">"..."</span><span class="c-tag">/&gt;</span>
+<span class="c-tag">&lt;/svg&gt;</span></pre>
+        </div>
+      </div>
+
+      <h3 class="ds-subsection-title">Donut chart</h3>
+      <div class="ds-preview-wrap">
+        <div class="ds-preview-tabbar">
+          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-donut')">Preview</button>
+          <button class="ds-preview-tab" onclick="switchTab(this,'code-donut')">Code</button>
+        </div>
+        <div class="ds-preview-pane" id="prev-donut" style="padding:40px 32px;">
+          <div class="chart-card">
+            <div class="chart-head">
+              <div class="chart-title">Donut Chart — Distribution</div>
+              <div class="chart-desc">Components by category</div>
+            </div>
+            <div class="donut-wrap">
+              <svg class="donut-svg" viewBox="0 0 64 64">
+                <circle class="donut-bg" cx="32" cy="32" r="26"/>
+                <circle class="donut-seg" cx="32" cy="32" r="26" stroke="#A614C3" stroke-dasharray="65 100" pathLength="100"/>
+                <circle class="donut-seg" cx="32" cy="32" r="26" stroke="#4ECDC4" stroke-dasharray="20 100" stroke-dashoffset="-65" pathLength="100"/>
+                <circle class="donut-seg" cx="32" cy="32" r="26" stroke="#C084FC" stroke-dasharray="15 100" stroke-dashoffset="-85" pathLength="100"/>
+                <text class="donut-center" x="32" y="33">52</text>
+                <text class="donut-center-sub" x="32" y="44">Total</text>
+              </svg>
+              <div class="donut-legend">
+                <div class="donut-row"><span class="donut-swatch" style="background:#A614C3;"></span>Components<span class="donut-row-val">65%</span></div>
+                <div class="donut-row"><span class="donut-swatch" style="background:#4ECDC4;"></span>Foundations<span class="donut-row-val">20%</span></div>
+                <div class="donut-row"><span class="donut-swatch" style="background:#C084FC;"></span>Patterns<span class="donut-row-val">15%</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-code-pane" id="code-donut">
+          <button class="ds-copy-btn" onclick="copyCode(this,'code-donut')"><span class="material-icons-round">content_copy</span> Copy</button>
+          <pre class="ds-code-block"><span class="c-tag">&lt;svg</span> <span class="c-attr">class</span>=<span class="c-str">"donut-svg"</span> <span class="c-attr">viewBox</span>=<span class="c-str">"0 0 64 64"</span><span class="c-tag">&gt;</span>
+  <span class="c-tag">&lt;circle</span> <span class="c-attr">class</span>=<span class="c-str">"donut-bg"</span> <span class="c-attr">cx</span>=<span class="c-str">"32"</span> <span class="c-attr">cy</span>=<span class="c-str">"32"</span> <span class="c-attr">r</span>=<span class="c-str">"26"</span><span class="c-tag">/&gt;</span>
+  <span class="c-tag">&lt;circle</span> <span class="c-attr">class</span>=<span class="c-str">"donut-seg"</span> <span class="c-attr">stroke</span>=<span class="c-str">"#A614C3"</span>
+          <span class="c-attr">stroke-dasharray</span>=<span class="c-str">"65 100"</span> <span class="c-attr">pathLength</span>=<span class="c-str">"100"</span><span class="c-tag">/&gt;</span>
+<span class="c-tag">&lt;/svg&gt;</span></pre>
+        </div>
+      </div>
+
+      <h3 class="ds-subsection-title">Horizontal bar chart</h3>
+      <div class="ds-preview-wrap">
+        <div class="ds-preview-tabbar">
+          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-hbar')">Preview</button>
+          <button class="ds-preview-tab" onclick="switchTab(this,'code-hbar')">Code</button>
+        </div>
+        <div class="ds-preview-pane" id="prev-hbar" style="padding:40px 32px;">
+          <div class="chart-card">
+            <div class="chart-head">
+              <div class="chart-title">Horizontal Bar — Top categories</div>
+              <div class="chart-desc">Components per category</div>
+            </div>
+            <div class="hbar-chart">
+              <div class="hbar-row"><span>Buttons</span><div class="hbar-track"><div class="hbar-fill" style="width:92%;"></div></div><span class="hbar-val">12</span></div>
+              <div class="hbar-row"><span>Forms</span><div class="hbar-track"><div class="hbar-fill" style="width:78%;"></div></div><span class="hbar-val">10</span></div>
+              <div class="hbar-row"><span>Overlays</span><div class="hbar-track"><div class="hbar-fill" style="width:62%;"></div></div><span class="hbar-val">8</span></div>
+              <div class="hbar-row"><span>Display</span><div class="hbar-track"><div class="hbar-fill" style="width:48%;"></div></div><span class="hbar-val">6</span></div>
+              <div class="hbar-row"><span>Navigation</span><div class="hbar-track"><div class="hbar-fill" style="width:32%;"></div></div><span class="hbar-val">4</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-code-pane" id="code-hbar">
+          <button class="ds-copy-btn" onclick="copyCode(this,'code-hbar')"><span class="material-icons-round">content_copy</span> Copy</button>
+          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"hbar-chart"</span><span class="c-tag">&gt;</span>
+  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"hbar-row"</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;span&gt;</span>Buttons<span class="c-tag">&lt;/span&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"hbar-track"</span><span class="c-tag">&gt;</span>
+      <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"hbar-fill"</span> <span class="c-attr">style</span>=<span class="c-str">"width:92%;"</span><span class="c-tag">/&gt;</span>
+    <span class="c-tag">&lt;/div&gt;</span>
+    <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"hbar-val"</span><span class="c-tag">&gt;</span>12<span class="c-tag">&lt;/span&gt;</span>
+  <span class="c-tag">&lt;/div&gt;</span>
+<span class="c-tag">&lt;/div&gt;</span></pre>
+        </div>
+      </div>
+
+      <h3 class="ds-subsection-title">Stacked bar chart</h3>
+      <div class="ds-preview-wrap">
+        <div class="ds-preview-tabbar">
+          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-stack')">Preview</button>
+          <button class="ds-preview-tab" onclick="switchTab(this,'code-stack')">Code</button>
+        </div>
+        <div class="ds-preview-pane" id="prev-stack" style="padding:40px 32px;">
+          <div class="chart-card">
+            <div class="chart-head">
+              <div class="chart-title">Stacked Bar — Quarterly</div>
+              <div class="chart-desc">Releases by category</div>
+            </div>
+            <div class="bar-chart">
+              <div class="bar-col"><div class="bar-stack"><div class="bar stacked top" style="height:28%;background:#C084FC;"></div><div class="bar stacked" style="height:32%;background:#5C2ED4;"></div><div class="bar stacked" style="height:40%;background:#A614C3;"></div></div><div class="bar-label">Q1</div></div>
+              <div class="bar-col"><div class="bar-stack"><div class="bar stacked top" style="height:35%;background:#C084FC;"></div><div class="bar stacked" style="height:30%;background:#5C2ED4;"></div><div class="bar stacked" style="height:35%;background:#A614C3;"></div></div><div class="bar-label">Q2</div></div>
+              <div class="bar-col"><div class="bar-stack"><div class="bar stacked top" style="height:42%;background:#C084FC;"></div><div class="bar stacked" style="height:30%;background:#5C2ED4;"></div><div class="bar stacked" style="height:28%;background:#A614C3;"></div></div><div class="bar-label">Q3</div></div>
+              <div class="bar-col"><div class="bar-stack"><div class="bar stacked top" style="height:50%;background:#C084FC;"></div><div class="bar stacked" style="height:25%;background:#5C2ED4;"></div><div class="bar stacked" style="height:25%;background:#A614C3;"></div></div><div class="bar-label">Q4</div></div>
+            </div>
+            <div class="chart-legend">
+              <div class="legend-item"><div class="legend-dot" style="background:#A614C3;"></div>Components</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#5C2ED4;"></div>Foundations</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#C084FC;"></div>Patterns</div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-code-pane" id="code-stack">
+          <button class="ds-copy-btn" onclick="copyCode(this,'code-stack')"><span class="material-icons-round">content_copy</span> Copy</button>
+          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"bar-col"</span><span class="c-tag">&gt;</span>
+  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"bar-stack"</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"bar stacked top"</span> <span class="c-attr">style</span>=<span class="c-str">"height:28%;..."</span><span class="c-tag">/&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"bar stacked"</span> <span class="c-attr">style</span>=<span class="c-str">"height:32%;..."</span><span class="c-tag">/&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"bar stacked"</span> <span class="c-attr">style</span>=<span class="c-str">"height:40%;..."</span><span class="c-tag">/&gt;</span>
+  <span class="c-tag">&lt;/div&gt;</span>
+<span class="c-tag">&lt;/div&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-divider"></div>
     <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
       <h3 class="ds-subsection-title">Classes</h3>
-      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>chart-wrap</code></td><td>Outer container</td></tr><tr><td><code>bar-chart</code></td><td>Flex row container (align-items:flex-end)</td></tr><tr><td><code>bar-col</code></td><td>Column with bar + label</td></tr><tr><td><code>bar</code></td><td>The bar element — set height% and background via style</td></tr><tr><td><code>bar-label</code></td><td>Category label below bar</td></tr><tr><td><code>chart-legend</code></td><td>Flex legend row</td></tr><tr><td><code>legend-item</code></td><td>Dot + label pair</td></tr></tbody></table></div>    </div>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody>
+      <tr><td><code>chart-card</code></td><td>Outer wrapper (max-width 480px)</td></tr>
+      <tr><td><code>chart-head</code></td><td>Title + description block</td></tr>
+      <tr><td><code>chart-title</code></td><td>Chart heading text</td></tr>
+      <tr><td><code>chart-desc</code></td><td>Subtitle / time range</td></tr>
+      <tr><td><code>bar-chart</code></td><td>Vertical bar container (flex, align-items:flex-end)</td></tr>
+      <tr><td><code>bar-col</code></td><td>Column with bar + label</td></tr>
+      <tr><td><code>bar</code></td><td>Bar element — set <code>height%</code> via style</td></tr>
+      <tr><td><code>bar-stack</code></td><td>Stacked bar wrapper (flex-direction:column-reverse)</td></tr>
+      <tr><td><code>hbar-chart</code></td><td>Horizontal bar container</td></tr>
+      <tr><td><code>hbar-row</code></td><td>Row: label + track + value</td></tr>
+      <tr><td><code>hbar-track</code> / <code>hbar-fill</code></td><td>Track + filled portion</td></tr>
+      <tr><td><code>chart-svg</code></td><td>SVG container for line/area charts</td></tr>
+      <tr><td><code>line-path</code> / <code>area-path</code></td><td>Stroke / area paths</td></tr>
+      <tr><td><code>donut-svg</code> / <code>donut-seg</code></td><td>Donut chart segments</td></tr>
+      <tr><td><code>chart-legend</code> / <code>legend-item</code> / <code>legend-dot</code></td><td>Bottom legend rows</td></tr>
+      </tbody></table></div>
+    </div>
 
   
     <!-- ── Prev / Next navigation ── -->

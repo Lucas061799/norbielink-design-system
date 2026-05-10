@@ -24,12 +24,22 @@
 .sem-hex { font-size: 11px; font-family: monospace; }
 .sem-usage { font-size: 11px; opacity: 0.8; }
 
-.dark-swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.dark-swatch { border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+.dark-swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 20px; background: #0F1120; border-radius: 16px; }
+.dark-swatch { border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #191D35; }
 .dark-block { height: 64px; }
-.dark-info { padding: 10px 12px; background: rgba(255,255,255,0.05); }
-.dark-name { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.8); }
-.dark-hex  { font-size: 10px; font-family: monospace; color: rgba(255,255,255,0.4); }
+.dark-info { padding: 10px 12px; }
+.dark-name { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.85); }
+.dark-hex  { font-size: 10px; font-family: monospace; color: rgba(255,255,255,0.45); }
+
+/* Dark-scheme section + its preceding divider + its TOC entry only visible in dark mode */
+#dark-scheme,
+#dark-scheme + .ds-divider,
+.ds-divider:has(+ #dark-scheme),
+.ds-toc-item[href="#dark-scheme"] { display: none; }
+body.dark-mode #dark-scheme,
+body.dark-mode #dark-scheme + .ds-divider,
+body.dark-mode .ds-divider:has(+ #dark-scheme),
+body.dark-mode .ds-toc-item[href="#dark-scheme"] { display: block; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -40,9 +50,7 @@
       <img src="BTIS.png" class="btis-logo-img" alt="NorbieLink">
     </a>
     <nav class="btis-top-nav">
-      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>
-      <a class="btis-top-nav-link active" href="ds-nav-styles.html">Styles</a>
-      <a class="btis-top-nav-link" href="ds-nav-components.html">Components</a>
+      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>      <a class="btis-top-nav-link" href="ds-nav-components.html">Components</a>
       <a class="btis-top-nav-link" href="ds-nav-resources.html">Resources</a>
     </nav>
     <div class="btis-header-right">
@@ -61,7 +69,7 @@
   <div class="search-modal">
     <div class="search-input-wrap">
       <span class="material-icons-round">search</span>
-      <input id="search-input" type="text" placeholder="Search components, foundations, styles…" oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
+      <input id="search-input" type="text" placeholder="Search components, foundations…" oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
       <span class="material-icons-round search-close" onclick="closeSearch()">close</span>
     </div>
     <div class="search-results" id="search-results"></div>
@@ -86,16 +94,13 @@
     <a class="ds-sidenav-item" href="ds-26-accordion.html">Accordion</a>
     <a class="ds-sidenav-item" href="ds-27-alert.html">Alert</a>
     <a class="ds-sidenav-item" href="ds-28-alert-dialog.html">Alert Dialog</a>
-    <a class="ds-sidenav-item" href="ds-14-appbar.html">App Bars</a>
     <a class="ds-sidenav-item" href="ds-29-avatar.html">Avatar</a>
     <a class="ds-sidenav-item" href="ds-09-badges.html">Badge</a>
     <a class="ds-sidenav-item" href="ds-30-breadcrumb.html">Breadcrumb</a>
     <a class="ds-sidenav-item" href="ds-06-buttons.html">Button</a>
     <a class="ds-sidenav-item" href="ds-31-button-group.html">Button Group</a>
     <a class="ds-sidenav-item" href="ds-32-calendar.html">Calendar</a>
-    <a class="ds-sidenav-item" href="ds-10-cards.html">Card</a>
     <a class="ds-sidenav-item" href="ds-33-carousel.html">Carousel</a>
-    <a class="ds-sidenav-item" href="ds-34-chart.html">Chart</a>
     <a class="ds-sidenav-item" href="ds-15-checkbox.html">Checkbox</a>
     <a class="ds-sidenav-item" href="ds-16-chips.html">Chips</a>
     <a class="ds-sidenav-item" href="ds-35-collapsible.html">Collapsible</a>
@@ -108,7 +113,6 @@
     <a class="ds-sidenav-item" href="ds-40-drawer.html">Drawer</a>
     <a class="ds-sidenav-item" href="ds-41-dropdown.html">Dropdown Menu</a>
     <a class="ds-sidenav-item" href="ds-42-empty-state.html">Empty State</a>
-    <a class="ds-sidenav-item" href="ds-43-hover-card.html">Hover Card</a>
     <a class="ds-sidenav-item" href="ds-44-input-otp.html">Input OTP</a>
 <a class="ds-sidenav-item" href="ds-46-label.html">Label</a>
     <a class="ds-sidenav-item" href="ds-19-lists.html">Lists</a>
@@ -143,7 +147,7 @@
   <div class="ds-breadcrumb">
     <a href="ds-00-home.html">Home</a>
     <span class="ds-breadcrumb-sep">›</span>
-    <a href="ds-nav-styles.html">Styles</a>
+    <a href="ds-nav-foundations.html">Foundations</a>
     <span class="ds-breadcrumb-sep">›</span>
     <a href="#">Color</a>
   </div>
@@ -151,48 +155,48 @@
   <div class="ds-title-row">
     <h1 class="ds-page-title">Color</h1>
     <div class="ds-title-actions">
-      <button class="ds-copy-page-btn" onclick="copyPageLink()">
-        <span class="material-icons-round">content_copy</span> Copy Page
-        <span class="material-icons-round chevron">expand_more</span>
-      </button>
       <a class="ds-nav-arrow-btn" href="ds-00-home.html" title="Previous"><span class="material-icons-round">arrow_back</span></a>
       <a class="ds-nav-arrow-btn" href="ds-02-typography.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-  <p class="ds-page-desc">Norbielink's color system uses a structured set of roles based on two brand colors — <strong>Teal</strong> as the primary highlight &amp; action color, and <strong>Purple</strong> as the secondary brand identity. Both a light and dark scheme are supported.</p>
+  <p class="ds-page-desc">Norbielink's color system is built on a <strong>purple gradient</strong> as the primary brand identity (<code>#5C2ED4 → #A614C3</code>) and <strong>Teal</strong> as the secondary accent. Both light and dark schemes are fully supported.</p>
 
   <!-- HERO PREVIEW -->
   <div class="ds-example" style="padding: 48px; gap: 0; flex-direction: column;">
     <div class="m3-swatch-row" style="width:100%; border-radius:12px 12px 0 0;">
-      <div class="m3-swatch" style="background:#2CB9A8; flex:2;">
-        <div class="m3-swatch-name" style="color:white;">Primary (Highlight)</div>
-        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.7);">#2CB9A8</div>
+      <div class="m3-swatch" style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%); flex:3;">
+        <div class="m3-swatch-name" style="color:white;">Primary Gradient</div>
+        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.7);">#5C2ED4 → #A614C3</div>
       </div>
-      <div class="m3-swatch" style="background:#48C8BC;">
-        <div class="m3-swatch-name" style="color:white;">Primary Light</div>
-        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.7);">#48C8BC</div>
+      <div class="m3-swatch" style="background:#5C2ED4;">
+        <div class="m3-swatch-name" style="color:white;">Primary Deep</div>
+        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.7);">#5C2ED4</div>
       </div>
-      <div class="m3-swatch" style="background:#E6F9F7;">
-        <div class="m3-swatch-name" style="color:#0E9680;">Primary Container</div>
-        <div class="m3-swatch-hex" style="color:#0E9680;">#E6F9F7</div>
+      <div class="m3-swatch" style="background:#A614C3;">
+        <div class="m3-swatch-name" style="color:white;">Primary Highlight</div>
+        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.7);">#A614C3</div>
       </div>
-      <div class="m3-swatch" style="background:#7B2FBE; flex:2;">
-        <div class="m3-swatch-name" style="color:white;">Brand (Secondary)</div>
-        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.7);">#7B2FBE</div>
+      <div class="m3-swatch" style="background:#EDE7FF;">
+        <div class="m3-swatch-name" style="color:#5C2ED4;">Primary Tint</div>
+        <div class="m3-swatch-hex" style="color:#5C2ED4;">#EDE7FF</div>
       </div>
-      <div class="m3-swatch" style="background:#A855F7;">
-        <div class="m3-swatch-name" style="color:white;">Brand Light</div>
-        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.7);">#A855F7</div>
+      <div class="m3-swatch" style="background:#4ECDC4; flex:2;">
+        <div class="m3-swatch-name" style="color:white;">Teal (Accent)</div>
+        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.7);">#4ECDC4</div>
       </div>
-      <div class="m3-swatch" style="background:#F3E8FF;">
-        <div class="m3-swatch-name" style="color:#5A1F8C;">Brand Container</div>
-        <div class="m3-swatch-hex" style="color:#7B2FBE;">#F3E8FF</div>
+      <div class="m3-swatch" style="background:#74C3B7;">
+        <div class="m3-swatch-name" style="color:white;">Teal Light</div>
+        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.7);">#74C3B7</div>
+      </div>
+      <div class="m3-swatch" style="background:#E0F6F5;">
+        <div class="m3-swatch-name" style="color:#1A7A74;">Teal Tint</div>
+        <div class="m3-swatch-hex" style="color:#1A7A74;">#E0F6F5</div>
       </div>
     </div>
     <div class="m3-swatch-row" style="width:100%; border-radius:0 0 12px 12px; margin-top:4px; height:56px;">
-      <div class="m3-swatch" style="background:#1A1A2E;">
+      <div class="m3-swatch" style="background:#111827;">
         <div class="m3-swatch-name" style="color:white;font-size:9px;">On Surface</div>
-        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.5);">#1A1A2E</div>
+        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.5);">#111827</div>
       </div>
       <div class="m3-swatch" style="background:#374151;">
         <div class="m3-swatch-name" style="color:white;font-size:9px;">Outline Variant</div>
@@ -229,38 +233,38 @@
     <p class="ds-section-desc">Each color role has a specific purpose. Primary roles drive brand identity; secondary roles drive actions; error/semantic roles communicate state.</p>
 
     <div class="role-grid">
-      <!-- Primary (Teal) -->
+      <!-- Primary (Purple Gradient) -->
       <div class="role-swatch">
-        <div class="role-block" style="background: linear-gradient(135deg, #0E9680, #2CB9A8, #48C8BC);"></div>
+        <div class="role-block" style="background: linear-gradient(90deg, #5C2ED4 0%, #A614C3 65%);"></div>
         <div class="role-info">
-          <div class="role-name">Primary (Highlight)</div>
-          <div class="role-hex">#2CB9A8</div>
-          <div class="role-desc">Nav active state, buttons, focus rings, highlights</div>
+          <div class="role-name">Primary Gradient</div>
+          <div class="role-hex">#5C2ED4 → #A614C3</div>
+          <div class="role-desc">Buttons, nav active state, focus rings, highlights</div>
         </div>
       </div>
       <div class="role-swatch">
-        <div class="role-block" style="background: #E6F9F7;"></div>
+        <div class="role-block" style="background: #EDE7FF;"></div>
         <div class="role-info">
-          <div class="role-name">Primary Container</div>
-          <div class="role-hex">#E6F9F7</div>
+          <div class="role-name">Primary Tint</div>
+          <div class="role-hex">#EDE7FF</div>
           <div class="role-desc">Tonal button fill, icon backgrounds, active chip</div>
         </div>
       </div>
-      <!-- Secondary (Purple brand) -->
+      <!-- Secondary (Teal Accent) -->
       <div class="role-swatch">
-        <div class="role-block" style="background: linear-gradient(135deg, #5A1F8C, #7B2FBE, #9B4DCA);"></div>
+        <div class="role-block" style="background: linear-gradient(135deg, #4ECDC4, #74C3B7);"></div>
         <div class="role-info">
-          <div class="role-name">Brand (Secondary)</div>
-          <div class="role-hex">#7B2FBE</div>
-          <div class="role-desc">Brand identity, logo mark, marketing accents</div>
+          <div class="role-name">Teal (Accent)</div>
+          <div class="role-hex">#4ECDC4</div>
+          <div class="role-desc">Secondary actions, accent badges, avatar fills</div>
         </div>
       </div>
       <div class="role-swatch">
-        <div class="role-block" style="background: #F3E8FF;"></div>
+        <div class="role-block" style="background: #E0F6F5;"></div>
         <div class="role-info">
-          <div class="role-name">Brand Container</div>
-          <div class="role-hex">#F3E8FF</div>
-          <div class="role-desc">Brand badge backgrounds, tonal brand fills</div>
+          <div class="role-name">Teal Container</div>
+          <div class="role-hex">#E0F6F5</div>
+          <div class="role-desc">Teal badge backgrounds, tonal teal fills</div>
         </div>
       </div>
       <!-- Error -->
@@ -290,11 +294,11 @@
         </div>
       </div>
       <div class="role-swatch">
-        <div class="role-block" style="background: #F0F4F3;"></div>
+        <div class="role-block" style="background: #F5F5F7;"></div>
         <div class="role-info">
           <div class="role-name">Surface Container</div>
-          <div class="role-hex">#F0F4F3</div>
-          <div class="role-desc">Component example areas, cards (green-tinted)</div>
+          <div class="role-hex">#F5F5F7</div>
+          <div class="role-desc">Component example areas, section backgrounds</div>
         </div>
       </div>
     </div>
@@ -307,31 +311,46 @@
     <h2 class="ds-section-title">Color scale</h2>
     <p class="ds-section-desc">Full tone scales for both brand colors. Use named roles rather than raw scale values in product code.</p>
 
-    <h3 class="ds-subsection-title">Teal — Primary Highlight</h3>
+    <h3 class="ds-subsection-title">Purple — Primary Deep</h3>
     <div class="scale-row">
-      <div class="scale-cell" style="background:#E6F9F7;"><div class="scale-num" style="color:#0E9680;">50</div><div class="scale-val" style="color:#0E9680;">#E6F9F7</div></div>
-      <div class="scale-cell" style="background:#C2EDE8;"><div class="scale-num" style="color:#0E9680;">100</div><div class="scale-val" style="color:#0E9680;">#C2EDE8</div></div>
-      <div class="scale-cell" style="background:#9AE0D9;"><div class="scale-num" style="color:#0E9680;">200</div><div class="scale-val" style="color:#0E9680;">#9AE0D9</div></div>
-      <div class="scale-cell" style="background:#6FD2C9;"><div class="scale-num" style="color:white;">300</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#6FD2C9</div></div>
-      <div class="scale-cell" style="background:#48C8BC;"><div class="scale-num" style="color:white;">400</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#48C8BC</div></div>
-      <div class="scale-cell" style="background:#2CB9A8; border:2px solid #1A1A2E;"><div class="scale-num" style="color:white;">500 ★</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#2CB9A8</div></div>
-      <div class="scale-cell" style="background:#1FA898;"><div class="scale-num" style="color:white;">600</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#1FA898</div></div>
-      <div class="scale-cell" style="background:#0E9680;"><div class="scale-num" style="color:white;">700</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#0E9680</div></div>
-      <div class="scale-cell" style="background:#007D6E;"><div class="scale-num" style="color:white;">800</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#007D6E</div></div>
-      <div class="scale-cell" style="background:#005F54;"><div class="scale-num" style="color:white;">900</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#005F54</div></div>
+      <div class="scale-cell" style="background:#EDE7FF;"><div class="scale-num" style="color:#5C2ED4;">50</div><div class="scale-val" style="color:#5C2ED4;">#EDE7FF</div></div>
+      <div class="scale-cell" style="background:#D4C5FF;"><div class="scale-num" style="color:#5C2ED4;">100</div><div class="scale-val" style="color:#5C2ED4;">#D4C5FF</div></div>
+      <div class="scale-cell" style="background:#B09AF7;"><div class="scale-num" style="color:#5C2ED4;">200</div><div class="scale-val" style="color:#5C2ED4;">#B09AF7</div></div>
+      <div class="scale-cell" style="background:#8A6EEB;"><div class="scale-num" style="color:white;">300</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#8A6EEB</div></div>
+      <div class="scale-cell" style="background:#7050DC;"><div class="scale-num" style="color:white;">400</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#7050DC</div></div>
+      <div class="scale-cell" style="background:#5C2ED4;"><div class="scale-num" style="color:white;">500 ★</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#5C2ED4</div></div>
+      <div class="scale-cell" style="background:#4B25B0;"><div class="scale-num" style="color:white;">600</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#4B25B0</div></div>
+      <div class="scale-cell" style="background:#3C1C8C;"><div class="scale-num" style="color:white;">700</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#3C1C8C</div></div>
+      <div class="scale-cell" style="background:#2D1468;"><div class="scale-num" style="color:white;">800</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#2D1468</div></div>
+      <div class="scale-cell" style="background:#1E0D44;"><div class="scale-num" style="color:white;">900</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#1E0D44</div></div>
     </div>
 
-    <h3 class="ds-subsection-title" style="margin-top:24px;">Purple — Brand Secondary</h3>
+    <h3 class="ds-subsection-title" style="margin-top:24px;">Purple — Primary Highlight</h3>
     <div class="scale-row">
-      <div class="scale-cell" style="background:#F3E8FF;"><div class="scale-num" style="color:#5A1F8C;">100</div><div class="scale-val" style="color:#5A1F8C;">#F3E8FF</div></div>
-      <div class="scale-cell" style="background:#E9D5FF;"><div class="scale-num" style="color:#5A1F8C;">200</div><div class="scale-val" style="color:#5A1F8C;">#E9D5FF</div></div>
-      <div class="scale-cell" style="background:#D8B4FE;"><div class="scale-num" style="color:#5A1F8C;">300</div><div class="scale-val" style="color:#5A1F8C;">#D8B4FE</div></div>
-      <div class="scale-cell" style="background:#C084FC;"><div class="scale-num" style="color:white;">400</div><div class="scale-val" style="color:rgba(255,255,255,0.7);">#C084FC</div></div>
-      <div class="scale-cell" style="background:#A855F7;"><div class="scale-num" style="color:white;">500</div><div class="scale-val" style="color:rgba(255,255,255,0.7);">#A855F7</div></div>
-      <div class="scale-cell" style="background:#9333EA;"><div class="scale-num" style="color:white;">600</div><div class="scale-val" style="color:rgba(255,255,255,0.7);">#9333EA</div></div>
-      <div class="scale-cell" style="background:#7B2FBE; border:2px solid #1A1A2E;"><div class="scale-num" style="color:white;">700 ★</div><div class="scale-val" style="color:rgba(255,255,255,0.7);">#7B2FBE</div></div>
-      <div class="scale-cell" style="background:#5A1F8C;"><div class="scale-num" style="color:white;">800</div><div class="scale-val" style="color:rgba(255,255,255,0.7);">#5A1F8C</div></div>
-      <div class="scale-cell" style="background:#3B0764;"><div class="scale-num" style="color:white;">900</div><div class="scale-val" style="color:rgba(255,255,255,0.7);">#3B0764</div></div>
+      <div class="scale-cell" style="background:#FCE6FA;"><div class="scale-num" style="color:#A614C3;">50</div><div class="scale-val" style="color:#A614C3;">#FCE6FA</div></div>
+      <div class="scale-cell" style="background:#F5BEF0;"><div class="scale-num" style="color:#A614C3;">100</div><div class="scale-val" style="color:#A614C3;">#F5BEF0</div></div>
+      <div class="scale-cell" style="background:#EC8CE2;"><div class="scale-num" style="color:#A614C3;">200</div><div class="scale-val" style="color:#A614C3;">#EC8CE2</div></div>
+      <div class="scale-cell" style="background:#E060D4;"><div class="scale-num" style="color:white;">300</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#E060D4</div></div>
+      <div class="scale-cell" style="background:#CB33CB;"><div class="scale-num" style="color:white;">400</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#CB33CB</div></div>
+      <div class="scale-cell" style="background:#A614C3;"><div class="scale-num" style="color:white;">500 ★</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#A614C3</div></div>
+      <div class="scale-cell" style="background:#8C10A6;"><div class="scale-num" style="color:white;">600</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#8C10A6</div></div>
+      <div class="scale-cell" style="background:#6F0C85;"><div class="scale-num" style="color:white;">700</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#6F0C85</div></div>
+      <div class="scale-cell" style="background:#520964;"><div class="scale-num" style="color:white;">800</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#520964</div></div>
+      <div class="scale-cell" style="background:#360645;"><div class="scale-num" style="color:white;">900</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#360645</div></div>
+    </div>
+
+    <h3 class="ds-subsection-title" style="margin-top:24px;">Teal — Accent</h3>
+    <div class="scale-row">
+      <div class="scale-cell" style="background:#E0F6F5;"><div class="scale-num" style="color:#1A7A74;">50</div><div class="scale-val" style="color:#1A7A74;">#E0F6F5</div></div>
+      <div class="scale-cell" style="background:#B3ECEB;"><div class="scale-num" style="color:#1A7A74;">100</div><div class="scale-val" style="color:#1A7A74;">#B3ECEB</div></div>
+      <div class="scale-cell" style="background:#80DFDB;"><div class="scale-num" style="color:#1A7A74;">200</div><div class="scale-val" style="color:#1A7A74;">#80DFDB</div></div>
+      <div class="scale-cell" style="background:#4ECDC4;"><div class="scale-num" style="color:white;">300 ★</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#4ECDC4</div></div>
+      <div class="scale-cell" style="background:#38B8AE;"><div class="scale-num" style="color:white;">400</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#38B8AE</div></div>
+      <div class="scale-cell" style="background:#74C3B7;"><div class="scale-num" style="color:white;">500</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#74C3B7</div></div>
+      <div class="scale-cell" style="background:#2A9A92;"><div class="scale-num" style="color:white;">600</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#2A9A92</div></div>
+      <div class="scale-cell" style="background:#1F7A74;"><div class="scale-num" style="color:white;">700</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#1F7A74</div></div>
+      <div class="scale-cell" style="background:#155C58;"><div class="scale-num" style="color:white;">800</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#155C58</div></div>
+      <div class="scale-cell" style="background:#0C3D3A;"><div class="scale-num" style="color:white;">900</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#0C3D3A</div></div>
     </div>
 
   </div>
@@ -376,39 +395,45 @@
   <div class="ds-section" id="dark-scheme">
     <h2 class="ds-section-title">Dark scheme</h2>
     <p class="ds-section-desc">Dark mode uses very deep navy surfaces with identical brand accents. All color roles maintain a consistent mapping.</p>
-          <div class="dark-info"><div class="dark-name">Background</div><div class="dark-hex">#09090b</div></div>
-        </div>
-        <div class="dark-swatch">
-          <div class="dark-block" style="background:#18181b;"></div>
-          <div class="dark-info"><div class="dark-name">Surface / Sidebar</div><div class="dark-hex">#18181b</div></div>
-        </div>
-        <div class="dark-swatch">
-          <div class="dark-block" style="background:#27272a;"></div>
-          <div class="dark-info"><div class="dark-name">Surface Raised</div><div class="dark-hex">#27272a</div></div>
-        </div>
-        <div class="dark-swatch">
-          <div class="dark-block" style="background:rgba(255,255,255,0.06); border:1px dashed rgba(255,255,255,0.15);"></div>
-          <div class="dark-info"><div class="dark-name">Surface Overlay</div><div class="dark-hex">rgba(#FFF, 6%)</div></div>
-        </div>
-        <div class="dark-swatch">
-          <div class="dark-block" style="background:linear-gradient(135deg,#5A1F8C,#7B2FBE,#9B4DCA);"></div>
-          <div class="dark-info"><div class="dark-name">Primary (same)</div><div class="dark-hex">#7B2FBE</div></div>
-        </div>
-        <div class="dark-swatch">
-          <div class="dark-block" style="background:linear-gradient(135deg,#4ECBA1,#2CB9A8);"></div>
-          <div class="dark-info"><div class="dark-name">Secondary (same)</div><div class="dark-hex">#2CB9A8</div></div>
-        </div>
-        <div class="dark-swatch">
-          <div class="dark-block" style="background:rgba(255,255,255,0.85);"></div>
-          <div class="dark-info"><div class="dark-name">On Surface</div><div class="dark-hex">rgba(#FFF, 85%)</div></div>
-        </div>
-        <div class="dark-swatch">
-          <div class="dark-block" style="background:rgba(255,255,255,0.12);"></div>
-          <div class="dark-info"><div class="dark-name">Outline</div><div class="dark-hex">rgba(#FFF, 12%)</div></div>
-        </div>
+    <div class="dark-swatches">
+      <div class="dark-swatch">
+        <div class="dark-block" style="background:#0F1120;"></div>
+        <div class="dark-info"><div class="dark-name">Background</div><div class="dark-hex">#0F1120</div></div>
+      </div>
+      <div class="dark-swatch">
+        <div class="dark-block" style="background:#191D35;"></div>
+        <div class="dark-info"><div class="dark-name">Surface / Sidebar</div><div class="dark-hex">#191D35</div></div>
+      </div>
+      <div class="dark-swatch">
+        <div class="dark-block" style="background:#27272a;"></div>
+        <div class="dark-info"><div class="dark-name">Surface Raised</div><div class="dark-hex">#27272a</div></div>
+      </div>
+      <div class="dark-swatch">
+        <div class="dark-block" style="background:rgba(255,255,255,0.06); border:1px dashed rgba(255,255,255,0.15);"></div>
+        <div class="dark-info"><div class="dark-name">Surface Overlay</div><div class="dark-hex">rgba(#FFF, 6%)</div></div>
+      </div>
+      <div class="dark-swatch">
+        <div class="dark-block" style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);"></div>
+        <div class="dark-info"><div class="dark-name">Primary (same)</div><div class="dark-hex">#5C2ED4 → #A614C3</div></div>
+      </div>
+      <div class="dark-swatch">
+        <div class="dark-block" style="background:linear-gradient(135deg,#4ECDC4,#74C3B7);"></div>
+        <div class="dark-info"><div class="dark-name">Teal Accent (same)</div><div class="dark-hex">#4ECDC4</div></div>
+      </div>
+      <div class="dark-swatch">
+        <div class="dark-block" style="background:rgba(255,255,255,0.85);"></div>
+        <div class="dark-info"><div class="dark-name">On Surface</div><div class="dark-hex">rgba(#FFF, 85%)</div></div>
+      </div>
+      <div class="dark-swatch">
+        <div class="dark-block" style="background:rgba(255,255,255,0.12);"></div>
+        <div class="dark-info"><div class="dark-name">Outline</div><div class="dark-hex">rgba(#FFF, 12%)</div></div>
+      </div>
+    </div>
   
 
-  <div class="ds-divider">
+  </div>
+
+  <div class="ds-divider"></div>
 
   <!-- TOKEN TABLE -->
   <div class="ds-section" id="color-tokens">
@@ -418,12 +443,12 @@
       <table class="ds-table">
         <thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Usage</th></tr></thead>
         <tbody>
-          <tr><td><code>color.primary</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#2CB9A8;display:inline-block;"></span>#2CB9A8</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#2CB9A8;display:inline-block;"></span>#2CB9A8</span></td><td>Nav active, focus ring, highlights</td></tr>
-          <tr><td><code>color.primary-container</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#E6F9F7;border:1px solid #E5E7EB;display:inline-block;"></span>#E6F9F7</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#0E3D38;display:inline-block;"></span>#0E3D38</span></td><td>Tonal btn fill, icon bg</td></tr>
-          <tr><td><code>color.brand</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#7B2FBE;display:inline-block;"></span>#7B2FBE</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#7B2FBE;display:inline-block;"></span>#7B2FBE</span></td><td>Brand identity, logo, marketing</td></tr>
-          <tr><td><code>color.background</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:var(--page-bg);border:1px solid #E5E7EB;display:inline-block;"></span>#FFFBFE</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#09090b;display:inline-block;"></span>#09090b</span></td><td>Page background</td></tr>
-          <tr><td><code>color.surface</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#FFFFFF;border:1px solid #E5E7EB;display:inline-block;"></span>#FFFFFF</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#18181b;display:inline-block;"></span>#18181b</span></td><td>Cards, sidebar</td></tr>
-          <tr><td><code>color.on-surface</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#1A1A2E;display:inline-block;"></span>#1A1A2E</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:rgba(255,255,255,0.85);border:1px solid #333;display:inline-block;"></span>rgba(FFF,85%)</span></td><td>Primary text</td></tr>
+          <tr><td><code>color.primary</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:32px;height:14px;border-radius:3px;background:linear-gradient(90deg,#5C2ED4,#A614C3);display:inline-block;"></span>#5C2ED4 → #A614C3</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:32px;height:14px;border-radius:3px;background:linear-gradient(90deg,#5C2ED4,#A614C3);display:inline-block;"></span>#5C2ED4 → #A614C3</span></td><td>Buttons, nav active, focus ring, highlights</td></tr>
+          <tr><td><code>color.primary-tint</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#EDE7FF;border:1px solid #E5E7EB;display:inline-block;"></span>#EDE7FF</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#2D1260;display:inline-block;"></span>#2D1260</span></td><td>Tonal btn fill, chip bg, icon bg</td></tr>
+          <tr><td><code>color.teal-accent</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#4ECDC4;display:inline-block;"></span>#4ECDC4</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#4ECDC4;display:inline-block;"></span>#4ECDC4</span></td><td>Secondary actions, accent badges, avatars</td></tr>
+          <tr><td><code>color.background</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:var(--page-bg);border:1px solid #E5E7EB;display:inline-block;"></span>#FFFBFE</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#0F1120;display:inline-block;"></span>#0F1120</span></td><td>Page background</td></tr>
+          <tr><td><code>color.surface</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#FFFFFF;border:1px solid #E5E7EB;display:inline-block;"></span>#FFFFFF</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#191D35;display:inline-block;"></span>#191D35</span></td><td>Cards, sidebar</td></tr>
+          <tr><td><code>color.on-surface</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#111827;display:inline-block;"></span>#111827</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:rgba(255,255,255,0.85);border:1px solid #333;display:inline-block;"></span>rgba(FFF,85%)</span></td><td>Primary text</td></tr>
           <tr><td><code>color.outline</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#E5E7EB;border:1px solid #D1D5DB;display:inline-block;"></span>#E5E7EB</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:rgba(255,255,255,0.12);border:1px solid #444;display:inline-block;"></span>rgba(FFF,12%)</span></td><td>Borders, dividers</td></tr>
           <tr><td><code>color.error</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#EF4444;display:inline-block;"></span>#EF4444</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#EF4444;display:inline-block;"></span>#EF4444</span></td><td>Declined, errors</td></tr>
         </tbody>
@@ -462,14 +487,13 @@
 
 <script>
 const DS_PAGES = [
-  {t:'Color',section:'Styles',url:'ds-01-color.html',icon:'palette'},
-  {t:'Typography',section:'Styles',url:'ds-02-typography.html',icon:'text_fields'},
+  {t:'Color',section:'Foundations',url:'ds-01-color.html',icon:'palette'},
+  {t:'Typography',section:'Foundations',url:'ds-02-typography.html',icon:'text_fields'},
   {t:'Elevation',section:'Foundations',url:'ds-03-elevation.html',icon:'layers'},
   {t:'Shape',section:'Foundations',url:'ds-04-shape.html',icon:'rounded_corner'},
   {t:'Spacing',section:'Foundations',url:'ds-05-spacing.html',icon:'space_bar'},
   {t:'Badges',section:'Components',url:'ds-09-badges.html',icon:'fiber_manual_record'},
   {t:'Buttons',section:'Components',url:'ds-06-buttons.html',icon:'smart_button'},
-  {t:'Cards',section:'Components',url:'ds-10-cards.html',icon:'crop_square'},
   {t:'Checkbox',section:'Components',url:'ds-14-checkbox.html',icon:'check_box'},
   {t:'Chips',section:'Components',url:'ds-16-chips.html',icon:'label'},
   {t:'Data Tables',section:'Components',url:'ds-13-datatable.html',icon:'table_chart'},

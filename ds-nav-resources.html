@@ -31,17 +31,19 @@ body.dark-mode .page-hero::before { background-color:#0D1020; background-image:r
 .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#999; margin-bottom:16px; }
 .hero-title { font-size:clamp(32px,4vw,52px); font-weight:800; color:#0a0a0a; line-height:1.05; letter-spacing:-.035em; margin-bottom:16px; max-width:560px; }
 .hero-desc { font-size:15px; color:#888; line-height:1.7; max-width:460px; margin-bottom:28px; }
-.hero-meta { display:flex; gap:28px; flex-wrap:wrap; }
-.hero-meta-item { display:flex; align-items:center; gap:7px; font-size:12px; color:#bbb; }
-.hero-meta-dot { width:4px; height:4px; border-radius:50%; background:#ddd; }
+.hero-meta { display:flex; gap:8px; flex-wrap:wrap; }
+.hero-meta-item { display:flex; align-items:center; gap:6px; font-size:12px; color:#888; font-weight:500; background:#fff; border:1.5px solid #e0e0e0; border-radius:20px; padding:4px 12px; }
+.hero-meta-dot { width:4px; height:4px; border-radius:50%; background:#A614C3; flex-shrink:0; }
 body.dark-mode .hero-eyebrow { color:rgba(255,255,255,.28); }
 body.dark-mode .hero-title { color:rgba(255,255,255,.92); }
 body.dark-mode .hero-desc { color:rgba(255,255,255,.35); }
-body.dark-mode .hero-meta-item { color:rgba(255,255,255,.22); }
+body.dark-mode .hero-meta-item { background:rgba(255,255,255,0.07); border-color:rgba(255,255,255,0.12); color:rgba(255,255,255,0.65); }
 
 /* ── Section ── */
 .page-section { padding:48px 0 64px; border-top:1px solid #ebebeb; }
+.page-hero + .page-section { border-top:none; }
 body.dark-mode .page-section { border-top-color:rgba(255,255,255,.08); }
+body.dark-mode .page-hero + .page-section { border-top:none; }
 .sec-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:28px; }
 .sec-title { font-size:20px; font-weight:700; color:#0a0a0a; letter-spacing:-.02em; }
 .sec-note { font-size:13px; color:#bbb; }
@@ -55,18 +57,19 @@ body.dark-mode .sec-note { color:rgba(255,255,255,.2); }
 
 .res-card {
   border:1px solid #e8e8e8; border-radius:12px; overflow:hidden;
-  text-decoration:none; display:flex; flex-direction:column; background:#fafafa;
+  text-decoration:none; display:flex; flex-direction:column; background:#ffffff;
   transition:border-color .18s, box-shadow .18s, transform .18s;
 }
 .res-card:hover { border-color:#ccc; box-shadow:0 4px 20px rgba(0,0,0,.07); transform:translateY(-2px); }
 .res-card.coming-soon { opacity:.55; pointer-events:none; }
 .res-prev {
-  height:140px; background:#f2f2f2; display:flex; align-items:center;
+  height:140px; background:#ffffff; display:flex; align-items:center;
   justify-content:center; padding:20px; overflow:hidden; position:relative;
 }
 .res-foot {
   display:flex; align-items:flex-start; justify-content:space-between;
-  padding:14px 16px 16px; border-top:1px solid #e5e5e5; gap:10px;
+  padding:14px 16px 16px; border-top:1px solid #ececec; gap:10px;
+  background:#fafafa;
 }
 .res-foot-text { display:flex; flex-direction:column; gap:3px; }
 .res-name { font-size:13px; font-weight:700; color:#0a0a0a; }
@@ -75,10 +78,10 @@ body.dark-mode .sec-note { color:rgba(255,255,255,.2); }
 .res-tag.soon { background:#f0f0f0; color:#bbb; }
 .res-arrow { font-size:15px; color:#ccc; flex-shrink:0; margin-top:2px; }
 
-body.dark-mode .res-card { background:#18181b; border-color:rgba(255,255,255,.07); }
+body.dark-mode .res-card { background:#191D35; border-color:rgba(255,255,255,.07); }
 body.dark-mode .res-card:hover { border-color:rgba(255,255,255,.22); box-shadow:0 4px 24px rgba(0,0,0,.4); }
-body.dark-mode .res-prev { background:#09090b; }
-body.dark-mode .res-foot { border-top-color:rgba(255,255,255,.06); }
+body.dark-mode .res-prev { background:#0F1120; }
+body.dark-mode .res-foot { background:#191D35; border-top-color:rgba(255,255,255,.06); }
 body.dark-mode .res-name { color:rgba(255,255,255,.88); }
 body.dark-mode .res-desc { color:rgba(255,255,255,.25); }
 body.dark-mode .res-tag { background:rgba(255,255,255,.07); color:rgba(255,255,255,.3); }
@@ -87,6 +90,12 @@ body.dark-mode .res-arrow { color:rgba(255,255,255,.18); }
 /* ── Figma icon illus ── */
 .figma-icon { width:32px; height:44px; position:relative; }
 .figma-icon svg { width:32px; height:44px; }
+
+/* ── Light/dark-only image swap ── */
+.light-only { display:block; }
+.dark-only { display:none; }
+body.dark-mode .light-only { display:none; }
+body.dark-mode .dark-only { display:block; }
 </style>
 </head>
 <body>
@@ -97,9 +106,7 @@ body.dark-mode .res-arrow { color:rgba(255,255,255,.18); }
       <img src="BTIS.png" class="btis-logo-img" alt="NorbieLink">
     </a>
     <nav class="btis-top-nav">
-      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>
-      <a class="btis-top-nav-link" href="ds-nav-styles.html">Styles</a>
-      <a class="btis-top-nav-link" href="ds-nav-components.html">Components</a>
+      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>      <a class="btis-top-nav-link" href="ds-nav-components.html">Components</a>
       <a class="btis-top-nav-link active" href="ds-nav-resources.html">Resources</a>
     </nav>
     <div class="btis-header-right">
@@ -116,7 +123,7 @@ body.dark-mode .res-arrow { color:rgba(255,255,255,.18); }
   <div class="search-modal">
     <div class="search-input-wrap">
       <span class="material-icons-round">search</span>
-      <input id="search-input" type="text" placeholder="Search components, foundations, styles…" oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
+      <input id="search-input" type="text" placeholder="Search components, foundations…" oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
       <span class="material-icons-round search-close" onclick="closeSearch()">close</span>
     </div>
     <div class="search-results" id="search-results"></div>
@@ -135,8 +142,8 @@ body.dark-mode .res-arrow { color:rgba(255,255,255,.18); }
     <p class="hero-desc">Figma kits, icon libraries, design tokens, and tooling to accelerate Norbielink product design.</p>
     <div class="hero-meta">
       <div class="hero-meta-item"><div class="hero-meta-dot"></div>Figma kit</div>
-      <div class="hero-meta-item"><div class="hero-meta-dot"></div>Icon library</div>
-      <div class="hero-meta-item"><div class="hero-meta-dot"></div>Design tokens</div>
+      <div class="hero-meta-item"><div class="hero-meta-dot"></div>Brand assets</div>
+      <div class="hero-meta-item"><div class="hero-meta-dot"></div>Visual elements</div>
     </div>
   </div>
 
@@ -310,14 +317,21 @@ body.dark-mode .res-arrow { color:rgba(255,255,255,.18); }
       <!-- Contributing -->
       <a class="res-card coming-soon" href="#">
         <div class="res-prev">
-          <div style="display:flex;flex-direction:column;gap:10px;align-items:center;">
-            <div style="width:52px;height:52px;border-radius:50%;background:#f0f0f0;border:2px solid #e0e0e0;display:flex;align-items:center;justify-content:center;">
-              <span class="material-icons-round" style="font-size:24px;color:#bbb;">group_add</span>
+          <div style="display:flex;flex-direction:column;gap:6px;width:220px;">
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span class="material-icons-round" style="font-size:14px;color:#0d9488;">call_merge</span>
+              <span style="font-size:10px;font-weight:700;color:#111;font-family:'Montserrat',sans-serif;">feat/button-hover</span>
+              <span style="font-size:8px;font-weight:700;padding:2px 6px;border-radius:10px;background:rgba(166,20,195,.1);color:#A614C3;font-family:'Montserrat',sans-serif;margin-left:auto;">PR #42</span>
             </div>
-            <div style="display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center;">
-              <div style="height:5px;border-radius:3px;background:#ebebeb;width:120px;"></div>
-              <div style="height:5px;border-radius:3px;background:#ebebeb;width:90px;"></div>
-              <div style="height:5px;border-radius:3px;background:#ebebeb;width:100px;"></div>
+            <div style="display:flex;gap:3px;flex-wrap:wrap;">
+              <span style="font-size:8px;padding:2px 6px;border-radius:10px;background:#dcfce7;color:#166534;font-family:'Montserrat',sans-serif;font-weight:600;">good first issue</span>
+              <span style="font-size:8px;padding:2px 6px;border-radius:10px;background:#fef3c7;color:#854d0e;font-family:'Montserrat',sans-serif;font-weight:600;">help wanted</span>
+            </div>
+            <div style="height:1px;background:#ebebeb;margin:1px 0;"></div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:9px;color:#0d9488;font-family:'Montserrat',sans-serif;font-weight:600;">
+              <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;"></span>
+              <span>3 checks passed</span>
+              <span style="margin-left:auto;color:#888;font-weight:500;">+128 −42</span>
             </div>
           </div>
         </div>
@@ -327,6 +341,61 @@ body.dark-mode .res-arrow { color:rgba(255,255,255,.18); }
             <span class="res-desc">Guidelines for adding new components and patterns to the design system.</span>
           </div>
           <span class="res-tag soon">Soon</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- BRAND ASSETS -->
+  <div class="page-section">
+    <div class="sec-header">
+      <div class="sec-title">Brand assets</div>
+      <a href="https://zeroheight.com/741749006" target="_blank" rel="noopener" style="font-size:11px;color:#74C3B7;font-family:'Montserrat',sans-serif;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:4px;">Brand style guide <span class="material-icons-round" style="font-size:13px;">open_in_new</span></a>
+    </div>
+    <div class="res-grid">
+
+      <!-- Norbie -->
+      <a class="res-card" href="https://zeroheight.com/741749006" target="_blank" rel="noopener">
+        <div class="res-prev" style="padding:8px;">
+          <img src="Norbielink-avartar.png" alt="Norbie brand characters" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;">
+        </div>
+        <div class="res-foot">
+          <div class="res-foot-text">
+            <span class="res-name">Brand Characters</span>
+            <span class="res-desc">Norbie &amp; AI-Norbie — expressions, usage rules, and placement guidelines.</span>
+          </div>
+          <span class="material-icons-round res-arrow">open_in_new</span>
+        </div>
+      </a>
+
+      <!-- Visual Elements / Tiles -->
+      <a class="res-card" href="https://zeroheight.com/741749006" target="_blank" rel="noopener">
+        <div class="res-prev" style="padding:8px;">
+          <img src="Hero-img-light.jpeg" alt="Visual elements" class="light-only" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;">
+          <img src="Hero-img-dark.png" alt="Visual elements" class="dark-only" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;">
+        </div>
+        <div class="res-foot">
+          <div class="res-foot-text">
+            <span class="res-name">Visual Elements</span>
+            <span class="res-desc">Tiles &amp; product icons — Monstera, Banana, Marketplace awning, Jungle background.</span>
+          </div>
+          <span class="material-icons-round res-arrow">open_in_new</span>
+        </div>
+      </a>
+
+      <!-- Prosuite -->
+      <a class="res-card" href="https://zeroheight.com/741749006" target="_blank" rel="noopener">
+        <div class="res-prev">
+          <img src="ProSuiteLogoReverse.png" alt="ProSuite" class="light-only" style="max-width:70%;max-height:75%;object-fit:contain;">
+          <img src="ProSuiteLogoReverse-dark.png" alt="ProSuite" class="dark-only" style="max-width:70%;max-height:75%;object-fit:contain;">
+        </div>
+        <div class="res-foot">
+          <div class="res-foot-text">
+            <span class="res-name">Prosuite</span>
+            <span class="res-desc">Sub-brand identity — logo, colors, and asset guidelines for the Prosuite product.</span>
+          </div>
+          <span class="material-icons-round res-arrow">open_in_new</span>
         </div>
       </a>
 

@@ -8,23 +8,54 @@ body.dark-mode .anno { background: #27272a; border-color: rgba(255,255,255,0.1);
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
 .table-wrap { background: white; border-radius: 16px; overflow: hidden; border: 1px solid var(--gray-200); box-shadow: 0 1px 3px rgba(0,0,0,.06); }
-.table-toolbar { display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--gray-100); }
-.toolbar-search { display: flex; align-items: center; gap: 8px; border: 1.5px solid var(--gray-200); border-radius: 8px; padding: 8px 12px; font-size: 13px; color: var(--gray-400); width: 220px; background: white; }
-.toolbar-btn { display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; border: 1.5px solid var(--gray-200); font-size: 13px; font-weight: 500; color: var(--gray-600); font-family: Montserrat, sans-serif; cursor: pointer; background: white; }
+.table-toolbar { display: flex; align-items: center; gap: 10px; padding: 16px 20px 14px; flex-wrap: wrap; }
+.toolbar-search-wrap { display: flex; flex: 1; max-width: 360px; border: 1px solid #E5E7EB; border-radius: 10px; overflow: hidden; background: white; }
+.toolbar-search-input { flex: 1; outline: none; border: none; background: transparent; font-size: 13px; color: #374151; padding: 8px 14px; font-family: Montserrat, sans-serif; }
+.toolbar-search-input::placeholder { color: #9CA3AF; }
+.toolbar-search-btn { display: flex; align-items: center; gap: 6px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: white; background: linear-gradient(90deg, #5C2ED4 0%, #A614C3 65%); border: none; cursor: pointer; font-family: Montserrat, sans-serif; flex-shrink: 0; }
+.toolbar-action-btn { display: flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; color: white; background: linear-gradient(90deg, #5C2ED4 0%, #A614C3 65%); cursor: pointer; border: none; font-family: Montserrat, sans-serif; }
+.toolbar-outline-btn { display: flex; align-items: center; gap: 6px; padding: 9px 14px; border-radius: 10px; font-size: 13px; font-weight: 600; color: #374151; background: white; cursor: pointer; border: 1px solid #E5E7EB; font-family: Montserrat, sans-serif; }
+/* Filter pills */
+.filter-pills { display: flex; align-items: center; gap: 8px; padding: 8px 20px 4px; flex-wrap: wrap; }
+.filter-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 15px; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid #E5E7EB; background: transparent; color: #9CA3AF; font-family: Montserrat, sans-serif; transition: background .15s; }
+.filter-pill.active { border: none; padding: 1px; background: linear-gradient(90deg, #5C2ED4 0%, #A614C3 65%); }
+.filter-pill.active span { display: flex; align-items: center; gap: 6px; padding: 4px 14px; border-radius: 11px; background: linear-gradient(90deg, rgba(92,46,212,0.05) 0%, rgba(166,20,195,0.05) 100%); background-image: linear-gradient(90deg, rgba(92,46,212,0.05) 0%, rgba(166,20,195,0.05) 100%); }
+.filter-pill.active .pill-label { background: linear-gradient(90deg, #5C2ED4 0%, #A614C3 65%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.filter-pill:not(.active):hover { background: #F5F5F5; }
+/* Tab bar */
+.table-tabs { display: flex; align-items: center; border-bottom: 1px solid #E5E7EB; padding: 0 20px; }
+.table-tab { display: flex; align-items: center; gap: 6px; padding: 10px 16px; font-size: 13px; font-weight: 500; color: #9CA3AF; cursor: pointer; border: none; background: transparent; position: relative; font-family: Montserrat, sans-serif; }
+.table-tab.active { color: #A614C3; }
+.table-tab.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #5C2ED4 0%, #A614C3 65%); }
+.table-tab .material-icons-round { font-size: 15px; }
+.tab-icon-btns { margin-left: auto; display: flex; align-items: center; gap: 2px; border-left: 1px solid #E5E7EB; padding-left: 10px; }
+.tab-icon-btn { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border: none; background: transparent; cursor: pointer; border-radius: 8px; color: #A614C3; }
+.tab-icon-btn:hover { background: #F5F5F5; }
+/* Table */
 .table-grid { width: 100%; border-collapse: collapse; }
-.table-grid th { background: var(--gray-50); font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--gray-400); padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--gray-200); white-space: nowrap; }
+.table-grid th { background: white; font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: #9CA3AF; padding: 12px 16px; text-align: left; border-bottom: 1px solid #E5E7EB; white-space: nowrap; }
 .table-grid th .sort { color: var(--gray-300); margin-left: 4px; font-size: 10px; cursor: pointer; }
-.table-grid td { font-size: 13px; color: var(--gray-700); padding: 13px 16px; border-bottom: 1px solid var(--gray-100); vertical-align: middle; }
+.table-grid td { font-size: 13px; color: #374151; padding: 12px 16px; border-bottom: 1px solid #E5E7EB; vertical-align: middle; }
 .table-grid tr:last-child td { border-bottom: none; }
-.table-grid tr:hover td { background: var(--gray-50); }
-.td-link { color: var(--teal-500); font-weight: 500; text-decoration: none; cursor: pointer; }
-.badge-s { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 700; font-family: Montserrat, sans-serif; }
-.table-footer { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; border-top: 1px solid var(--gray-100); background: white; }
+.table-grid tr:hover td { background: #F9FAFB; }
+.td-code { color: #A614C3; font-size: 12px; font-weight: 600; }
+.td-muted { color: #9CA3AF; font-size: 13px; }
+.td-users { display: inline-flex; align-items: center; gap: 6px; color: #A614C3; font-size: 13px; font-weight: 500; }
+.badge-appointed { display: inline-flex; align-items: center; justify-content: center; padding: 3px 10px; border-radius: 9999px; background: linear-gradient(90deg, rgba(92,46,212,0.05) 0%, rgba(166,20,195,0.05) 100%); font-size: 11px; font-weight: 600; font-family: Montserrat, sans-serif; background-image: linear-gradient(90deg, rgba(92,46,212,0.05) 0%, rgba(166,20,195,0.05) 100%); }
+.badge-appointed span { background: linear-gradient(90deg, #5C2ED4 0%, #A614C3 65%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.badge-unappointed { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 9999px; background: rgba(115,201,183,0.10); color: #73C9B7; font-size: 11px; font-weight: 600; font-family: Montserrat, sans-serif; white-space: nowrap; }
+.star-btn { background: none; border: none; cursor: pointer; padding: 0; display: flex; }
+.td-name { display: flex; align-items: center; gap: 36px; }
+/* Footer / Pagination */
+.table-footer { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; border-top: 1px solid #E5E7EB; background: #F9FAFB; }
 .pagination { display: flex; gap: 4px; align-items: center; }
-.page-btn { width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--gray-200); background: white; color: var(--gray-600); font-family: Montserrat, sans-serif; }
-.page-btn.active { background: var(--teal-500); color: white; border-color: var(--teal-500); }
-.page-btn.arrow { color: var(--gray-400); font-weight: 400; }
-.select-sm { font-family: Montserrat, sans-serif; font-size: 12px; padding: 4px 8px; border: 1px solid var(--gray-200); border-radius: 6px; color: var(--gray-600); background: white; }
+.page-btn { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; cursor: pointer; border: none; background: transparent; color: #9CA3AF; font-family: Montserrat, sans-serif; }
+.page-btn:hover { background: #F3F4F6; }
+.page-btn.active { background: linear-gradient(90deg, #5C2ED4 0.1%, #A614C3 63.88%); color: white; border: none; }
+.page-btn.active:hover { background: linear-gradient(90deg, #5C2ED4 0.1%, #A614C3 63.88%); }
+.page-btn.arrow { color: #9CA3AF; }
+.select-sm { font-family: Montserrat, sans-serif; font-size: 12px; padding: 4px 8px; border: 1px solid #E5E7EB; border-radius: 6px; color: #374151; background: white; }
+.perpage-btn { display: flex; align-items: center; gap: 6px; padding: 4px 8px; border: 1px solid #E5E7EB; border-radius: 8px; background: white; font-size: 12px; font-family: Montserrat, sans-serif; color: #374151; cursor: pointer; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -35,9 +66,7 @@ body.dark-mode .anno { background: #27272a; border-color: rgba(255,255,255,0.1);
       <img src="BTIS.png" class="btis-logo-img" alt="NorbieLink">
     </a>
     <nav class="btis-top-nav">
-      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>
-      <a class="btis-top-nav-link" href="ds-nav-styles.html">Styles</a>
-      <a class="btis-top-nav-link active" href="ds-nav-components.html">Components</a>
+      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>      <a class="btis-top-nav-link active" href="ds-nav-components.html">Components</a>
       <a class="btis-top-nav-link" href="ds-nav-resources.html">Resources</a>
     </nav>
     <div class="btis-header-right">
@@ -57,7 +86,7 @@ body.dark-mode .anno { background: #27272a; border-color: rgba(255,255,255,0.1);
   <div class="search-modal">
     <div class="search-input-wrap">
       <span class="material-icons-round">search</span>
-      <input id="search-input" type="text" placeholder="Search components, foundations, styles…" oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
+      <input id="search-input" type="text" placeholder="Search components, foundations…" oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
       <span class="material-icons-round search-close" onclick="closeSearch()">close</span>
     </div>
     <div class="search-results" id="search-results"></div>
@@ -82,16 +111,13 @@ body.dark-mode .anno { background: #27272a; border-color: rgba(255,255,255,0.1);
     <a class="ds-sidenav-item" href="ds-26-accordion.html">Accordion</a>
     <a class="ds-sidenav-item" href="ds-27-alert.html">Alert</a>
     <a class="ds-sidenav-item" href="ds-28-alert-dialog.html">Alert Dialog</a>
-    <a class="ds-sidenav-item" href="ds-14-appbar.html">App Bars</a>
     <a class="ds-sidenav-item" href="ds-29-avatar.html">Avatar</a>
     <a class="ds-sidenav-item" href="ds-09-badges.html">Badge</a>
     <a class="ds-sidenav-item" href="ds-30-breadcrumb.html">Breadcrumb</a>
     <a class="ds-sidenav-item" href="ds-06-buttons.html">Button</a>
     <a class="ds-sidenav-item" href="ds-31-button-group.html">Button Group</a>
     <a class="ds-sidenav-item" href="ds-32-calendar.html">Calendar</a>
-    <a class="ds-sidenav-item" href="ds-10-cards.html">Card</a>
     <a class="ds-sidenav-item" href="ds-33-carousel.html">Carousel</a>
-    <a class="ds-sidenav-item" href="ds-34-chart.html">Chart</a>
     <a class="ds-sidenav-item" href="ds-15-checkbox.html">Checkbox</a>
     <a class="ds-sidenav-item" href="ds-16-chips.html">Chips</a>
     <a class="ds-sidenav-item" href="ds-35-collapsible.html">Collapsible</a>
@@ -104,7 +130,6 @@ body.dark-mode .anno { background: #27272a; border-color: rgba(255,255,255,0.1);
     <a class="ds-sidenav-item" href="ds-40-drawer.html">Drawer</a>
     <a class="ds-sidenav-item" href="ds-41-dropdown.html">Dropdown Menu</a>
     <a class="ds-sidenav-item" href="ds-42-empty-state.html">Empty State</a>
-    <a class="ds-sidenav-item" href="ds-43-hover-card.html">Hover Card</a>
     <a class="ds-sidenav-item" href="ds-44-input-otp.html">Input OTP</a>
 <a class="ds-sidenav-item" href="ds-46-label.html">Label</a>
     <a class="ds-sidenav-item" href="ds-19-lists.html">Lists</a>
@@ -137,125 +162,143 @@ body.dark-mode .anno { background: #27272a; border-color: rgba(255,255,255,0.1);
   <div class="ds-title-row">
     <h1 class="ds-page-title">Data Tables</h1>
     <div class="ds-title-actions">
-      <button class="ds-copy-page-btn" onclick="copyPageLink()">
-        <span class="material-icons-round">content_copy</span> Copy Page
-        <span class="material-icons-round chevron">expand_more</span>
-      </button>
       <a class="ds-nav-arrow-btn" href="ds-38-context-menu.html" title="Previous"><span class="material-icons-round">arrow_back</span></a>
       <a class="ds-nav-arrow-btn" href="ds-39-date-picker.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-  <p class="ds-page-desc">Data tables display structured information across Quotes, Policies, and Endorsements. They include sortable columns, teal-colored row links, semantic status badges, a toolbar with filters, and pagination.</p>
+  <p class="ds-page-desc">Data tables display structured information for entities like Agencies and Users. They include a search toolbar, gradient filter pills, a tab bar with icon controls, sortable columns, status badges, and minimal pagination.</p>
 
-  <!-- HERO: Full table -->
+  <!-- HERO: Agencies-style table -->
   <div class="table-wrap">
+    <!-- Toolbar -->
     <div class="table-toolbar">
-      <div class="toolbar-search">🔍 &nbsp;Search...</div>
-      <div class="toolbar-btn">Past 20 Days ▾</div>
-      <div class="toolbar-btn" style="color:var(--gray-400);border-style:dashed;">↻</div>
-      <div class="toolbar-btn" style="color:var(--gray-400);">⊞</div>
-      <div class="toolbar-btn" style="color:var(--gray-400);">⬇</div>
-      <div style="flex:1;"></div>
-      <div class="toolbar-btn" style="color:var(--gray-500);">Need help finding something? ▾</div>
+      <div class="toolbar-search-wrap">
+        <input class="toolbar-search-input" type="text" placeholder="By agency, agency code, or user" readonly>
+        <button class="toolbar-search-btn"><span class="material-icons-round" style="font-size:14px;">search</span>Search</button>
+      </div>
+      <button class="toolbar-action-btn"><span class="material-icons-round" style="font-size:16px;">add</span>Add New Agency</button>
+      <button class="toolbar-outline-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="url(#bmark-grad)" stroke="url(#bmark-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <defs><linearGradient id="bmark-grad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#5C2ED4"/><stop offset="100%" stop-color="#A614C3"/></linearGradient></defs>
+          <path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/>
+        </svg>
+        Drafts
+      </button>
     </div>
+    <!-- Filter pills -->
+    <div class="filter-pills">
+      <button class="filter-pill active"><span><span class="pill-label">All</span></span></button>
+      <button class="filter-pill"><span class="pill-label">Appointed</span></button>
+      <button class="filter-pill"><span class="pill-label">Unappointed</span></button>
+    </div>
+    <!-- Tab bar -->
+    <div class="table-tabs">
+      <button class="table-tab active"><span class="material-icons-round">business</span>Agencies</button>
+      <button class="table-tab"><span class="material-icons-round">group</span>All Users</button>
+      <button class="table-tab"><span class="material-icons-round">hub</span>Affiliations</button>
+      <div class="tab-icon-btns">
+        <button class="tab-icon-btn"><span class="material-icons-round" style="font-size:16px;">refresh</span></button>
+        <button class="tab-icon-btn"><span class="material-icons-round" style="font-size:16px;">grid_view</span></button>
+        <button class="tab-icon-btn"><span class="material-icons-round" style="font-size:16px;">download</span></button>
+      </div>
+    </div>
+    <!-- Table -->
     <table class="table-grid" style="width:100%;">
       <thead>
         <tr>
-          <th>CREATED <span class="sort">↑</span></th>
-          <th>SUBMISSION ID <span class="sort">↑</span></th>
-          <th>APPLICANT <span class="sort">↑</span></th>
-          <th>DBA <span class="sort">↑</span></th>
-          <th>EFFECTIVE <span class="sort">↑</span></th>
-          <th>LOB <span class="sort">↑</span></th>
-          <th>STATUS <span class="sort">↑</span></th>
-          <th>PRODUCER <span class="sort">↑</span></th>
+          <th style="width:200px;padding-left:20px;">AGENCY NAME <span class="sort">↑</span></th>
+          <th style="text-align:center;">AGENCY CODE <span class="sort">↑</span></th>
+          <th>LOCATION <span class="sort">↑</span></th>
+          <th>AFFILIATION <span class="sort">↑</span></th>
+          <th style="text-align:center;">TOTAL USERS <span class="sort">↑</span></th>
+          <th>LAST LOGIN <span class="sort">↑</span></th>
+          <th style="text-align:center;">STATUS <span class="sort">↑</span></th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>05/01/2024</td>
-          <td><span class="td-link">QAA0234567B9</span></td>
-          <td>Elvis Pressley</td>
-          <td>NASA</td>
-          <td>05/01/2024</td>
-          <td>General Liability</td>
-          <td><span class="badge-s" style="background:rgba(59,130,246,.1);color:#2563EB;">● Add'l Insured Req.</span></td>
-          <td>Elvis Pressley</td>
+          <td style="padding-left:20px;">
+            <div class="td-name">
+              <button class="star-btn"><span class="material-icons-round" style="font-size:16px;color:#F59E0B;">star</span></button>
+              <span style="font-weight:600;">Apex Insurance Group</span>
+            </div>
+          </td>
+          <td style="text-align:center;"><span class="td-code">AX042</span></td>
+          <td><span class="td-muted">Los Angeles, CA</span></td>
+          <td><span class="td-muted">Pacific West</span></td>
+          <td style="text-align:center;"><span class="td-users"><span class="material-icons-round" style="font-size:14px;color:#9CA3AF;">group</span>12</span></td>
+          <td><span class="td-muted">04/18/2026</span></td>
+          <td style="text-align:center;"><span class="badge-appointed"><span>Appointed</span></span></td>
         </tr>
         <tr>
-          <td>01/01/2024</td>
-          <td><span class="td-link">QAN556666123</span></td>
-          <td>Jane Smith</td>
-          <td>VRG Plumbing, LLC</td>
-          <td>01/01/2024</td>
-          <td>Worker's Comp</td>
-          <td><span class="badge-s" style="background:rgba(16,185,129,.1);color:#059669;">● Sold/Issued</span></td>
-          <td>Jane Smith</td>
+          <td style="padding-left:20px;">
+            <div class="td-name">
+              <button class="star-btn"><span class="material-icons-round" style="font-size:16px;color:#E5E7EB;">star</span></button>
+              <span style="font-weight:600;">Midland Risk Partners</span>
+            </div>
+          </td>
+          <td style="text-align:center;"><span class="td-code">MR217</span></td>
+          <td><span class="td-muted">Chicago, IL</span></td>
+          <td><span class="td-muted">Midwest Alliance</span></td>
+          <td style="text-align:center;"><span class="td-users"><span class="material-icons-round" style="font-size:14px;color:#9CA3AF;">group</span>7</span></td>
+          <td><span class="td-muted">03/30/2026</span></td>
+          <td style="text-align:center;"><span class="badge-appointed"><span>Appointed</span></span></td>
         </tr>
         <tr>
-          <td>06/15/2024</td>
-          <td><span class="td-link">QAWWC52345678</span></td>
-          <td>Joe Smith</td>
-          <td>California Auto Sales</td>
-          <td>06/15/2024</td>
-          <td>General Liability</td>
-          <td><span class="badge-s" style="background:rgba(239,68,68,.1);color:#DC2626;">● Declined</span></td>
-          <td>Joe Smith</td>
+          <td style="padding-left:20px;">
+            <div class="td-name">
+              <button class="star-btn"><span class="material-icons-round" style="font-size:16px;color:#F59E0B;">star</span></button>
+              <span style="font-weight:600;">NorthStar Brokerage</span>
+            </div>
+          </td>
+          <td style="text-align:center;"><span class="td-code">NS309</span></td>
+          <td><span class="td-muted">Seattle, WA</span></td>
+          <td><span class="td-muted">Pacific West</span></td>
+          <td style="text-align:center;"><span class="td-users"><span class="material-icons-round" style="font-size:14px;color:#9CA3AF;">group</span>4</span></td>
+          <td><span class="td-muted">01/12/2025</span></td>
+          <td style="text-align:center;"><span class="badge-unappointed">Unappointed</span></td>
         </tr>
         <tr>
-          <td>07/01/2024</td>
-          <td><span class="td-link">QMWCTR1222333</span></td>
-          <td>Elvis Pressley</td>
-          <td>Restaurant R' Us</td>
-          <td>07/01/2024</td>
-          <td>Vacant Risks</td>
-          <td><span class="badge-s" style="background:#F3F4F6;color:#6B7280;">● Incomplete</span></td>
-          <td>Elvis Pressley</td>
+          <td style="padding-left:20px;">
+            <div class="td-name">
+              <button class="star-btn"><span class="material-icons-round" style="font-size:16px;color:#E5E7EB;">star</span></button>
+              <span style="font-weight:600;">Sunbelt Coverage Co.</span>
+            </div>
+          </td>
+          <td style="text-align:center;"><span class="td-code">SB558</span></td>
+          <td><span class="td-muted">Dallas, TX</span></td>
+          <td><span class="td-muted">Southern Network</span></td>
+          <td style="text-align:center;"><span class="td-users"><span class="material-icons-round" style="font-size:14px;color:#9CA3AF;">group</span>9</span></td>
+          <td><span class="td-muted">04/25/2026</span></td>
+          <td style="text-align:center;"><span class="badge-appointed"><span>Appointed</span></span></td>
         </tr>
         <tr>
-          <td>07/01/2024</td>
-          <td><span class="td-link">QMWCTR1222333</span></td>
-          <td>Joe Smith</td>
-          <td>Restaurant R' Us</td>
-          <td>07/01/2024</td>
-          <td>General Liability</td>
-          <td><span class="badge-s" style="background:#F3F4F6;color:#6B7280;">● Incomplete</span></td>
-          <td>Joe Smith</td>
-        </tr>
-        <tr>
-          <td>03/01/2025</td>
-          <td><span class="td-link">QAA987654321-1</span></td>
-          <td>Elvis Pressley</td>
-          <td>Iron Gate Fencing</td>
-          <td>03/01/2025</td>
-          <td>Vacant Risks</td>
-          <td><span class="badge-s" style="background:rgba(249,115,22,.1);color:#EA580C;">● Upcoming Renewals</span></td>
-          <td>Elvis Pressley</td>
-        </tr>
-        <tr>
-          <td>03/01/2025</td>
-          <td><span class="td-link">QAA987654321-1</span></td>
-          <td>Joe Smith</td>
-          <td>Iron Gate Fencing</td>
-          <td>03/01/2025</td>
-          <td>Vacant Risks</td>
-          <td><span class="badge-s" style="background:rgba(249,115,22,.1);color:#EA580C;">● Pending/Action Req.</span></td>
-          <td>Joe Smith</td>
+          <td style="padding-left:20px;">
+            <div class="td-name">
+              <button class="star-btn"><span class="material-icons-round" style="font-size:16px;color:#E5E7EB;">star</span></button>
+              <span style="font-weight:600;">Harbor Shield Agency</span>
+            </div>
+          </td>
+          <td style="text-align:center;"><span class="td-code">HS891</span></td>
+          <td><span class="td-muted">Miami, FL</span></td>
+          <td><span class="td-muted">—</span></td>
+          <td style="text-align:center;"><span class="td-users"><span class="material-icons-round" style="font-size:14px;color:#9CA3AF;">group</span>3</span></td>
+          <td><span class="td-muted">08/03/2024</span></td>
+          <td style="text-align:center;"><span class="badge-unappointed">Unappointed</span></td>
         </tr>
       </tbody>
     </table>
+    <!-- Footer / pagination -->
     <div class="table-footer">
-      <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray-500);">
-        Show <select class="select-sm"><option>10</option><option>25</option><option>50</option></select> per page
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#9CA3AF;">
+        Show <button class="perpage-btn">10 <span class="material-icons-round" style="font-size:12px;color:#9CA3AF;">expand_more</span></button> per page
       </div>
-      <div style="font-size:12px;color:var(--gray-400);">Page 1 of 1</div>
       <div class="pagination">
-        <div class="page-btn arrow">‹</div>
-        <div class="page-btn active">1</div>
-        <div class="page-btn">2</div>
-        <div class="page-btn">3</div>
-        <div class="page-btn arrow">›</div>
+        <button class="page-btn arrow"><span class="material-icons-round" style="font-size:16px;">chevron_left</span></button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn arrow"><span class="material-icons-round" style="font-size:16px;">chevron_right</span></button>
       </div>
+      <div style="font-size:12px;color:#9CA3AF;text-align:right;">Page 1 of 3</div>
     </div>
   </div>
 
@@ -264,25 +307,17 @@ body.dark-mode .anno { background: #27272a; border-color: rgba(255,255,255,0.1);
   <!-- ANATOMY -->
   <div class="ds-section" id="anatomy">
     <h2 class="ds-section-title">Anatomy</h2>
-    <p class="ds-section-desc">A data table consists of four zones: toolbar, header row, data rows, and footer. Each zone has distinct typographic and spacing treatment.</p>
-    <div class="ds-example" style="flex-direction:column; align-items:stretch; padding:0; gap:0; overflow:hidden; border-radius:16px; border:2px solid var(--teal-200);">
-      <div style="background:rgba(44,185,168,0.06); border-bottom:2px solid var(--teal-100); padding:12px 20px; display:flex; align-items:center; gap:8px;">
-        <div style="font-size:11px;font-weight:700;color:var(--teal-700);background:var(--teal-50);padding:2px 10px;border-radius:20px;">A</div>
-        <div style="font-size:13px;font-weight:600;color:var(--teal-800);">Toolbar — filters, search, export</div>
-      </div>
-      <div style="background:var(--gray-50); border-bottom:2px solid var(--teal-100); padding:12px 20px; display:flex; align-items:center; gap:8px;">
-        <div style="font-size:11px;font-weight:700;color:var(--teal-700);background:var(--teal-50);padding:2px 10px;border-radius:20px;">B</div>
-        <div style="font-size:13px;font-weight:600;color:var(--teal-800);">Header row — 11px Uppercase Bold · sortable · gray-50 bg</div>
-      </div>
-      <div style="padding:12px 20px; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--gray-100);">
-        <div style="font-size:11px;font-weight:700;color:var(--teal-700);background:var(--teal-50);padding:2px 10px;border-radius:20px;">C</div>
-        <div style="font-size:13px;color:var(--gray-700);">Data row — 13px Regular · hover: gray-50 · link cells in Teal · status cells use badge</div>
-      </div>
-      <div style="padding:12px 20px; display:flex; align-items:center; gap:8px; border-top:1px solid var(--gray-100); background:white;">
-        <div style="font-size:11px;font-weight:700;color:var(--teal-700);background:var(--teal-50);padding:2px 10px;border-radius:20px;">D</div>
-        <div style="font-size:13px;color:var(--gray-700);">Footer — per-page selector · page counter · pagination controls</div>
-      </div>
-    </div>
+    <p class="ds-section-desc">A data table has five zones: toolbar (search + actions), filter pills, tab bar, data rows, and footer. Each zone has distinct typographic and spacing treatment.</p>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Zone</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>A</code></td><td>Toolbar</td><td>Search input + Search button, Add New action, Drafts toggle</td></tr>
+        <tr><td><code>B</code></td><td>Filter pills</td><td>All · Appointed · Unappointed — active pill has gradient border + gradient text</td></tr>
+        <tr><td><code>C</code></td><td>Tab bar</td><td>Agencies · All Users · Affiliations — active tab underline uses brand gradient; icon buttons on right</td></tr>
+        <tr><td><code>D</code></td><td>Data rows</td><td>☆ star · 13px semibold name · agency code in <code>#A614C3</code> · muted location / affiliation · user count · status badge</td></tr>
+        <tr><td><code>E</code></td><td>Footer</td><td>Gray-50 background — per-page dropdown (left) · ← gradient page# → (center) · Page X of Y (right)</td></tr>
+      </tbody>
+    </table></div>
   </div>
 
   <div class="ds-divider"></div>
@@ -290,42 +325,48 @@ body.dark-mode .anno { background: #27272a; border-color: rgba(255,255,255,0.1);
   <!-- PAGINATION -->
   <div class="ds-section" id="pagination">
     <h2 class="ds-section-title">Pagination</h2>
-    <p class="ds-section-desc">Teal active page indicator. Arrow buttons use gray. Pagination shows a window of up to 5 pages.</p>
+    <p class="ds-section-desc">Only the current page number is shown, with gradient fill. Arrow chevrons navigate prev/next. Footer background is gray-50.</p>
     <div class="ds-example" style="gap:40px; padding:40px; flex-direction:column; align-items:flex-start;">
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-400);margin-bottom:4px;">First page</div>
-        <div class="pagination">
-          <div class="page-btn arrow" style="opacity:.4;">‹</div>
-          <div class="page-btn active">1</div>
-          <div class="page-btn">2</div>
-          <div class="page-btn">3</div>
-          <div class="page-btn">4</div>
-          <div class="page-btn">5</div>
-          <div class="page-btn arrow">›</div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-400);margin-bottom:4px;">First page (prev disabled)</div>
+        <div style="background:white;border:1px solid #E5E7EB;border-radius:12px;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;min-width:400px;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#9CA3AF;">
+            Show <button class="perpage-btn">10 <span class="material-icons-round" style="font-size:12px;color:#9CA3AF;">expand_more</span></button> per page
+          </div>
+          <div class="pagination">
+            <button class="page-btn arrow" style="opacity:.3;"><span class="material-icons-round" style="font-size:16px;">chevron_left</span></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn arrow"><span class="material-icons-round" style="font-size:16px;">chevron_right</span></button>
+          </div>
+          <div style="font-size:12px;color:#9CA3AF;">Page 1 of 5</div>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:8px;">
         <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-400);margin-bottom:4px;">Middle page</div>
-        <div class="pagination">
-          <div class="page-btn arrow">‹</div>
-          <div class="page-btn">1</div>
-          <div class="page-btn">2</div>
-          <div class="page-btn active">3</div>
-          <div class="page-btn">4</div>
-          <div class="page-btn">5</div>
-          <div class="page-btn arrow">›</div>
+        <div style="background:white;border:1px solid #E5E7EB;border-radius:12px;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;min-width:400px;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#9CA3AF;">
+            Show <button class="perpage-btn">10 <span class="material-icons-round" style="font-size:12px;color:#9CA3AF;">expand_more</span></button> per page
+          </div>
+          <div class="pagination">
+            <button class="page-btn arrow"><span class="material-icons-round" style="font-size:16px;">chevron_left</span></button>
+            <button class="page-btn active">3</button>
+            <button class="page-btn arrow"><span class="material-icons-round" style="font-size:16px;">chevron_right</span></button>
+          </div>
+          <div style="font-size:12px;color:#9CA3AF;">Page 3 of 5</div>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-400);margin-bottom:4px;">Last page</div>
-        <div class="pagination">
-          <div class="page-btn arrow">‹</div>
-          <div class="page-btn">1</div>
-          <div class="page-btn">2</div>
-          <div class="page-btn">3</div>
-          <div class="page-btn">4</div>
-          <div class="page-btn active">5</div>
-          <div class="page-btn arrow" style="opacity:.4;">›</div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-400);margin-bottom:4px;">Last page (next disabled)</div>
+        <div style="background:white;border:1px solid #E5E7EB;border-radius:12px;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;min-width:400px;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#9CA3AF;">
+            Show <button class="perpage-btn">10 <span class="material-icons-round" style="font-size:12px;color:#9CA3AF;">expand_more</span></button> per page
+          </div>
+          <div class="pagination">
+            <button class="page-btn arrow"><span class="material-icons-round" style="font-size:16px;">chevron_left</span></button>
+            <button class="page-btn active">5</button>
+            <button class="page-btn arrow" style="opacity:.3;"><span class="material-icons-round" style="font-size:16px;">chevron_right</span></button>
+          </div>
+          <div style="font-size:12px;color:#9CA3AF;">Page 5 of 5</div>
         </div>
       </div>
     </div>
@@ -340,20 +381,25 @@ body.dark-mode .anno { background: #27272a; border-color: rgba(255,255,255,0.1);
       <table class="ds-table">
         <thead><tr><th>Element</th><th>Value</th></tr></thead>
         <tbody>
-          <tr><td>Container shape</td><td><code>shape.lg</code> (16px) · elevation.1</td></tr>
-          <tr><td>Header font</td><td>11px / Bold 700 / Uppercase / letter-spacing .09em / gray-400</td></tr>
-          <tr><td>Header background</td><td>gray-50</td></tr>
-          <tr><td>Header border-bottom</td><td>1px solid gray-200 (2px weight)</td></tr>
-          <tr><td>Row font</td><td>13px / Regular 400 / gray-700</td></tr>
-          <tr><td>Row height</td><td>~48px (13px top + bottom padding)</td></tr>
-          <tr><td>Row divider</td><td>1px solid gray-100</td></tr>
-          <tr><td>Row hover</td><td>background: gray-50</td></tr>
-          <tr><td>Link cell color</td><td><code>color.secondary</code> (#2CB9A8) / Medium 500</td></tr>
-          <tr><td>Column padding</td><td>13px 16px</td></tr>
-          <tr><td>Sort icon</td><td>10px / gray-300 · turns gray-700 when sorted</td></tr>
-          <tr><td>Footer padding</td><td>12px 20px</td></tr>
-          <tr><td>Pagination button size</td><td>30×30px / shape.sm (6px)</td></tr>
-          <tr><td>Pagination active bg</td><td><code>color.secondary</code> (#2CB9A8)</td></tr>
+          <tr><td>Container shape</td><td><code>shape.lg</code> (16px) · 1px solid #E5E7EB · elevation.1</td></tr>
+          <tr><td>Toolbar search</td><td>flex: input + gradient Search button · rounded-10px · 360px max-width</td></tr>
+          <tr><td>Toolbar actions</td><td>Add New: gradient fill btn · Drafts: outline btn with gradient bookmark icon</td></tr>
+          <tr><td>Filter pill active</td><td>1px gradient border wrap · inner bg rgba(92,46,212,0.05) · gradient text</td></tr>
+          <tr><td>Filter pill inactive</td><td>border 1px solid #E5E7EB · muted text · hover: #F5F5F5</td></tr>
+          <tr><td>Tab active</td><td>color: #A614C3 · 2px gradient underline at bottom</td></tr>
+          <tr><td>Tab icon buttons</td><td>32×32px / rounded-8px · color: #A614C3 · hover: gray-50</td></tr>
+          <tr><td>Header font</td><td>11px / Bold 700 / Uppercase / letter-spacing .09em / #9CA3AF</td></tr>
+          <tr><td>Row name cell</td><td>star icon (16px #F59E0B) + 36px gap + 13px Semibold name</td></tr>
+          <tr><td>Agency code color</td><td>#A614C3 / 12px Semibold</td></tr>
+          <tr><td>Muted cells (location, affiliation)</td><td>13px / #9CA3AF</td></tr>
+          <tr><td>Total users</td><td>group icon (#9CA3AF) + clickable count in #A614C3</td></tr>
+          <tr><td>Status — Appointed</td><td>gradient-tint bg · gradient clip text · 11px Semibold</td></tr>
+          <tr><td>Status — Unappointed</td><td>bg rgba(115,201,183,0.10) · color #73C9B7 · 11px Semibold</td></tr>
+          <tr><td>Row divider</td><td>1px solid #E5E7EB</td></tr>
+          <tr><td>Row hover</td><td>background: #F9FAFB</td></tr>
+          <tr><td>Footer background</td><td>#F9FAFB · border-top 1px solid #E5E7EB</td></tr>
+          <tr><td>Pagination active</td><td>28×28px · gradient fill · white text · border-radius 8px</td></tr>
+          <tr><td>Pagination arrows</td><td>chevron_left / chevron_right icons · 28×28px · disabled: opacity .3</td></tr>
         </tbody>
       </table>
     </div>
@@ -387,14 +433,13 @@ body.dark-mode .anno { background: #27272a; border-color: rgba(255,255,255,0.1);
 
 <script>
 const DS_PAGES = [
-  {t:'Color',section:'Styles',url:'ds-01-color.html',icon:'palette'},
-  {t:'Typography',section:'Styles',url:'ds-02-typography.html',icon:'text_fields'},
+  {t:'Color',section:'Foundations',url:'ds-01-color.html',icon:'palette'},
+  {t:'Typography',section:'Foundations',url:'ds-02-typography.html',icon:'text_fields'},
   {t:'Elevation',section:'Foundations',url:'ds-03-elevation.html',icon:'layers'},
   {t:'Shape',section:'Foundations',url:'ds-04-shape.html',icon:'rounded_corner'},
   {t:'Spacing',section:'Foundations',url:'ds-05-spacing.html',icon:'space_bar'},
   {t:'Badges',section:'Components',url:'ds-09-badges.html',icon:'fiber_manual_record'},
   {t:'Buttons',section:'Components',url:'ds-06-buttons.html',icon:'smart_button'},
-  {t:'Cards',section:'Components',url:'ds-10-cards.html',icon:'crop_square'},
   {t:'Checkbox',section:'Components',url:'ds-14-checkbox.html',icon:'check_box'},
   {t:'Chips',section:'Components',url:'ds-16-chips.html',icon:'label'},
   {t:'Data Tables',section:'Components',url:'ds-13-datatable.html',icon:'table_chart'},

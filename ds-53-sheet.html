@@ -3,7 +3,8 @@
 <title>Sheet — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.sh-scene{position:relative;width:100%;max-width:560px;height:280px;background:#f5f5f5;border-radius:10px;overflow:hidden;font-family:'Montserrat',sans-serif;}
+.sh-scene{position:relative;width:100%;max-width:560px;height:280px;background:#f5f5f5;border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;font-family:'Montserrat',sans-serif;}
+body.dark-mode .sh-scene{border-color:rgba(255,255,255,0.10);background:#0F1120;}
 .sh-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.2);z-index:1;}
 .sh-panel{position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:16px 16px 0 0;box-shadow:0 -4px 20px rgba(0,0,0,.1);z-index:2;display:flex;flex-direction:column;}
 .sh-handle-bar{width:36px;height:4px;background:#ddd;border-radius:2px;margin:10px auto 0;}
@@ -13,13 +14,13 @@
 .sh-close .material-icons-round{font-size:16px;color:#666;}
 .sh-body{padding:8px 20px 20px;}
 .sh-body-text{font-size:13px;color:#888;line-height:1.6;}
-.sh-dk .sh-panel{background:#18181b;}
+.sh-dk .sh-panel{background:#191D35;}
 .sh-dk .sh-title{color:rgba(255,255,255,.9);}
 .sh-dk .sh-close{background:rgba(255,255,255,.07);}
 .sh-dk .sh-close .material-icons-round{color:rgba(255,255,255,.5);}
 .sh-dk .sh-handle-bar{background:rgba(255,255,255,.2);}
 .sh-dk .sh-body-text{color:rgba(255,255,255,.45);}
-body.dark-mode .sh-panel{background:#18181b;}
+body.dark-mode .sh-panel{background:#191D35;}
 body.dark-mode .sh-title{color:rgba(255,255,255,.9);}
 body.dark-mode .sh-close{background:rgba(255,255,255,.07);}
 body.dark-mode .sh-close .material-icons-round{color:rgba(255,255,255,.5);}
@@ -35,9 +36,7 @@ body.dark-mode .sh-body-text{color:rgba(255,255,255,.45);}
       <img src="BTIS.png" class="btis-logo-img" alt="NorbieLink">
     </a>
     <nav class="btis-top-nav">
-      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>
-      <a class="btis-top-nav-link" href="ds-nav-styles.html">Styles</a>
-      <a class="btis-top-nav-link active" href="ds-nav-components.html">Components</a>
+      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>      <a class="btis-top-nav-link active" href="ds-nav-components.html">Components</a>
       <a class="btis-top-nav-link" href="ds-nav-resources.html">Resources</a>
     </nav>
     <div class="btis-header-right">
@@ -82,16 +81,13 @@ body.dark-mode .sh-body-text{color:rgba(255,255,255,.45);}
     <a class="ds-sidenav-item" href="ds-26-accordion.html">Accordion</a>
     <a class="ds-sidenav-item" href="ds-27-alert.html">Alert</a>
     <a class="ds-sidenav-item" href="ds-28-alert-dialog.html">Alert Dialog</a>
-    <a class="ds-sidenav-item" href="ds-14-appbar.html">App Bars</a>
     <a class="ds-sidenav-item" href="ds-29-avatar.html">Avatar</a>
     <a class="ds-sidenav-item" href="ds-09-badges.html">Badge</a>
     <a class="ds-sidenav-item" href="ds-30-breadcrumb.html">Breadcrumb</a>
     <a class="ds-sidenav-item" href="ds-06-buttons.html">Button</a>
     <a class="ds-sidenav-item" href="ds-31-button-group.html">Button Group</a>
     <a class="ds-sidenav-item" href="ds-32-calendar.html">Calendar</a>
-    <a class="ds-sidenav-item" href="ds-10-cards.html">Card</a>
     <a class="ds-sidenav-item" href="ds-33-carousel.html">Carousel</a>
-    <a class="ds-sidenav-item" href="ds-34-chart.html">Chart</a>
     <a class="ds-sidenav-item" href="ds-15-checkbox.html">Checkbox</a>
     <a class="ds-sidenav-item" href="ds-16-chips.html">Chips</a>
     <a class="ds-sidenav-item" href="ds-35-collapsible.html">Collapsible</a>
@@ -104,7 +100,6 @@ body.dark-mode .sh-body-text{color:rgba(255,255,255,.45);}
     <a class="ds-sidenav-item" href="ds-40-drawer.html">Drawer</a>
     <a class="ds-sidenav-item" href="ds-41-dropdown.html">Dropdown Menu</a>
     <a class="ds-sidenav-item" href="ds-42-empty-state.html">Empty State</a>
-    <a class="ds-sidenav-item" href="ds-43-hover-card.html">Hover Card</a>
     <a class="ds-sidenav-item" href="ds-44-input-otp.html">Input OTP</a>
 <a class="ds-sidenav-item" href="ds-46-label.html">Label</a>
     <a class="ds-sidenav-item" href="ds-19-lists.html">Lists</a>
@@ -150,10 +145,6 @@ body.dark-mode .sh-body-text{color:rgba(255,255,255,.45);}
     <div class="ds-title-row">
     <h1 class="ds-page-title">Sheet</h1>
     <div class="ds-title-actions">
-      <button class="ds-copy-page-btn" onclick="copyPageLink()">
-        <span class="material-icons-round">content_copy</span> Copy Page
-        <span class="material-icons-round chevron">expand_more</span>
-      </button>
       <a class="ds-nav-arrow-btn" href="ds-52-select.html" title="Previous"><span class="material-icons-round">arrow_back</span></a>
       <a class="ds-nav-arrow-btn" href="ds-54-skeleton.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>

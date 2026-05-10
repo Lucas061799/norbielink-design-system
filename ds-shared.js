@@ -7,10 +7,9 @@
 
 /* ─── SEARCH INDEX ─── */
 const DS_SEARCH_INDEX = [
-  // Styles
-  { title: 'Color',            section: 'Styles',      href: 'ds-01-color.html',      icon: 'palette' },
-  { title: 'Typography',       section: 'Styles',      href: 'ds-02-typography.html', icon: 'text_fields' },
   // Foundations
+  { title: 'Color',            section: 'Foundations', href: 'ds-01-color.html',      icon: 'palette' },
+  { title: 'Typography',       section: 'Foundations', href: 'ds-02-typography.html', icon: 'text_fields' },
   { title: 'Elevation',        section: 'Foundations', href: 'ds-03-elevation.html',  icon: 'flip_to_front' },
   { title: 'Shape',            section: 'Foundations', href: 'ds-04-shape.html',       icon: 'rounded_corner' },
   { title: 'Spacing',          section: 'Foundations', href: 'ds-05-spacing.html',     icon: 'space_bar' },
@@ -19,11 +18,9 @@ const DS_SEARCH_INDEX = [
   { title: 'Navigation',       section: 'Components',  href: 'ds-07-navigation.html',  icon: 'menu' },
   { title: 'Text Fields',      section: 'Components',  href: 'ds-08-textfields.html',  icon: 'text_fields' },
   { title: 'Badges',           section: 'Components',  href: 'ds-09-badges.html',      icon: 'new_releases' },
-  { title: 'Cards',            section: 'Components',  href: 'ds-10-cards.html',       icon: 'dashboard' },
   { title: 'Tabs',             section: 'Components',  href: 'ds-11-tabs.html',        icon: 'tab' },
   { title: 'Switches',         section: 'Components',  href: 'ds-12-switches.html',    icon: 'toggle_on' },
   { title: 'Data Tables',      section: 'Components',  href: 'ds-13-datatable.html',   icon: 'table_chart' },
-  { title: 'App Bars',         section: 'Components',  href: 'ds-14-appbar.html',      icon: 'web_asset' },
   { title: 'Checkbox',         section: 'Components',  href: 'ds-15-checkbox.html',    icon: 'check_box' },
   { title: 'Chips',            section: 'Components',  href: 'ds-16-chips.html',       icon: 'label' },
   { title: 'Dialogs',          section: 'Components',  href: 'ds-17-dialogs.html',     icon: 'open_in_new' },
@@ -43,18 +40,14 @@ const DS_SEARCH_INDEX = [
   { title: 'Button Group',     section: 'Components',  href: 'ds-31-button-group.html',icon: 'view_column' },
   { title: 'Calendar',         section: 'Components',  href: 'ds-32-calendar.html',    icon: 'calendar_today' },
   { title: 'Carousel',         section: 'Components',  href: 'ds-33-carousel.html',    icon: 'view_carousel' },
-  { title: 'Chart',            section: 'Components',  href: 'ds-34-chart.html',       icon: 'bar_chart' },
   { title: 'Collapsible',      section: 'Components',  href: 'ds-35-collapsible.html', icon: 'unfold_more' },
   { title: 'Combobox',         section: 'Components',  href: 'ds-36-combobox.html',    icon: 'arrow_drop_down' },
-  { title: 'Command',          section: 'Components',  href: 'ds-37-command.html',     icon: 'terminal' },
   { title: 'Context Menu',     section: 'Components',  href: 'ds-38-context-menu.html',icon: 'more_vert' },
   { title: 'Date Picker',      section: 'Components',  href: 'ds-39-date-picker.html', icon: 'event' },
   { title: 'Drawer',           section: 'Components',  href: 'ds-40-drawer.html',      icon: 'menu_open' },
   { title: 'Dropdown',         section: 'Components',  href: 'ds-41-dropdown.html',    icon: 'arrow_drop_down_circle' },
   { title: 'Empty State',      section: 'Components',  href: 'ds-42-empty-state.html', icon: 'inbox' },
-  { title: 'Hover Card',       section: 'Components',  href: 'ds-43-hover-card.html',  icon: 'open_in_new' },
   { title: 'Input OTP',        section: 'Components',  href: 'ds-44-input-otp.html',   icon: 'pin' },
-  { title: 'Kbd',              section: 'Components',  href: 'ds-45-kbd.html',         icon: 'keyboard' },
   { title: 'Label',            section: 'Components',  href: 'ds-46-label.html',       icon: 'label_outline' },
   { title: 'Menubar',          section: 'Components',  href: 'ds-47-menubar.html',     icon: 'menu' },
   { title: 'Pagination',       section: 'Components',  href: 'ds-48-pagination.html',  icon: 'last_page' },
@@ -152,33 +145,52 @@ function fixInlineWhiteBgs(isDark) {
     '[style*="background-color:white"]','[style*="background-color: white"]',
     '[style*="background-color:#fff"]','[style*="background-color: #fff"]'
   ].join(',');
-  const skipClasses = ['sw-thumb','ds-sl-t','btis-logo-img'];
-  document.querySelectorAll(bgSel).forEach(el => {
-    if (skipClasses.some(c => el.classList.contains(c))) return;
-    if (isDark) {
+  const skipClasses = ['sw-thumb','ds-sl-t','btis-logo-img','dm-surf','dm-soft','dm-bdr'];
+  // Only override border-color if it's a known light gray (preserve brand colors like #A614C3, #EF4444, etc.)
+  const LIGHT_GRAY_BORDERS = ['#e5e7eb','#e0e0e0','#ddd','#eef2f0','#f3f4f6','#d1d5db','#f0f0f0','#ebebeb','#e8e8e8','#dce4e1'];
+  if (isDark) {
+    document.querySelectorAll(bgSel).forEach(el => {
+      if (skipClasses.some(c => el.classList.contains(c))) return;
+      // Also skip elements that have any dm-* class (explicit dark-mode handlers)
+      if ([...el.classList].some(c => c.startsWith('dm-'))) return;
       el.dataset.origStyle = el.getAttribute('style');
       el.style.setProperty('background', '#1e1e22', 'important');
-      el.style.setProperty('border-color', 'rgba(255,255,255,0.08)', 'important');
-      /* fix dark text on this element */
-      fixDarkTextEl(el, isDark);
-      /* fix dark text on all children */
-      el.querySelectorAll('[style]').forEach(child => fixDarkTextEl(child, isDark));
-    } else {
-      if (el.dataset.origStyle !== undefined) {
-        el.setAttribute('style', el.dataset.origStyle);
-        delete el.dataset.origStyle;
+      // Smart border-color override: only override neutral grays, preserve brand colors
+      const origStyle = (el.dataset.origStyle || '').toLowerCase();
+      const hasLightGrayBorder = LIGHT_GRAY_BORDERS.some(g => origStyle.includes(g));
+      const hasBrandBorder = /border[^;]*#(a614c3|5c2ed4|74c3b7|ef4444|10b981|f59e0b|3b82f6|dc2626|0a0a0a|111)/i.test(origStyle);
+      if (hasLightGrayBorder && !hasBrandBorder) {
+        el.style.setProperty('border-color', 'rgba(255,255,255,0.08)', 'important');
       }
+      fixDarkTextEl(el, isDark);
+      el.querySelectorAll('[style]').forEach(child => fixDarkTextEl(child, isDark));
+    });
+  } else {
+    document.querySelectorAll('[data-orig-style]').forEach(el => {
+      el.setAttribute('style', el.dataset.origStyle);
+      delete el.dataset.origStyle;
       el.querySelectorAll('[data-orig-color]').forEach(child => {
         child.style.color = child.dataset.origColor;
         delete child.dataset.origColor;
       });
-    }
-  });
+    });
+    document.querySelectorAll('[data-orig-color]').forEach(child => {
+      child.style.color = child.dataset.origColor;
+      delete child.dataset.origColor;
+    });
+  }
 }
 function fixDarkTextEl(el, isDark) {
   if (!el.style.color) return;
-  const c = el.style.color;
-  if (DARK_TEXT_COLORS.some(dc => c.includes(dc))) {
+  // Read raw inline attribute (browser normalizes el.style.color to rgb(...) which
+  // doesn't match our hex-based DARK_TEXT_COLORS list)
+  const rawStyle = (el.getAttribute('style') || '').toLowerCase();
+  const computed = (el.style.color || '').toLowerCase();
+  // Match against either the raw hex in the attribute OR known rgb() equivalents
+  const RGB_DARKS = ['rgb(26, 26, 46)','rgb(20, 31, 30)','rgb(37, 56, 53)','rgb(58, 79, 77)','rgb(83, 101, 99)','rgb(55, 65, 81)','rgb(31, 41, 55)','rgb(17, 24, 39)','rgb(15, 23, 42)','rgb(30, 41, 59)'];
+  const hexHit = DARK_TEXT_COLORS.some(dc => rawStyle.includes(dc.toLowerCase()));
+  const rgbHit = RGB_DARKS.some(rgb => computed.includes(rgb));
+  if (hexHit || rgbHit) {
     el.dataset.origColor = el.style.color;
     el.style.setProperty('color', 'rgba(255,255,255,0.78)', 'important');
   }
@@ -293,16 +305,11 @@ function initMobileMenu() {
       label: 'Foundations', href: 'ds-nav-foundations.html',
       pages: [
         { label: 'Introduction', href: 'ds-00-home.html' },
-        { label: 'Elevation',    href: 'ds-03-elevation.html' },
-        { label: 'Shape',        href: 'ds-04-shape.html' },
+        { label: 'Color',        href: 'ds-01-color.html' },
+        { label: 'Typography',   href: 'ds-02-typography.html' },
         { label: 'Spacing',      href: 'ds-05-spacing.html' },
-      ]
-    },
-    {
-      label: 'Styles', href: 'ds-nav-styles.html',
-      pages: [
-        { label: 'Color',      href: 'ds-01-color.html' },
-        { label: 'Typography', href: 'ds-02-typography.html' },
+        { label: 'Shape',        href: 'ds-04-shape.html' },
+        { label: 'Elevation',    href: 'ds-03-elevation.html' },
       ]
     },
     {
@@ -311,16 +318,13 @@ function initMobileMenu() {
         { label: 'Accordion',         href: 'ds-26-accordion.html' },
         { label: 'Alert',             href: 'ds-27-alert.html' },
         { label: 'Alert Dialog',      href: 'ds-28-alert-dialog.html' },
-        { label: 'App Bars',          href: 'ds-14-appbar.html' },
         { label: 'Avatar',            href: 'ds-29-avatar.html' },
         { label: 'Badge',             href: 'ds-09-badges.html' },
         { label: 'Breadcrumb',        href: 'ds-30-breadcrumb.html' },
         { label: 'Button',            href: 'ds-06-buttons.html' },
         { label: 'Button Group',      href: 'ds-31-button-group.html' },
         { label: 'Calendar',          href: 'ds-32-calendar.html' },
-        { label: 'Card',              href: 'ds-10-cards.html' },
         { label: 'Carousel',          href: 'ds-33-carousel.html' },
-        { label: 'Chart',             href: 'ds-34-chart.html' },
         { label: 'Checkbox',          href: 'ds-15-checkbox.html' },
         { label: 'Chips',             href: 'ds-16-chips.html' },
         { label: 'Collapsible',       href: 'ds-35-collapsible.html' },
@@ -333,7 +337,6 @@ function initMobileMenu() {
         { label: 'Drawer',            href: 'ds-40-drawer.html' },
         { label: 'Dropdown Menu',     href: 'ds-41-dropdown.html' },
         { label: 'Empty State',       href: 'ds-42-empty-state.html' },
-        { label: 'Hover Card',        href: 'ds-43-hover-card.html' },
         { label: 'Input OTP',         href: 'ds-44-input-otp.html' },
         { label: 'Label',             href: 'ds-46-label.html' },
         { label: 'Lists',             href: 'ds-19-lists.html' },
@@ -434,11 +437,10 @@ function initFooter() {
         <a href="ds-00-home.html" class="btis-footer-brand">
           <img class="btis-logo-img btis-footer-logo" src="BTIS.png" style="height:20px;width:auto;" alt="NorbieLink">
         </a>
-        <span class="btis-footer-copy">© 2025 Norbielink. All rights reserved.</span>
+        <span class="btis-footer-copy">© 2026 Norbielink. All rights reserved.</span>
       </div>
       <nav class="btis-footer-nav">
         <a class="btis-footer-link" href="ds-nav-foundations.html">Foundations</a>
-        <a class="btis-footer-link" href="ds-nav-styles.html">Styles</a>
         <a class="btis-footer-link" href="ds-nav-components.html">Components</a>
         <a class="btis-footer-link" href="ds-nav-resources.html">Resources</a>
       </nav>

@@ -4,7 +4,9 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
-.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.field-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+body:not(.dark-mode) .dark-mode-demo { display: none; }
+body.dark-mode .light-mode-demo { display: none; }
 .field-col { display: flex; flex-direction: column; gap: 24px; }
 .field-wrap { display: flex; flex-direction: column; gap: 6px; }
 .field-label { font-size: 12px; font-weight: 600; color: var(--gray-600); }
@@ -29,9 +31,7 @@
       <img src="BTIS.png" class="btis-logo-img" alt="NorbieLink">
     </a>
     <nav class="btis-top-nav">
-      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>
-      <a class="btis-top-nav-link" href="ds-nav-styles.html">Styles</a>
-      <a class="btis-top-nav-link active" href="ds-nav-components.html">Components</a>
+      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>      <a class="btis-top-nav-link active" href="ds-nav-components.html">Components</a>
       <a class="btis-top-nav-link" href="ds-nav-resources.html">Resources</a>
     </nav>
     <div class="btis-header-right">
@@ -51,7 +51,7 @@
   <div class="search-modal">
     <div class="search-input-wrap">
       <span class="material-icons-round">search</span>
-      <input id="search-input" type="text" placeholder="Search components, foundations, styles…" oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
+      <input id="search-input" type="text" placeholder="Search components, foundations…" oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
       <span class="material-icons-round search-close" onclick="closeSearch()">close</span>
     </div>
     <div class="search-results" id="search-results"></div>
@@ -76,16 +76,13 @@
     <a class="ds-sidenav-item" href="ds-26-accordion.html">Accordion</a>
     <a class="ds-sidenav-item" href="ds-27-alert.html">Alert</a>
     <a class="ds-sidenav-item" href="ds-28-alert-dialog.html">Alert Dialog</a>
-    <a class="ds-sidenav-item" href="ds-14-appbar.html">App Bars</a>
     <a class="ds-sidenav-item" href="ds-29-avatar.html">Avatar</a>
     <a class="ds-sidenav-item" href="ds-09-badges.html">Badge</a>
     <a class="ds-sidenav-item" href="ds-30-breadcrumb.html">Breadcrumb</a>
     <a class="ds-sidenav-item" href="ds-06-buttons.html">Button</a>
     <a class="ds-sidenav-item" href="ds-31-button-group.html">Button Group</a>
     <a class="ds-sidenav-item" href="ds-32-calendar.html">Calendar</a>
-    <a class="ds-sidenav-item" href="ds-10-cards.html">Card</a>
     <a class="ds-sidenav-item" href="ds-33-carousel.html">Carousel</a>
-    <a class="ds-sidenav-item" href="ds-34-chart.html">Chart</a>
     <a class="ds-sidenav-item" href="ds-15-checkbox.html">Checkbox</a>
     <a class="ds-sidenav-item" href="ds-16-chips.html">Chips</a>
     <a class="ds-sidenav-item" href="ds-35-collapsible.html">Collapsible</a>
@@ -98,7 +95,6 @@
     <a class="ds-sidenav-item" href="ds-40-drawer.html">Drawer</a>
     <a class="ds-sidenav-item" href="ds-41-dropdown.html">Dropdown Menu</a>
     <a class="ds-sidenav-item" href="ds-42-empty-state.html">Empty State</a>
-    <a class="ds-sidenav-item" href="ds-43-hover-card.html">Hover Card</a>
     <a class="ds-sidenav-item" href="ds-44-input-otp.html">Input OTP</a>
 <a class="ds-sidenav-item" href="ds-46-label.html">Label</a>
     <a class="ds-sidenav-item" href="ds-19-lists.html">Lists</a>
@@ -131,36 +127,32 @@
   <div class="ds-title-row">
     <h1 class="ds-page-title">Text Fields</h1>
     <div class="ds-title-actions">
-      <button class="ds-copy-page-btn" onclick="copyPageLink()">
-        <span class="material-icons-round">content_copy</span> Copy Page
-        <span class="material-icons-round chevron">expand_more</span>
-      </button>
       <a class="ds-nav-arrow-btn" href="ds-11-tabs.html" title="Previous"><span class="material-icons-round">arrow_back</span></a>
       <a class="ds-nav-arrow-btn" href="ds-56-textarea.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-  <p class="ds-page-desc">Text fields let users enter and edit text. Norbielink provides outlined text fields with a consistent teal focus ring, used across all forms — user profiles, quote submissions, filters, and search.</p>
+  <p class="ds-page-desc">Text fields let users enter and edit text. Norbielink provides outlined text fields with a consistent purple focus ring, used across all forms — user profiles, quote submissions, filters, and search.</p>
 
   <!-- HERO -->
   <div class="ds-example" style="gap:24px; padding:48px; flex-wrap:wrap; align-items:flex-start;">
     <div style="display:flex;flex-direction:column;gap:6px;width:240px;">
       <label style="font-size:12px;font-weight:600;color:var(--gray-600);">Job Title</label>
-      <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:8px;border:1.5px solid #E5E7EB;background:white;color:#1A1A2E;outline:none;width:100%;" placeholder="e.g. Producer">
+      <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1.5px solid #E5E7EB;background:white;color:#1A1A2E;outline:none;width:100%;" placeholder="e.g. Producer">
       <span style="font-size:12px;color:var(--gray-400);">Default state</span>
     </div>
     <div style="display:flex;flex-direction:column;gap:6px;width:240px;">
       <label style="font-size:12px;font-weight:600;color:var(--gray-600);">Job Title</label>
-      <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:8px;border:2px solid #2CB9A8;background:white;color:#1A1A2E;outline:none;box-shadow:0 0 0 3px rgba(44,185,168,.12);width:100%;" value="">
+      <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1px solid #A614C3;background:white;color:#1A1A2E;outline:none;box-shadow:0 0 0 2px rgba(92,46,212,0.2);width:100%;" value="">
       <span style="font-size:12px;color:var(--gray-400);">Focused</span>
     </div>
     <div style="display:flex;flex-direction:column;gap:6px;width:240px;">
       <label style="font-size:12px;font-weight:600;color:var(--gray-600);">Job Title</label>
-      <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:8px;border:1.5px solid #2CB9A8;background:white;color:#1A1A2E;outline:none;width:100%;" value="Producer">
+      <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1.5px solid #A614C3;background:white;color:#1A1A2E;outline:none;width:100%;" value="Producer">
       <span style="font-size:12px;color:var(--gray-400);">Filled</span>
     </div>
     <div style="display:flex;flex-direction:column;gap:6px;width:240px;">
       <label style="font-size:12px;font-weight:600;color:#EF4444;">Job Title</label>
-      <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:8px;border:2px solid #EF4444;background:white;color:#1A1A2E;outline:none;box-shadow:0 0 0 3px rgba(239,68,68,.10);width:100%;" value="invalid@">
+      <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:2px solid #EF4444;background:white;color:#1A1A2E;outline:none;box-shadow:0 0 0 3px rgba(239,68,68,.10);width:100%;" value="invalid@">
       <span style="font-size:12px;color:#EF4444;">Invalid email format</span>
     </div>
   </div>
@@ -170,72 +162,72 @@
   <!-- STATES: Light + Dark -->
   <div class="ds-section" id="states">
     <h2 class="ds-section-title">States</h2>
-    <p class="ds-section-desc">All input states — across both light and dark themes. Focus ring uses <code>color.secondary</code> (Teal) and a 3px ring at 12% opacity.</p>
+    <p class="ds-section-desc">All input states — across both light and dark themes. Focus ring uses <code>color.primary</code> (Purple) and a 2px ring at 20% opacity.</p>
     <div class="field-grid">
 
-      <!-- Light Mode -->
-      <div>
+      <!-- Light Mode (hidden in light mode page — already self-demonstrated) -->
+      <div class="light-mode-demo">
         <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400);margin-bottom:20px;">Light Mode</div>
         <div class="field-col">
           <div class="field-wrap">
             <div class="field-state-tag">Default</div>
             <label class="field-label">Full Name</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:8px;border:1.5px solid #E5E7EB;background:white;color:#1A1A2E;outline:none;width:100%;" placeholder="Enter your name">
+            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1.5px solid #E5E7EB;background:white;color:#1A1A2E;outline:none;width:100%;" placeholder="Enter your name">
             <div class="helper">Helper text</div>
           </div>
           <div class="field-wrap">
             <div class="field-state-tag">Focused</div>
             <label class="field-label">Full Name</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:8px;border:2px solid #2CB9A8;background:white;color:#1A1A2E;outline:none;box-shadow:0 0 0 3px rgba(44,185,168,.12);width:100%;" placeholder="Enter your name">
+            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1px solid #A614C3;background:white;color:#1A1A2E;outline:none;box-shadow:0 0 0 2px rgba(92,46,212,0.2);width:100%;" placeholder="Enter your name">
           </div>
           <div class="field-wrap">
             <div class="field-state-tag">Filled</div>
             <label class="field-label">Full Name</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:8px;border:1.5px solid #2CB9A8;background:white;color:#1A1A2E;outline:none;width:100%;" value="John Smith">
+            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1.5px solid #A614C3;background:white;color:#1A1A2E;outline:none;width:100%;" value="John Smith">
           </div>
           <div class="field-wrap">
             <div class="field-state-tag">Error</div>
             <label class="field-label" style="color:#EF4444;">Email Address</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:8px;border:2px solid #EF4444;background:white;color:#1A1A2E;outline:none;box-shadow:0 0 0 3px rgba(239,68,68,.10);width:100%;" value="notvalid">
+            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:2px solid #EF4444;background:white;color:#1A1A2E;outline:none;box-shadow:0 0 0 3px rgba(239,68,68,.10);width:100%;" value="notvalid">
             <div class="error-text">Please enter a valid email address</div>
           </div>
           <div class="field-wrap">
             <div class="field-state-tag">Disabled</div>
             <label class="field-label" style="color:#9CA3AF;">Full Name</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:8px;border:1.5px solid #F3F4F6;background:#F9FAFB;color:#9CA3AF;outline:none;cursor:not-allowed;width:100%;" placeholder="Not editable" disabled>
+            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1.5px solid #F3F4F6;background:#F9FAFB;color:#9CA3AF;outline:none;cursor:not-allowed;width:100%;" placeholder="Not editable" disabled>
           </div>
         </div>
       </div>
 
-      <!-- Dark Mode -->
-      <div style="background:var(--dark-bg);border-radius:16px;padding:28px;">
+      <!-- Dark Mode (shown only when page is in dark mode) -->
+      <div class="dark-mode-demo">
         <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:20px;">Dark Mode</div>
         <div class="field-col">
           <div class="field-wrap">
             <div class="field-state-tag" style="color:rgba(255,255,255,0.25);">Default</div>
             <label style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);">Full Name</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:8px;border:1.5px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.9);outline:none;width:100%;" placeholder="Enter your name">
+            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1.5px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);outline:none;width:100%;" placeholder="Enter your name">
           </div>
           <div class="field-wrap">
             <div class="field-state-tag" style="color:rgba(255,255,255,0.25);">Focused</div>
             <label style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);">Full Name</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:8px;border:2px solid #2CB9A8;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.9);outline:none;box-shadow:0 0 0 3px rgba(44,185,168,.15);width:100%;" placeholder="">
+            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1px solid rgba(166,20,195,0.8);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);outline:none;box-shadow:0 0 0 2px rgba(92,46,212,0.2);width:100%;" placeholder="">
           </div>
           <div class="field-wrap">
             <div class="field-state-tag" style="color:rgba(255,255,255,0.25);">Filled</div>
             <label style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);">Full Name</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:8px;border:1.5px solid #2CB9A8;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.9);outline:none;width:100%;" value="John Smith">
+            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1.5px solid rgba(166,20,195,0.8);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);outline:none;width:100%;" value="John Smith">
           </div>
           <div class="field-wrap">
             <div class="field-state-tag" style="color:rgba(255,255,255,0.25);">Error</div>
             <label style="font-size:12px;font-weight:600;color:#EF4444;">Email Address</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:8px;border:2px solid #EF4444;background:rgba(239,68,68,0.08);color:rgba(255,255,255,0.9);outline:none;width:100%;" value="notvalid">
+            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:2px solid #EF4444;background:rgba(239,68,68,0.08);color:rgba(255,255,255,0.9);outline:none;width:100%;" value="notvalid">
             <div style="font-size:12px;color:#EF4444;margin-top:4px;">Please enter a valid email address</div>
           </div>
           <div class="field-wrap">
             <div class="field-state-tag" style="color:rgba(255,255,255,0.25);">Disabled</div>
             <label style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.2);">Full Name</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:8px;border:1.5px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.2);outline:none;cursor:not-allowed;width:100%;" disabled>
+            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1.5px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.2);outline:none;cursor:not-allowed;width:100%;" disabled>
           </div>
         </div>
       </div>
@@ -257,13 +249,13 @@
       </div>
       <div style="display:flex;flex-direction:column;gap:6px;width:240px;">
         <div class="field-state-tag">Focused</div>
-        <div class="select-demo" style="border:2px solid #2CB9A8;background:white;color:#1A1A2E;box-shadow:0 0 0 3px rgba(44,185,168,.12);">
-          <span style="color:#9CA3AF;">Select a role...</span><span style="color:#2CB9A8;font-size:12px;">▾</span>
+        <div class="select-demo" style="border:1px solid #A614C3;background:white;color:#1A1A2E;box-shadow:0 0 0 2px rgba(92,46,212,0.2);">
+          <span style="color:#9CA3AF;">Select a role...</span><span style="color:#A614C3;font-size:12px;">▾</span>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:6px;width:240px;">
         <div class="field-state-tag">Selected</div>
-        <div class="select-demo" style="border:1.5px solid #2CB9A8;background:white;color:#1A1A2E;">
+        <div class="select-demo" style="border:1.5px solid #A614C3;background:white;color:#1A1A2E;">
           <span>Producer</span><span style="color:#9CA3AF;font-size:12px;">▾</span>
         </div>
       </div>
@@ -287,29 +279,22 @@
         <div class="search-row">
           <div class="search-tag">Default</div>
           <div class="search-demo" style="border:1.5px solid #E5E7EB;background:white;">
-            <span style="color:#9CA3AF;font-size:15px;">🔍</span>
+            <span class="material-icons-round" style="color:#9CA3AF;font-size:18px;">search</span>
             <span style="font-size:14px;color:#9CA3AF;">Search clients, quotes or policies...</span>
           </div>
         </div>
         <div class="search-row">
           <div class="search-tag">Focused</div>
-          <div class="search-demo" style="border:2px solid #2CB9A8;background:white;box-shadow:0 0 0 3px rgba(44,185,168,.12);">
-            <span style="color:#2CB9A8;font-size:15px;">🔍</span>
+          <div class="search-demo" style="border:1px solid #A614C3;background:white;box-shadow:0 0 0 2px rgba(92,46,212,0.2);">
+            <span class="material-icons-round" style="color:#A614C3;font-size:18px;">search</span>
             <span style="font-size:14px;color:#9CA3AF;">Search clients, quotes or policies...</span>
           </div>
         </div>
         <div class="search-row">
           <div class="search-tag">With value</div>
-          <div class="search-demo" style="border:1.5px solid #2CB9A8;background:white;">
-            <span style="color:#2CB9A8;font-size:15px;">🔍</span>
+          <div class="search-demo" style="border:1.5px solid #A614C3;background:white;">
+            <span class="material-icons-round" style="color:#A614C3;font-size:18px;">search</span>
             <span style="font-size:14px;color:#1A1A2E;">VRG Plumbing</span>
-          </div>
-        </div>
-        <div class="search-row">
-          <div class="search-tag" style="color:rgba(255,255,255,0.4);">Dark</div>
-          <div class="search-demo" style="border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);width:360px;">
-            <span style="color:rgba(255,255,255,0.4);font-size:15px;">🔍</span>
-            <span style="font-size:14px;color:rgba(255,255,255,0.4);">Search clients, quotes or policies...</span>
           </div>
         </div>
       </div>
@@ -328,13 +313,13 @@
           <tr><td>Height</td><td>44px (11px top + bottom padding)</td></tr>
           <tr><td>Padding horizontal</td><td>14px (<code>space-3.5</code>)</td></tr>
           <tr><td>Border default</td><td>1.5px solid <code>color.outline</code> (#E5E7EB)</td></tr>
-          <tr><td>Border focused</td><td>2px solid <code>color.secondary</code> (#2CB9A8)</td></tr>
-          <tr><td>Focus ring</td><td><code>0 0 0 3px rgba(#2CB9A8, 12%)</code></td></tr>
+          <tr><td>Border focused</td><td>1px solid <code>color.primary</code> (#A614C3)</td></tr>
+          <tr><td>Focus ring</td><td><code>0 0 0 2px rgba(92,46,212,0.2)</code></td></tr>
           <tr><td>Border error</td><td>2px solid <code>color.error</code> (#EF4444)</td></tr>
           <tr><td>Error ring</td><td><code>0 0 0 3px rgba(#EF4444, 10%)</code></td></tr>
           <tr><td>Background light</td><td>white</td></tr>
-          <tr><td>Background dark</td><td><code>rgba(#FFF, 6%)</code></td></tr>
-          <tr><td>Shape</td><td><code>shape.sm</code> (8px) for inputs · <code>shape.full</code> for search</td></tr>
+          <tr><td>Background dark</td><td><code>rgba(#FFF, 5%)</code></td></tr>
+          <tr><td>Shape</td><td><code>shape.sm</code> (10px) for inputs · <code>shape.full</code> for search</td></tr>
           <tr><td>Font size</td><td>14px / Body Medium</td></tr>
           <tr><td>Label font</td><td>12px / Label Medium / 600</td></tr>
           <tr><td>Helper text</td><td>12px / Label Small / <code>color.on-surface-variant</code></td></tr>
@@ -372,14 +357,13 @@
 
 <script>
 const DS_PAGES = [
-  {t:'Color',section:'Styles',url:'ds-01-color.html',icon:'palette'},
-  {t:'Typography',section:'Styles',url:'ds-02-typography.html',icon:'text_fields'},
+  {t:'Color',section:'Foundations',url:'ds-01-color.html',icon:'palette'},
+  {t:'Typography',section:'Foundations',url:'ds-02-typography.html',icon:'text_fields'},
   {t:'Elevation',section:'Foundations',url:'ds-03-elevation.html',icon:'layers'},
   {t:'Shape',section:'Foundations',url:'ds-04-shape.html',icon:'rounded_corner'},
   {t:'Spacing',section:'Foundations',url:'ds-05-spacing.html',icon:'space_bar'},
   {t:'Badges',section:'Components',url:'ds-09-badges.html',icon:'fiber_manual_record'},
   {t:'Buttons',section:'Components',url:'ds-06-buttons.html',icon:'smart_button'},
-  {t:'Cards',section:'Components',url:'ds-10-cards.html',icon:'crop_square'},
   {t:'Checkbox',section:'Components',url:'ds-14-checkbox.html',icon:'check_box'},
   {t:'Chips',section:'Components',url:'ds-16-chips.html',icon:'label'},
   {t:'Data Tables',section:'Components',url:'ds-13-datatable.html',icon:'table_chart'},

@@ -8,19 +8,43 @@
 .sw-thumb { position: absolute; width: 22px; height: 22px; border-radius: 50%; background: white; top: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.25); transition: transform 0.2s; }
 .sw.on .sw-thumb { transform: translateX(26px); }
 .sw.off .sw-thumb { transform: translateX(4px); }
-.sw.on-teal { background: #2CB9A8; }
-.sw.on-purple { background: #2CB9A8; }
+.sw.on-teal { background: #E8622A; }
+.sw.on-purple { background: #E8622A; }
 .sw.on-orange { background: #F97316; }
 .sw.off-state { background: #D1D5DB; }
 .sw.off-dark { background: rgba(255,255,255,0.2); }
 .sw.disabled { opacity: 0.4; cursor: not-allowed; }
 
+.sw-rows-card { background: #fff; }
+body.dark-mode .sw-rows-card { background: #191D35; }
+body.dark-mode .sw-row { border-bottom-color: rgba(255,255,255,0.08); }
+body.dark-mode .sw-title { color: rgba(255,255,255,0.85); }
+body.dark-mode .sw-desc { color: rgba(255,255,255,0.45); }
+body.dark-mode .sw-state-tag { color: rgba(255,255,255,0.40); }
 .sw-row { display: flex; align-items: center; gap: 16px; padding: 14px 24px; border-bottom: 1px solid var(--gray-100); }
 .sw-row:last-child { border-bottom: none; }
 .sw-info { flex: 1; }
 .sw-title { font-size: 14px; font-weight: 600; color: var(--gray-800); margin-bottom: 2px; }
 .sw-desc { font-size: 12px; color: var(--gray-400); }
 .sw-state-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--gray-400); width: 80px; flex-shrink: 0; }
+
+/* Sidebar footer demo — light/dark variants */
+.sb-foot { background:#FFFFFF; border:1px solid #E5E7EB; border-radius:14px; padding:18px; width:240px; display:flex; flex-direction:column; gap:14px; }
+.sb-foot-btn { position:relative; box-sizing:border-box; height:57.84px; border:0.876px solid #E5E7EB; border-radius:8.76px; background:#FFFFFF; }
+.sb-foot-avatar { position:absolute; left:14.9px; top:13.14px; width:31.55px; height:31.55px; border-radius:50%; background:#FFFFFF; box-shadow:0 0 0 1.75px #E5E7EB; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.sb-foot-title { font-family:'Montserrat',sans-serif; font-weight:400; font-size:14.5px; line-height:18px; color:#6B7280; }
+.sb-foot-sub { font-family:'Montserrat',sans-serif; font-weight:400; font-size:10.5157px; line-height:14px; color:rgba(107,114,128,0.6); margin-top:3px; }
+.sb-foot-divider { height:1px; background:#E5E7EB; width:100%; }
+.sb-foot-label { font-size:12px; color:#6B7280; }
+
+body:not(.dark-mode) .sb-foot .sw.off-dark { background:#D1D5DB; }
+body.dark-mode .sb-foot { background:#0F1120; border-color:rgba(255,255,255,0.06); }
+body.dark-mode .sb-foot-btn { background:rgba(255,255,255,0.02); border-color:rgba(229,231,235,0.20); }
+body.dark-mode .sb-foot-avatar { box-shadow:0 0 0 1.75px rgba(229,231,235,0.20); }
+body.dark-mode .sb-foot-title { color:rgba(255,255,255,0.85); }
+body.dark-mode .sb-foot-sub { color:rgba(255,255,255,0.45); }
+body.dark-mode .sb-foot-divider { background:rgba(255,255,255,0.08); }
+body.dark-mode .sb-foot-label { color:rgba(255,255,255,0.7); }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -31,9 +55,7 @@
       <img src="BTIS.png" class="btis-logo-img" alt="NorbieLink">
     </a>
     <nav class="btis-top-nav">
-      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>
-      <a class="btis-top-nav-link" href="ds-nav-styles.html">Styles</a>
-      <a class="btis-top-nav-link active" href="ds-nav-components.html">Components</a>
+      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>      <a class="btis-top-nav-link active" href="ds-nav-components.html">Components</a>
       <a class="btis-top-nav-link" href="ds-nav-resources.html">Resources</a>
     </nav>
     <div class="btis-header-right">
@@ -53,7 +75,7 @@
   <div class="search-modal">
     <div class="search-input-wrap">
       <span class="material-icons-round">search</span>
-      <input id="search-input" type="text" placeholder="Search components, foundations, styles…" oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
+      <input id="search-input" type="text" placeholder="Search components, foundations…" oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
       <span class="material-icons-round search-close" onclick="closeSearch()">close</span>
     </div>
     <div class="search-results" id="search-results"></div>
@@ -78,16 +100,13 @@
     <a class="ds-sidenav-item" href="ds-26-accordion.html">Accordion</a>
     <a class="ds-sidenav-item" href="ds-27-alert.html">Alert</a>
     <a class="ds-sidenav-item" href="ds-28-alert-dialog.html">Alert Dialog</a>
-    <a class="ds-sidenav-item" href="ds-14-appbar.html">App Bars</a>
     <a class="ds-sidenav-item" href="ds-29-avatar.html">Avatar</a>
     <a class="ds-sidenav-item" href="ds-09-badges.html">Badge</a>
     <a class="ds-sidenav-item" href="ds-30-breadcrumb.html">Breadcrumb</a>
     <a class="ds-sidenav-item" href="ds-06-buttons.html">Button</a>
     <a class="ds-sidenav-item" href="ds-31-button-group.html">Button Group</a>
     <a class="ds-sidenav-item" href="ds-32-calendar.html">Calendar</a>
-    <a class="ds-sidenav-item" href="ds-10-cards.html">Card</a>
     <a class="ds-sidenav-item" href="ds-33-carousel.html">Carousel</a>
-    <a class="ds-sidenav-item" href="ds-34-chart.html">Chart</a>
     <a class="ds-sidenav-item" href="ds-15-checkbox.html">Checkbox</a>
     <a class="ds-sidenav-item" href="ds-16-chips.html">Chips</a>
     <a class="ds-sidenav-item" href="ds-35-collapsible.html">Collapsible</a>
@@ -100,7 +119,6 @@
     <a class="ds-sidenav-item" href="ds-40-drawer.html">Drawer</a>
     <a class="ds-sidenav-item" href="ds-41-dropdown.html">Dropdown Menu</a>
     <a class="ds-sidenav-item" href="ds-42-empty-state.html">Empty State</a>
-    <a class="ds-sidenav-item" href="ds-43-hover-card.html">Hover Card</a>
     <a class="ds-sidenav-item" href="ds-44-input-otp.html">Input OTP</a>
 <a class="ds-sidenav-item" href="ds-46-label.html">Label</a>
     <a class="ds-sidenav-item" href="ds-19-lists.html">Lists</a>
@@ -133,10 +151,6 @@
   <div class="ds-title-row">
     <h1 class="ds-page-title">Switches</h1>
     <div class="ds-title-actions">
-      <button class="ds-copy-page-btn" onclick="copyPageLink()">
-        <span class="material-icons-round">content_copy</span> Copy Page
-        <span class="material-icons-round chevron">expand_more</span>
-      </button>
       <a class="ds-nav-arrow-btn" href="ds-55-spinner.html" title="Previous"><span class="material-icons-round">arrow_back</span></a>
       <a class="ds-nav-arrow-btn" href="ds-11-tabs.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
@@ -158,12 +172,12 @@
     <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
       <div class="sw on on-teal"><div class="sw-thumb"></div></div>
       <div style="font-size:12px;font-weight:700;color:var(--gray-700);">Notifications</div>
-      <div style="font-size:11px;color:var(--gray-400);">On — Teal</div>
+      <div style="font-size:11px;color:var(--gray-400);">On — Orange</div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
       <div class="sw on on-purple"><div class="sw-thumb"></div></div>
       <div style="font-size:12px;font-weight:700;color:var(--gray-700);">Feature Flag</div>
-      <div style="font-size:11px;color:var(--gray-400);">On — Purple</div>
+      <div style="font-size:11px;color:var(--gray-400);">On — Orange</div>
     </div>
   </div>
 
@@ -174,13 +188,13 @@
     <h2 class="ds-section-title">States</h2>
     <p class="ds-section-desc">Each switch has three states: on, off, and disabled. The thumb always stays white. The track color changes to communicate the current state.</p>
 
-    <div class="ds-example" style="flex-direction:column; align-items:stretch; padding:0; border-radius:16px; overflow:hidden; background:white; gap:0;">
+    <div class="ds-example sw-rows-card" style="flex-direction:column; align-items:stretch; padding:0; border-radius:16px; overflow:hidden; gap:0;">
       <div class="sw-row">
         <div class="sw-state-tag">On</div>
         <div class="sw on on-teal"><div class="sw-thumb"></div></div>
         <div class="sw-info">
           <div class="sw-title">On state</div>
-          <div class="sw-desc">Track: <code>color.secondary</code> (#2CB9A8) · Thumb: white · positioned right</div>
+          <div class="sw-desc">Track: <code>color.warning</code> (#E8622A) · Thumb: white · positioned right</div>
         </div>
       </div>
       <div class="sw-row">
@@ -209,7 +223,7 @@
     <h2 class="ds-section-title">Color variants</h2>
     <p class="ds-section-desc">Three track colors are used depending on context. Dark Mode uses Orange (a signal of a major mode change), settings use Teal, and feature flags use Purple.</p>
 
-    <div class="ds-example" style="flex-direction:column; align-items:stretch; padding:0; border-radius:16px; overflow:hidden; background:white; gap:0;">
+    <div class="ds-example sw-rows-card" style="flex-direction:column; align-items:stretch; padding:0; border-radius:16px; overflow:hidden; gap:0;">
       <div class="sw-row">
         <div class="sw on on-orange"><div class="sw-thumb"></div></div>
         <div class="sw-info">
@@ -220,15 +234,15 @@
       <div class="sw-row">
         <div class="sw on on-teal"><div class="sw-thumb"></div></div>
         <div class="sw-info">
-          <div class="sw-title">Teal — General settings</div>
-          <div class="sw-desc">Track: #2CB9A8 (<code>color.secondary</code>) · Used for notification preferences, user settings, and general feature toggles.</div>
+          <div class="sw-title">Orange — General settings</div>
+          <div class="sw-desc">Track: #E8622A (<code>color.warning</code>) · Used for notification preferences, user settings, and general feature toggles.</div>
         </div>
       </div>
       <div class="sw-row">
         <div class="sw on on-purple"><div class="sw-thumb"></div></div>
         <div class="sw-info">
-          <div class="sw-title">Purple — Feature flags</div>
-          <div class="sw-desc">Track: #2CB9A8 (<code>color.primary</code>) · Used for beta features, ProSuite unlocks, and admin-level feature toggles.</div>
+          <div class="sw-title">Orange — Feature flags</div>
+          <div class="sw-desc">Track: #E8622A (<code>color.warning</code>) · Used for beta features, ProSuite unlocks, and admin-level feature toggles.</div>
         </div>
       </div>
     </div>
@@ -238,31 +252,39 @@
     
   
 
-  <div class="ds-divider">
+  <div class="ds-divider"></div>
 
   <!-- IN CONTEXT: Sidebar footer -->
   <div class="ds-section" id="in-context-sidebar-footer">
     <h2 class="ds-section-title">In context — Sidebar footer</h2>
-        <div>
-          <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.75);">Chat with Norbie</div>
-          <div style="font-size:10px;color:rgba(255,255,255,0.35);">AI Assistant</div>
+    <p class="ds-section-desc">How the Dark Mode and Legacy View switches appear in the Norbielink sidebar footer.</p>
+    <div class="ds-example" style="padding:32px; justify-content:center;">
+      <div class="sb-foot">
+        <div class="sb-foot-btn">
+          <div class="sb-foot-avatar">
+            <img src="Norbieface.svg" alt="Norbie" style="width:31.55px; height:31.55px; object-fit:contain;">
+          </div>
+          <div style="position:absolute; left:56.96px; top:11.39px; width:151.6px;">
+            <div class="sb-foot-title">Chat with Norbie</div>
+            <div class="sb-foot-sub">AI Assistant</div>
+          </div>
+        </div>
+        <div class="sb-foot-divider"></div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="sw on on-orange" style="width:40px;height:24px;">
+            <div class="sw-thumb" style="width:18px;height:18px;top:3px;transform:translateX(20px);"></div>
+          </div>
+          <span class="sb-foot-label">Dark Mode</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="sw off off-dark" style="width:40px;height:24px;">
+            <div class="sw-thumb" style="width:18px;height:18px;top:3px;transform:translateX(3px);"></div>
+          </div>
+          <span class="sb-foot-label">Legacy View</span>
         </div>
       </div>
-      <div style="height:1px;background:rgba(255,255,255,0.08);width:100%;margin-bottom:4px;"></div>
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div class="sw on on-orange" style="width:40px;height:24px;">
-          <div class="sw-thumb" style="width:18px;height:18px;top:3px;transform:translateX(20px);"></div>
-        </div>
-        <span style="font-size:12px;color:rgba(255,255,255,0.5);">Dark Mode</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div class="sw off off-dark" style="width:40px;height:24px;">
-          <div class="sw-thumb" style="width:18px;height:18px;top:3px;transform:translateX(3px);"></div>
-        </div>
-        <span style="font-size:12px;color:rgba(255,255,255,0.5);">Legacy View</span>
-      </div>
-    
-  
+    </div>
+  </div>
 
   <div class="ds-divider"></div>
 
@@ -281,8 +303,8 @@
           <tr><td>On position</td><td>Thumb at right: translateX(26px)</td></tr>
           <tr><td>Off position</td><td>Thumb at left: translateX(4px)</td></tr>
           <tr><td>Track on (Dark Mode)</td><td>#F97316 (warning)</td></tr>
-          <tr><td>Track on (General)</td><td>#2CB9A8 (secondary)</td></tr>
-          <tr><td>Track on (Feature)</td><td>#2CB9A8 (primary)</td></tr>
+          <tr><td>Track on (General)</td><td>#E8622A (warning/orange)</td></tr>
+          <tr><td>Track on (Feature)</td><td>#E8622A (warning/orange)</td></tr>
           <tr><td>Track off (light)</td><td>#D1D5DB (gray-300)</td></tr>
           <tr><td>Track off (dark)</td><td>rgba(white, 20%)</td></tr>
         </tbody>
@@ -322,14 +344,13 @@
 
 <script>
 const DS_PAGES = [
-  {t:'Color',section:'Styles',url:'ds-01-color.html',icon:'palette'},
-  {t:'Typography',section:'Styles',url:'ds-02-typography.html',icon:'text_fields'},
+  {t:'Color',section:'Foundations',url:'ds-01-color.html',icon:'palette'},
+  {t:'Typography',section:'Foundations',url:'ds-02-typography.html',icon:'text_fields'},
   {t:'Elevation',section:'Foundations',url:'ds-03-elevation.html',icon:'layers'},
   {t:'Shape',section:'Foundations',url:'ds-04-shape.html',icon:'rounded_corner'},
   {t:'Spacing',section:'Foundations',url:'ds-05-spacing.html',icon:'space_bar'},
   {t:'Badges',section:'Components',url:'ds-09-badges.html',icon:'fiber_manual_record'},
   {t:'Buttons',section:'Components',url:'ds-06-buttons.html',icon:'smart_button'},
-  {t:'Cards',section:'Components',url:'ds-10-cards.html',icon:'crop_square'},
   {t:'Checkbox',section:'Components',url:'ds-14-checkbox.html',icon:'check_box'},
   {t:'Chips',section:'Components',url:'ds-16-chips.html',icon:'label'},
   {t:'Data Tables',section:'Components',url:'ds-13-datatable.html',icon:'table_chart'},
