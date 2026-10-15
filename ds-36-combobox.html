@@ -3,19 +3,54 @@
 <title>Combobox — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.cmb{position:relative;width:100%;max-width:320px;font-family:'Montserrat',sans-serif;}
-.cmb-trigger{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border:1.5px solid #ddd;border-radius:8px;cursor:pointer;font-size:13px;color:#333;background:#fff;transition:border-color .15s;}
-.cmb-trigger:hover,.cmb-trigger.open{border-color:#A614C3;}
-.cmb-trigger .material-icons-round{font-size:18px;color:#aaa;}
-.cmb-search{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid #eee;}
-.cmb-search .material-icons-round{font-size:16px;color:#aaa;}
-.cmb-search input{border:none;outline:none;font-size:13px;font-family:'Montserrat',sans-serif;color:#333;flex:1;background:transparent;}
-.cmb-list{max-height:180px;overflow-y:auto;}
-.cmb-option{padding:9px 14px;font-size:13px;color:#444;cursor:pointer;transition:background .12s;display:flex;align-items:center;justify-content:space-between;}
-.cmb-option:hover{background:#f5f5f5;}
-.cmb-option.selected{color:#A614C3;font-weight:600;background:rgba(166,20,195,0.07);}
-.cmb-option.selected::after{content:'check';font-family:'Material Icons Round';font-size:16px;color:#A614C3;}
-.cmb-dropdown{border:1px solid #e8e8e8;border-radius:8px;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,.1);overflow:hidden;margin-top:4px;}
+/* ── COMBOBOX ── the searchable multi-select filter on a table column heading. */
+.cb-col { position: relative; font-family: 'Montserrat', sans-serif; }
+.cb-trigger { display: inline-flex; align-items: center; gap: 4px; padding: 0; border: none;
+  background: transparent; cursor: pointer; font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 700; line-height: 1.5; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--gray-500); }
+.cb-trigger.on { color: #A614C3; }
+.cb-caret { margin-left: 4px; display: inline-block; }
+
+.cb-panel { position: absolute; top: calc(100% + 4px); left: 0; z-index: 30; min-width: 220px;
+  background: #fff; border: 1px solid #E9EAEC; border-radius: 12px; overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+  font-family: 'Montserrat', sans-serif; text-align: left; }
+.cb-searchwrap { padding: 8px; border-bottom: 1px solid #E9EAEC; }
+.cb-search { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 8px;
+  background: var(--gray-50); border: 1px solid #E9EAEC; color: var(--gray-500); }
+.cb-input { flex: 1; min-width: 0; border: none; outline: none; background: transparent;
+  font-family: 'Montserrat', sans-serif; font-size: 12px; line-height: 1.5; color: var(--gray-800); }
+.cb-svg { display: block; flex-shrink: 0; }
+
+.cb-allwrap { padding: 8px 12px; border-bottom: 1px solid #E9EAEC; }
+.cb-all, .cb-opt { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left;
+  border: none; background: transparent; cursor: pointer; font-family: 'Montserrat', sans-serif;
+  font-size: 12px; line-height: 1.5; color: var(--gray-800); }
+.cb-all { padding: 0; }
+.cb-list { max-height: 180px; overflow-y: auto; padding: 4px 0; }
+.cb-opt { padding: 6px 12px; transition: background .15s; }
+.cb-opt:hover { background: var(--gray-50); }
+.cb-box { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  width: 16px; height: 16px; border-radius: 4px; border: 1.5px solid var(--gray-300); background: #fff; }
+.cb-tick { display: block; }
+.cb-reset { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+  padding: 12px; border: none; border-top: 1px solid #E9EAEC; background: transparent; cursor: pointer;
+  font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; line-height: 1.5;
+  color: #A614C3; transition: background .15s; }
+.cb-reset:hover { background: var(--gray-50); }
+
+body.dark-mode .cb-trigger { color: #8B8FA8; }
+body.dark-mode .cb-trigger.on { color: #A614C3; }
+body.dark-mode .cb-panel { background: #191D35; border-color: rgba(255,255,255,0.08); }
+body.dark-mode .cb-searchwrap, body.dark-mode .cb-allwrap { border-bottom-color: rgba(255,255,255,0.08); }
+body.dark-mode .cb-search { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.08);
+  color: #8B8FA8; }
+body.dark-mode .cb-input, body.dark-mode .cb-all, body.dark-mode .cb-opt { color: #F9FAFB; }
+body.dark-mode .cb-opt:hover { background: rgba(255,255,255,0.04); }
+body.dark-mode .cb-box { background: #191D35; border-color: rgba(255,255,255,0.18); }
+body.dark-mode .cb-reset { border-top-color: rgba(255,255,255,0.08); }
+body.dark-mode .cb-reset:hover { background: rgba(255,255,255,0.04); }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -116,9 +151,8 @@
 </nav>
 <aside class="ds-toc">
   <div class="ds-toc-title">On this page</div>
-  <a class="ds-toc-item active" href="#overview">Overview</a>
-  <a class="ds-toc-item" href="#installation">Installation</a>
-  <a class="ds-toc-item" href="#api">Api</a>
+  <a class="ds-toc-item active" href="#overview">Column filter</a>
+  <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 <main class="ds-main">
   <div class="ds-content">
@@ -136,69 +170,66 @@
       <a class="ds-nav-arrow-btn" href="ds-38-context-menu.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">An autocomplete input combining a text field with a dropdown list of options.</p>
-    <div class="ds-section" id="overview">      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
-        </div>
-        <div class="ds-preview-pane" id="prev-main" style="align-items:center;justify-content:center;">
-          <div style="width:100%;max-width:320px;display:flex;flex-direction:column;gap:8px;">
-            <div class="cmb-trigger open"><span>Framework: Next.js</span><span class="material-icons-round">unfold_more</span></div>
-            <div class="cmb-dropdown">
-              <div class="cmb-search"><span class="material-icons-round">search</span><input placeholder="Search framework..."></div>
-              <div class="cmb-list">
-                <div class="cmb-option selected">Next.js</div>
-                <div class="cmb-option">Remix</div>
-                <div class="cmb-option">SvelteKit</div>
-                <div class="cmb-option">Nuxt</div>
-                <div class="cmb-option">Astro</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="ds-code-pane" id="code-main">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-main')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"cmb"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"cmb-trigger"</span><span class="c-tag">&gt;</span>Select framework...
-    <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"material-icons-round"</span><span class="c-tag">&gt;</span>unfold_more<span class="c-tag">&lt;/span&gt;</span>
-  <span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"cmb-dropdown"</span><span class="c-tag">&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"cmb-search"</span><span class="c-tag">&gt;</span>
-      <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"material-icons-round"</span><span class="c-tag">&gt;</span>search<span class="c-tag">&lt;/span&gt;</span>
-      <span class="c-tag">&lt;input</span> <span class="c-attr">placeholder</span>=<span class="c-str">"Search..."</span><span class="c-tag">&gt;</span>
-    <span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"cmb-list"</span><span class="c-tag">&gt;</span>
-      <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"cmb-option selected"</span><span class="c-tag">&gt;</span>Next.js<span class="c-tag">&lt;/div&gt;</span>
-      <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"cmb-option"</span><span class="c-tag">&gt;</span>Remix<span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;/div&gt;</span>
-<span class="c-tag">&lt;/div&gt;</span></pre>
-        </div>
+    <p class="ds-page-desc">Norbielink’s combobox is the <strong>table column filter</strong>. It is not a
+  single-value picker — it is a searchable, <strong>multi-select</strong> checklist that opens from a column
+  heading, with Select All at the top and Reset Filter at the bottom. For picking one value from a short list
+  the product uses a plain <a href="ds-52-select.html">select</a> instead.</p>
+
+  <div class="ds-section" id="overview">
+    <h2 class="ds-section-title">Column filter</h2>
+    <p class="ds-section-desc">The trigger is the column heading itself, with a small caret. Both heading and
+    caret turn <code>#A614C3</code> while any value is selected, so an active filter is visible without opening
+    the panel.</p>
+    <div class="ds-example" style="padding:32px 32px 300px;gap:48px;align-items:flex-start;justify-content:center;">
+      <div class="cb-col">
+        <button class="cb-trigger">Status <svg class="cb-caret" width="7" height="5" viewBox="0 0 7 5" fill="none"><path d="M3.5 5L0.5 0H6.5L3.5 5Z" fill="currentColor"/></svg></button>
       </div>
-    </div><div class="ds-divider"></div>    <div class="ds-section" id="installation">
-      <h2 class="ds-section-title">Installation</h2>
-      <p class="ds-section-desc">Built with pure HTML and CSS. Include <span class="ds-inline-code">ds-shared.css</span> in your project.</p>
-      <div class="ds-install-wrap">
-        <div class="ds-install-tabbar">
-          <button class="ds-install-tab active" onclick="switchInstall(this,'pnpm')">pnpm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'npm')">npm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'yarn')">yarn</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'bun')">bun</button>
-        </div>
-        <div class="ds-install-code">
-          <span class="ds-install-cmd" id="install-cmd"><span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span></span>
-          <button class="ds-copy-btn" style="position:static;" onclick="copyInstall(this)"><span class="material-icons-round">content_copy</span></button>
+      <div class="cb-col">
+        <button class="cb-trigger on">LOB <svg class="cb-caret" width="7" height="5" viewBox="0 0 7 5" fill="none"><path d="M3.5 5L0.5 0H6.5L3.5 5Z" fill="currentColor"/></svg></button>
+        <div class="cb-panel">
+          <div class="cb-searchwrap">
+            <div class="cb-search"><svg class="cb-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg><input class="cb-input" placeholder="Search LOB" value=""></div>
+          </div>
+          <div class="cb-allwrap">
+            <button class="cb-all"><span class="cb-box"></span>Select All</button>
+          </div>
+          <div class="cb-list"><button class="cb-opt"><span class="cb-box"><svg class="cb-tick" width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="#A614C3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>General Liability</button><button class="cb-opt"><span class="cb-box"><svg class="cb-tick" width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="#A614C3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Commercial Auto</button><button class="cb-opt"><span class="cb-box"></span>Workers’ Comp</button><button class="cb-opt"><span class="cb-box"></span>Professional Liability</button><button class="cb-opt"><span class="cb-box"></span>Inland Marine</button><button class="cb-opt"><span class="cb-box"></span>Cyber Risk</button><button class="cb-opt"><span class="cb-box"></span>Excess</button></div>
+          <button class="cb-reset"><svg class="cb-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg> Reset Filter</button>
         </div>
       </div>
     </div>
-    <div class="ds-divider"></div>
-    <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
-      <h3 class="ds-subsection-title">Classes</h3>
-      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>cmb</code></td><td>Outer container (position:relative)</td></tr><tr><td><code>cmb-trigger</code></td><td>Button that opens the dropdown</td></tr><tr><td><code>cmb-dropdown</code></td><td>Floating dropdown panel</td></tr><tr><td><code>cmb-search</code></td><td>Search input row at top of dropdown</td></tr><tr><td><code>cmb-list</code></td><td>Scrollable options list</td></tr><tr><td><code>cmb-option</code></td><td>Individual option</td></tr><tr><td><code>cmb-option.selected</code></td><td>Currently selected option</td></tr></tbody></table></div>    </div>
+  </div>
 
-  
-    <!-- ── Prev / Next navigation ── -->
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Part</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Trigger</td><td>11px / 700 uppercase · <code>letter-spacing .05em</code> · <code>gap 4px</code> · <code>#6B7280</code>, <code>#A614C3</code> when filtered</td></tr>
+        <tr><td>Caret</td><td>7×5 solid triangle, not a chevron · <code>margin-left 4px</code> · takes the trigger’s colour</td></tr>
+        <tr><td>Panel</td><td><code>min-width 220px</code> · <code>radius 12px</code> · <code>overflow:hidden</code> · <code>#fff</code> on <code>1px #E9EAEC</code> · <code>shadow-lg</code> · <code>margin-top 4px</code>, <code>left 0</code></td></tr>
+        <tr><td>Search block</td><td><code>padding 8px</code> · <code>border-bottom 1px</code>; field <code>padding 6px 10px</code> · <code>radius 8px</code> · <code>#F9FAFB</code> on <code>1px #E9EAEC</code> · <code>gap 8px</code> · 14px icon</td></tr>
+        <tr><td>Search input</td><td>12px · transparent · <code>outline:none</code> · <code>flex:1</code></td></tr>
+        <tr><td>Select All</td><td><code>padding 8px 12px</code> · <code>border-bottom 1px</code> · 12px · ticks only when every option is selected</td></tr>
+        <tr><td>Option list</td><td><code>max-height 180px</code> · <code>overflow-y:auto</code> · <code>padding 4px 0</code></td></tr>
+        <tr><td>Option</td><td><code>padding 6px 12px</code> · 12px · <code>gap 8px</code> · hover <code>#F9FAFB</code></td></tr>
+        <tr><td>Checkbox</td><td>16×16 · <code>radius 4px</code> · <code>1.5px #D1D5DB</code> on white · tick is a 9×7 <code>#A614C3</code> stroke, the box never fills</td></tr>
+        <tr><td>Reset Filter</td><td>Full width · <code>padding 12px</code> · centred · 12px / 600 <code>#A614C3</code> · <code>border-top 1px</code> · 14px <code>refresh-cw</code> icon · hover <code>#F9FAFB</code></td></tr>
+        <tr><td>Dismiss</td><td>A transparent <code>fixed inset-0</code> backdrop at <code>z-index 20</code>; the panel sits at <code>30</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td>The checkbox here is <strong>not</strong> the one on <a href="ds-15-checkbox.html">Checkbox</a>: it is smaller, has a 1.5px border, and shows a bare tick instead of filling with the brand colour. It exists only inside this panel.</td></tr>
+      <tr><td>Selecting nothing and selecting everything mean the same thing — an empty set is treated as “no filter”, which is why Reset Filter clears the set rather than ticking all of it.</td></tr>
+      <tr><td>The search box filters the option list only. It never creates a value, so this is a filter, not a tag input or a free-text entry.</td></tr>
+      <tr><td>There is no keyboard navigation, no highlighted option and no empty state — a search that matches nothing simply renders an empty list between the two dividers.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-35-collapsible.html">
       <span class="ds-page-nav-label">← Previous</span>
