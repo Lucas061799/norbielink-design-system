@@ -4,22 +4,37 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
-.field-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
-body:not(.dark-mode) .dark-mode-demo { display: none; }
-body.dark-mode .light-mode-demo { display: none; }
-.field-col { display: flex; flex-direction: column; gap: 24px; }
-.field-wrap { display: flex; flex-direction: column; gap: 6px; }
-.field-label { font-size: 12px; font-weight: 600; color: var(--gray-600); }
-.field-state-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--gray-400); margin-bottom: 4px; }
-.helper { font-size: 12px; color: var(--gray-400); margin-top: 4px; }
-.error-text { font-size: 12px; color: var(--error); margin-top: 4px; }
+/* ── TEXT FIELD ── transcribed from the live app (filter + edit-form inputs). */
+.tf-col { display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 420px; }
+.tf-wrap { display: flex; flex-direction: column; }
+.tf-label { font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--gray-800);
+  display: block; margin-bottom: 6px; font-family: 'Montserrat', sans-serif; }
+.tf {
+  width: 100%; height: 40px; box-sizing: border-box;
+  padding: 9px 12px; border-radius: 10px;
+  border: 1px solid var(--gray-300); background: var(--input-bg);
+  font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
+  color: var(--gray-800); outline: none;
+}
+.tf::placeholder { color: var(--gray-400); }
+.tf:disabled { background: var(--gray-50); color: var(--gray-400); cursor: not-allowed; }
+.tf-invalid { border-color: #DC2626; box-shadow: 0 0 0 1px rgba(220,38,38,0.15); }
+.tf-error { display: flex; align-items: center; gap: 4px; font-size: 11px; line-height: 1.5;
+  color: #DC2626; margin-top: 4px; }
+.tf-error .material-icons-round { font-size: 13px; }
+.tf-help { font-size: 11px; line-height: 1.5; color: var(--gray-400); margin-top: 4px; }
 
-.search-states { display: flex; flex-direction: column; gap: 20px; }
-.search-row { display: flex; align-items: center; gap: 20px; }
-.search-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--gray-400); width: 70px; flex-shrink: 0; }
-.search-demo { display: flex; align-items: center; gap: 10px; border-radius: 50px; padding: 10px 18px; width: 360px; }
+.tf-select {
+  appearance: none; -webkit-appearance: none; cursor: pointer; padding-right: 32px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+}
 
-.select-demo { display: flex; align-items: center; justify-content: space-between; border-radius: 8px; padding: 11px 14px; font-size: 14px; cursor: pointer; width: 100%; }
+/* A leading icon softens the border and pushes the text right. */
+.tf-search { position: relative; width: 100%; max-width: 420px; }
+.tf-search .material-icons-round { position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  font-size: 16px; color: var(--gray-400); pointer-events: none; }
+.tf-has-icon { padding: 9px 14px 9px 36px; border-color: var(--gray-200); }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -127,104 +142,31 @@ body.dark-mode .light-mode-demo { display: none; }
       <a class="ds-nav-arrow-btn" href="ds-56-textarea.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-  <p class="ds-page-desc">Text fields let users enter and edit text. Norbielink provides outlined text fields with a consistent purple focus ring, used across all forms — user profiles, quote submissions, filters, and search.</p>
+  <p class="ds-page-desc">One field shape across the product: <code>40px</code> tall, <code>9px 12px</code> padding,
+  <code>10px</code> radius, <code>13px</code> text. Form fields take the stronger <code>#D1D5DB</code> hairline;
+  search and filter fields take the lighter <code>#E5E7EB</code>.</p>
 
-  <!-- HERO -->
-  <div class="ds-example" style="gap:24px; padding:48px; flex-wrap:wrap; align-items:flex-start;">
-    <div style="display:flex;flex-direction:column;gap:6px;width:240px;">
-      <label style="font-size:12px;font-weight:600;color:var(--gray-600);">Job Title</label>
-      <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1.5px solid #E5E7EB;background:white;color:#1A1A2E;outline:none;width:100%;" placeholder="e.g. Producer">
-      <span style="font-size:12px;color:var(--gray-400);">Default state</span>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:6px;width:240px;">
-      <label style="font-size:12px;font-weight:600;color:var(--gray-600);">Job Title</label>
-      <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1px solid #A614C3;background:white;color:#1A1A2E;outline:none;box-shadow:0 0 0 2px rgba(92,46,212,0.2);width:100%;" value="">
-      <span style="font-size:12px;color:var(--gray-400);">Focused</span>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:6px;width:240px;">
-      <label style="font-size:12px;font-weight:600;color:var(--gray-600);">Job Title</label>
-      <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1.5px solid #A614C3;background:white;color:#1A1A2E;outline:none;width:100%;" value="Producer">
-      <span style="font-size:12px;color:var(--gray-400);">Filled</span>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:6px;width:240px;">
-      <label style="font-size:12px;font-weight:600;color:#DC2626;">Job Title</label>
-      <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:2px solid #DC2626;background:white;color:#1A1A2E;outline:none;box-shadow:0 0 0 3px rgba(220,38,38,.10);width:100%;" value="invalid@">
-      <span style="font-size:12px;color:#DC2626;">Invalid email format</span>
-    </div>
-  </div>
-
-  <div class="ds-divider"></div>
-
-  <!-- STATES: Light + Dark -->
   <div class="ds-section" id="states">
     <h2 class="ds-section-title">States</h2>
-    <p class="ds-section-desc">All input states — across both light and dark themes. Focus ring uses <code>color.primary</code> (Purple) and a 2px ring at 20% opacity.</p>
-    <div class="field-grid">
-
-      <!-- Light Mode (hidden in light mode page — already self-demonstrated) -->
-      <div class="light-mode-demo">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400);margin-bottom:20px;">Light Mode</div>
-        <div class="field-col">
-          <div class="field-wrap">
-            <div class="field-state-tag">Default</div>
-            <label class="field-label">Full Name</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1.5px solid #E5E7EB;background:white;color:#1A1A2E;outline:none;width:100%;" placeholder="Enter your name">
-            <div class="helper">Helper text</div>
-          </div>
-          <div class="field-wrap">
-            <div class="field-state-tag">Focused</div>
-            <label class="field-label">Full Name</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1px solid #A614C3;background:white;color:#1A1A2E;outline:none;box-shadow:0 0 0 2px rgba(92,46,212,0.2);width:100%;" placeholder="Enter your name">
-          </div>
-          <div class="field-wrap">
-            <div class="field-state-tag">Filled</div>
-            <label class="field-label">Full Name</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1.5px solid #A614C3;background:white;color:#1A1A2E;outline:none;width:100%;" value="John Smith">
-          </div>
-          <div class="field-wrap">
-            <div class="field-state-tag">Error</div>
-            <label class="field-label" style="color:#DC2626;">Email Address</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:2px solid #DC2626;background:white;color:#1A1A2E;outline:none;box-shadow:0 0 0 3px rgba(220,38,38,.10);width:100%;" value="notvalid">
-            <div class="error-text">Please enter a valid email address</div>
-          </div>
-          <div class="field-wrap">
-            <div class="field-state-tag">Disabled</div>
-            <label class="field-label" style="color:#9CA3AF;">Full Name</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1.5px solid #F3F4F6;background:#F9FAFB;color:#9CA3AF;outline:none;cursor:not-allowed;width:100%;" placeholder="Not editable" disabled>
-          </div>
+    <div class="ds-example" style="padding:40px;">
+      <div class="tf-col">
+        <div class="tf-wrap">
+          <label class="tf-label">Agency Name</label>
+          <input class="tf" placeholder="Acme Insurance Agency">
         </div>
-      </div>
-
-      <!-- Dark Mode (shown only when page is in dark mode) -->
-      <div class="dark-mode-demo">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:20px;">Dark Mode</div>
-        <div class="field-col">
-          <div class="field-wrap">
-            <div class="field-state-tag" style="color:rgba(255,255,255,0.25);">Default</div>
-            <label style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);">Full Name</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1.5px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);outline:none;width:100%;" placeholder="Enter your name">
-          </div>
-          <div class="field-wrap">
-            <div class="field-state-tag" style="color:rgba(255,255,255,0.25);">Focused</div>
-            <label style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);">Full Name</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1px solid rgba(166,20,195,0.8);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);outline:none;box-shadow:0 0 0 2px rgba(92,46,212,0.2);width:100%;" placeholder="">
-          </div>
-          <div class="field-wrap">
-            <div class="field-state-tag" style="color:rgba(255,255,255,0.25);">Filled</div>
-            <label style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);">Full Name</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1.5px solid rgba(166,20,195,0.8);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);outline:none;width:100%;" value="John Smith">
-          </div>
-          <div class="field-wrap">
-            <div class="field-state-tag" style="color:rgba(255,255,255,0.25);">Error</div>
-            <label style="font-size:12px;font-weight:600;color:#DC2626;">Email Address</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:2px solid #DC2626;background:rgba(220,38,38,0.08);color:rgba(255,255,255,0.9);outline:none;width:100%;" value="notvalid">
-            <div style="font-size:12px;color:#DC2626;margin-top:4px;">Please enter a valid email address</div>
-          </div>
-          <div class="field-wrap">
-            <div class="field-state-tag" style="color:rgba(255,255,255,0.25);">Disabled</div>
-            <label style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.2);">Full Name</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:1.5px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.2);outline:none;cursor:not-allowed;width:100%;" disabled>
-          </div>
+        <div class="tf-wrap">
+          <label class="tf-label">Agency Code</label>
+          <input class="tf" value="ACME01">
+        </div>
+        <div class="tf-wrap">
+          <label class="tf-label">Email Address</label>
+          <input class="tf tf-invalid" value="invalid@">
+          <div class="tf-error"><span class="material-icons-round">error</span>Enter a valid email address.</div>
+        </div>
+        <div class="tf-wrap">
+          <label class="tf-label">Tax ID</label>
+          <input class="tf" value="121222334455" disabled>
+          <div class="tf-help">Locked after the agency is appointed.</div>
         </div>
       </div>
     </div>
@@ -232,33 +174,19 @@ body.dark-mode .light-mode-demo { display: none; }
 
   <div class="ds-divider"></div>
 
-  <!-- SELECT / DROPDOWN -->
   <div class="ds-section" id="select-dropdown">
-    <h2 class="ds-section-title">Select / Dropdown</h2>
-    <p class="ds-section-desc">Dropdowns share the same shape and state tokens as text fields. The chevron icon indicates selectability.</p>
-    <div class="ds-example" style="gap:24px; align-items:flex-start; flex-wrap:wrap; padding:40px;">
-      <div style="display:flex;flex-direction:column;gap:6px;width:240px;">
-        <div class="field-state-tag">Default</div>
-        <div class="select-demo" style="border:1.5px solid #E5E7EB;background:white;color:#9CA3AF;">
-          <span>Select a role...</span><span style="color:#9CA3AF;font-size:12px;">▾</span>
+    <h2 class="ds-section-title">Select</h2>
+    <p class="ds-section-desc">The same field with <code>appearance: none</code>, <code>32px</code> of right padding
+    and a chevron drawn as an inline SVG data URI at <code>right 12px center</code>.</p>
+    <div class="ds-example" style="padding:40px;">
+      <div class="tf-col">
+        <div class="tf-wrap">
+          <label class="tf-label">Agency Type</label>
+          <select class="tf tf-select"><option>Retail</option><option>Wholesale</option></select>
         </div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:6px;width:240px;">
-        <div class="field-state-tag">Focused</div>
-        <div class="select-demo" style="border:1px solid #A614C3;background:white;color:#1A1A2E;box-shadow:0 0 0 2px rgba(92,46,212,0.2);">
-          <span style="color:#9CA3AF;">Select a role...</span><span style="color:#A614C3;font-size:12px;">▾</span>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:6px;width:240px;">
-        <div class="field-state-tag">Selected</div>
-        <div class="select-demo" style="border:1.5px solid #A614C3;background:white;color:#1A1A2E;">
-          <span>Producer</span><span style="color:#9CA3AF;font-size:12px;">▾</span>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:6px;width:240px;">
-        <div class="field-state-tag">Disabled</div>
-        <div class="select-demo" style="border:1.5px solid #F3F4F6;background:#F9FAFB;color:#9CA3AF;cursor:not-allowed;">
-          <span>Select a role...</span><span style="color:#D1D5DB;font-size:12px;">▾</span>
+        <div class="tf-wrap">
+          <label class="tf-label">Country</label>
+          <select class="tf tf-select"><option>United States of America</option><option>Canada</option></select>
         </div>
       </div>
     </div>
@@ -266,32 +194,15 @@ body.dark-mode .light-mode-demo { display: none; }
 
   <div class="ds-divider"></div>
 
-  <!-- SEARCH BAR -->
   <div class="ds-section" id="search">
     <h2 class="ds-section-title">Search</h2>
-    <p class="ds-section-desc">The search bar uses a full pill shape (<code>shape.full</code>) and appears in the top bar. It shares the same focus ring as other inputs.</p>
-    <div class="ds-example" style="flex-direction:column; align-items:flex-start; gap:20px; padding:40px;">
-      <div class="search-states">
-        <div class="search-row">
-          <div class="search-tag">Default</div>
-          <div class="search-demo" style="border:1.5px solid #E5E7EB;background:white;">
-            <span class="material-icons-round" style="color:#9CA3AF;font-size:18px;">search</span>
-            <span style="font-size:14px;color:#9CA3AF;">Search clients, quotes or policies...</span>
-          </div>
-        </div>
-        <div class="search-row">
-          <div class="search-tag">Focused</div>
-          <div class="search-demo" style="border:1px solid #A614C3;background:white;box-shadow:0 0 0 2px rgba(92,46,212,0.2);">
-            <span class="material-icons-round" style="color:#A614C3;font-size:18px;">search</span>
-            <span style="font-size:14px;color:#9CA3AF;">Search clients, quotes or policies...</span>
-          </div>
-        </div>
-        <div class="search-row">
-          <div class="search-tag">With value</div>
-          <div class="search-demo" style="border:1.5px solid #A614C3;background:white;">
-            <span class="material-icons-round" style="color:#A614C3;font-size:18px;">search</span>
-            <span style="font-size:14px;color:#1A1A2E;">VRG Plumbing</span>
-          </div>
+    <p class="ds-section-desc">A field with a leading icon: left padding grows to <code>36px</code> and the border
+    softens to <code>#E5E7EB</code>. Everything else is unchanged.</p>
+    <div class="ds-example" style="padding:40px;">
+      <div class="tf-col">
+        <div class="tf-search">
+          <span class="material-icons-round">search</span>
+          <input class="tf tf-has-icon" placeholder="Search by agency, code, or user...">
         </div>
       </div>
     </div>
@@ -299,33 +210,35 @@ body.dark-mode .light-mode-demo { display: none; }
 
   <div class="ds-divider"></div>
 
-  <!-- SPECS -->
   <div class="ds-section" id="specs">
     <h2 class="ds-section-title">Specs</h2>
     <div class="ds-table-wrap">
       <table class="ds-table">
         <thead><tr><th>Property</th><th>Value</th></tr></thead>
         <tbody>
-          <tr><td>Height</td><td>44px (11px top + bottom padding)</td></tr>
-          <tr><td>Padding horizontal</td><td>14px (<code>space-3.5</code>)</td></tr>
-          <tr><td>Border default</td><td>1.5px solid <code>color.outline</code> (#E5E7EB)</td></tr>
-          <tr><td>Border focused</td><td>1px solid <code>color.primary</code> (#A614C3)</td></tr>
-          <tr><td>Focus ring</td><td><code>0 0 0 2px rgba(92,46,212,0.2)</code></td></tr>
-          <tr><td>Border error</td><td>2px solid <code>color.error</code> (#DC2626)</td></tr>
-          <tr><td>Error ring</td><td><code>0 0 0 3px rgba(#DC2626, 10%)</code></td></tr>
-          <tr><td>Background light</td><td>white</td></tr>
-          <tr><td>Background dark</td><td><code>rgba(#FFF, 5%)</code></td></tr>
-          <tr><td>Shape</td><td><code>shape.sm</code> (10px) for inputs · <code>shape.full</code> for search</td></tr>
-          <tr><td>Font size</td><td>14px / Body Medium</td></tr>
-          <tr><td>Label font</td><td>12px / Label Medium / 600</td></tr>
-          <tr><td>Helper text</td><td>12px / Label Small / <code>color.on-surface-variant</code></td></tr>
+          <tr><td>Height</td><td><code>40px</code> · <code>box-sizing: border-box</code></td></tr>
+          <tr><td>Padding</td><td><code>9px 12px</code> · <code>9px 14px 9px 36px</code> with a leading icon</td></tr>
+          <tr><td>Radius</td><td><code>10px</code> · <code>8px</code> on the compact edit form</td></tr>
+          <tr><td>Border</td><td><code>1px #D1D5DB</code> on form fields · <code>1px #E5E7EB</code> on search and filter fields · <code>rgba(255,255,255,.18)</code> / <code>.12</code> in dark</td></tr>
+          <tr><td>Surface</td><td><code>#FFFFFF</code> · <code>rgba(255,255,255,.05)</code> in dark</td></tr>
+          <tr><td>Text</td><td>13px / 400 · <code>#1F2937</code> · placeholder <code>#9CA3AF</code></td></tr>
+          <tr><td>Outline</td><td><code>none</code> — the product does not draw a focus ring on inputs</td></tr>
+          <tr><td>Label</td><td>13px / 600 · <code>display: block</code> · <code>margin-bottom 6px</code></td></tr>
+          <tr><td>Invalid</td><td>border <code>#DC2626</code> + <code>box-shadow 0 0 0 1px rgba(220,38,38,.15)</code></td></tr>
+          <tr><td>Error text</td><td>11px · <code>#DC2626</code> · <code>margin-top 4px</code></td></tr>
+          <tr><td>Select chevron</td><td>12×12 inline SVG, <code>stroke #9CA3AF</code>, at <code>right 12px center</code> · <code>padding-right 32px</code></td></tr>
         </tbody>
       </table>
     </div>
+    <div class="ds-table-wrap" style="margin-top:24px;">
+      <table class="ds-table"><tbody>
+        <tr><td>Two error reds exist in the product: the field border uses <code>#DC2626</code>, while one older form renders its message in <code>#EF4444</code>. Use <code>#DC2626</code>.</td></tr>
+        <tr><td>Inputs carry no focus ring. Do not add one to the DS that the product does not draw.</td></tr>
+      </tbody></table>
+    </div>
   </div>
 
-
-    <!-- ── Prev / Next navigation ── -->
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-56-textarea.html">
       <span class="ds-page-nav-label">← Previous</span>
@@ -342,7 +255,7 @@ body.dark-mode .light-mode-demo { display: none; }
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
   <a class="ds-toc-item active" href="#states">States</a>
-  <a class="ds-toc-item" href="#select-dropdown">Select / Dropdown</a>
+  <a class="ds-toc-item" href="#select-dropdown">Select</a>
   <a class="ds-toc-item" href="#search">Search</a>
   <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>

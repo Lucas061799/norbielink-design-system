@@ -4,6 +4,21 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
+<style>
+/* ── LOADING ──
+   The product has no spinner component and no progress bar. A long action
+   spins the icon already on its own button, counter-clockwise, and swaps the
+   label. Transcribed from the Refresh control on Quotes and Policies. */
+@keyframes ds-spin-ccw { 0% { transform: rotate(0); } to { transform: rotate(-360deg); } }
+.load-btn { display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 10px; border-radius: 8px; border: 1px solid var(--gray-200);
+  background: var(--card-bg); font-family: 'Montserrat', sans-serif;
+  font-size: 12px; font-weight: 500; line-height: 1.5; color: var(--gray-800); cursor: pointer; }
+.load-btn:hover { background: var(--hover-bg); }
+.load-btn .material-icons-round { font-size: 14px; color: var(--gray-500); }
+.load-btn.is-loading .material-icons-round { animation: ds-spin-ccw 0.9s linear infinite; }
+.load-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+</style>
 </head>
 <body class="btis-layout">
 <header class="btis-header">
@@ -105,8 +120,7 @@
 
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
-  <a class="ds-toc-item active" href="#linear">Linear</a>
-  <a class="ds-toc-item" href="#circular">Circular</a>
+  <a class="ds-toc-item active" href="#loading-pattern">The loading pattern</a>
   <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 
@@ -123,43 +137,47 @@
       <a class="ds-nav-arrow-btn" href="ds-47-menubar.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">Progress indicators communicate the status of ongoing processes. They help reassure users that the system is active and reducing uncertainty.</p>
+    <p class="ds-page-desc">Norbielink has <strong>no progress bar</strong>. A DOM and bundle sweep finds no
+  <code>role="progressbar"</code>, no determinate bar and no percentage readout anywhere in the product. Long actions
+  are shown by spinning the icon on the control that started them.</p>
 
-<div class="ds-section" id="linear"><div class="ds-section-title">Linear</div>
-<div class="ds-example" style="flex-direction:column;gap:24px;align-items:stretch;padding:32px 48px;">
-  <div><div style="font-size:12px;color:#9CA3AF;font-weight:600;margin-bottom:10px;">Determinate (65%)</div><div style="height:4px;background:rgba(92,46,212,0.1);border-radius:4px;overflow:hidden;"><div style="height:100%;width:65%;background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);border-radius:4px;"></div></div></div>
-  <div><div style="font-size:12px;color:#9CA3AF;font-weight:600;margin-bottom:10px;">With label</div>
-  <div style="display:flex;align-items:center;gap:12px;"><div style="flex:1;height:4px;background:rgba(92,46,212,0.1);border-radius:4px;overflow:hidden;"><div style="height:100%;width:40%;background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);border-radius:4px;"></div></div><span style="font-size:12px;font-weight:700;color:#A614C3;">40%</span></div>
-  </div>
-</div></div>
-<div class="ds-section" id="circular"><div class="ds-section-title">Circular</div>
-<div class="ds-example" style="gap:40px;">
-  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
-    <div style="width:48px;height:48px;border-radius:50%;border:4px solid rgba(166,20,195,0.15);border-top-color:#A614C3;animation:spin 1s linear infinite;"></div>
-    <span style="font-size:12px;color:#9CA3AF;font-weight:500;">Indeterminate</span>
-  </div>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
-    <div style="width:48px;height:48px;position:relative;">
-      <svg viewBox="0 0 48 48" style="transform:rotate(-90deg);width:48px;height:48px;">
-        <circle cx="24" cy="24" r="20" fill="none" stroke="rgba(166,20,195,0.15)" stroke-width="4"/>
-        <circle cx="24" cy="24" r="20" fill="none" stroke="#A614C3" stroke-width="4" stroke-dasharray="125.6" stroke-dashoffset="44" stroke-linecap="round"/>
-      </svg>
-      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#A614C3;">65%</div>
+  <div class="ds-section" id="loading-pattern">
+    <h2 class="ds-section-title">The loading pattern</h2>
+    <p class="ds-section-desc">The control keeps its place, its icon spins, and its label changes. Nothing is added
+    to the layout, so the page does not shift.</p>
+    <div class="ds-example" style="padding:40px;">
+      <div class="load-row">
+        <button class="load-btn"><span class="material-icons-round">refresh</span>Refresh</button>
+        <button class="load-btn is-loading"><span class="material-icons-round">refresh</span>Refreshing…</button>
+      </div>
     </div>
-    <span style="font-size:12px;color:#9CA3AF;font-weight:500;">Determinate</span>
   </div>
-</div>
-<style>@keyframes spin{to{transform:rotate(360deg);}}</style>
-</div>
-<div class="ds-section" id="specs"><div class="ds-section-title">Specs</div>
-<div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Property</th><th>Value</th><th>Token</th></tr></thead><tbody>
-<tr><td>Linear height</td><td>4px</td><td><code>progress.linear.height</code></td></tr>
-<tr><td>Circular size</td><td>48px</td><td><code>progress.circular.size</code></td></tr>
-<tr><td>Active color</td><td>#A614C3 (gradient)</td><td><code>color.primary</code></td></tr>
-<tr><td>Track color</td><td>rgba(92,46,212,0.1)</td><td><code>color.primary-container</code></td></tr>
-</tbody></table></div></div>
-  
-    <!-- ── Prev / Next navigation ── -->
+
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Indicator</td><td>The button’s own 14×14px icon — no separate element</td></tr>
+          <tr><td>Animation</td><td><code>0.9s linear infinite</code>, rotating to <code>-360deg</code> — <strong>counter-clockwise</strong></td></tr>
+          <tr><td>Icon colour</td><td><code>#6B7280</code> · unchanged while loading</td></tr>
+          <tr><td>Label</td><td>Swaps to the present participle, e.g. <code>Refresh → Refreshing…</code></td></tr>
+          <tr><td>Disabled</td><td><code>cursor: not-allowed</code> while the action runs</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ds-table-wrap" style="margin-top:24px;">
+      <table class="ds-table"><tbody>
+        <tr><td>Do not add a progress bar, a percentage or a blocking overlay. For content that is still arriving, use <a href="ds-54-skeleton.html">Skeleton</a>.</td></tr>
+        <tr><td>The rotation is negative. A clockwise spin reads as a different component.</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-49-popover.html">
       <span class="ds-page-nav-label">← Previous</span>

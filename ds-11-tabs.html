@@ -4,17 +4,33 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
-.tab-demo { background: white; border-radius: 16px; padding: 32px; border: 1px solid var(--gray-200); margin-bottom: 24px; }
-.tabs-hero { background: #fff; }
-body.dark-mode .tabs-hero { background: #191D35; }
-body.dark-mode .tab-bar { border-bottom-color: rgba(255,255,255,0.10); }
-.tab-bar { display: flex; border-bottom: 2px solid var(--gray-200); margin-bottom: 24px; }
-.tab-item { padding: 12px 28px; font-size: 14px; font-weight: 600; color: var(--gray-400); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; font-family: Montserrat, sans-serif; white-space: nowrap; }
-.tab-item.active { color: #A614C3; border-bottom-color: #A614C3; }
-.tab-item.active-purple { color: #A614C3; border-bottom-color: #A614C3; }
-.tab-item:hover:not(.active):not(.active-purple) { color: var(--gray-700); border-bottom-color: var(--gray-200); }
-body.dark-mode .tab-item:hover:not(.active):not(.active-purple) { color: rgba(255,255,255,0.85); border-bottom-color: rgba(255,255,255,0.15); }
-.tab-content { background: var(--gray-50); border-radius: 8px; padding: 24px; font-size: 13px; color: var(--gray-500); }
+/* ── TABS ── transcribed from the agency record tab bar and its sub-view pills. */
+.tab-bar { display: flex; align-items: center; gap: 4px; border-bottom: 1px solid var(--gray-200);
+  margin-bottom: 20px; width: 100%; overflow-x: auto; }
+.tab-item { position: relative; display: inline-flex; align-items: center; gap: 6px;
+  padding: 12px 16px; border: none; background: transparent; cursor: pointer;
+  font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
+  letter-spacing: 0.01em; color: var(--gray-500); white-space: nowrap; transition: color .12s; }
+.tab-item .material-icons-round { font-size: 16px; color: inherit; }
+.tab-item:hover { color: var(--gray-800); }
+.tab-item.active { color: #A614C3; }
+.tab-underline { position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%); }
+.tab-count { display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px; border-radius: 9999px; background: rgba(166,20,195,0.12);
+  font-size: 10px; font-weight: 600; color: #A614C3; flex-shrink: 0; }
+body.dark-mode .tab-bar { border-bottom-color: var(--gray-200); }
+body.dark-mode .tab-item { color: var(--gray-500); }
+body.dark-mode .tab-item.active { color: #FFFFFF; }
+body.dark-mode .tab-count { background: rgba(168,85,247,0.22); color: #E9D5FF; }
+
+.tab-pills { display: flex; align-items: center; gap: 2px; flex-wrap: wrap; }
+.tab-pill { padding: 6px 12px; border: none; border-radius: 6px; background: transparent;
+  cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500;
+  line-height: 1.5; color: var(--gray-500); white-space: nowrap; transition: background .12s, color .12s; }
+.tab-pill:hover { background: var(--hover-bg); }
+.tab-pill.active { background: #F3F4F6; color: var(--gray-800); }
+body.dark-mode .tab-pill.active { background: rgba(255,255,255,0.06); color: #F9FAFB; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -122,107 +138,70 @@ body.dark-mode .tab-item:hover:not(.active):not(.active-purple) { color: rgba(25
       <a class="ds-nav-arrow-btn" href="ds-08-textfields.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-  <p class="ds-page-desc">Tabs organize content into groups at the same level of hierarchy. Norbielink uses primary tabs with an underline indicator. The active indicator uses <code>#A614C3</code> (Purple) for all tab variants.</p>
+  <p class="ds-page-desc">Two tab patterns ship. The <strong>underline bar</strong> switches the main view of a
+  record; the <strong>pill group</strong> switches a sub-view inside a panel. Neither uses a border on the item
+  itself — the active underline is a separate 2px gradient element.</p>
 
-  <!-- HERO -->
-  <div class="ds-example tabs-hero" style="flex-direction:column; align-items:stretch; padding:0; overflow:hidden; border-radius:16px; gap:0;">
-    <div style="padding:24px 32px 0;">
-      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400);margin-bottom:16px;">Quote Detail — UW Comments &amp; Documents</div>
-      <div class="tab-bar">
-        <div class="tab-item active">UW Comments</div>
-        <div class="tab-item">Documents</div>
-        <div class="tab-item">History</div>
-      </div>
-    </div>
-    <div style="padding:0 32px 32px;">
-      <div class="tab-content">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-          <div style="font-size:13px;color:var(--gray-700);font-weight:600;">11/20/2024 2:09:48 PM &nbsp; QCN03262409</div>
-          <div style="font-size:12px;font-weight:700;color:#A614C3;cursor:pointer;">+ Expand</div>
-        </div>
-        <div style="font-size:13px;color:var(--gray-700);">Lorem ipsum dolor sit amet, consectetur adipiscing elit. The underwriter has reviewed the submission and provided initial comments regarding risk assessment...</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ds-divider"></div>
-
-  <!-- VARIANTS -->
   <div class="ds-section" id="variants">
-    <h2 class="ds-section-title">Variants</h2>
-    <p class="ds-section-desc">Two layout variants — both using the purple indicator. Document tabs and section navigation tabs share the same active color.</p>
-
-    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400);margin-bottom:12px;">Purple indicator — Document tabs</div>
-    <div class="tab-demo">
+    <h2 class="ds-section-title">Underline bar</h2>
+    <p class="ds-section-desc">The record tab bar. The container carries a <code>1px</code> hairline and the active
+    tab paints a <code>2px</code> brand gradient over it.</p>
+    <div class="ds-example" style="padding:32px 40px;">
       <div class="tab-bar">
-        <div class="tab-item active">UW Comments</div>
-        <div class="tab-item">Documents</div>
-        <div class="tab-item">History</div>
+          <button class="tab-item active"><span class="material-icons-round">dashboard</span>Overview<span class="tab-underline"></span></button>
+          <button class="tab-item"><span class="material-icons-round">description</span>Quotes</button>
+          <button class="tab-item"><span class="material-icons-round">shield</span>Policies</button>
+          <button class="tab-item"><span class="material-icons-round">group</span>Users</button>
+          <button class="tab-item"><span class="material-icons-round">folder</span>Documents</button>
+          <button class="tab-item"><span class="material-icons-round">sticky_note_2</span>Notes<span class="tab-count">3</span></button>
       </div>
-      <div class="tab-content">Active tab content area</div>
-    </div>
-
-    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400);margin-bottom:12px;margin-top:32px;">Purple indicator — Section tabs</div>
-    <div class="tab-demo">
-      <div class="tab-bar">
-        <div class="tab-item active-purple">Overview</div>
-        <div class="tab-item">Submissions</div>
-        <div class="tab-item">Analytics</div>
-        <div class="tab-item">Settings</div>
-      </div>
-      <div class="tab-content">Active tab content area</div>
     </div>
   </div>
 
   <div class="ds-divider"></div>
 
-  <!-- STATES -->
   <div class="ds-section" id="tab-item-states">
-    <h2 class="ds-section-title">Tab item states</h2>
-    <p class="ds-section-desc">Each tab item has three interactive states. Only one tab can be active at a time.</p>
-    <div class="ds-example" style="flex-direction:column; align-items:flex-start; gap:0; padding:0; overflow:hidden; border-radius:16px; background:white;">
-      <div style="width:100%; padding:24px 0 0;">
-        <div class="tab-bar" style="margin-bottom:0;display:grid;grid-template-columns:repeat(4,1fr);">
-          <div class="tab-item active" style="text-align:center;">Active</div>
-          <div class="tab-item" style="color:var(--gray-700);border-bottom-color:var(--gray-200);text-align:center;">Hover</div>
-          <div class="tab-item" style="text-align:center;">Rest</div>
-          <div class="tab-item" style="color:var(--gray-300);cursor:not-allowed;text-align:center;">Disabled</div>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--gray-100);width:100%;">
-        <div style="padding:16px 28px;font-size:11px;color:var(--gray-400);border-right:1px solid var(--gray-100);text-align:center;">color: #A614C3<br>3px underline indicator</div>
-        <div style="padding:16px 28px;font-size:11px;color:var(--gray-400);border-right:1px solid var(--gray-100);text-align:center;">color: gray-700<br>bg: gray-50</div>
-        <div style="padding:16px 28px;font-size:11px;color:var(--gray-400);border-right:1px solid var(--gray-100);text-align:center;">color: gray-400<br>no indicator</div>
-        <div style="padding:16px 28px;font-size:11px;color:var(--gray-400);text-align:center;">color: gray-300<br>cursor: not-allowed</div>
+    <h2 class="ds-section-title">Pill group</h2>
+    <p class="ds-section-desc">Used for sub-views. The selected pill takes a neutral <code>#F3F4F6</code> fill —
+    no brand colour, no underline.</p>
+    <div class="ds-example" style="padding:32px 40px;">
+      <div class="tab-pills">
+          <button class="tab-pill active">ITC Record</button>
+          <button class="tab-pill">Commission Statement</button>
+          <button class="tab-pill">Statement of Account</button>
       </div>
     </div>
   </div>
 
   <div class="ds-divider"></div>
 
-  <!-- SPECS -->
   <div class="ds-section" id="specs">
     <h2 class="ds-section-title">Specs</h2>
     <div class="ds-table-wrap">
       <table class="ds-table">
-        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <thead><tr><th>Property</th><th>Underline bar</th><th>Pill group</th></tr></thead>
         <tbody>
-          <tr><td>Tab height</td><td>44px (12px top + bottom padding)</td></tr>
-          <tr><td>Tab padding horizontal</td><td>28px</td></tr>
-          <tr><td>Font</td><td>14px / SemiBold 600 / Montserrat</td></tr>
-          <tr><td>Active color</td><td><code>color.primary</code> (#A614C3)</td></tr>
-          <tr><td>Indicator height</td><td>3px bottom border</td></tr>
-          <tr><td>Container border</td><td>2px solid <code>color.outline</code> at bottom</td></tr>
-          <tr><td>Rest color</td><td>gray-400</td></tr>
-          <tr><td>Dark active</td><td>Same teal / purple indicator, text matches</td></tr>
-          <tr><td>Dark rest</td><td>rgba(white, 45%)</td></tr>
+          <tr><td>Container</td><td><code>flex</code> · <code>gap 4px</code> · <code>border-bottom 1px #E5E7EB</code> · <code>margin-bottom 20px</code></td><td><code>flex</code> · <code>gap 2px</code></td></tr>
+          <tr><td>Item padding</td><td><code>12px 16px</code></td><td><code>6px 12px</code></td></tr>
+          <tr><td>Type</td><td>13px / 400 · <code>letter-spacing 0.01em</code></td><td>12px / 500</td></tr>
+          <tr><td>Icon gap</td><td><code>6px</code></td><td><code>6px</code></td></tr>
+          <tr><td>Radius</td><td><code>0</code></td><td><code>6px</code></td></tr>
+          <tr><td>Inactive</td><td><code>#6B7280</code></td><td><code>#6B7280</code> on transparent</td></tr>
+          <tr><td>Active</td><td><code>#A614C3</code> · <code>#FFFFFF</code> in dark</td><td><code>#1F2937</code> on <code>#F3F4F6</code> · <code>rgba(255,255,255,.06)</code> in dark</td></tr>
+          <tr><td>Active marker</td><td><code>2px</code> <code>linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%)</code>, absolutely positioned at <code>bottom 0</code></td><td>— fill only</td></tr>
+          <tr><td>Count badge</td><td>16×16px round · <code>rgba(166,20,195,.12)</code></td><td>—</td></tr>
         </tbody>
       </table>
     </div>
+    <div class="ds-table-wrap" style="margin-top:24px;">
+      <table class="ds-table"><tbody>
+        <tr><td>The active tab does not set <code>border-bottom</code> on itself. The underline is a child element so it can carry a gradient, which a border cannot.</td></tr>
+        <tr><td>No tab is bold. The active one changes colour, not weight.</td></tr>
+      </tbody></table>
+    </div>
   </div>
 
-
-    <!-- ── Prev / Next navigation ── -->
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-12-switches.html">
       <span class="ds-page-nav-label">← Previous</span>
@@ -240,8 +219,8 @@ body.dark-mode .tab-item:hover:not(.active):not(.active-purple) { color: rgba(25
 
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
-  <a class="ds-toc-item active" href="#variants">Variants</a>
-  <a class="ds-toc-item" href="#tab-item-states">Tab item states</a>
+  <a class="ds-toc-item active" href="#variants">Underline bar</a>
+  <a class="ds-toc-item" href="#tab-item-states">Pill group</a>
   <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 

@@ -4,6 +4,42 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
+<style>
+/* ── DIALOG ── transcribed from the Export Clients panel. */
+.dlg-scrim { display: flex; align-items: center; justify-content: center; width: 100%;
+  min-height: 340px; padding: 24px; border-radius: 12px; background: rgba(0,0,0,0.45); }
+.dlg { display: flex; flex-direction: column; width: 100%; max-width: 540px; max-height: 420px;
+  border-radius: 16px; background: var(--card-bg); border: 1px solid var(--gray-200);
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); font-family: 'Montserrat', sans-serif; overflow: hidden; }
+.dlg-head { display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 16px 24px; border-bottom: 1px solid var(--gray-200); flex-shrink: 0; }
+.dlg-title { font-size: 16px; font-weight: 700; line-height: 1.5; color: var(--gray-800); margin: 0; }
+.dlg-sub { font-size: 12px; line-height: 1.5; color: var(--gray-500); margin: 2px 0 0; }
+.dlg-close { display: inline-flex; padding: 6px; border: none; border-radius: 6px; background: transparent;
+  color: var(--gray-500); cursor: pointer; transition: background .12s; }
+.dlg-close:hover { background: var(--hover-bg); }
+.dlg-close .material-icons-round { font-size: 16px; }
+.dlg-body { flex: 1; min-height: 0; overflow-y: auto; padding: 20px 24px; }
+.dlg-section-label { font-size: 10px; font-weight: 700; line-height: 1.5; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--gray-500); margin: 0 0 8px; }
+.dlg-opts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.dlg-opt { display: flex; align-items: center; gap: 8px; width: 100%; padding: 8px 12px;
+  border-radius: 8px; border: 1px solid var(--gray-200); background: transparent;
+  font-family: inherit; font-size: 12px; line-height: 1.5; color: var(--gray-800); cursor: pointer; }
+.dlg-opt.selected { background: rgba(166,20,195,0.06); border-color: rgba(166,20,195,0.25); color: #A614C3; }
+.dlg-radio { display: inline-flex; align-items: center; justify-content: center;
+  width: 14px; height: 14px; border-radius: 9999px; border: 1.5px solid var(--gray-200); flex-shrink: 0; }
+.dlg-opt.selected .dlg-radio { border-color: #A614C3; }
+.dlg-radio span { width: 6px; height: 6px; border-radius: 9999px; background: #A614C3; }
+.dlg-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 16px 24px; border-top: 1px solid var(--gray-200); flex-shrink: 0; }
+.dlg-btn { padding: 9px 17px; border-radius: 8px; border: 1px solid var(--gray-200);
+  background: var(--card-bg); font-family: inherit; font-size: 12px; font-weight: 400;
+  line-height: 1.5; color: var(--gray-800); cursor: pointer; }
+.dlg-btn.primary { border: none; font-weight: 600; color: #fff;
+  background: linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%); }
+.dlg-btn.primary:hover { filter: brightness(1.10); }
+</style>
 </head>
 <body class="btis-layout">
 <header class="btis-header">
@@ -103,7 +139,7 @@
 
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
-  <a class="ds-toc-item active" href="#variants">Variants</a>
+  <a class="ds-toc-item active" href="#variants">Panel dialog</a>
   <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 
@@ -120,82 +156,71 @@
       <a class="ds-nav-arrow-btn" href="ds-18-divider.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">Dialogs interrupt users with urgent information or required decisions. They appear in front of all content and require interaction before dismissal.</p>
+    <p class="ds-page-desc">A dialog is a <code>16px</code> panel on a <code>rgba(0,0,0,.45)</code> scrim, sized to its
+  job rather than to a scale: <code>400px</code> for a confirmation, <code>540–620px</code> for a working panel,
+  capped at <code>92vw</code> and <code>86vh</code>. Header and footer are fixed; only the body scrolls.</p>
 
-<div class="ds-section" id="variants"><div class="ds-section-title">Variants</div>
-<div class="ds-example" style="gap:24px;align-items:flex-start;flex-wrap:wrap;">
-
-  <!-- Destructive confirm dialog -->
-  <div style="background:white;border-radius:16px;border:1px solid #E5E7EB;box-shadow:0 20px 50px rgba(0,0,0,0.12);padding:24px;width:360px;">
-    <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:20px;">
-      <div style="width:48px;height:48px;border-radius:50%;background:rgba(239,68,68,0.10);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-        <span class="material-icons-round" style="color:#EF4444;font-size:22px;">delete</span>
+  <div class="ds-section" id="variants">
+    <h2 class="ds-section-title">Panel dialog</h2>
+    <p class="ds-section-desc">Title with a supporting line, a close button, a scrolling body, and a footer whose
+    buttons sit at opposite ends.</p>
+    <div class="ds-example" style="padding:32px;">
+      <div class="dlg-scrim">
+        <div class="dlg">
+          <div class="dlg-head">
+            <div>
+              <h2 class="dlg-title">Export Clients</h2>
+              <p class="dlg-sub">Based on your current view</p>
+            </div>
+            <button class="dlg-close"><span class="material-icons-round">close</span></button>
+          </div>
+          <div class="dlg-body">
+            <p class="dlg-section-label">Scope</p>
+            <div class="dlg-opts">
+              <button class="dlg-opt selected"><span class="dlg-radio"><span></span></span>Current view (22)</button>
+              <button class="dlg-opt"><span class="dlg-radio"></span>All clients (148)</button>
+            </div>
+          </div>
+          <div class="dlg-foot">
+            <button class="dlg-btn">Cancel</button>
+            <button class="dlg-btn primary">Export</button>
+          </div>
+        </div>
       </div>
-      <div>
-        <div style="font-size:16px;font-weight:700;color:#111827;margin-bottom:4px;">Remove this user?</div>
-        <div style="font-size:12px;color:#6B7280;line-height:1.6;">This action <strong style="color:#EF4444;">cannot be undone</strong>. They will be permanently removed from this agency.</div>
-      </div>
-    </div>
-    <div style="display:flex;justify-content:flex-end;gap:10px;">
-      <div style="font-size:12px;padding:7px 16px;border-radius:8px;border:1px solid #D1D5DB;background:transparent;cursor:pointer;font-weight:500;color:#374151;">Cancel</div>
-      <div style="font-size:12px;padding:7px 16px;border-radius:8px;background:#EF4444;color:white;cursor:pointer;font-weight:600;">Remove</div>
     </div>
   </div>
 
-  <!-- Success / confirmation dialog -->
-  <div style="background:white;border-radius:16px;border:1px solid #E5E7EB;box-shadow:0 20px 50px rgba(0,0,0,0.12);padding:24px;width:360px;">
-    <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:20px;">
-      <div style="width:48px;height:48px;border-radius:50%;background:rgba(166,20,195,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-        <span class="material-icons-round" style="color:#A614C3;font-size:22px;">check_circle</span>
-      </div>
-      <div>
-        <div style="font-size:16px;font-weight:700;color:#111827;margin-bottom:4px;">Changes saved</div>
-        <div style="font-size:12px;color:#6B7280;line-height:1.6;">Your design changes have been saved successfully to the cloud.</div>
-      </div>
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Part</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Scrim</td><td><code>rgba(0,0,0,0.45)</code> · <code>0.40</code> on the confirm dialog · click to dismiss</td></tr>
+          <tr><td>Panel</td><td><code>radius 16px</code> · <code>shadow-2xl</code> · <code>1px #E5E7EB</code> · <code>max-width 92vw</code> · <code>max-height 86vh</code> · flex column</td></tr>
+          <tr><td>Width</td><td><code>400px</code> confirm · <code>540px</code> / <code>620px</code> panel</td></tr>
+          <tr><td>Header</td><td><code>padding 16px 24px</code> · <code>border-bottom 1px</code> · does not scroll</td></tr>
+          <tr><td>Title</td><td>16px / 700 · sub-line 12px muted at <code>margin-top 2px</code></td></tr>
+          <tr><td>Close</td><td>16×16px icon · <code>padding 6px</code> · <code>radius 6px</code> · hover <code>#F9FAFB</code></td></tr>
+          <tr><td>Body</td><td><code>padding 20px 24px</code> · <code>overflow-y auto</code> · the only scrolling region</td></tr>
+          <tr><td>Section label</td><td>10px / 700 · uppercase · <code>letter-spacing .05em</code> · muted</td></tr>
+          <tr><td>Footer</td><td><code>padding 16px 24px</code> · <code>border-top 1px</code> · <code>justify-content: space-between</code></td></tr>
+          <tr><td>Buttons</td><td><code>padding 9px 17px</code> · <code>radius 8px</code> · 12px · Cancel 400 on white, primary 600 on the gradient</td></tr>
+          <tr><td>Option row</td><td><code>padding 8px 12px</code> · <code>radius 8px</code> · selected: <code>rgba(166,20,195,.06)</code> fill, <code>rgba(166,20,195,.25)</code> border, <code>#A614C3</code> text</td></tr>
+        </tbody>
+      </table>
     </div>
-    <div style="display:flex;justify-content:flex-end;">
-      <div style="font-size:12px;padding:7px 20px;border-radius:8px;background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:white;cursor:pointer;font-weight:600;box-shadow:0 4px 14px rgba(166,20,195,0.25);">Done</div>
+    <div class="ds-table-wrap" style="margin-top:24px;">
+      <table class="ds-table"><tbody>
+        <tr><td>Footer buttons are <code>space-between</code>, not right-aligned — Cancel sits at the far left.</td></tr>
+        <tr><td>Destructive confirmations are a different component; see <a href="ds-28-alert-dialog.html">Alert Dialog</a>.</td></tr>
+      </tbody></table>
     </div>
   </div>
 
-  <!-- Neutral / info dialog -->
-  <div style="background:white;border-radius:16px;border:1px solid #E5E7EB;box-shadow:0 20px 50px rgba(0,0,0,0.12);padding:24px;width:360px;">
-    <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:20px;">
-      <div style="width:48px;height:48px;border-radius:50%;background:rgba(245,158,11,0.10);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-        <span class="material-icons-round" style="color:#F59E0B;font-size:22px;">warning</span>
-      </div>
-      <div>
-        <div style="font-size:16px;font-weight:700;color:#111827;margin-bottom:4px;">Archive document?</div>
-        <div style="font-size:12px;color:#6B7280;line-height:1.6;">This document will be moved to archive. You can restore it at any time from the archived files section.</div>
-      </div>
-    </div>
-    <div style="display:flex;justify-content:flex-end;gap:10px;">
-      <div style="font-size:12px;padding:7px 16px;border-radius:8px;border:1px solid #D1D5DB;background:transparent;cursor:pointer;font-weight:500;color:#374151;">Cancel</div>
-      <div style="font-size:12px;padding:7px 16px;border-radius:8px;background:#F59E0B;color:white;cursor:pointer;font-weight:600;">Archive</div>
-    </div>
-  </div>
-
-</div></div>
-<div class="ds-section" id="specs"><div class="ds-section-title">Specs</div>
-<div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Property</th><th>Value</th><th>Token</th></tr></thead><tbody>
-<tr><td>Width</td><td>360–420px</td><td><code>dialog.width</code></td></tr>
-<tr><td>Border radius</td><td>16px</td><td><code>dialog.radius</code></td></tr>
-<tr><td>Border</td><td>1px solid #E5E7EB</td><td><code>color.border</code></td></tr>
-<tr><td>Shadow</td><td>0 20px 50px rgba(0,0,0,0.12)</td><td><code>dialog.shadow</code></td></tr>
-<tr><td>Padding</td><td>24px</td><td><code>dialog.padding</code></td></tr>
-<tr><td>Icon circle size</td><td>48×48px / rounded-full</td><td>—</td></tr>
-<tr><td>Icon circle — destructive</td><td>rgba(239,68,68,0.10) bg · #EF4444 icon</td><td>—</td></tr>
-<tr><td>Icon circle — success</td><td>rgba(166,20,195,0.08) bg · #A614C3 icon</td><td>—</td></tr>
-<tr><td>Icon circle — warning</td><td>rgba(245,158,11,0.10) bg · #F59E0B icon</td><td>—</td></tr>
-<tr><td>Title</td><td>16px / Bold 700 / #111827</td><td><code>type.heading-sm</code></td></tr>
-<tr><td>Body</td><td>12px / Regular / #6B7280 / line-height 1.6</td><td><code>type.body-sm</code></td></tr>
-<tr><td>Cancel button</td><td>border 1px solid #D1D5DB · transparent bg · 12px / Medium</td><td>—</td></tr>
-<tr><td>Destructive button</td><td>#EF4444 solid fill · white text · 12px / Semibold</td><td>—</td></tr>
-<tr><td>Primary button</td><td>gradient fill · white text · 12px / Semibold</td><td><code>color.primary-gradient</code></td></tr>
-<tr><td>Button padding</td><td>7px 16px · border-radius 8px</td><td>—</td></tr>
-</tbody></table></div></div>
-  
-    <!-- ── Prev / Next navigation ── -->
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-39-date-picker.html">
       <span class="ds-page-nav-label">← Previous</span>

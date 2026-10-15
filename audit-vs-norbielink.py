@@ -21,7 +21,7 @@ SPEC = {
         "#10B981": "Tailwind green — product's positive state is teal #73C9B7",
         "#059669": "Tailwind green — product's positive state is teal #73C9B7",
         "#047857": "Tailwind green — product's positive state is teal #73C9B7",
-        "#4ECDC4": "DS teal-400/500 — product uses #73C9B7",
+        "#4ECDC4": "DS teal accent — product uses #73C9B7; valid ONLY as a dark-mode value",
         "#F97316": "only valid as the activity-feed 'note' icon; switches use #E8622A",
         "#3B82F6": "only valid as promo-card tag content, never as a UI colour",
     },
@@ -29,22 +29,46 @@ SPEC = {
     "allowed_radius_px": {"0", "4", "6", "8", "9", "10", "12", "16", "100", "999", "9999"},
 }
 
-def styling_context(src):
-    """Only the text that actually styles something: <style> blocks and
-    style="..." attributes. A hex inside <code> is documentation — the
-    retired-colour tables on the Color page are not violations."""
-    parts = re.findall(r"<style>(.*?)</style>", src, re.S)
-    parts += re.findall(r'style="([^"]*)"', src)
-    return "\n".join(parts) if (parts or "<" in src) else src
+def styling_rules(src):
+    """Yield (selector, declarations) for every styling site.
+
+    Rules from <style> blocks keep their selector, so a check can tell a
+    dark-mode declaration from a light-mode one. Inline style="..." has no
+    selector and yields "".
+    """
+    for block in re.findall(r"<style>(.*?)</style>", src, re.S):
+        for m in re.finditer(r"([^{}]+)\{([^{}]*)\}", block):
+            yield m.group(1).strip().split("\n")[-1].strip(), m.group(2)
+    for m in re.finditer(r'style="([^"]*)"', src):
+        yield "", m.group(1)
+
+
+DARK_ONLY = {"#4ECDC4", "#A855F7", "#D946EF", "#C084FC", "#E6B8FF", "#8FDBC9"}
+
+
+def is_dark_scope(selector):
+    return "dark-mode" in selector or re.search(r"-dk\b", selector) is not None
 
 
 def scan(path):
     raw = open(path, encoding="utf-8").read()
-    s = styling_context(raw) if path.endswith(".html") else raw
+    if path.endswith(".html"):
+        sites = list(styling_rules(raw))
+    else:
+        sites = [("", raw)]
+    s = "\n".join(decl for _, decl in sites)
     out = collections.defaultdict(list)
 
     for hexv, why in SPEC["forbidden_colors"].items():
-        n = len(re.findall(re.escape(hexv), s, re.I))
+        n = 0
+        for selector, decl in sites:
+            hits = len(re.findall(re.escape(hexv), decl, re.I))
+            if not hits:
+                continue
+            # these are legitimate as DARK-mode values and wrong anywhere else
+            if hexv.upper() in DARK_ONLY and is_dark_scope(selector):
+                continue
+            n += hits
         if n:
             out["colour"].append((hexv, n, why))
 

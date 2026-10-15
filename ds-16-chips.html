@@ -4,6 +4,21 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
+<style>
+/* ── CHIP ── transcribed from the Agencies Affiliations column. */
+.chip-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.chip {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 3px 10px; border-radius: 9999px; white-space: nowrap;
+  background: #F3F4F6; color: var(--gray-800); border: none;
+  font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; line-height: 16px;
+}
+.chip-more { background: var(--hover-bg); color: var(--gray-500); cursor: pointer; transition: background .12s, color .12s; }
+.chip-more:hover { background: rgba(168,85,247,0.08); color: #A614C3; }
+body.dark-mode .chip { background: rgba(255,255,255,0.06); color: #F9FAFB; }
+body.dark-mode .chip-more { background: rgba(255,255,255,0.04); color: var(--gray-500); }
+body.dark-mode .chip-more:hover { background: rgba(168,85,247,0.18); color: #C084FC; }
+</style>
 </head>
 <body class="btis-layout">
 <header class="btis-header">
@@ -120,44 +135,54 @@
       <a class="ds-nav-arrow-btn" href="ds-35-collapsible.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">Chips are compact elements that represent an attribute, action, or entity. Four types serve different interaction purposes.</p>
+    <p class="ds-page-desc">Norbielink has one chip: a neutral pill that lists a value — an affiliation, a carrier,
+  a tag. It is not interactive, carries no icon and has no close button. When a list is too long it is truncated with
+  a <code>+N more</code> chip, which is the only interactive variant.</p>
 
-<div class="ds-section" id="types"><div class="ds-section-title">Types</div>
-<div class="ds-example" style="flex-direction:column;align-items:flex-start;gap:24px;">
-  <div><div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9CA3AF;margin-bottom:10px;">Assist chips</div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;">
-    <div style="display:inline-flex;align-items:center;gap:6px;height:32px;border-radius:100px;border:1px solid #E5E7EB;padding:0 12px;font-size:13px;font-weight:500;color:#374151;background:white;"><span class="material-icons-round" style="font-size:16px;color:#6B7280;">event</span>Add to calendar</div>
-    <div style="display:inline-flex;align-items:center;gap:6px;height:32px;border-radius:100px;border:1px solid #E5E7EB;padding:0 12px;font-size:13px;font-weight:500;color:#374151;background:white;"><span class="material-icons-round" style="font-size:16px;color:#6B7280;">directions</span>Get directions</div>
-  </div></div>
-  <div><div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9CA3AF;margin-bottom:10px;">Filter chips</div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;">
-    <div style="display:inline-flex;align-items:center;gap:6px;height:32px;border-radius:100px;background:rgba(166,20,195,0.08);border:1px solid #A614C3;padding:0 12px;font-size:13px;font-weight:600;color:#A614C3;"><span class="material-icons-round" style="font-size:16px;">check</span>Selected</div>
-    <div style="display:inline-flex;align-items:center;height:32px;border-radius:100px;border:1px solid #E5E7EB;padding:0 14px;font-size:13px;font-weight:500;color:#374151;background:white;">Purple</div>
-    <div style="display:inline-flex;align-items:center;height:32px;border-radius:100px;border:1px solid #E5E7EB;padding:0 14px;font-size:13px;font-weight:500;color:#374151;background:white;">Green</div>
-  </div></div>
-  <div><div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9CA3AF;margin-bottom:10px;">Input chips</div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;">
-    <div style="display:inline-flex;align-items:center;gap:6px;height:32px;border-radius:100px;border:1px solid #E5E7EB;padding:0 8px 0 12px;font-size:13px;font-weight:500;color:#374151;background:white;">Design<span class="material-icons-round" style="font-size:16px;color:#9CA3AF;">close</span></div>
-    <div style="display:inline-flex;align-items:center;gap:6px;height:32px;border-radius:100px;border:1px solid #E5E7EB;padding:0 8px 0 12px;font-size:13px;font-weight:500;color:#374151;background:white;">Teal<span class="material-icons-round" style="font-size:16px;color:#9CA3AF;">close</span></div>
-  </div></div>
-  <div><div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9CA3AF;margin-bottom:10px;">Suggestion chips</div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;">
-    <div style="display:inline-flex;align-items:center;height:32px;border-radius:100px;border:1px solid #E5E7EB;padding:0 14px;font-size:13px;font-weight:500;color:#374151;background:white;">Sounds good</div>
-    <div style="display:inline-flex;align-items:center;height:32px;border-radius:100px;border:1px solid #E5E7EB;padding:0 14px;font-size:13px;font-weight:500;color:#374151;background:white;">On my way</div>
-    <div style="display:inline-flex;align-items:center;height:32px;border-radius:100px;border:1px solid #E5E7EB;padding:0 14px;font-size:13px;font-weight:500;color:#374151;background:white;">Reply</div>
-  </div></div>
-</div></div>
-<div class="ds-section" id="specs"><div class="ds-section-title">Specs</div>
-<div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Property</th><th>Value</th><th>Token</th></tr></thead><tbody>
-<tr><td>Height</td><td>32px</td><td><code>chip.height</code></td></tr>
-<tr><td>Border radius</td><td>100px</td><td><code>chip.radius</code></td></tr>
-<tr><td>Label size</td><td>13px/500</td><td><code>chip.label</code></td></tr>
-<tr><td>Selected bg</td><td>rgba(166,20,195,0.08)</td><td><code>color.primary-tint</code></td></tr>
-<tr><td>Selected border</td><td>1px solid #A614C3</td><td><code>color.primary</code></td></tr>
-<tr><td>Selected text</td><td>#A614C3</td><td><code>color.primary</code></td></tr>
-</tbody></table></div></div>
-  
-    <!-- ── Prev / Next navigation ── -->
+  <div class="ds-section" id="types">
+    <h2 class="ds-section-title">Chip</h2>
+    <p class="ds-section-desc">Seen in the Affiliations column. Five values are shown and the rest collapse into the
+    overflow chip, which tints razz on hover.</p>
+    <div class="ds-example" style="padding:40px;">
+      <div class="chip-row">
+        <span class="chip">AAA/ACG (AC364)</span>
+        <span class="chip">Acrisure</span>
+        <span class="chip">SIAA</span>
+        <span class="chip">Farmers</span>
+        <span class="chip">IronPeak</span>
+        <button class="chip chip-more">+3 more</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Shape</td><td><code>9999px</code> · <code>padding 3px 10px</code> · <code>white-space: nowrap</code></td></tr>
+          <tr><td>Type</td><td>11px / 600 · <code>line-height 16px</code></td></tr>
+          <tr><td>Fill</td><td><code>#F3F4F6</code> · <code>rgba(255,255,255,.06)</code> in dark</td></tr>
+          <tr><td>Text</td><td><code>#1F2937</code> · <code>#F9FAFB</code> in dark</td></tr>
+          <tr><td>Row gap</td><td><code>6px</code>, wraps</td></tr>
+          <tr><td>Overflow chip</td><td><code>#F9FAFB</code> · <code>rgba(255,255,255,.04)</code> in dark · text <code>#6B7280</code> · no border</td></tr>
+          <tr><td>Overflow hover</td><td><code>rgba(168,85,247,.08)</code> · <code>.18</code> in dark · text <code>#A614C3</code></td></tr>
+          <tr><td>Truncation</td><td>First 5 values, then <code>+N more</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ds-table-wrap" style="margin-top:24px;">
+      <table class="ds-table"><tbody>
+        <tr><td>The chip has no icon, no avatar, no close button and no selected state. Those belong to the badge and filter-pill components, which the product does have.</td></tr>
+        <tr><td>Only the overflow chip responds to hover. A plain chip is static text.</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-15-checkbox.html">
       <span class="ds-page-nav-label">← Previous</span>

@@ -3,21 +3,10 @@
 <title>Skeleton — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-@keyframes sk-shimmer{0%{background-position:-400px 0;}100%{background-position:400px 0;}}
-.sk{display:inline-block;background:linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%);background-size:400px 100%;animation:sk-shimmer 1.4s infinite linear;border-radius:6px;}
-.sk-circle{border-radius:50%;}
-.sk-card{display:flex;gap:14px;align-items:flex-start;width:100%;max-width:440px;}
-.sk-avatar{width:48px;height:48px;flex-shrink:0;}
-.sk-lines{flex:1;display:flex;flex-direction:column;gap:8px;padding-top:4px;}
-.sk-line{height:12px;width:100%;}
-.sk-line.w60{width:60%;}
-.sk-line.w80{width:80%;}
-.sk-line.w40{width:40%;}
-.sk-rect{height:160px;width:100%;max-width:440px;}
-.sk-dk{background:linear-gradient(90deg,#27272a 25%,#1e1b45 50%,#27272a 75%);}
-body.dark-mode .sk{background:linear-gradient(90deg,#27272a 25%,#3f3f46 50%,#27272a 75%);background-size:400px 100%;}
-.sk-card-frame{border-color:#e8e8e8;}
-body.dark-mode .sk-card-frame{border-color:rgba(255,255,255,0.10) !important;}
+/* ── SKELETON ── transcribed from the document preview placeholder. */
+.skel-stack { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 460px; }
+.skel { height: 8px; border-radius: 4px; background: #E5E7EB; }
+body.dark-mode .skel { background: rgba(255,255,255,0.08); }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -118,10 +107,8 @@ body.dark-mode .sk-card-frame{border-color:rgba(255,255,255,0.10) !important;}
 </nav>
 <aside class="ds-toc">
   <div class="ds-toc-title">On this page</div>
-  <a class="ds-toc-item active" href="#overview">Overview</a>
-  <a class="ds-toc-item" href="#installation">Installation</a>
-  <a class="ds-toc-item" href="#examples">Examples</a>
-  <a class="ds-toc-item" href="#api">Api</a>
+  <a class="ds-toc-item active" href="#skeleton">Text skeleton</a>
+  <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 <main class="ds-main">
   <div class="ds-content">
@@ -139,98 +126,48 @@ body.dark-mode .sk-card-frame{border-color:rgba(255,255,255,0.10) !important;}
       <a class="ds-nav-arrow-btn" href="ds-23-sliders.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">A placeholder component that mimics content layout during loading.</p>
-    <div class="ds-section" id="overview">      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
-        </div>
-        <div class="ds-preview-pane" id="prev-main" style="align-items:center;justify-content:center;">
-          <div style="display:flex;flex-direction:column;gap:20px;width:100%;max-width:440px;">
-            <div class="sk sk-rect" style="max-width:440px;"></div>
-            <div class="sk-card">
-              <div class="sk sk-circle sk-avatar"></div>
-              <div class="sk-lines">
-                <div class="sk sk-line w80"></div>
-                <div class="sk sk-line w60"></div>
-                <div class="sk sk-line w40"></div>
-              </div>
-            </div>
-            <div class="sk-card">
-              <div class="sk sk-circle sk-avatar"></div>
-              <div class="sk-lines">
-                <div class="sk sk-line"></div>
-                <div class="sk sk-line w80"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="ds-code-pane" id="code-main">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-main')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sk-card"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sk sk-circle"</span> <span class="c-attr">style</span>=<span class="c-str">"width:48px;height:48px;flex-shrink:0;"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sk-lines"</span><span class="c-tag">&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sk sk-line"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sk sk-line w60"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sk sk-line w40"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;/div&gt;</span>
-<span class="c-tag">&lt;/div&gt;</span>
+    <p class="ds-page-desc">A stack of flat grey bars standing in for text that has not arrived. The product uses a
+  single bar height and varies only the width — there is no shimmer, no pulse and no rounded avatar placeholder.</p>
 
-<span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sk sk-rect"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span></pre>
-        </div>
-      </div>
-    </div><div class="ds-divider"></div>    <div class="ds-section" id="installation">
-      <h2 class="ds-section-title">Installation</h2>
-      <p class="ds-section-desc">Built with pure HTML and CSS. Include <span class="ds-inline-code">ds-shared.css</span> in your project.</p>
-      <div class="ds-install-wrap">
-        <div class="ds-install-tabbar">
-          <button class="ds-install-tab active" onclick="switchInstall(this,'pnpm')">pnpm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'npm')">npm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'yarn')">yarn</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'bun')">bun</button>
-        </div>
-        <div class="ds-install-code">
-          <span class="ds-install-cmd" id="install-cmd"><span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span></span>
-          <button class="ds-copy-btn" style="position:static;" onclick="copyInstall(this)"><span class="material-icons-round">content_copy</span></button>
-        </div>
+  <div class="ds-section" id="skeleton">
+    <h2 class="ds-section-title">Text skeleton</h2>
+    <p class="ds-section-desc">Transcribed from the document preview pane: fourteen bars, each <code>8px</code> tall,
+    widths cycling between roughly 65% and 95%.</p>
+    <div class="ds-example" style="padding:40px;">
+      <div class="skel-stack">
+        <div class="skel" style="width:82%"></div><div class="skel" style="width:95%"></div>
+        <div class="skel" style="width:71%"></div><div class="skel" style="width:88%"></div>
+        <div class="skel" style="width:65%"></div><div class="skel" style="width:93%"></div>
+        <div class="skel" style="width:77%"></div><div class="skel" style="width:84%"></div>
       </div>
     </div>
-    <div class="ds-divider"></div>
-    <div class="ds-section" id="examples"><h2 class="ds-section-title">Examples</h2>
-      <h3 class="ds-subsection-title">Card skeleton</h3>
-      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-ex1')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-ex1')">Code</button>
-        </div>
-        <div class="ds-preview-pane" id="prev-ex1">
-          <div class="sk-card-frame" style="width:100%;max-width:300px;border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;">
-            <div class="sk" style="width:100%;height:120px;border-radius:0;"></div>
-            <div style="padding:16px;display:flex;flex-direction:column;gap:8px;">
-              <div class="sk sk-line w80" style="height:14px;"></div>
-              <div class="sk sk-line w60"></div>
-              <div class="sk sk-line w40"></div>
-            </div>
-          </div>
-        </div>
-        <div class="ds-code-pane" id="code-ex1">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-ex1')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">style</span>=<span class="c-str">"width:300px;border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sk"</span> <span class="c-attr">style</span>=<span class="c-str">"width:100%;height:120px;border-radius:0;"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">style</span>=<span class="c-str">"padding:16px;display:flex;flex-direction:column;gap:8px;"</span><span class="c-tag">&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sk sk-line w80"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sk sk-line w60"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;/div&gt;</span>
-<span class="c-tag">&lt;/div&gt;</span></pre>
-        </div>
-      </div>
-    </div><div class="ds-divider"></div>
-        <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
-      <h3 class="ds-subsection-title">Classes</h3>
-      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>sk</code></td><td>Base skeleton with shimmer animation</td></tr><tr><td><code>sk-circle</code></td><td>Circular shape (border-radius:50%)</td></tr><tr><td><code>sk-rect</code></td><td>Rectangular block (160px height)</td></tr><tr><td><code>sk-line</code></td><td>Text line skeleton (12px height)</td></tr><tr><td><code>sk-line.w60</code></td><td>Line at 60% width (also w80, w40)</td></tr><tr><td><code>sk-dk</code></td><td>Dark mode shimmer</td></tr></tbody></table></div>    </div>
+  </div>
 
-  
-    <!-- ── Prev / Next navigation ── -->
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Bar height</td><td><code>8px</code> — one height for every line</td></tr>
+          <tr><td>Fill</td><td><code>#E5E7EB</code> · <code>rgba(255,255,255,.08)</code> in dark</td></tr>
+          <tr><td>Radius</td><td><code>4px</code></td></tr>
+          <tr><td>Vertical gap</td><td><code>10px</code></td></tr>
+          <tr><td>Widths</td><td>Cycle through ~65–95% so the block does not read as a solid rectangle</td></tr>
+          <tr><td>Animation</td><td><strong>None.</strong> The bars are static</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ds-table-wrap" style="margin-top:24px;">
+      <table class="ds-table"><tbody>
+        <tr><td>No shimmer sweep. The DS previously animated a gradient across the bars; the product does not.</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-53-sheet.html">
       <span class="ds-page-nav-label">← Previous</span>

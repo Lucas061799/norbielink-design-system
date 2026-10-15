@@ -3,14 +3,19 @@
 <title>Spinner — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-@keyframes sp-spin{to{transform:rotate(360deg);}}
-.sp{display:inline-block;width:32px;height:32px;border:3px solid #e8e8e8;border-top-color:#111;border-radius:50%;animation:sp-spin .7s linear infinite;}
-.sp-sm{width:20px;height:20px;border-width:2px;}
-.sp-lg{width:48px;height:48px;border-width:4px;}
-.sp-teal{border-color:rgba(166,20,195,.15);border-top-color:#A614C3;}
-.sp-purple{border-color:rgba(192,132,252,.2);border-top-color:#C084FC;}
-.sp-dk{border-color:rgba(255,255,255,.12);border-top-color:rgba(255,255,255,.75);}
-.sp-wrap{display:flex;align-items:center;gap:10px;font-family:'Montserrat',sans-serif;font-size:13px;color:#888;}
+/* ── LOADING ──
+   The product has no spinner component and no progress bar. A long action
+   spins the icon already on its own button, counter-clockwise, and swaps the
+   label. Transcribed from the Refresh control on Quotes and Policies. */
+@keyframes ds-spin-ccw { 0% { transform: rotate(0); } to { transform: rotate(-360deg); } }
+.load-btn { display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 10px; border-radius: 8px; border: 1px solid var(--gray-200);
+  background: var(--card-bg); font-family: 'Montserrat', sans-serif;
+  font-size: 12px; font-weight: 500; line-height: 1.5; color: var(--gray-800); cursor: pointer; }
+.load-btn:hover { background: var(--hover-bg); }
+.load-btn .material-icons-round { font-size: 14px; color: var(--gray-500); }
+.load-btn.is-loading .material-icons-round { animation: ds-spin-ccw 0.9s linear infinite; }
+.load-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -111,10 +116,8 @@
 </nav>
 <aside class="ds-toc">
   <div class="ds-toc-title">On this page</div>
-  <a class="ds-toc-item active" href="#overview">Overview</a>
-  <a class="ds-toc-item" href="#installation">Installation</a>
-  <a class="ds-toc-item" href="#examples">Examples</a>
-  <a class="ds-toc-item" href="#api">Api</a>
+  <a class="ds-toc-item active" href="#spinner">Rotation</a>
+  <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 <main class="ds-main">
   <div class="ds-content">
@@ -132,80 +135,37 @@
       <a class="ds-nav-arrow-btn" href="ds-12-switches.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">An animated loading indicator.</p>
-    <div class="ds-section" id="overview">      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
-        </div>
-        <div class="ds-preview-pane" id="prev-main">
-          <div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap;justify-content:center;">
-            <div class="sp sp-sm sp-teal"></div>
-            <div class="sp sp-teal"></div>
-            <div class="sp sp-lg sp-teal"></div>
-            <div class="sp"></div>
-            <div class="sp sp-purple"></div>
-          </div>
-        </div>
-        <div class="ds-code-pane" id="code-main">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-main')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sp"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span>
-<span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sp sp-sm sp-teal"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span>
-<span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sp sp-lg sp-purple"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span>
+    <p class="ds-page-desc">There is no standalone spinner in Norbielink. What the product has is a rotation applied
+  to an icon that is already on screen — documented here so the motion is consistent wherever it is reused.</p>
 
-<span class="c-comment">&lt;!-- Inline with text --&gt;</span>
-<span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sp-wrap"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sp sp-sm"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span>
-  Loading...
-<span class="c-tag">&lt;/div&gt;</span></pre>
-        </div>
-      </div>
-    </div><div class="ds-divider"></div>    <div class="ds-section" id="installation">
-      <h2 class="ds-section-title">Installation</h2>
-      <p class="ds-section-desc">Built with pure HTML and CSS. Include <span class="ds-inline-code">ds-shared.css</span> in your project.</p>
-      <div class="ds-install-wrap">
-        <div class="ds-install-tabbar">
-          <button class="ds-install-tab active" onclick="switchInstall(this,'pnpm')">pnpm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'npm')">npm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'yarn')">yarn</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'bun')">bun</button>
-        </div>
-        <div class="ds-install-code">
-          <span class="ds-install-cmd" id="install-cmd"><span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span></span>
-          <button class="ds-copy-btn" style="position:static;" onclick="copyInstall(this)"><span class="material-icons-round">content_copy</span></button>
-        </div>
+  <div class="ds-section" id="spinner">
+    <h2 class="ds-section-title">Rotation</h2>
+    <div class="ds-example" style="padding:40px;">
+      <div class="load-row">
+        <button class="load-btn is-loading"><span class="material-icons-round">refresh</span>Refreshing…</button>
+        <button class="load-btn is-loading"><span class="material-icons-round">sync</span>Syncing…</button>
       </div>
     </div>
-    <div class="ds-divider"></div>
-    <div class="ds-section" id="examples"><h2 class="ds-section-title">Examples</h2>
-      <h3 class="ds-subsection-title">Inline with text</h3>
-      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-ex1')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-ex1')">Code</button>
-        </div>
-        <div class="ds-preview-pane" id="prev-ex1" style="align-items:center;justify-content:center;">
-          <div style="display:flex;flex-direction:column;gap:16px;align-items:flex-start;width:100%;max-width:320px;">
-            <div class="sp-wrap"><div class="sp sp-sm sp-teal"></div>Loading components...</div>
-            <div class="sp-wrap"><div class="sp sp-sm"></div>Saving changes...</div>
-            <div class="sp-wrap"><div class="sp sp-sm sp-purple"></div>Publishing...</div>
-          </div>
-        </div>
-        <div class="ds-code-pane" id="code-ex1">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-ex1')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sp-wrap"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sp sp-sm sp-teal"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span>
-  Loading...
-<span class="c-tag">&lt;/div&gt;</span></pre>
-        </div>
-      </div>
-    </div><div class="ds-divider"></div>
-        <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
-      <h3 class="ds-subsection-title">Classes</h3>
-      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>sp</code></td><td>Default 32px black spinner</td></tr><tr><td><code>sp-sm</code></td><td>Small 20px variant</td></tr><tr><td><code>sp-lg</code></td><td>Large 48px variant</td></tr><tr><td><code>sp-teal</code></td><td>Purple (#A614C3) color</td></tr><tr><td><code>sp-purple</code></td><td>Purple (#C084FC) color</td></tr><tr><td><code>sp-dk</code></td><td>Dark mode variant (white tones)</td></tr><tr><td><code>sp-wrap</code></td><td>Flex row with spinner + label text</td></tr></tbody></table></div>    </div>
+  </div>
 
-  
-    <!-- ── Prev / Next navigation ── -->
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Keyframes</td><td><code>0% { rotate(0) } to { rotate(-360deg) }</code></td></tr>
+          <tr><td>Timing</td><td><code>0.9s linear infinite</code></td></tr>
+          <tr><td>Size</td><td>14×14px — the icon’s own size, never scaled up for loading</td></tr>
+          <tr><td>Colour</td><td>Inherited from the control; the product does not tint it</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-24-snackbar.html">
       <span class="ds-page-nav-label">← Previous</span>
