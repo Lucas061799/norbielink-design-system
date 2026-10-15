@@ -197,33 +197,52 @@
     <!-- STATES -->
     <div class="ds-section" id="states">
       <h2 class="ds-section-title">States</h2>
-      <p class="ds-section-desc">Menu items have four states: default, hover, active/selected, and disabled. The purple hover state uses a low-opacity fill to maintain visual clarity.</p>
-      <div class="ds-example" style="gap:32px; align-items:flex-start; flex-wrap:wrap; padding:48px;">
-        <div style="background:white;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.12);padding:6px 0;min-width:240px;border:1px solid #E5E7EB;">
-          <!-- Default -->
-          <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;border-radius:6px;margin:0 4px;">
-            <span class="material-icons-round" style="font-size:18px;color:var(--gray-500);">folder</span>
-            <span style="font-size:13.5px;font-weight:500;color:var(--gray-700);flex:1;">Default item</span>
-            <span style="font-size:10px;color:var(--gray-300);font-weight:600;text-transform:uppercase;letter-spacing:.05em;">default</span>
+      <p class="ds-section-desc">Three states, not four. There is <strong>no disabled menu item</strong> anywhere in
+      the product, and hover is never a purple fill — it is either a neutral tint or, in the account menu, a
+      gradient border. Selection is marked with a trailing check, not with weight.</p>
+      <div class="ds-example" style="padding:40px;flex-direction:column;align-items:center;gap:32px;">
+        <div class="mnu-board">
+          <div class="mnu-caption">Select menu — the common case</div>
+          <div class="mnu-select">
+            <button class="mnu-opt"><span>Individual</span></button>
+            <button class="mnu-opt mnu-opt-hover"><span>Corporation</span></button>
+            <button class="mnu-opt mnu-opt-sel"><span>LLC</span>
+              <svg width="10" height="8" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="#A614C3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="mnu-opt"><span>Partnership</span></button>
           </div>
-          <!-- Hover -->
-          <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;border-radius:6px;margin:0 4px;background:rgba(166,20,195,0.08);">
-            <span class="material-icons-round" style="font-size:18px;color:#A614C3;">star</span>
-            <span style="font-size:13.5px;font-weight:500;color:#A614C3;flex:1;">Hovered item</span>
-            <span style="font-size:10px;color:#A614C3;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">hover</span>
+          <div class="mnu-notes">
+            <code>rest</code> transparent · <code>#1F2937</code><br>
+            <code>hover</code> <code>#F9FAFB</code> · colour unchanged<br>
+            <code>selected</code> <code>rgba(168,85,247,.08)</code> · <code>#A614C3</code> + check
           </div>
-          <!-- Active -->
-          <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;border-radius:6px;margin:0 4px;background:rgba(166,20,195,0.12);">
-            <span class="material-icons-round" style="font-size:18px;color:#A614C3;">check_circle</span>
-            <span style="font-size:13.5px;font-weight:600;color:#A614C3;flex:1;">Selected item</span>
-            <span style="font-size:10px;color:#A614C3;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">active</span>
+        </div>
+
+        <div class="mnu-board">
+          <div class="mnu-caption">Account menu — gradient-border hover</div>
+          <div class="mnu-acct">
+            <div class="mnu-acct-hd">My Account</div>
+            <button class="mnu-acct-item"><span class="material-icons-round">person</span>Profile</button>
+            <button class="mnu-acct-item mnu-acct-hover"><span class="material-icons-round">logout</span>Sign Out</button>
           </div>
-          <div style="height:1px;background:var(--gray-100);margin:4px 8px;"></div>
-          <!-- Disabled -->
-          <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:not-allowed;border-radius:6px;margin:0 4px;opacity:0.38;">
-            <span class="material-icons-round" style="font-size:18px;color:var(--gray-400);">block</span>
-            <span style="font-size:13.5px;font-weight:500;color:var(--gray-500);flex:1;">Disabled item</span>
-            <span style="font-size:10px;color:var(--gray-300);font-weight:600;text-transform:uppercase;letter-spacing:.05em;">disabled</span>
+          <div class="mnu-notes">
+            <code>rest</code> transparent · <code>1px solid transparent</code><br>
+            <code>hover</code> gradient border + <code>0 0 8px rgba(166,20,195,.4)</code><br>
+            Same treatment as a sidebar nav item.
+          </div>
+        </div>
+
+        <div class="mnu-board">
+          <div class="mnu-caption">Context menu — right-click on a row</div>
+          <div class="mnu-ctx">
+            <button class="mnu-ctx-item"><span class="material-icons-round">visibility</span>View</button>
+            <button class="mnu-ctx-item mnu-ctx-hover"><span class="material-icons-round">edit</span>Rename</button>
+            <button class="mnu-ctx-item mnu-ctx-danger"><span class="material-icons-round">delete</span>Delete</button>
+          </div>
+          <div class="mnu-notes">
+            <code>rest</code> <code>#1F2937</code> · <code>hover</code> <code>#F9FAFB</code><br>
+            Destructive items are <code>#EF4444</code> in every state.<br>
+            No separator, no disabled row.
           </div>
         </div>
       </div>
@@ -234,21 +253,25 @@
     <!-- SPECS -->
     <div class="ds-section" id="specs">
       <h2 class="ds-section-title">Specs</h2>
+      <p class="ds-section-desc">Three patterns ship. They do not share a radius, a shadow or an item shape —
+      pick the one that matches the trigger.</p>
       <div class="ds-table-wrap"><table class="ds-table">
-        <thead><tr><th>Property</th><th>Value</th><th>Token</th></tr></thead>
+        <thead><tr><th>&nbsp;</th><th>Select menu</th><th>Account menu</th><th>Context menu</th></tr></thead>
         <tbody>
-          <tr><td>Min width</td><td>160px</td><td><code>menu.min-width</code></td></tr>
-          <tr><td>Max width</td><td>280px</td><td><code>menu.max-width</code></td></tr>
-          <tr><td>Border radius</td><td>12px</td><td><code>menu.radius</code></td></tr>
-          <tr><td>Item padding</td><td>10px 16px</td><td><code>menu.item.padding</code></td></tr>
-          <tr><td>Item height</td><td>40px</td><td><code>menu.item.height</code></td></tr>
-          <tr><td>Item border radius</td><td>6px</td><td><code>menu.item.radius</code></td></tr>
-          <tr><td>Hover background</td><td><code>rgba(166,20,195,0.08)</code></td><td><code>menu.item.hover-bg</code></td></tr>
-          <tr><td>Active text</td><td><code>#A614C3</code></td><td><code>menu.item.active-color</code></td></tr>
-          <tr><td>Divider</td><td>1px, <code>var(--gray-100)</code></td><td><code>menu.divider</code></td></tr>
-          <tr><td>Elevation</td><td>0 4px 24px rgba(0,0,0,0.12)</td><td><code>elevation.2</code></td></tr>
-          <tr><td>Icon size</td><td>18px</td><td><code>menu.icon.size</code></td></tr>
-          <tr><td>Font size</td><td>13.5px</td><td><code>menu.item.font-size</code></td></tr>
+          <tr><td>Trigger</td><td>A select field</td><td>The sidebar account button</td><td>Right-click on a row</td></tr>
+          <tr><td>Width</td><td>Matches the field</td><td>Matches the button</td><td><code>min-width 160px</code></td></tr>
+          <tr><td>Radius</td><td><code>8px</code></td><td><code>12px</code></td><td><code>8px</code></td></tr>
+          <tr><td>Border</td><td><code>1px #E9EAEC</code></td><td><code>1px #E5E7EB</code></td><td><code>1px #E9EAEC</code></td></tr>
+          <tr><td>Shadow</td><td><code>0 8px 24px rgba(0,0,0,.12)</code></td><td><code>0 12px 32px rgba(0,0,0,.14)</code></td><td><code>0 8px 24px rgba(0,0,0,.12)</code></td></tr>
+          <tr><td>Container padding</td><td>None — <code>overflow:hidden</code></td><td><code>4px</code></td><td><code>4px 0</code></td></tr>
+          <tr><td>Item padding</td><td><code>8px 12px</code></td><td><code>8px 12px</code></td><td><code>8px 12px</code></td></tr>
+          <tr><td>Item radius</td><td>None (square, clipped)</td><td><code>12px</code></td><td>None</td></tr>
+          <tr><td>Item type</td><td>13px / 400</td><td>13px / 500</td><td>12px / 400</td></tr>
+          <tr><td>Icon</td><td>None</td><td>16×16 · <code>#6B7280</code> · <code>gap 10px</code></td><td>14×14 · <code>gap 10px</code></td></tr>
+          <tr><td>Hover</td><td><code>#F9FAFB</code></td><td>Gradient border + <code>0 0 8px rgba(166,20,195,.4)</code></td><td><code>#F9FAFB</code></td></tr>
+          <tr><td>Selected</td><td><code>rgba(168,85,247,.08)</code> · <code>#A614C3</code> · trailing check</td><td>—</td><td>—</td></tr>
+          <tr><td>Destructive</td><td>—</td><td>—</td><td><code>#EF4444</code> in every state</td></tr>
+          <tr><td>Disabled</td><td colspan="3">Does not exist. Actions that are unavailable are removed from the menu, not greyed out.</td></tr>
         </tbody>
       </table></div>
     </div>
@@ -309,6 +332,59 @@ body.dark-mode .ds-example [style*="border:1px solid rgba(0,0,0,0.06)"] { border
   padding: 2px 6px; font-family: var(--font);
   font-weight: 600; flex-shrink: 0;
 }
+
+/* ── MENU STATE BOARDS ── the three real menu patterns, transcribed from the app. */
+.mnu-board { display: grid; grid-template-columns: 120px 240px 1fr; align-items: start; gap: 24px;
+  width: 100%; max-width: 660px; font-family: 'Montserrat', sans-serif; }
+.mnu-caption { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  line-height: 1.5; color: var(--gray-400); padding-top: 8px; }
+.mnu-notes { font-size: 11px; line-height: 1.8; color: var(--gray-500); padding-top: 4px; }
+.mnu-notes code { font-size: 10px; }
+
+.mnu-select { background: #fff; border: 1px solid #E9EAEC; border-radius: 8px; overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+.mnu-opt { display: flex; align-items: center; justify-content: space-between; width: 100%;
+  padding: 8px 12px; border: none; background: transparent; cursor: pointer; text-align: left;
+  font-family: 'Montserrat', sans-serif; font-size: 13px; line-height: 1.5; color: var(--gray-800); }
+.mnu-opt:hover, .mnu-opt-hover { background: var(--gray-50); }
+.mnu-opt-sel, .mnu-opt-sel:hover { background: rgba(168,85,247,0.08); color: #A614C3; }
+
+.mnu-acct { background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; padding: 4px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.14); }
+.mnu-acct-hd { padding: 8px 12px; border-bottom: 1px solid var(--gray-100); font-size: 11px;
+  font-weight: 600; line-height: 1.5; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-400); }
+.mnu-acct-item { display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 12px;
+  border: 1px solid transparent; border-radius: 12px; background: transparent; cursor: pointer;
+  text-align: left; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 500;
+  line-height: 1.5; color: #2D3653; transition: all .15s; }
+.mnu-acct-item .material-icons-round { font-size: 16px; color: var(--gray-500); }
+.mnu-acct-item:hover, .mnu-acct-hover {
+  background: linear-gradient(#fff,#fff) padding-box,
+              linear-gradient(to right,#5C2ED4 0%,#A614C3 65%) border-box;
+  border: 1px solid transparent; box-shadow: 0 0 8px rgba(166,20,195,0.4); }
+
+.mnu-ctx { background: #fff; border: 1px solid #E9EAEC; border-radius: 8px; padding: 4px 0;
+  min-width: 160px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+.mnu-ctx-item { display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 12px;
+  border: none; background: transparent; cursor: pointer; text-align: left;
+  font-family: 'Montserrat', sans-serif; font-size: 12px; line-height: 1.5; color: var(--gray-800);
+  transition: background .15s; }
+.mnu-ctx-item .material-icons-round { font-size: 14px; }
+.mnu-ctx-item:hover, .mnu-ctx-hover { background: var(--gray-50); }
+.mnu-ctx-danger { color: #EF4444; }
+
+body.dark-mode .mnu-select, body.dark-mode .mnu-acct, body.dark-mode .mnu-ctx {
+  background: #191D35; border-color: rgba(255,255,255,0.08); }
+body.dark-mode .mnu-opt, body.dark-mode .mnu-ctx-item { color: #F9FAFB; }
+body.dark-mode .mnu-acct-item { color: #F9FAFB; }
+body.dark-mode .mnu-opt:hover, body.dark-mode .mnu-opt-hover,
+body.dark-mode .mnu-ctx-item:hover, body.dark-mode .mnu-ctx-hover { background: rgba(255,255,255,0.04); }
+body.dark-mode .mnu-opt-sel, body.dark-mode .mnu-opt-sel:hover { background: rgba(168,85,247,0.14); color: #A614C3; }
+body.dark-mode .mnu-acct-item:hover, body.dark-mode .mnu-acct-hover {
+  background: linear-gradient(#1E2240,#1E2240) padding-box,
+              linear-gradient(to right,#5C2ED4 0%,#A614C3 65%) border-box; }
+body.dark-mode .mnu-acct-hd { border-bottom-color: rgba(255,255,255,0.06); color: #8B8FA8; }
+body.dark-mode .mnu-ctx-danger { color: #EF4444; }
 </style>
 
 <script src="ds-search.js"></script>

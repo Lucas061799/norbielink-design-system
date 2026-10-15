@@ -4,31 +4,114 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
-.nav-states { display: flex; flex-direction: column; gap: 4px; }
-.state-row { display: flex; align-items: center; gap: 16px; }
-.state-label { font-size: 11px; font-weight: 700; color: var(--gray-400); width: 80px; flex-shrink: 0; text-transform: uppercase; letter-spacing: .08em; }
-.demo-item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; margin: 0; border-radius: 50px; font-size: 14px; font-weight: 500; width: 200px; }
+/* ── SIDEBAR ── the product's only navigation surface. 220px, white, gradient-border items. */
+.nv-side { width: 220px; flex-shrink: 0; display: flex; flex-direction: column; min-height: 560px;
+  background: #fff; border-right: 1px solid var(--gray-100); border-radius: 12px 0 0 12px;
+  font-family: 'Montserrat', sans-serif; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+.nv-logo { padding: 20px 16px 12px; font-size: 18px; font-weight: 700; letter-spacing: .02em; color: #2D3653; }
+.nv-logo-accent { background: linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
 
-.top-bar { background: #0F1120; height: 56px; border-radius: 12px 12px 0 0; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-.search-pill { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 50px; padding: 8px 16px; width: 280px; font-size: 13px; color: rgba(255,255,255,0.4); }
+.nv-acct-wrap { padding: 0 12px 12px; }
+.nv-acct { display: flex; align-items: center; gap: 12px; width: 100%; padding: 8px;
+  border: none; border-radius: 12px; background: transparent; cursor: pointer; text-align: left;
+  font-family: 'Montserrat', sans-serif; transition: background .15s; }
+.nv-acct:hover { background: var(--gray-50); }
+.nv-avatar { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  width: 36px; height: 36px; border-radius: 9999px; border: 2.5px solid #73C9B7;
+  background: rgba(115,201,183,0.10); }
+.nv-initials { font-style: normal; font-size: 13px; font-weight: 600; letter-spacing: .02em;
+  line-height: 1; background: linear-gradient(135deg, #73C9B7 0%, #4FA897 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  color: transparent; }
+.nv-acct-txt { flex: 1; min-width: 0; display: block; }
+.nv-acct-name { display: block; font-size: 13px; font-weight: 700; line-height: 1.2; color: #2D3653;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nv-acct-sub { display: block; font-size: 11px; line-height: 1.2; color: var(--gray-400); }
 
-.full-sidebar { width: 240px; background: #191D35; border-radius: 0 0 0 12px; padding: 16px 0 0; min-height: 520px; position: relative; display: flex; flex-direction: column; }
-.full-sidebar-logo { font-size: 16px; font-weight: 700; color: white; padding: 0 20px 16px; letter-spacing: .04em; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 8px; }
-.full-sidebar-user { display: flex; align-items: center; gap: 10px; padding: 8px 20px 12px; }
-.sidebar-avatar { width: 34px; height: 34px; border-radius: 50%; background: #A614C3; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white; flex-shrink: 0; }
-.sidebar-nav { flex: 1; padding: 4px 0; }
-.s-item { display: flex; align-items: center; gap: 10px; padding: 9px 16px; margin: 1px 8px; border-radius: 50px; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.6); cursor: pointer; }
-.s-item.active { background: linear-gradient(to bottom, #191D35 0%, #582A75 48%, #9D37BC 100%); color: white; font-weight: 600; border: 1px solid rgba(166,20,195,0.8); box-shadow: 0 0 8px rgba(166,20,195,0.5); }
-.s-item .icon { width: 16px; height: 16px; opacity: .7; flex-shrink: 0; }
-.s-item.active .icon { opacity: 1; color: #A614C3; }
-.sidebar-footer { padding: 12px 20px; border-top: 1px solid rgba(255,255,255,0.07); }
-.toggle-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-.mini-toggle { width: 36px; height: 20px; border-radius: 10px; position: relative; flex-shrink: 0; }
-.mini-thumb { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: white; top: 3px; }
+.nv-divider { margin: 0 16px 8px; border-bottom: 1px solid var(--gray-100); }
 
-.collapsed-sidebar { width: 72px; background: #191D35; border-radius: 0 0 0 12px; padding: 12px 0; min-height: 520px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.c-item { width: 48px; height: 48px; border-radius: 50px; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; color: rgba(255,255,255,0.5); }
-.c-item.active { background: linear-gradient(to bottom, #191D35 0%, #582A75 48%, #9D37BC 100%); color: white; border: 1px solid rgba(166,20,195,0.8); box-shadow: 0 0 8px rgba(166,20,195,0.5); }
+.nv-nav { display: flex; flex-direction: column; gap: 2px; padding: 0 8px; }
+.nv-item { display: flex; align-items: center; gap: 12px; width: 100%; padding: 7px 12px;
+  border: 1px solid transparent; border-radius: 12px; background: transparent; cursor: pointer;
+  text-align: left; font-family: 'Montserrat', sans-serif; transition: all .15s; }
+.nv-ico { font-size: 18px; flex-shrink: 0; color: var(--gray-400); }
+.nv-lbl { flex: 1; font-size: 13px; font-weight: 500; line-height: 1.5; color: var(--gray-500);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nv-badge { flex-shrink: 0; font-size: 10px; font-weight: 600; line-height: 1.5; padding: 1px 6px;
+  border-radius: 9999px; border: 1px solid #74C3B7; color: #74C3B7; }
+.nv-chev { font-size: 14px; flex-shrink: 0; color: var(--gray-400); }
+
+.nv-item:hover, .nv-hover {
+  background: linear-gradient(#fff,#fff) padding-box,
+              linear-gradient(to right,#5C2ED4 0%,#A614C3 65%) border-box;
+  border: 1px solid transparent; }
+.nv-active {
+  background: linear-gradient(#fff,#fff) padding-box,
+              linear-gradient(to right,#5C2ED4 0%,#A614C3 65%) border-box;
+  border: 1px solid transparent; box-shadow: 0 0 8px rgba(166,20,195,0.4); }
+.nv-active .nv-ico { color: #A614C3; }
+.nv-active .nv-lbl { color: #2D3653; }
+.nv-open .nv-chev { transform: rotate(180deg); }
+
+.nv-sub { display: flex; flex-direction: column; gap: 2px; padding: 2px 0 2px 32px; }
+.nv-subitem { width: 100%; text-align: left; padding: 4px 8px; border: none; border-radius: 6px;
+  background: transparent; cursor: pointer; font-family: 'Montserrat', sans-serif;
+  font-size: 12px; font-weight: 500; line-height: 1.5; color: var(--gray-500); transition: background .15s; }
+.nv-subitem:hover { background: var(--gray-100); }
+.nv-subactive { font-weight: 600; color: #A614C3; background: rgba(168,85,247,0.08); }
+.nv-subactive:hover { background: rgba(168,85,247,0.08); }
+
+.nv-foot { margin-top: auto; display: flex; flex-direction: column; gap: 8px; padding: 8px 12px 16px; }
+.nv-norbie { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 12px;
+  border: 1.5px solid var(--gray-200); border-radius: 12px; background: rgba(255,255,255,0.7);
+  cursor: pointer; text-align: left; font-family: 'Montserrat', sans-serif; }
+.nv-norbie-av { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  width: 32px; height: 32px; border-radius: 9999px; background: rgba(115,201,183,0.14); color: #4FA897; }
+.nv-norbie-av .material-icons-round { font-size: 18px; }
+.nv-norbie-txt { display: block; }
+.nv-norbie-t { display: block; font-size: 12px; font-weight: 600; line-height: 1.5; color: #2D3653; }
+.nv-norbie-s { display: block; font-size: 10px; line-height: 1.5; color: var(--gray-400); }
+.nv-foot-div { border-bottom: 1px solid var(--gray-100); }
+.nv-dark { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 12px;
+  border: none; border-radius: 12px; background: transparent; cursor: pointer;
+  font-family: 'Montserrat', sans-serif; }
+.nv-track { position: relative; flex-shrink: 0; width: 36px; height: 20px; border-radius: 9999px;
+  background: var(--gray-300); }
+.nv-thumb { position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 9999px;
+  background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.12); transition: left .2s; }
+.nv-dark-lbl { font-size: 13px; font-weight: 500; line-height: 1.5; color: var(--gray-500); }
+
+/* state board */
+.nv-states { display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 620px;
+  font-family: 'Montserrat', sans-serif; }
+.nv-state-row { display: grid; grid-template-columns: 56px 220px 1fr; align-items: center; gap: 16px; }
+.nv-state-tag { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--gray-400); }
+.nv-state-code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px;
+  line-height: 1.5; color: var(--gray-500); }
+
+body.dark-mode .nv-side { background: #191D35; border-right-color: rgba(255,255,255,0.12); }
+body.dark-mode .nv-logo { color: #F9FAFB; }
+body.dark-mode .nv-acct:hover { background: rgba(255,255,255,0.06); }
+body.dark-mode .nv-acct-name { color: #F9FAFB; }
+body.dark-mode .nv-avatar { background: rgba(115,201,183,0.18); }
+body.dark-mode .nv-acct-sub, body.dark-mode .nv-ico, body.dark-mode .nv-lbl,
+body.dark-mode .nv-chev, body.dark-mode .nv-dark-lbl { color: #8B8FA8; }
+body.dark-mode .nv-divider, body.dark-mode .nv-foot-div { border-bottom-color: rgba(255,255,255,0.08); }
+body.dark-mode .nv-item:hover, body.dark-mode .nv-hover, body.dark-mode .nv-active {
+  background: linear-gradient(to bottom, #191D35 0%, #582A75 48%, #9D37BC 100%); }
+body.dark-mode .nv-active { border: 1px solid rgba(166,20,195,0.8); box-shadow: 0 0 8px rgba(166,20,195,0.5); }
+body.dark-mode .nv-item:hover .nv-ico, body.dark-mode .nv-item:hover .nv-lbl,
+body.dark-mode .nv-active .nv-ico, body.dark-mode .nv-active .nv-lbl { color: #ffffff; }
+body.dark-mode .nv-subitem { color: #8B8FA8; }
+body.dark-mode .nv-subactive { color: #A614C3; background: rgba(168,85,247,0.14); }
+body.dark-mode .nv-norbie { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
+body.dark-mode .nv-norbie-t { color: #F9FAFB; }
+body.dark-mode .nv-norbie-s { color: #8B8FA8; }
+body.dark-mode .nv-dark { background: rgba(255,255,255,0.06); }
+body.dark-mode .nv-track { background: #E8622A; }
+body.dark-mode .nv-thumb { left: 19px; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -136,191 +219,127 @@
       <a class="ds-nav-arrow-btn" href="ds-48-pagination.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-  <p class="ds-page-desc">Norbielink uses a collapsible side navigation drawer as the primary navigation pattern. The active item uses a purple gradient pill. A persistent top bar contains search and partner branding.</p>
+  <p class="ds-page-desc">Norbielink has one navigation surface: a fixed <strong>220px</strong> sidebar that is
+  white in light mode. There is no top bar, no collapsed rail and no gradient-filled pill. Both rest and active
+  items keep a white fill — what changes is the <strong>border</strong>, which becomes the brand gradient, and the
+  active item adds a soft purple glow.</p>
 
-  <!-- HERO removed -->
-  <div style="display:none;">
-    <!-- Top bar dark -->
-    <div class="top-bar">
-      <div class="search-pill"><span class="material-icons-round" style="font-size:16px;color:#9CA3AF;flex-shrink:0;">search</span>  Search clients, quotes or policies...</div>
-      <div style="font-size:12px;color:rgba(255,255,255,0.35);font-weight:600;letter-spacing:.05em;">POWERED BY <span style="color:rgba(255,255,255,0.6);font-size:14px;font-weight:700;">btis</span></div>
-    </div>
-    <div style="display:flex;">
-      <!-- Full Sidebar -->
-      <div class="full-sidebar">
-        <div class="full-sidebar-logo">NORBIE<span style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">LINK</span></div>
-        <div class="full-sidebar-user">
-          <div class="sidebar-avatar">JS</div>
-          <div>
-            <div style="font-size:12px;font-weight:600;color:white;">John Smith <span style="border:1px solid #A614C3;color:#A614C3;font-size:9px;padding:1px 5px;border-radius:10px;font-weight:700;">PRO</span></div>
-            <div style="font-size:10px;color:rgba(255,255,255,0.4);">ProSuite Member</div>
-          </div>
+  <div class="ds-section" id="sidebar">
+    <h2 class="ds-section-title">Sidebar</h2>
+    <p class="ds-section-desc">Logo, account button, divider, scrolling nav, then a pinned footer. The whole
+    column is <code>220px</code> wide with a <code>1px #F3F4F6</code> right border.</p>
+    <div class="ds-example" style="padding:32px;align-items:flex-start;justify-content:center;">
+      <div class="nv-side">
+        <div class="nv-logo">NORBIE<span class="nv-logo-accent">LINK</span></div>
+        <div class="nv-acct-wrap">
+          <button class="nv-acct">
+            <span class="nv-avatar"><i class="nv-initials">JS</i></span>
+            <span class="nv-acct-txt">
+              <span class="nv-acct-name">Jane Smith</span>
+              <span class="nv-acct-sub">ProSuite Member</span>
+            </span>
+            <span class="material-icons-round nv-chev">expand_more</span>
+          </button>
         </div>
-        <div class="sidebar-nav">
-          <div class="s-item active">
-            <svg class="icon" fill="currentColor" viewBox="0 0 20 20" style="color:#A614C3;"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 8a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zm6-6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zm0 8a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
-            Marketplace
+        <div class="nv-divider"></div>
+        <nav class="nv-nav">
+          <button class="nv-item nv-active"><span class="material-icons-round nv-ico">storefront</span><span class="nv-lbl">Marketplace</span></button>
+          <button class="nv-item"><span class="material-icons-round nv-ico">auto_awesome</span><span class="nv-lbl">Appetite Assistant</span></button>
+          <button class="nv-item"><span class="material-icons-round nv-ico">request_quote</span><span class="nv-lbl">Quotes</span></button>
+          <button class="nv-item"><span class="material-icons-round nv-ico">shield</span><span class="nv-lbl">Policies</span></button>
+          <button class="nv-item"><span class="material-icons-round nv-ico">groups</span><span class="nv-lbl">Clients</span></button>
+          <button class="nv-item"><span class="material-icons-round nv-ico">workspace_premium</span><span class="nv-lbl">ProSuite</span> <span class="nv-badge">PRO</span> <span class="material-icons-round nv-chev">expand_more</span></button>
+          <button class="nv-item"><span class="material-icons-round nv-ico">payments</span><span class="nv-lbl">Make a Payment</span></button>
+          <button class="nv-item nv-open"><span class="material-icons-round nv-ico">credit_card</span><span class="nv-lbl">Payment Info</span> <span class="material-icons-round nv-chev">expand_more</span></button>
+          <div class="nv-sub">
+            <button class="nv-subitem nv-subactive">eCheck / Credit Authorization Form</button>
+            <button class="nv-subitem">Payment Types</button>
           </div>
-          <div class="s-item"><svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg> Appetite Assistant</div>
-          <div class="s-item"><svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12"/></svg> Quotes</div>
-          <div class="s-item"><svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75"/></svg> Policies</div>
-          <div class="s-item">ProSuite <span style="border:1px solid #A614C3;color:#A614C3;font-size:9px;padding:1px 5px;border-radius:10px;font-weight:700;margin-left:4px;">PRO</span></div>
-          <div class="s-item">Make a Payment</div>
-          <div class="s-item">Accounting</div>
-          <div class="s-item">Endorsements</div>
-          <div class="s-item">Tools &amp; Resources</div>
-          <div class="s-item">Support</div>
-          <div class="s-item">Admin</div>
+          <button class="nv-item"><span class="material-icons-round nv-ico">edit_note</span><span class="nv-lbl">Endorsements</span></button>
+          <button class="nv-item"><span class="material-icons-round nv-ico">build</span><span class="nv-lbl">Tools &amp; Resources</span> <span class="material-icons-round nv-chev">expand_more</span></button>
+          <button class="nv-item"><span class="material-icons-round nv-ico">support_agent</span><span class="nv-lbl">Support</span></button>
+        </nav>
+        <div class="nv-foot">
+          <button class="nv-norbie">
+            <span class="nv-norbie-av"><span class="material-icons-round">smart_toy</span></span>
+            <span class="nv-norbie-txt">
+              <span class="nv-norbie-t">Chat with Norbie</span>
+              <span class="nv-norbie-s">AI Assistant</span>
+            </span>
+          </button>
+          <div class="nv-foot-div"></div>
+          <button class="nv-dark">
+            <span class="nv-track"><span class="nv-thumb"></span></span>
+            <span class="nv-dark-lbl">Dark Mode</span>
+          </button>
         </div>
-        <div class="sidebar-footer">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
-            <div style="width:28px;height:28px;border-radius:50%;background:#A614C3;display:flex;align-items:center;justify-content:center;"><span class="material-icons-round" style="font-size:14px;color:white;">smart_toy</span></div>
-            <div><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);">Chat with Norbie</div><div style="font-size:9px;color:rgba(255,255,255,0.35);">AI Assistant</div></div>
-          </div>
-          <div class="toggle-row">
-            <div class="mini-toggle" style="background:#E8622A;"><div class="mini-thumb" style="right:3px;"></div></div>
-            <span style="font-size:11px;color:rgba(255,255,255,0.45);">Dark Mode</span>
-          </div>
-          <div class="toggle-row">
-            <div class="mini-toggle" style="background:rgba(255,255,255,0.15);"><div class="mini-thumb" style="left:3px;"></div></div>
-            <span style="font-size:11px;color:rgba(255,255,255,0.45);">Legacy View</span>
-          </div>
-        </div>
-      </div>
-      <!-- Content placeholder -->
-      <div style="flex:1;background:#F9FAFB;padding:28px;border-radius:0 0 12px 0;">
-        <div style="font-size:24px;font-weight:700;color:#1A1A2E;margin-bottom:8px;">Marketplace</div>
-        <div style="font-size:13px;color:#9CA3AF;">Content area</div>
       </div>
     </div>
   </div>
 
   <div class="ds-divider"></div>
 
-  <!-- NAV ITEM STATES -->
-  <div class="ds-section" id="nav-item-states">
+  <div class="ds-section" id="states">
     <h2 class="ds-section-title">Nav item states</h2>
-    <p class="ds-section-desc">Each nav item has four states. Only one item can be active at a time. The pill shape is always applied — only the fill changes between states.</p>
-
-    <div class="ds-example" style="flex-direction:column; align-items:flex-start; gap:0; padding:40px; background:var(--dark-bg);">
-      <div class="nav-states">
-        <div class="state-row">
-          <div class="state-label" style="color:rgba(255,255,255,0.3);">Rest</div>
-          <div class="demo-item" style="color:rgba(255,255,255,0.6);">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20" style="opacity:.6;"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5z"/></svg>
-            Marketplace
-          </div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.2);font-family:monospace;">color: rgba(FFF, 60%)</div>
-        </div>
-        <div class="state-row">
-          <div class="state-label" style="color:rgba(255,255,255,0.3);">Hover</div>
-          <div class="demo-item" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.85);">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5z"/></svg>
-            Marketplace
-          </div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.2);font-family:monospace;">bg: rgba(FFF, 6%)</div>
-        </div>
-        <div class="state-row">
-          <div class="state-label" style="color:rgba(255,255,255,0.3);">Active</div>
-          <div class="demo-item" style="background:linear-gradient(to bottom, #191D35 0%, #582A75 48%, #9D37BC 100%);color:white;font-weight:600;border:1px solid rgba(166,20,195,0.8);box-shadow:0 0 8px rgba(166,20,195,0.5);">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20" style="color:#A614C3;"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5z"/></svg>
-            Marketplace
-          </div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.2);font-family:monospace;">bg: gradient purple · shadow: elev.nav-active</div>
-        </div>
-        <div class="state-row">
-          <div class="state-label" style="color:rgba(255,255,255,0.3);">Disabled</div>
-          <div class="demo-item" style="color:rgba(255,255,255,0.2);cursor:not-allowed;">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20" style="opacity:.3;"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5z"/></svg>
-            Marketplace
-          </div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.2);font-family:monospace;">color: rgba(FFF, 20%)</div>
-        </div>
+    <p class="ds-section-desc">Three states, not four — there is no disabled nav item. Hover and active share the
+    same gradient border; only the glow, the icon colour and the label colour separate them.</p>
+    <div class="ds-example" style="padding:40px;justify-content:center;">
+      <div class="nv-states">
+        <div class="nv-state-row"><span class="nv-state-tag">rest</span>
+          <button class="nv-item"><span class="material-icons-round nv-ico">request_quote</span><span class="nv-lbl">Quotes</span></button>
+          <code class="nv-state-code">border: 1px transparent · icon #9CA3AF · label #6B7280</code></div>
+        <div class="nv-state-row"><span class="nv-state-tag">hover</span>
+          <button class="nv-item nv-hover"><span class="material-icons-round nv-ico">request_quote</span><span class="nv-lbl">Quotes</span></button>
+          <code class="nv-state-code">gradient border · no glow · colours unchanged</code></div>
+        <div class="nv-state-row"><span class="nv-state-tag">active</span>
+          <button class="nv-item nv-active"><span class="material-icons-round nv-ico">request_quote</span><span class="nv-lbl">Quotes</span></button>
+          <code class="nv-state-code">gradient border + glow · icon #A614C3 · label #2D3653</code></div>
       </div>
     </div>
   </div>
 
   <div class="ds-divider"></div>
 
-  <!-- COLLAPSED STATE -->
-  <div class="ds-section" id="collapsed-sidebar">
-    <h2 class="ds-section-title">Collapsed sidebar</h2>
-    <p class="ds-section-desc">When collapsed, only icons are shown. Hovering reveals a tooltip with the item label. Active state maintains the purple gradient pill — scaled to a circle.</p>
-    <div class="ds-example" style="padding:0; overflow:hidden; border-radius:16px; align-items:stretch; background:#F0F0F0; gap:0;">
-      <div class="collapsed-sidebar">
-        <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:white;margin-bottom:12px;">N</div>
-        <div class="c-item active" title="Marketplace"><span class="material-icons-round" style="font-size:18px;">grid_view</span></div>
-        <div class="c-item" title="Appetite Assistant"><span class="material-icons-round" style="font-size:18px;">auto_awesome</span></div>
-        <div class="c-item" title="Quotes"><span class="material-icons-round" style="font-size:18px;">description</span></div>
-        <div class="c-item" title="Policies"><span class="material-icons-round" style="font-size:18px;">assignment</span></div>
-        <div class="c-item" title="ProSuite"><span class="material-icons-round" style="font-size:18px;">workspace_premium</span></div>
-        <div class="c-item" title="Accounting"><span class="material-icons-round" style="font-size:18px;">bar_chart</span></div>
-        <div class="c-item" title="Support"><span class="material-icons-round" style="font-size:18px;">support_agent</span></div>
-      </div>
-      <div style="flex:1;background:#F9FAFB;padding:28px;border-radius:0 0 12px 0;">
-        <div style="font-size:13px;color:#9CA3AF;">Content expands to fill available space when sidebar is collapsed.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ds-divider"></div>
-
-  <!-- AVATAR -->
-  <div class="ds-section" id="avatar">
-    <h2 class="ds-section-title">Avatar</h2>
-    <p class="ds-section-desc">User avatars use initials on a solid purple background. Four sizes are available across the system.</p>
-    <div class="ds-example" style="gap:32px;">
-      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
-        <div style="width:56px;height:56px;border-radius:50%;background:#A614C3;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:white;">JS</div>
-        <div style="font-size:11px;font-weight:700;color:var(--gray-600);">XL — 56px</div>
-        <div style="font-size:10px;color:var(--gray-400);">Profile page</div>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
-        <div style="width:44px;height:44px;border-radius:50%;background:#A614C3;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:white;">JS</div>
-        <div style="font-size:11px;font-weight:700;color:var(--gray-600);">LG — 44px</div>
-        <div style="font-size:10px;color:var(--gray-400);">Dropdown header</div>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
-        <div style="width:36px;height:36px;border-radius:50%;background:#A614C3;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;">JS</div>
-        <div style="font-size:11px;font-weight:700;color:var(--gray-600);">MD — 36px</div>
-        <div style="font-size:10px;color:var(--gray-400);">Sidebar user row</div>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
-        <div style="width:28px;height:28px;border-radius:50%;background:#A614C3;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;">JS</div>
-        <div style="font-size:11px;font-weight:700;color:var(--gray-600);">SM — 28px</div>
-        <div style="font-size:10px;color:var(--gray-400);">Table rows, inline</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ds-divider"></div>
-
-  <!-- SPECS -->
   <div class="ds-section" id="specs">
     <h2 class="ds-section-title">Specs</h2>
-    <div class="ds-table-wrap">
-      <table class="ds-table">
-        <thead><tr><th>Element</th><th>Value</th></tr></thead>
-        <tbody>
-          <tr><td>Sidebar width (expanded)</td><td>245px</td></tr>
-          <tr><td>Sidebar width (collapsed)</td><td>72px</td></tr>
-          <tr><td>Sidebar background</td><td><code>#191D35</code> (dark-sidebar)</td></tr>
-          <tr><td>Nav item shape</td><td><code>shape.full</code> (pill)</td></tr>
-          <tr><td>Nav item height</td><td>40px</td></tr>
-          <tr><td>Nav item margin</td><td>2px 8px (8px horizontal inset)</td></tr>
-          <tr><td>Active background</td><td><code>linear-gradient(to bottom, #191D35, #582A75, #9D37BC)</code></td></tr>
-          <tr><td>Active border</td><td><code>1px solid rgba(166,20,195,0.8)</code></td></tr>
-          <tr><td>Active shadow</td><td><code>0 0 8px rgba(166,20,195,0.5)</code></td></tr>
-          <tr><td>Active icon color</td><td><code>#A614C3</code></td></tr>
-          <tr><td>Top bar height</td><td>56px</td></tr>
-          <tr><td>Top bar background</td><td><code>#0F1120</code></td></tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Part</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Column</td><td><code>width 220px</code> · <code>min-height 100vh</code> · <code>#fff</code> · right border <code>1px #F3F4F6</code></td></tr>
+        <tr><td>Logo block</td><td><code>padding 20px 16px 12px</code> · mark <code>height 28px</code></td></tr>
+        <tr><td>Account button</td><td><code>padding 8px</code> · <code>radius 12px</code> · <code>gap 12px</code> · hover fill <code>#F9FAFB</code></td></tr>
+        <tr><td>Avatar</td><td>36×36px circle · <code>2.5px solid #73C9B7</code> · fill <code>rgba(115,201,183,.10)</code> · initials 13px / 600 in a teal gradient</td></tr>
+        <tr><td>Account name</td><td>13px / 700 · <code>#2D3653</code>; sub-line 11px · <code>#9CA3AF</code></td></tr>
+        <tr><td>Divider</td><td><code>margin 0 16px 8px</code> · <code>1px #F3F4F6</code></td></tr>
+        <tr><td>Nav list</td><td><code>padding 0 8px</code> · <code>2px</code> between items</td></tr>
+        <tr><td>Nav item</td><td><code>padding 7px 12px</code> · <code>radius 12px</code> · <code>gap 12px</code> · 13px / 500</td></tr>
+        <tr><td>Nav icon</td><td>18×18px (16×16 for Appetite Assistant) · <code>#9CA3AF</code>, <code>#A614C3</code> when active</td></tr>
+        <tr><td>PRO badge</td><td>10px / 600 · <code>padding 1px 6px</code> · <code>radius 9999px</code> · <code>1px #74C3B7</code> text <code>#74C3B7</code></td></tr>
+        <tr><td>Chevron</td><td>14×14px · <code>#9CA3AF</code> · rotates 180° when the group is open</td></tr>
+        <tr><td>Sub-item</td><td><code>padding-left 32px</code> group · item <code>padding 4px 8px</code> · <code>radius 6px</code> · 12px / 500; active 600 <code>#A614C3</code> on <code>rgba(168,85,247,.08)</code>, hover <code>#F3F4F6</code></td></tr>
+        <tr><td>Norbie button</td><td><code>padding 10px 12px</code> · <code>radius 12px</code> · <code>1.5px #E5E7EB</code> · avatar 32×32 · title 12px / 600, sub 10px</td></tr>
+        <tr><td>Dark toggle</td><td>Track 36×20px <code>radius 9999px</code>, <code>#D1D5DB</code> off / <code>#E8622A</code> on · thumb 16×16 white at <code>left 2px</code> → <code>19px</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="ds-subsection-title" style="margin-top:28px;">The gradient border</h3>
+    <p class="ds-section-desc">Hover and active do not fill the item. They paint the 1px border with the brand
+    gradient by layering two backgrounds — this is the single most recognisable Norbielink detail, and it is
+    reused by the account menu.</p>
+    <div class="ds-code-wrap"><pre class="ds-code-block">background: linear-gradient(#fff, #fff) padding-box,
+            linear-gradient(to right, #5C2ED4 0%, #A614C3 65%) border-box;
+border: 1px solid transparent;
+/* active only: */
+box-shadow: 0 0 8px rgba(166, 20, 195, 0.4);</pre></div>
+
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td>There is <strong>no collapsed sidebar</strong>. The column is always 220px. The collapse controls elsewhere in the product belong to detail panels, not to navigation.</td></tr>
+      <tr><td>There is <strong>no application top bar</strong>. Each page draws its own 71px header with a <code>22px / 400</code> title and a <code>0.87px #F3F4F6</code> rule.</td></tr>
+      <tr><td>In dark mode the column becomes <code>#191D35</code> with a <code>rgba(255,255,255,.12)</code> right border, and the item fill becomes <code>linear-gradient(to bottom, #191D35 0%, #582A75 48%, #9D37BC 100%)</code> — the only place the product fills a nav item.</td></tr>
+    </tbody></table></div>
   </div>
 
-
-    <!-- ── Prev / Next navigation ── -->
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-21-menus.html">
       <span class="ds-page-nav-label">← Previous</span>
@@ -336,9 +355,8 @@
 
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
-  <a class="ds-toc-item active" href="#nav-item-states">Nav item states</a>
-  <a class="ds-toc-item" href="#collapsed-sidebar">Collapsed sidebar</a>
-  <a class="ds-toc-item" href="#avatar">Avatar</a>
+  <a class="ds-toc-item active" href="#sidebar">Sidebar</a>
+  <a class="ds-toc-item" href="#states">Nav item states</a>
   <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 

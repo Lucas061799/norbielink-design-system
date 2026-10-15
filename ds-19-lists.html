@@ -5,13 +5,43 @@
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 <style>
-body.dark-mode .ds-example { background: #191D35; }
-body.dark-mode .ds-example [style*="background:white"] { background: #27272a !important; }
-body.dark-mode .ds-example [style*="color:#111827"] { color: rgba(255,255,255,.85) !important; }
-body.dark-mode .ds-example [style*="color:#9CA3AF"] { color: rgba(255,255,255,.4) !important; }
-body.dark-mode .ds-example [style*="color:#6B7280"] { color: rgba(255,255,255,.5) !important; }
-body.dark-mode .ds-example [style*="border:1px solid #E5E7EB"] { border-color: rgba(255,255,255,0.08) !important; }
-body.dark-mode .ds-example [style*="border-bottom:1px solid #E5E7EB"] { border-bottom-color: rgba(255,255,255,0.06) !important; }
+/* ── ACTIVITY TIMELINE ── the product's only list; everything else is a table. */
+.lst-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;
+  font-family: 'Montserrat', sans-serif; }
+.lst-chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
+  border-radius: 12px; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 400;
+  line-height: 1.5; background: var(--gray-50); border: 1px solid #E9EAEC; color: var(--gray-500);
+  cursor: pointer; transition: all .15s; }
+.lst-chip .material-icons-round { font-size: 14px; }
+.lst-chip-n { font-size: 10px; line-height: 1.5; padding: 2px 6px; border-radius: 9999px;
+  background: var(--gray-200); color: var(--gray-400); margin-left: 2px; }
+.lst-chip-on .lst-chip-n { background: inherit; }
+
+.lst-card { background: #fff; border: 1px solid #E9EAEC; border-radius: 12px; padding: 20px;
+  font-family: 'Montserrat', sans-serif; }
+.lst-entry { display: flex; gap: 16px; }
+.lst-rail { display: flex; flex-direction: column; align-items: center; padding-top: 2px; }
+.lst-disc { display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 9999px; flex-shrink: 0; }
+.lst-disc .material-icons-round { font-size: 14px; }
+.lst-line { width: 1px; flex: 1; margin: 8px 0; background: #E9EAEC; }
+.lst-last .lst-line { display: none; }
+.lst-body { flex: 1; min-width: 0; padding-bottom: 20px; }
+.lst-last .lst-body { padding-bottom: 0; }
+.lst-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 4px; }
+.lst-title { margin: 0; font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--gray-800); }
+.lst-time { flex-shrink: 0; margin-left: 16px; font-size: 11px; line-height: 1.5; color: var(--gray-500);
+  white-space: nowrap; }
+.lst-desc { margin: 0 0 4px; font-size: 12px; line-height: 1.5; color: var(--gray-500); }
+.lst-by { margin: 0; font-size: 11px; line-height: 1.5; color: var(--gray-400); }
+
+body.dark-mode .lst-card { background: #191D35; border-color: rgba(255,255,255,0.08); }
+body.dark-mode .lst-line { background: rgba(255,255,255,0.08); }
+body.dark-mode .lst-title { color: #F9FAFB; }
+body.dark-mode .lst-time, body.dark-mode .lst-desc { color: #8B8FA8; }
+body.dark-mode .lst-by { color: #6B7280; }
+body.dark-mode .lst-chip { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.08); color: #8B8FA8; }
+body.dark-mode .lst-chip-n { background: rgba(255,255,255,0.08); color: #6B7280; }
 </style>
 </head>
 <body class="btis-layout">
@@ -112,7 +142,7 @@ body.dark-mode .ds-example [style*="border-bottom:1px solid #E5E7EB"] { border-b
 
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
-  <a class="ds-toc-item active" href="#variants">Variants</a>
+  <a class="ds-toc-item active" href="#variants">Activity timeline</a>
   <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 
@@ -129,39 +159,145 @@ body.dark-mode .ds-example [style*="border-bottom:1px solid #E5E7EB"] { border-b
       <a class="ds-nav-arrow-btn" href="ds-20-progress.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">Lists are continuous vertical indexes of text or images. They display related items and support one-, two-, and three-line configurations.</p>
+    <p class="ds-page-desc">The product’s only list is the <strong>activity timeline</strong> on a client record.
+  Everything else that looks like a list is a table. A filter row sits above it; the entries themselves live on a
+  white card with a connector line running down the icon rail.</p>
 
-<div class="ds-section" id="variants"><div class="ds-section-title">Variants</div>
-<div class="ds-example" style="flex-direction:column;align-items:stretch;gap:24px;padding:24px 40px;">
-  <div><div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9CA3AF;margin-bottom:8px;">One-line</div>
-  <div style="background:white;border-radius:12px;border:1px solid #E5E7EB;overflow:hidden;">
-    <div style="display:flex;align-items:center;gap:16px;padding:12px 16px;border-bottom:1px solid #E5E7EB;"><span class="material-icons-round" style="color:#6B7280;">folder</span><span style="font-size:14px;font-weight:500;color:#111827;">Projects</span><span class="material-icons-round" style="margin-left:auto;color:#9CA3AF;font-size:18px;">chevron_right</span></div>
-    <div style="display:flex;align-items:center;gap:16px;padding:12px 16px;border-bottom:1px solid #E5E7EB;"><span class="material-icons-round" style="color:#6B7280;">photo_library</span><span style="font-size:14px;font-weight:500;color:#111827;">Assets</span><span class="material-icons-round" style="margin-left:auto;color:#9CA3AF;font-size:18px;">chevron_right</span></div>
-    <div style="display:flex;align-items:center;gap:16px;padding:12px 16px;"><span class="material-icons-round" style="color:#6B7280;">settings</span><span style="font-size:14px;font-weight:500;color:#111827;">Settings</span><span class="material-icons-round" style="margin-left:auto;color:#9CA3AF;font-size:18px;">chevron_right</span></div>
-  </div></div>
-  <div><div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9CA3AF;margin-bottom:8px;">Two-line</div>
-  <div style="background:white;border-radius:12px;border:1px solid #E5E7EB;overflow:hidden;">
-    <div style="display:flex;align-items:center;gap:16px;padding:12px 16px;border-bottom:1px solid #E5E7EB;">
-      <div style="width:40px;height:40px;border-radius:50%;background:rgba(166,20,195,0.10);border:1.5px solid #A614C3;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;font-weight:700;color:#A614C3;font-family:Montserrat,sans-serif;">LY</div>
-      <div><div style="font-size:14px;font-weight:600;color:#111827;">Lucas Ye</div><div style="font-size:12px;color:#9CA3AF;margin-top:2px;">Design Lead · Online</div></div>
-      <span style="margin-left:auto;font-size:11px;color:#9CA3AF;">2m</span>
+  <div class="ds-section" id="variants">
+    <h2 class="ds-section-title">Activity timeline</h2>
+    <p class="ds-section-desc">Each entry type has its own icon colour on a 12% tint of the same hue. The six types
+    are fixed. The vertical connector is drawn between discs and stops at the last entry.</p>
+    <div class="ds-example" style="padding:32px;flex-direction:column;align-items:stretch;">
+      <div class="lst-filters">
+          <button class="lst-chip lst-chip-on" style="background:#73C9B715;border-color:#73C9B7;color:#73C9B7;">All<span class="lst-chip-n" style="background:#73C9B720;color:#73C9B7;">24</span></button>
+          <button class="lst-chip"><span class="material-icons-round">shield</span>Policy<span class="lst-chip-n">6</span></button>
+          <button class="lst-chip"><span class="material-icons-round">description</span>Quote<span class="lst-chip-n">5</span></button>
+          <button class="lst-chip"><span class="material-icons-round">folder</span>Document<span class="lst-chip-n">4</span></button>
+          <button class="lst-chip"><span class="material-icons-round">mail</span>Email<span class="lst-chip-n">5</span></button>
+          <button class="lst-chip"><span class="material-icons-round">call</span>Call<span class="lst-chip-n">3</span></button>
+          <button class="lst-chip"><span class="material-icons-round">sticky_note_2</span>Note<span class="lst-chip-n">1</span></button>
+      </div>
+      <div class="lst-card">
+          <div class="lst-entry">
+            <div class="lst-rail">
+              <span class="lst-disc" style="background:rgba(116,195,183,0.12);"><span class="material-icons-round" style="color:#74C3B7;">shield</span></span>
+              <span class="lst-line"></span>
+            </div>
+            <div class="lst-body">
+              <div class="lst-head"><h4 class="lst-title">Policy bound</h4><span class="lst-time">Oct 14, 2026 09:12 AM</span></div>
+              <p class="lst-desc">GL policy GLP-884512 issued for Garcia Landscaping.</p>
+              <p class="lst-by">by Jane Smith</p>
+            </div>
+          </div>
+          <div class="lst-entry">
+            <div class="lst-rail">
+              <span class="lst-disc" style="background:rgba(167,139,250,0.12);"><span class="material-icons-round" style="color:#A78BFA;">description</span></span>
+              <span class="lst-line"></span>
+            </div>
+            <div class="lst-body">
+              <div class="lst-head"><h4 class="lst-title">Quote submitted</h4><span class="lst-time">Oct 13, 2026 04:40 PM</span></div>
+              <p class="lst-desc">Quote QAN334455667 sent to the carrier for review.</p>
+              <p class="lst-by">by Jane Smith</p>
+            </div>
+          </div>
+          <div class="lst-entry">
+            <div class="lst-rail">
+              <span class="lst-disc" style="background:rgba(96,165,250,0.12);"><span class="material-icons-round" style="color:#60A5FA;">folder</span></span>
+              <span class="lst-line"></span>
+            </div>
+            <div class="lst-body">
+              <div class="lst-head"><h4 class="lst-title">Document uploaded</h4><span class="lst-time">Oct 13, 2026 11:05 AM</span></div>
+              <p class="lst-desc">Five years of loss runs added to the client file.</p>
+              <p class="lst-by">by Jane Smith</p>
+            </div>
+          </div>
+          <div class="lst-entry">
+            <div class="lst-rail">
+              <span class="lst-disc" style="background:rgba(245,158,11,0.12);"><span class="material-icons-round" style="color:#F59E0B;">mail</span></span>
+              <span class="lst-line"></span>
+            </div>
+            <div class="lst-body">
+              <div class="lst-head"><h4 class="lst-title">Email sent</h4><span class="lst-time">Oct 11, 2026 08:30 AM</span></div>
+              <p class="lst-desc">Renewal reminder sent 60 days ahead of expiration.</p>
+              <p class="lst-by">by Jane Smith</p>
+            </div>
+          </div>
+          <div class="lst-entry">
+            <div class="lst-rail">
+              <span class="lst-disc" style="background:rgba(52,211,153,0.12);"><span class="material-icons-round" style="color:#34D399;">call</span></span>
+              <span class="lst-line"></span>
+            </div>
+            <div class="lst-body">
+              <div class="lst-head"><h4 class="lst-title">Call logged</h4><span class="lst-time">Oct 10, 2026 02:15 PM</span></div>
+              <p class="lst-desc">Spoke with the producer about adding inland marine.</p>
+              <p class="lst-by">by Jane Smith</p>
+            </div>
+          </div>
+          <div class="lst-entry lst-last">
+            <div class="lst-rail">
+              <span class="lst-disc" style="background:rgba(249,115,22,0.12);"><span class="material-icons-round" style="color:#F97316;">sticky_note_2</span></span>
+              <span class="lst-line"></span>
+            </div>
+            <div class="lst-body">
+              <div class="lst-head"><h4 class="lst-title">Note added</h4><span class="lst-time">Oct 09, 2026 05:48 PM</span></div>
+              <p class="lst-desc">Client prefers email over phone for all renewals.</p>
+              <p class="lst-by">by Jane Smith</p>
+            </div>
+          </div>
+      </div>
     </div>
-    <div style="display:flex;align-items:center;gap:16px;padding:12px 16px;">
-      <div style="width:40px;height:40px;border-radius:50%;background:rgba(166,20,195,0.10);border:1.5px solid #A614C3;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;font-weight:700;color:#A614C3;font-family:Montserrat,sans-serif;">N</div>
-      <div><div style="font-size:14px;font-weight:600;color:#111827;">Norbielink DS</div><div style="font-size:12px;color:#9CA3AF;margin-top:2px;">Design system updates</div></div>
-      <span style="margin-left:auto;font-size:11px;color:#9CA3AF;">1h</span>
-    </div>
-  </div></div>
-</div></div>
-<div class="ds-section" id="specs"><div class="ds-section-title">Specs</div>
-<div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Property</th><th>Value</th><th>Token</th></tr></thead><tbody>
-<tr><td>One-line height</td><td>48px</td><td><code>list.one-line.height</code></td></tr>
-<tr><td>Two-line height</td><td>64px</td><td><code>list.two-line.height</code></td></tr>
-<tr><td>Horizontal padding</td><td>16px</td><td><code>list.padding.h</code></td></tr>
-<tr><td>Leading icon</td><td>40px</td><td><code>list.icon.size</code></td></tr>
-</tbody></table></div></div>
-  
-    <!-- ── Prev / Next navigation ── -->
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Part</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Card</td><td><code>radius 12px</code> · <code>padding 20px</code> · <code>#fff</code> on <code>1px #E9EAEC</code></td></tr>
+        <tr><td>Entry</td><td><code>display:flex</code> · <code>gap 16px</code> · body has <code>padding-bottom 20px</code></td></tr>
+        <tr><td>Icon disc</td><td>28×28px · <code>radius 9999px</code> · 12% tint of the type colour · icon 14×14px · rail <code>padding-top 2px</code></td></tr>
+        <tr><td>Connector</td><td><code>1px</code> wide, <code>flex:1</code>, <code>margin 8px 0</code>, <code>#E9EAEC</code> — omitted on the last entry</td></tr>
+        <tr><td>Title</td><td>13px / 600 · <code>#1F2937</code> · row has <code>margin-bottom 4px</code></td></tr>
+        <tr><td>Timestamp</td><td>11px · <code>#6B7280</code> · <code>margin-left 16px</code>, never wraps</td></tr>
+        <tr><td>Description</td><td>12px · <code>#6B7280</code> · <code>margin-bottom 4px</code></td></tr>
+        <tr><td>Attribution</td><td>11px · <code>#9CA3AF</code> · always <code>by {user}</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="ds-subsection-title" style="margin-top:28px;">Filter chips</h3>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>State</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Shape</td><td><code>padding 6px 12px</code> · <code>radius 12px</code> · <code>gap 6px</code> · 12px / 400</td></tr>
+        <tr><td>Rest</td><td><code>background #F9FAFB</code> · <code>1px #E9EAEC</code> · <code>color #6B7280</code></td></tr>
+        <tr><td>Selected</td><td>Border and text take the type colour; fill is that colour at <code>15</code> (8%) alpha</td></tr>
+        <tr><td>Count pill</td><td>10px · <code>padding 2px 6px</code> · <code>radius 9999px</code> · <code>#E5E7EB</code>, or the type colour at <code>20</code> alpha when selected</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="ds-subsection-title" style="margin-top:28px;">Type colours</h3>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Type</th><th>Icon</th><th>Tint</th></tr></thead>
+      <tbody>
+        <tr><td>Policy</td><td><code>#74C3B7</code></td><td><code>rgba(116,195,183,.12)</code></td></tr>
+        <tr><td>Quote</td><td><code>#A78BFA</code></td><td><code>rgba(167,139,250,.12)</code></td></tr>
+        <tr><td>Document</td><td><code>#60A5FA</code></td><td><code>rgba(96,165,250,.12)</code></td></tr>
+        <tr><td>Email</td><td><code>#F59E0B</code></td><td><code>rgba(245,158,11,.12)</code></td></tr>
+        <tr><td>Call</td><td><code>#34D399</code></td><td><code>rgba(52,211,153,.12)</code></td></tr>
+        <tr><td>Note</td><td><code>#F97316</code></td><td><code>rgba(249,115,22,.12)</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td>These six are <strong>decorative type markers</strong>, not semantic colours. <code>#F59E0B</code> here means “email”, not “warning”, and <code>#F97316</code> means “note”, not “danger”. Do not reuse them for state.</td></tr>
+      <tr><td>For tabular data use a table. This timeline exists because activity entries are heterogeneous and have no columns.</td></tr>
+      <tr><td>When the filter matches nothing the card shows a centred empty state: a 32×32 muted icon over <em>No activity found</em> at 13px.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-46-label.html">
       <span class="ds-page-nav-label">← Previous</span>

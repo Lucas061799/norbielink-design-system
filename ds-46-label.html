@@ -14,6 +14,14 @@
 
 .lbl-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
   line-height: 1.5; text-transform: uppercase; letter-spacing: .05em; color: var(--gray-500); }
+
+.lbl-block { display: flex; gap: 8px; flex-wrap: wrap; }
+.lbl-opt { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--gray-200);
+  background: transparent; font-family: 'Montserrat', sans-serif; font-size: 12px;
+  line-height: 1.5; color: var(--gray-800); cursor: pointer; }
+.lbl-opt.selected { background: rgba(166,20,195,0.06); border-color: rgba(166,20,195,0.25); color: #A614C3; }
+.lbl-title { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 600;
+  line-height: 1.5; color: var(--gray-800); }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -151,10 +159,20 @@
 
   <div class="ds-section" id="eyebrow">
     <h2 class="ds-section-title">Section eyebrow</h2>
-    <p class="ds-section-desc">Labels a block rather than a control. Uppercase, tracked, muted.</p>
-    <div class="ds-example" style="flex-direction:column; align-items:flex-start; gap:8px; padding:40px;">
-      <div class="lbl-eyebrow">Scope</div>
-      <div class="lbl-eyebrow" style="letter-spacing:.06em;">Agency</div>
+    <p class="ds-section-desc">Names the block beneath it rather than a single control. It only reads correctly
+    attached to content — on its own it is just a shouted word.</p>
+    <div class="ds-example" style="flex-direction:column; align-items:stretch; gap:24px; padding:40px;">
+      <div>
+        <div class="lbl-eyebrow">Scope</div>
+        <div class="lbl-block">
+          <button class="lbl-opt selected">Current view (22)</button>
+          <button class="lbl-opt">All agencies (148)</button>
+        </div>
+      </div>
+      <div>
+        <div class="lbl-eyebrow" style="letter-spacing:.06em;">Agency</div>
+        <div class="lbl-title">Acme Insurance Agency</div>
+      </div>
     </div>
   </div>
 

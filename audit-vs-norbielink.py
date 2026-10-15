@@ -5,7 +5,7 @@ Checks only things that are mechanically decidable and actionable. The
 green-tinted --gray-* ramp is reported separately, not per page, because it is
 a token-level decision that touches the doc-site chrome too.
 """
-import re, glob, json, collections, sys
+import re, glob, json, collections, sys, os
 
 SPEC = {
     # colour -> why it is wrong
@@ -50,6 +50,12 @@ def is_dark_scope(selector):
     return "dark-mode" in selector or re.search(r"-dk\b", selector) is not None
 
 
+# A handful of colours are correct on exactly one page, where the component
+# that owns them lives. Listing the page is more honest than widening the rule.
+FILE_EXEMPT = {
+    "ds-19-lists.html": {"#F97316"},  # the activity timeline's "note" type marker
+}
+
 def scan(path):
     raw = open(path, encoding="utf-8").read()
     if path.endswith(".html"):
@@ -67,6 +73,8 @@ def scan(path):
                 continue
             # these are legitimate as DARK-mode values and wrong anywhere else
             if hexv.upper() in DARK_ONLY and is_dark_scope(selector):
+                continue
+            if hexv.upper() in FILE_EXEMPT.get(os.path.basename(path), ()):
                 continue
             n += hits
         if n:

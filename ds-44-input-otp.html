@@ -5,38 +5,49 @@
 <style>
 /* ── INPUT OTP ──
    Typography follows the product's verification screen: a 24px/700 heading
-   with the object ("Code") in the brand gradient, a 13px muted sub-line, and
-   a 12px timer. The boxes are the standard input surface at 12px radius. */
-.otp-wrap{display:flex;flex-direction:column;gap:10px;font-family:'Montserrat',sans-serif;width:100%;max-width:360px;}
-.otp-label{font-size:24px;font-weight:700;color:#1F2937;letter-spacing:-0.01em;line-height:1.25;}
+   with the object ("Code") in the brand gradient, a 14px muted sub-line, and
+   a 12px timer. Six boxes share the 520px form width with an 8px gap and are
+   square (aspect-ratio 1/1). Every margin below is the product's own. */
+.otp-wrap{display:flex;flex-direction:column;font-family:'Montserrat',sans-serif;width:100%;max-width:520px;}
+.otp-label{font-size:32px;font-weight:600;line-height:38px;color:#1F2937;margin:0 0 12px;}
 .otp-label .accent{
-  background:linear-gradient(88.54deg,#5C2ED4 0.1%,#A614C3 63.88%);
+  background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
-.otp-sub{font-size:13px;color:#6B7280;margin-top:-2px;line-height:1.5;}
+.otp-sub{font-size:14px;color:#6B7280;line-height:1.5;margin:0 0 32px;}
 .otp-sub strong{color:#1F2937;font-weight:600;}
-.otp-fields{display:flex;gap:8px;margin-top:6px;}
-.otp-box{flex:1;min-width:0;aspect-ratio:1/1;border:1px solid #E5E7EB;border-radius:12px;text-align:center;
+.otp-fields{display:flex;gap:8px;width:100%;margin-bottom:12px;}
+.otp-box{flex:1;min-width:0;aspect-ratio:1/1;padding:0;border:1px solid #D1D5DB;border-radius:10px;text-align:center;
   font-size:22px;font-weight:600;color:#1F2937;font-family:'Montserrat',sans-serif;outline:none;background:#fff;
   transition:border .15s,background .15s;}
 .otp-box:focus{border:1px solid transparent;
   background:linear-gradient(#fff,#fff) padding-box,linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%) border-box;}
-.otp-box.filled{border:1px solid #E5E7EB;background:#fff;}
+.otp-box.filled{border:1px solid #D1D5DB;background:#fff;}
 .otp-sep{display:none;}
-.otp-timer{font-size:12px;color:#6B7280;margin-top:4px;line-height:1.5;}
+.otp-timer{font-size:12px;color:#6B7280;line-height:1.5;margin:0 0 28px;}
 .otp-timer strong{color:#1F2937;font-weight:600;}
+.otp-verify{width:100%;padding:12px 28px;border:none;border-radius:10px;
+  background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:#fff;
+  font-family:'Montserrat',sans-serif;font-size:14px;font-weight:600;line-height:1.5;cursor:pointer;
+  box-shadow:0 4px 14px rgba(166,20,195,0.25);transition:all .15s;}
+.otp-resend{margin-top:20px;font-size:13px;line-height:1.5;color:#6B7280;}
+.otp-resend a{font-weight:700;font-size:13px;text-decoration:underline;text-underline-offset:3px;
+  background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
 
 body.dark-mode .otp-label,.otp-dk .otp-label{color:#F9FAFB;}
-body.dark-mode .otp-label .accent{background:linear-gradient(88.54deg,#A855F7 0.1%,#D946EF 63.88%);
+body.dark-mode .otp-label .accent{background:linear-gradient(90deg,#C9A6FF 0%,#E68BF2 65%);
   -webkit-background-clip:text;background-clip:text;}
 body.dark-mode .otp-sub,.otp-dk .otp-sub{color:#8B8FA8;}
 body.dark-mode .otp-sub strong{color:#F9FAFB;}
-body.dark-mode .otp-box,.otp-dk .otp-box{background:#1E2240;border-color:rgba(255,255,255,0.12);color:#F9FAFB;}
+body.dark-mode .otp-box,.otp-dk .otp-box{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.22);color:#F9FAFB;}
 body.dark-mode .otp-box:focus{border:1px solid transparent;
-  background:linear-gradient(#1E2240,#1E2240) padding-box,linear-gradient(90deg,#A855F7 0%,#D946EF 65%) border-box;}
-body.dark-mode .otp-box.filled{border-color:rgba(255,255,255,0.12);background:#1E2240;}
-body.dark-mode .otp-hint,.otp-dk .otp-hint{color:#8B8FA8;}
+  background:linear-gradient(#191D35,#191D35) padding-box,linear-gradient(90deg,#A855F7 0%,#D946EF 65%) border-box;}
+body.dark-mode .otp-box.filled{border-color:rgba(255,255,255,0.22);background:rgba(255,255,255,0.05);}
 body.dark-mode .otp-timer{color:#8B8FA8;}
 body.dark-mode .otp-timer strong{color:#F9FAFB;}
+body.dark-mode .otp-resend{color:#8B8FA8;}
+body.dark-mode .otp-resend a{background:linear-gradient(90deg,#C9A6FF 0%,#E68BF2 65%);
+  -webkit-background-clip:text;background-clip:text;}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -166,7 +177,7 @@ body.dark-mode .otp-timer strong{color:#F9FAFB;}
         <div class="ds-preview-pane" id="prev-main" style="align-items:center;justify-content:center;">
           <div class="otp-wrap">
             <div class="otp-label">Verify Your <span class="accent">Code</span></div>
-            <div class="otp-sub">We sent a 6-digit code to <strong>l***@email.com</strong></div>
+            <div class="otp-sub">We sent a 6-digit code to <strong>l***********e@amyntagroup.com</strong></div>
             <div class="otp-fields">
               <input class="otp-box filled" maxlength="1" value="4" readonly>
               <input class="otp-box filled" maxlength="1" value="2" readonly>
@@ -175,7 +186,9 @@ body.dark-mode .otp-timer strong{color:#F9FAFB;}
               <input class="otp-box" maxlength="1">
               <input class="otp-box" maxlength="1">
             </div>
-            <div class="otp-timer">Code expires in <strong>09:24</strong></div>
+            <div class="otp-timer">Code expires in <strong>09:46</strong></div>
+            <button class="otp-verify" type="button">Verify</button>
+            <div class="otp-resend">Didn't get the code? <a href="#" onclick="return false;">Resend</a></div>
           </div>
         </div>
         <div class="ds-code-pane" id="code-main">
@@ -213,7 +226,7 @@ body.dark-mode .otp-timer strong{color:#F9FAFB;}
     <div class="ds-divider"></div>
         <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
       <h3 class="ds-subsection-title">Classes</h3>
-      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>otp-wrap</code></td><td>Column container</td></tr><tr><td><code>otp-fields</code></td><td>Flex row of input boxes</td></tr><tr><td><code>otp-box</code></td><td>Single character input (48×56px)</td></tr><tr><td><code>otp-box.filled</code></td><td>Box with a digit entered</td></tr><tr><td><code>otp-sep</code></td><td>Visual group separator</td></tr><tr><td><code>otp-dk</code></td><td>Dark mode modifier</td></tr></tbody></table></div>    </div>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>otp-wrap</code></td><td>Column container, <code>max-width 520px</code> — the auth form width</td></tr><tr><td><code>otp-label</code></td><td>32px / 600 / <code>line-height 38px</code> · <code>margin-bottom 12px</code></td></tr><tr><td><code>otp-sub</code></td><td>14px muted · <code>margin-bottom 32px</code></td></tr><tr><td><code>otp-fields</code></td><td>Flex row, <code>gap 8px</code> · <code>margin-bottom 12px</code></td></tr><tr><td><code>otp-box</code></td><td><code>flex:1</code> · <code>aspect-ratio 1/1</code> (80×80 at 520px) · <code>radius 10px</code> · <code>1px #D1D5DB</code> · 22px / 600</td></tr><tr><td><code>otp-box:focus</code></td><td>Border becomes the brand gradient via <code>padding-box / border-box</code></td></tr><tr><td><code>otp-timer</code></td><td>12px muted · <code>margin-bottom 28px</code></td></tr><tr><td><code>otp-verify</code></td><td>Full-width gradient button, <code>12px 28px</code> · <code>radius 10px</code> · 14px / 600 · <code>shadow 0 4px 14px rgba(166,20,195,.25)</code></td></tr><tr><td><code>otp-resend</code></td><td><code>margin-top 20px</code> · 13px muted, link 13px / 700 gradient text, underline offset 3px</td></tr><tr><td><code>otp-dk</code></td><td>Dark mode modifier</td></tr></tbody></table></div>    </div>
 
   
     <!-- ── Prev / Next navigation ── -->
