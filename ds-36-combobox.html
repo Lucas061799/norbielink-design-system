@@ -74,6 +74,37 @@ body.dark-mode .cb-thead { background: rgba(255,255,255,0.03); border-bottom-col
 body.dark-mode .cb-sortcol { color: #8B8FA8; }
 body.dark-mode .cb-sort { color: #6B7280; }
 body.dark-mode .cb-row { color: #F9FAFB; border-bottom-color: rgba(255,255,255,0.06); }
+
+/* ── ADDRESS AUTOCOMPLETE ── the single-value combobox, backed by a remote geocoder. */
+.ac-field { width: 420px; font-family: 'Montserrat', sans-serif; }
+.ac-label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600; line-height: 1.5;
+  color: var(--gray-800); }
+.ac-wrap { position: relative; }
+.ac-input { width: 100%; padding: 9px 36px 9px 12px; border: 1px solid var(--gray-300);
+  border-radius: 8px; background: #fff; font-family: 'Montserrat', sans-serif; font-size: 13px;
+  line-height: 1.5; color: var(--gray-800); outline: none; }
+.ac-icon { position: absolute; top: 50%; right: 12px; transform: translateY(-50%);
+  display: inline-flex; color: var(--gray-400); pointer-events: none; }
+.ac-svg, .ac-pin { display: block; flex-shrink: 0; }
+.ac-panel { position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 50;
+  max-height: 320px; overflow-y: auto; padding: 4px 0; background: #fff;
+  border: 1px solid var(--gray-200); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+.ac-opt { display: flex; align-items: flex-start; gap: 12px; padding: 10px 16px; cursor: pointer;
+  background: transparent; transition: background .15s; }
+.ac-opt:hover, .ac-opt.on { background: var(--gray-50); }
+.ac-pin { color: var(--gray-400); margin-top: 2px; }
+.ac-txt { min-width: 0; flex: 1; }
+.ac-p { font-size: 12px; font-weight: 600; line-height: 1.5; color: var(--gray-800);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ac-s { font-size: 10px; line-height: 1.5; color: var(--gray-400); margin-top: 2px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+body.dark-mode .ac-label, body.dark-mode .ac-p { color: #F9FAFB; }
+body.dark-mode .ac-input { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.18);
+  color: #F9FAFB; }
+body.dark-mode .ac-panel { background: #191D35; border-color: rgba(255,255,255,0.08); }
+body.dark-mode .ac-opt:hover, body.dark-mode .ac-opt.on { background: rgba(255,255,255,0.04); }
+body.dark-mode .ac-s { color: #6B7280; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -175,6 +206,7 @@ body.dark-mode .cb-row { color: #F9FAFB; border-bottom-color: rgba(255,255,255,0
 <aside class="ds-toc">
   <div class="ds-toc-title">On this page</div>
   <a class="ds-toc-item active" href="#overview">Column filter</a>
+  <a class="ds-toc-item" href="#autocomplete">Address autocomplete</a>
   <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 <main class="ds-main">
@@ -193,10 +225,10 @@ body.dark-mode .cb-row { color: #F9FAFB; border-bottom-color: rgba(255,255,255,0
       <a class="ds-nav-arrow-btn" href="ds-38-context-menu.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">Norbielink’s combobox is the <strong>table column filter</strong>. It is not a
-  single-value picker — it is a searchable, <strong>multi-select</strong> checklist that opens from a column
-  heading, with Select All at the top and Reset Filter at the bottom. For picking one value from a short list
-  the product uses a plain <a href="ds-52-select.html">select</a> instead.</p>
+    <p class="ds-page-desc">Two comboboxes ship, and they have nothing in common but a search box. The
+  <strong>column filter</strong> is a multi-select checklist that opens from a table heading; the
+  <strong>address autocomplete</strong> is a single-value typeahead backed by a remote geocoder. For picking one
+  value from a short fixed list the product uses a plain <a href="ds-52-select.html">select</a> instead.</p>
 
   <div class="ds-section" id="overview">
     <h2 class="ds-section-title">Column filter</h2>
@@ -236,6 +268,48 @@ body.dark-mode .cb-row { color: #F9FAFB; border-bottom-color: rgba(255,255,255,0
 
   <div class="ds-divider"></div>
 
+  <div class="ds-section" id="autocomplete">
+    <h2 class="ds-section-title">Address autocomplete</h2>
+    <p class="ds-section-desc">The second combobox is a true single-value typeahead, used for the street field
+    on a client record. Typing queries a remote geocoder and picking a suggestion fills street, city, state, ZIP
+    and country in one go — so the control writes five fields, not one.</p>
+    <div class="ds-example" style="padding:32px 32px 200px;align-items:flex-start;justify-content:center;">
+      <div class="ac-field">
+        <label class="ac-label">Street Address</label>
+        <div class="ac-wrap">
+          <input class="ac-input" value="1200 Innovation" placeholder="Start typing an address">
+          <span class="ac-icon"><svg class="ac-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg></span>
+          <div class="ac-panel"><div class="ac-opt on"><svg class="ac-pin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><div class="ac-txt"><div class="ac-p">1200 Innovation Drive</div><div class="ac-s">San Francisco, California, 94105</div></div></div><div class="ac-opt"><svg class="ac-pin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><div class="ac-txt"><div class="ac-p">1200 Innovation Way</div><div class="ac-s">Palo Alto, California, 94301</div></div></div><div class="ac-opt"><svg class="ac-pin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><div class="ac-txt"><div class="ac-p">1200 Innovation Parkway</div><div class="ac-s">Austin, Texas, 78758</div></div></div><div class="ac-opt"><svg class="ac-pin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><div class="ac-txt"><div class="ac-p">1200 Innovation Boulevard</div><div class="ac-s">Sacramento, California, 95814</div></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Part</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Trigger</td><td>The field itself — <code>padding-right 36px</code> to clear the icon</td></tr>
+        <tr><td>Icon</td><td>14×14 <code>search</code> · <code>#9CA3AF</code> · <code>right 12px</code> · <code>pointer-events:none</code>, decorative only</td></tr>
+        <tr><td>Panel</td><td><code>top calc(100% + 4px)</code> · <code>left 0 / right 0</code> · <code>max-height 320px</code> · <code>radius 8px</code> · <code>1px #E5E7EB</code> · <code>shadow 0 8px 24px rgba(0,0,0,.08)</code> · <code>padding 4px 0</code></td></tr>
+        <tr><td>Suggestion</td><td><code>padding 10px 16px</code> · <code>gap 12px</code> · <code>align-items: flex-start</code></td></tr>
+        <tr><td>Pin</td><td>14×14 <code>map-pin</code> at <code>stroke-width 1.75</code> · <code>#9CA3AF</code> · <code>margin-top 2px</code></td></tr>
+        <tr><td>Primary line</td><td>12px / 600 · <code>#1F2937</code> · truncated</td></tr>
+        <tr><td>Secondary line</td><td>10px · <code>#9CA3AF</code> · <code>margin-top 2px</code> · truncated · city, state, ZIP</td></tr>
+        <tr><td>Active row</td><td><code>#F9FAFB</code> — one highlight shared by hover and the keyboard</td></tr>
+        <tr><td>Query</td><td>Fires after <strong>300ms</strong> idle, minimum <strong>2 characters</strong>, at most <strong>6</strong> results, US/CA/MX</td></tr>
+        <tr><td>Loading</td><td>A <code>…</code> at <code>right 32px</code>, 11px <code>#9CA3AF</code>, while a request is in flight</td></tr>
+        <tr><td>Keys</td><td><kbd>↓</kbd>/<kbd>↑</kbd> move · <kbd>Enter</kbd> commits · <kbd>Esc</kbd> closes</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td>Hovering a row <strong>moves the keyboard cursor</strong> rather than painting a separate hover state, so the two never disagree about which row <kbd>Enter</kbd> would pick.</td></tr>
+      <tr><td>The panel renders only when there is at least one result. There is no “no matches” state and no spinner inside the list — the <code>…</code> in the field is the only loading signal.</td></tr>
+      <tr><td>This is the only control in the product that reaches a third-party service while you type.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <div class="ds-divider"></div>
+
   <div class="ds-section" id="specs">
     <h2 class="ds-section-title">Specs</h2>
     <div class="ds-table-wrap"><table class="ds-table">
@@ -258,7 +332,7 @@ body.dark-mode .cb-row { color: #F9FAFB; border-bottom-color: rgba(255,255,255,0
     <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
       <tr><td>The checkbox here is <strong>not</strong> the one on <a href="ds-15-checkbox.html">Checkbox</a>: it is smaller, has a 1.5px border, and shows a bare tick instead of filling with the brand colour. It exists only inside this panel.</td></tr>
       <tr><td>Selecting nothing and selecting everything mean the same thing — an empty set is treated as “no filter”, which is why Reset Filter clears the set rather than ticking all of it.</td></tr>
-      <tr><td>The search box filters the option list only. It never creates a value, so this is a filter, not a tag input or a free-text entry.</td></tr>
+      <tr><td>The search box filters the option list only — it never creates a value, so this is a filter, not a tag input. The address autocomplete below is the opposite: its field <em>is</em> the value.</td></tr>
       <tr><td>There is no keyboard navigation, no highlighted option and no empty state — a search that matches nothing simply renders an empty list between the two dividers.</td></tr>
     </tbody></table></div>
   </div>
