@@ -31,11 +31,20 @@
 .hv-name { margin: 0 0 2px; font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--gray-800); }
 .hv-meta { margin: 0; font-size: 12px; line-height: 1.5; color: var(--gray-500); }
 
-.hv-rows { width: 100%; max-width: 420px; font-family: 'Montserrat', sans-serif; }
-.hv-row { position: relative; display: flex; align-items: center; gap: 8px; padding: 10px 12px;
-  border-radius: 8px; font-size: 13px; line-height: 1.5; color: var(--gray-800);
+
+/* the change list sits on the record editor's tinted rail, not on white */
+.hv-rail { width: 100%; max-width: 260px; padding: 12px 10px; background: #F5F6F8;
+  border: 1px solid var(--gray-200); border-radius: 12px; font-family: 'Montserrat', sans-serif; }
+.hv-railtitle { padding: 0 10px 8px; font-size: 11px; font-weight: 700; line-height: 1.5;
+  text-transform: uppercase; letter-spacing: .06em; color: var(--gray-500); }
+.hv-row { position: relative; display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+  margin-bottom: 2px; border: 1px solid transparent; border-radius: 8px; font-size: 12.5px;
+  font-weight: 500; line-height: 1.5; color: var(--gray-800); cursor: pointer;
   transition: background .15s; }
-.hv-row:hover { background: var(--gray-50); }
+.hv-row:last-child { margin-bottom: 0; }
+.hv-row:hover { background: #F0F1F4; }
+.hv-sel, .hv-sel:hover { background: #fff; border-color: var(--gray-200); color: #A614C3;
+  font-weight: 600; box-shadow: 0 1px 2px rgba(15,23,42,0.04); }
 .hv-rowlabel { flex: 1; min-width: 0; padding-right: 22px; overflow: hidden;
   text-overflow: ellipsis; white-space: nowrap; }
 .hv-check { flex-shrink: 0; color: #73C9B7; opacity: 1; transition: opacity .2s; }
@@ -54,8 +63,12 @@ body.dark-mode .hv-lockwrap .hv-action { background: rgba(255,255,255,0.03);
 body.dark-mode .hv-tip { background: #1F2233; }
 body.dark-mode .hv-name { color: #F9FAFB; }
 body.dark-mode .hv-meta, body.dark-mode .hv-remove { color: #8B8FA8; }
+body.dark-mode .hv-rail { background: #0F1120; border-color: rgba(255,255,255,0.10); }
+body.dark-mode .hv-railtitle { color: #8B8FA8; }
 body.dark-mode .hv-row { color: #F9FAFB; }
-body.dark-mode .hv-row:hover { background: rgba(255,255,255,0.04); }
+body.dark-mode .hv-row:hover { background: rgba(255,255,255,0.05); }
+body.dark-mode .hv-sel, body.dark-mode .hv-sel:hover { background: #1E2240;
+  border-color: rgba(255,255,255,0.10); color: #A614C3; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -223,18 +236,21 @@ body.dark-mode .hv-row:hover { background: rgba(255,255,255,0.04); }
   <div class="ds-section" id="swap">
     <h2 class="ds-section-title">Row swap</h2>
     <p class="ds-section-desc">On a list row the reveal is a <em>swap</em>: the trailing status check fades out
-    as the remove button fades in, in the same place. The row never changes width, so nothing shifts.</p>
+    as the remove button fades in, in the same place. The row never changes width, so nothing shifts. This list
+    lives on a tinted <code>#F5F6F8</code> rail, which is what lets both the <code>#F0F1F4</code> hover and the
+    white selected row read — on a white surface neither would.</p>
     <div class="ds-example" style="padding:40px;justify-content:center;">
-      <div class="hv-rows">
-        <div class="hv-row"><span class="hv-rowlabel">Add Hired &amp; Non-Owned Auto</span>
-          <svg class="hv-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-          <button class="hv-remove" title="Remove this change"><svg class="hv-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
-        <div class="hv-row"><span class="hv-rowlabel">Increase General Aggregate to $4M</span>
-          <svg class="hv-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-          <button class="hv-remove" title="Remove this change"><svg class="hv-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
-        <div class="hv-row"><span class="hv-rowlabel">Add Additional Insured — Garcia LLC</span>
-          <svg class="hv-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-          <button class="hv-remove" title="Remove this change"><svg class="hv-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+      <div class="hv-rail">
+        <div class="hv-railtitle">Pending changes</div>
+          <div class="hv-row"><span class="hv-rowlabel">Add Hired &amp; Non-Owned Auto</span>
+            <svg class="hv-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <button class="hv-remove" title="Remove this change"><svg class="hv-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+          <div class="hv-row hv-sel"><span class="hv-rowlabel">Increase General Aggregate to $4M</span>
+            <svg class="hv-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <button class="hv-remove" title="Remove this change"><svg class="hv-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+          <div class="hv-row"><span class="hv-rowlabel">Add Additional Insured — Garcia LLC</span>
+            <svg class="hv-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <button class="hv-remove" title="Remove this change"><svg class="hv-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
       </div>
     </div>
   </div>
@@ -251,6 +267,9 @@ body.dark-mode .hv-row:hover { background: rgba(255,255,255,0.04); }
         <tr><td>Card action fill</td><td><code>#fff</code> on <code>1px #E5E7EB</code>; its own hover is <code>#F9FAFB</code></td></tr>
         <tr><td>Locked action</td><td>Same box · <code>opacity .75</code> · <code>cursor:not-allowed</code> · text <code>#6B7280</code> · sits at <code>right 56px</code> to leave room for the card’s own icon</td></tr>
         <tr><td>Explanation bubble</td><td><code>top calc(100% + 6px)</code> · <code>right 0</code> · <code>#111827</code> on white text · 11px · <code>padding 6px 10px</code> · <code>radius 8px</code> · <code>shadow 0 6px 20px rgba(15,23,42,.15)</code> · <code>white-space:nowrap</code> · <code>pointer-events:none</code></td></tr>
+        <tr><td>Row</td><td><code>padding 8px 10px</code> · <code>radius 8px</code> · <code>1px transparent</code> · 12.5px / 500 · <code>margin-bottom 2px</code></td></tr>
+        <tr><td>Row rail</td><td><code>#F5F6F8</code> · hover <code>#F0F1F4</code> — both from the record editor, not the generic grays</td></tr>
+        <tr><td>Row selected</td><td><code>#fff</code> on <code>1px #E5E7EB</code> · <code>shadow 0 1px 2px rgba(15,23,42,.04)</code> · text <code>#A614C3</code> at 600</td></tr>
         <tr><td>Row swap</td><td>Check <code>opacity 1 → 0</code> and remove button <code>0 → 1</code> on the same row hover · button <code>absolute</code> at <code>right 6px</code>, vertically centred · <code>padding 4px</code></td></tr>
         <tr><td>Icons</td><td>14×14 in actions, 20×20 in the card’s corner badge, check at <code>stroke-width 3</code></td></tr>
       </tbody>
