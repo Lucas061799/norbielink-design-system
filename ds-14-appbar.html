@@ -4,7 +4,38 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
-body.dark-mode .ds-example { background: #0F1120; }
+/* ── APP BAR ── the 52px global bar, and the 71px per-page header below it. */
+.ab-bar { display: flex; align-items: center; gap: 16px; height: 52px; padding: 0 20px;
+  background: #fff; border-bottom: 1px solid var(--gray-100); flex-shrink: 0;
+  border-radius: 16px 16px 0 0; font-family: 'Montserrat', sans-serif; }
+.ab-search { position: relative; width: 400px; flex-shrink: 0; }
+.ab-search .ab-svg { position: absolute; left: 12.5px; top: 50%; transform: translateY(-50%);
+  color: var(--gray-400); display: block; }
+.ab-input { width: 100%; height: 35.94px; box-sizing: border-box;
+  padding: 7.81px 12.5px 7.81px 34.38px; border: 0.78px solid var(--gray-200);
+  border-radius: 10.94px; background: #fff; outline: none;
+  font-family: 'Montserrat', sans-serif; font-size: 12px; color: var(--gray-500); }
+.ab-input::placeholder { color: var(--gray-500); }
+.ab-spacer { flex: 1; }
+.ab-brand { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.ab-brandlabel { font-size: 10px; font-weight: 500; line-height: 1.5; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--gray-400); }
+.ab-brandlogo { height: 20px; width: auto; display: block; }
+
+.ab-page { background: #fff; border-radius: 16px; overflow: hidden;
+  font-family: 'Montserrat', sans-serif; }
+.ab-pagehead { display: flex; align-items: center; height: 71px; padding: 0 28px;
+  border-bottom: 0.87px solid var(--gray-100); flex-shrink: 0; }
+.ab-pagetitle { margin: 0; font-size: 22px; font-weight: 400; line-height: 1.5; color: #2D3653; }
+.ab-pagebody { padding: 48px; font-size: 13px; line-height: 1.5; color: var(--gray-500); }
+
+body.dark-mode .ab-bar { background: #191D35; border-bottom-color: rgba(255,255,255,0.08); }
+body.dark-mode .ab-input { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.10);
+  color: #8B8FA8; }
+body.dark-mode .ab-brandlogo { content: url("nav-assets/btis-logo-dark.png"); }
+body.dark-mode .ab-page { background: #191D35; }
+body.dark-mode .ab-pagehead { border-bottom-color: rgba(255,255,255,0.08); }
+body.dark-mode .ab-pagetitle { color: #F9FAFB; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -106,7 +137,8 @@ body.dark-mode .ds-example { background: #0F1120; }
 
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
-  <a class="ds-toc-item active" href="#variants">Variants</a>
+  <a class="ds-toc-item active" href="#appbar">App bar</a>
+  <a class="ds-toc-item" href="#pageheader">Page header</a>
   <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 
@@ -123,35 +155,79 @@ body.dark-mode .ds-example { background: #0F1120; }
       <a class="ds-nav-arrow-btn" href="ds-29-avatar.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">App bars provide content and actions related to the current screen. They appear at the top and contain a page title, leading navigation, and trailing actions.</p>
+    <p class="ds-page-desc">There are <strong>two</strong> bars, and they are not the same thing. A global
+  <strong>app bar</strong> sits above every screen at <code>52px</code> and holds search and partner branding
+  — never a page title. Each screen then draws its own <strong>page header</strong> at <code>71px</code>
+  that carries the title and bleeds out past the content padding.</p>
 
-<div class="ds-section" id="variants"><div class="ds-section-title">Variants</div>
-<div class="ds-example" style="flex-direction:column;gap:20px;align-items:stretch;">
-  <div style="height:64px;background:white;border-radius:10px;border:1px solid #eef2f0;display:flex;align-items:center;padding:0 16px;gap:8px;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
-    <span class="material-icons-round" style="color:#A614C3;">menu</span><span style="font-size:20px;font-weight:700;color:#141F1E;flex:1;">Small</span>
-    <span class="material-icons-round" style="color:#A614C3;">search</span><span class="material-icons-round" style="color:#A614C3;">more_vert</span>
-  </div>
-  <div style="background:white;border-radius:10px;border:1px solid #eef2f0;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
-    <div style="height:64px;display:flex;align-items:center;padding:0 16px;gap:8px;">
-      <span class="material-icons-round" style="color:#A614C3;">arrow_back</span><span style="flex:1;"></span><span class="material-icons-round" style="color:#A614C3;">more_vert</span>
+  <div class="ds-section" id="appbar">
+    <h2 class="ds-section-title">App bar</h2>
+    <p class="ds-section-desc">Spans the full width to the right of the sidebar. Search sits at a fixed 400px on
+    the left, a flexible spacer fills the middle, and the partner lockup is pinned right.</p>
+    <div class="ds-example" style="padding:0;align-items:stretch;justify-content:stretch;">
+      <div class="ab-bar">
+        <div class="ab-search">
+          <svg class="ab-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+          <input class="ab-input" placeholder="Search clients, quotes or policies...">
+        </div>
+        <div class="ab-spacer"></div>
+        <div class="ab-brand">
+          <span class="ab-brandlabel">Powered by</span>
+          <img class="ab-brandlogo" src="nav-assets/btis-logo.png" alt="btis">
+        </div>
+      </div>
     </div>
-    <div style="padding:0 16px 20px;font-size:28px;font-weight:700;color:#141F1E;">Medium</div>
   </div>
-  <div style="background:white;border-radius:10px;border:1px solid #eef2f0;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
-    <div style="height:64px;display:flex;align-items:center;padding:0 16px;gap:8px;">
-      <span class="material-icons-round" style="color:#A614C3;">arrow_back</span><span style="flex:1;"></span><span class="material-icons-round" style="color:#A614C3;">more_vert</span>
+
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="pageheader">
+    <h2 class="ds-section-title">Page header</h2>
+    <p class="ds-section-desc">The title bar belongs to the screen, not the chrome. It uses negative margins to
+    reach past the page’s <code>48px</code> side padding and sit flush against the content area’s edges, so
+    its rule runs the full width while the title stays on the 28px inset.</p>
+    <div class="ds-example" style="padding:0;align-items:stretch;justify-content:stretch;">
+      <div class="ab-page">
+        <div class="ab-pagehead"><h1 class="ab-pagetitle">Marketplace</h1></div>
+        <div class="ab-pagebody">Page content begins 48px below the rule.</div>
+      </div>
     </div>
-    <div style="padding:0 16px 28px;font-size:36px;font-weight:700;color:#141F1E;letter-spacing:-0.02em;">Large App Bar</div>
   </div>
-</div></div>
-<div class="ds-section" id="specs"><div class="ds-section-title">Specs</div>
-<div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Variant</th><th>Height</th><th>Title size</th></tr></thead><tbody>
-<tr><td>Small</td><td>64px</td><td>20px/700</td></tr>
-<tr><td>Medium</td><td>112px</td><td>28px/700</td></tr>
-<tr><td>Large</td><td>152px</td><td>36px/800</td></tr>
-</tbody></table></div></div>
-  
-    <!-- ── Prev / Next navigation ── -->
+
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>App bar</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Bar</td><td><code>height 52px</code> · <code>padding 0 20px</code> · <code>gap 16px</code> · <code>#fff</code> · <code>border-bottom 1px #F3F4F6</code> · <code>flex-shrink 0</code></td></tr>
+        <tr><td>Search wrapper</td><td><code>position: relative</code> · <code>width 400px</code>, fixed — it does not grow with the window</td></tr>
+        <tr><td>Search input</td><td><code>height 35.94px</code> · <code>border 0.78px #E5E7EB</code> · <code>radius 10.94px</code> · <code>padding 7.81px 12.5px 7.81px 34.38px</code> · 12px · <code>#6B7280</code> · <code>outline:none</code></td></tr>
+        <tr><td>Search icon</td><td>14×14 lucide <code>search</code> · <code>#9CA3AF</code> · <code>left 12.5px</code>, vertically centred</td></tr>
+        <tr><td>Spacer</td><td>An empty <code>flex:1</code> div — the gap is a real element, not <code>justify-content</code></td></tr>
+        <tr><td>Partner lockup</td><td><code>gap 8px</code> · label 10px / 500 uppercase with <code>tracking-widest</code> (<code>.1em</code>) in <code>#9CA3AF</code> · logo <code>height 20px</code>, width auto</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table">
+      <thead><tr><th>Page header</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Bar</td><td><code>height 71px</code> · <code>padding 0 28px</code> · <code>border-bottom 0.87px #F3F4F6</code> · <code>flex-shrink 0</code></td></tr>
+        <tr><td>Bleed</td><td><code>margin: -24px -48px 48px</code> — pulls back over the page’s own padding so the rule spans edge to edge</td></tr>
+        <tr><td>Title</td><td>22px / <strong>400</strong> · <code>#2D3653</code> · no margin — the one place the product sets a large size at regular weight</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td>The app bar <strong>never</strong> holds the page title, a back button or page actions. It carries search and the partner lockup only, and is identical on every screen.</td></tr>
+      <tr><td>The title is <code>font-weight 400</code> at 22px. Everything else large in the product is 600 or 700, so this is deliberate and easy to get wrong.</td></tr>
+      <tr><td>The search field’s values are a <code>0.78125</code> scaling of a 1 / 14 / 10 / 16 / 44 / 46 set — an export artifact that shipped. They are recorded as they render; nothing else in the product carries sub-pixel values.</td></tr>
+      <tr><td>Navigation lives in the <a href="ds-07-navigation.html">sidebar</a>, not up here. The two never share controls.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-28-alert-dialog.html">
       <span class="ds-page-nav-label">← Previous</span>

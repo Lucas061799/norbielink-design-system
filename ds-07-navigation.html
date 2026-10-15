@@ -225,7 +225,7 @@ body.dark-mode .nv-thumb { left: 19px; }
     </div>
   </div>
   <p class="ds-page-desc">Norbielink has one navigation surface: a fixed <strong>220px</strong> sidebar that is
-  white in light mode. There is no top bar, no collapsed rail and no gradient-filled pill. Both rest and active
+  white in light mode. There is no collapsed rail and no gradient-filled pill. Both rest and active
   items keep a white fill — what changes is the <strong>border</strong>, which becomes the brand gradient, and the
   active item adds a soft purple glow.</p>
 
@@ -344,7 +344,7 @@ body.dark-mode .nv-thumb { left: 19px; }
 
     <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
       <tr><td>There is <strong>no collapsed sidebar</strong>. The column is always 220px. The collapse controls elsewhere in the product belong to detail panels, not to navigation.</td></tr>
-      <tr><td>There is <strong>no application top bar</strong>. Each page draws its own 71px header with a <code>22px / 400</code> title and a <code>0.87px #F3F4F6</code> rule.</td></tr>
+      <tr><td>The sidebar is the <strong>only</strong> navigation surface. A 52px app bar does sit above the content, but it holds search and the partner lockup — never nav — and each page draws its own 71px title header below that; both are on <a href="ds-14-appbar.html">App Bars</a>.</td></tr>
       <tr><td>The logo, the Norbie face and the bottom wash are <strong>image assets</strong>, not drawn in CSS — <code>norbielink-logo.png</code> (swapped for <code>-dark</code> in dark mode), <code>norbieface.png</code> and <code>sidebar-bg.png</code>. Icons are <strong>lucide</strong> outlines at <code>stroke-width 2</code>, not the Material set used by this documentation site.</td></tr>
       <tr><td>In dark mode the column becomes <code>#191D35</code> with a <code>rgba(255,255,255,.12)</code> right border, and the item fill becomes <code>linear-gradient(to bottom, #191D35 0%, #582A75 48%, #9D37BC 100%)</code> — the only place the product fills a nav item.</td></tr>
     </tbody></table></div>

@@ -56,6 +56,14 @@ FILE_EXEMPT = {
     "ds-19-lists.html": {"#F97316"},  # the activity timeline's "note" type marker
 }
 
+# Sub-pixel radii that genuinely ship. Both are transcribed, not invented: the
+# app's global search box carries a 0.78125 export scaling, and ds-12 keeps one
+# scaled demo on purpose. Flagging them would mean asking the DS to lie.
+RADIUS_EXEMPT = {
+    "ds-12-switches.html": {"8.76"},
+    "ds-14-appbar.html": {"10.94"},
+}
+
 def scan(path):
     raw = open(path, encoding="utf-8").read()
     if path.endswith(".html"):
@@ -94,6 +102,8 @@ def scan(path):
         raw = m.group(1)
         # only trim trailing zeros on decimals — "10".rstrip("0") is "1"
         v = raw.rstrip("0").rstrip(".") if "." in raw else raw
+        if v in RADIUS_EXEMPT.get(os.path.basename(path), ()):
+            continue
         if v not in SPEC["allowed_radius_px"]:
             out["radius"].append((v + "px", 1, "not in {4,6,8,9,10,12,16}"))
 
