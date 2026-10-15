@@ -33,15 +33,26 @@
 .sh-empty-t { font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--gray-700); }
 .sh-empty-s { font-size: 11px; line-height: 1.5; color: var(--gray-400); }
 
+
+/* expand-in-place: shown as two stages so the transformation is visible */
+.sh-stage { font-family: 'Montserrat', sans-serif; }
+.sh-stagecap { margin-bottom: 8px; font-size: 10px; font-weight: 700; line-height: 1.5;
+  text-transform: uppercase; letter-spacing: .08em; color: var(--gray-400); }
+.sh-stagebox { position: relative; overflow: hidden; height: 170px; padding: 20px;
+  background: var(--gray-50); border-radius: 12px; }
+.sh-stagepage { font-size: 12px; line-height: 1.5; color: var(--gray-500); }
+.sh-stagescrim { position: absolute; inset: 0; background: rgba(0,0,0,0.35); }
 .sh-inline { background: #fff; border: 1px solid var(--gray-200); border-radius: 16px; padding: 24px;
   font-family: 'Montserrat', sans-serif; }
-.sh-inline-on { border-radius: 0; border: none; border-left: 1px solid var(--gray-200);
-  box-shadow: -12px 0 40px rgba(0,0,0,0.18); margin-left: 30%; }
+.sh-inline-on { position: absolute; top: 0; bottom: 0; right: 0; width: 70%; margin: 0;
+  border-radius: 0; border: none; border-left: 1px solid var(--gray-200);
+  box-shadow: -12px 0 40px rgba(0,0,0,0.18); overflow-y: auto; }
 .sh-inline-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
 .sh-inline-title { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.5; color: var(--gray-800); }
 .sh-inline-body { font-size: 13px; line-height: 1.5; color: var(--gray-500); }
 
-body.dark-mode .sh-scene { background: #0F1120; }
+body.dark-mode .sh-scene, body.dark-mode .sh-stagebox { background: #0F1120; }
+body.dark-mode .sh-stagepage { color: #8B8FA8; }
 body.dark-mode .sh-panel, body.dark-mode .sh-inline { background: #191D35;
   border-color: rgba(255,255,255,0.08); }
 body.dark-mode .sh-head { background: rgba(255,255,255,0.02); border-bottom-color: rgba(255,255,255,0.08); }
@@ -169,11 +180,12 @@ body.dark-mode .sh-empty-t { color: #F9FAFB; }
       <a class="ds-nav-arrow-btn" href="ds-54-skeleton.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">Every sheet in Norbielink enters from the <strong>right edge</strong>, full height,
-  with a <code>1px</code> left border and a deep shadow. There is no bottom sheet, no left sheet and no top
-  sheet. Width is a <strong>viewport fraction</strong>, never a fixed pixel value, and two forms ship: a
-  <em>viewer</em> that opens over the page, and an <em>expand-in-place</em> panel that is an inline card until
-  you expand it.</p>
+    <p class="ds-page-desc">A sheet enters from the <strong>right edge</strong>, full height, with a
+  <code>1px</code> left border and a <code>shadow-2xl</code>. Nothing enters from the bottom, left or top.
+  A sheet’s width is a <strong>viewport fraction</strong> — <code>50vw</code>, <code>58vw</code> or
+  <code>70vw</code> — which is what separates it from a <a href="ds-40-drawer.html">drawer</a>, the fixed
+  480px panel. Two forms ship: a <em>viewer</em> that opens over the page, and an <em>expand-in-place</em>
+  panel that is an inline card until you expand it.</p>
 
   <div class="ds-section" id="viewer">
     <h2 class="ds-section-title">Viewer sheet</h2>
@@ -217,22 +229,35 @@ body.dark-mode .sh-empty-t { color: #F9FAFB; }
     <p class="ds-section-desc">The same block is an inline card by default and a <code>70vw</code> sheet when
     expanded — one component, two layouts, toggled by the icon in its header. The icon turns
     <code>#A855F7</code> while expanded.</p>
-    <div class="ds-example" style="padding:32px;gap:24px;align-items:stretch;flex-direction:column;">
-      <div class="sh-inline">
-        <div class="sh-inline-head">
-          <h3 class="sh-inline-title">Agency Information</h3>
-          <button class="sh-icon" title="Expand"><svg class="sh-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="m21 3-7 7"/><path d="m3 21 7-7"/><path d="M9 21H3v-6"/></svg></button>
+    <div class="ds-example" style="padding:32px;gap:20px;align-items:stretch;flex-direction:column;">
+      <div class="sh-stage">
+        <div class="sh-stagecap">Collapsed — a card in the page</div>
+        <div class="sh-stagebox">
+          <div class="sh-inline">
+            <div class="sh-inline-head">
+              <h3 class="sh-inline-title">Agency Information</h3>
+              <button class="sh-icon" title="Expand"><svg class="sh-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="m21 3-7 7"/><path d="m3 21 7-7"/><path d="M9 21H3v-6"/></svg></button>
+            </div>
+            <div class="sh-inline-body">A <code>rounded-2xl</code> card with <code>padding 24px</code> and a
+            <code>1px</code> border, sitting in the flow with the rest of the page.</div>
+          </div>
         </div>
-        <div class="sh-inline-body">Collapsed — a <code>rounded-2xl</code> card with <code>padding 24px</code>
-        and a <code>1px</code> border, in the flow of the page.</div>
       </div>
-      <div class="sh-inline sh-inline-on">
-        <div class="sh-inline-head">
-          <h3 class="sh-inline-title">Agency Information</h3>
-          <button class="sh-icon sh-collapse" title="Collapse"><svg class="sh-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14 10 7-7"/><path d="M20 10h-6V4"/><path d="m3 21 7-7"/><path d="M4 14h6v6"/></svg></button>
+
+      <div class="sh-stage">
+        <div class="sh-stagecap">Expanded — the same block as a <code>70vw</code> sheet</div>
+        <div class="sh-stagebox">
+          <div class="sh-stagepage">Page content stays behind.</div>
+          <div class="sh-stagescrim"></div>
+          <div class="sh-inline sh-inline-on">
+            <div class="sh-inline-head">
+              <h3 class="sh-inline-title">Agency Information</h3>
+              <button class="sh-icon sh-collapse" title="Collapse"><svg class="sh-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14 10 7-7"/><path d="M20 10h-6V4"/><path d="m3 21 7-7"/><path d="M4 14h6v6"/></svg></button>
+            </div>
+            <div class="sh-inline-body">Border and radius are dropped, the block is pinned to the right edge
+            at full height, and a <code>rgba(0,0,0,.35)</code> scrim covers the whole page beneath it.</div>
+          </div>
         </div>
-        <div class="sh-inline-body">Expanded — the card loses its border and radius and becomes a
-        <code>70vw</code> sheet pinned to the right edge, over a <code>rgba(0,0,0,.35)</code> scrim.</div>
       </div>
     </div>
   </div>
@@ -265,7 +290,7 @@ body.dark-mode .sh-empty-t { color: #F9FAFB; }
 
     <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
       <tr><td>The two forms scrim differently. A <strong>viewer</strong> puts the scrim <em>inside</em> its own fixed box as a <code>flex-1</code> sibling, so only the strip beside the sheet is dimmed and clickable. An <strong>expand-in-place</strong> panel uses a separate <code>fixed inset-0</code> layer at <code>z-40</code>, dimming the whole page.</td></tr>
-      <tr><td>Width is always <code>vw</code>. The one pixel value in the family is a <code>min-width</code>, not a width — nothing opens at a fixed size.</td></tr>
+      <tr><td>A sheet’s width is always <code>vw</code>; the one pixel value here is a <code>min-width</code>. A panel with a <strong>fixed</strong> width is a <a href="ds-40-drawer.html">drawer</a> — different element, different shadow, different header.</td></tr>
       <tr><td>Expand-in-place is not a resize: it is two fixed layouts. See <a href="ds-50-resizable.html">Resizable</a>.</td></tr>
       <tr><td>Nothing enters from the bottom, left or top — checked across the whole app. A centred overlay is a <a href="ds-17-dialogs.html">dialog</a>, not a sheet.</td></tr>
     </tbody></table></div>
