@@ -198,6 +198,11 @@ body.dark-mode .mp-otp.empty { background:rgba(255,255,255,.03); border-color:rg
 body.dark-mode .mp-dd-item { color:rgba(255,255,255,.55); }
 
 /* ── Dark-mode inline-style override utilities ── */
+/* Mini-preview neutrals. Inline styles can't be overridden by a dark-mode
+   selector, so the previews reference these instead of hard-coding a grey. */
+:root { --mp-line:#e0e0e0; --mp-line-soft:#ececee; --mp-fill:#f5f5f7; --mp-bdr:#cfd3d8; }
+body.dark-mode { --mp-line:rgba(255,255,255,.18); --mp-line-soft:rgba(255,255,255,.10);
+                 --mp-fill:rgba(255,255,255,.05); --mp-bdr:rgba(255,255,255,.30); }
 body.dark-mode .dm-h  { color:rgba(255,255,255,.88) !important; }
 body.dark-mode .dm-b  { color:rgba(255,255,255,.65) !important; }
 body.dark-mode .dm-mid{ color:rgba(255,255,255,.42) !important; }
@@ -309,7 +314,7 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
       <a class="comp-card" href="ds-36-combobox.html">
         <div class="comp-prev">
           <div class="mp-box" style="width:150px;padding:0;box-shadow:0 4px 12px rgba(0,0,0,.08);overflow:hidden;">
-            <div style="padding:6px;border-bottom:1px solid #eee;">
+            <div style="padding:6px;border-bottom:1px solid var(--mp-line-soft);">
               <div class="mp-inp" style="gap:5px;width:100%;box-sizing:border-box;padding:3px 6px;">
                 <span class="material-icons-round" style="font-size:11px;color:#bbb;">search</span>
                 <span style="color:#bbb;font-family:'Montserrat',sans-serif;font-size:9px;">Search LOB</span>
@@ -317,16 +322,16 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
             </div>
             <div style="padding:4px 0;">
               <div style="display:flex;align-items:center;gap:7px;padding:4px 9px;">
-                <span style="width:10px;height:10px;border:1.5px solid #cfd3d8;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;"><span class="material-icons-round" style="font-size:9px;color:#A614C3;">check</span></span>
-                <span style="font-size:9px;color:#333;font-family:'Montserrat',sans-serif;">General Liability</span>
+                <span style="width:10px;height:10px;border:1.5px solid var(--mp-bdr);border-radius:3px;display:inline-flex;align-items:center;justify-content:center;"><span class="material-icons-round" style="font-size:9px;color:#A614C3;">check</span></span>
+                <span class="dm-b" style="font-size:9px;color:#333;font-family:'Montserrat',sans-serif;">General Liability</span>
               </div>
               <div style="display:flex;align-items:center;gap:7px;padding:4px 9px;">
-                <span style="width:10px;height:10px;border:1.5px solid #cfd3d8;border-radius:3px;"></span>
-                <span style="font-size:9px;color:#333;font-family:'Montserrat',sans-serif;">Commercial Auto</span>
+                <span style="width:10px;height:10px;border:1.5px solid var(--mp-bdr);border-radius:3px;"></span>
+                <span class="dm-b" style="font-size:9px;color:#333;font-family:'Montserrat',sans-serif;">Commercial Auto</span>
               </div>
               <div style="display:flex;align-items:center;gap:7px;padding:4px 9px;">
-                <span style="width:10px;height:10px;border:1.5px solid #cfd3d8;border-radius:3px;"></span>
-                <span style="font-size:9px;color:#333;font-family:'Montserrat',sans-serif;">Cyber Risk</span>
+                <span style="width:10px;height:10px;border:1.5px solid var(--mp-bdr);border-radius:3px;"></span>
+                <span class="dm-b" style="font-size:9px;color:#333;font-family:'Montserrat',sans-serif;">Cyber Risk</span>
               </div>
             </div>
           </div>
@@ -368,11 +373,11 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
         <div class="comp-prev">
           <div class="mp-col" style="width:170px;gap:7px;">
             <div>
-              <div style="font-size:9px;font-weight:700;color:#666;font-family:'Montserrat',sans-serif;margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em;">Email <span style="color:#EF4444;">*</span></div>
+              <div class="dm-mid" style="font-size:9px;font-weight:700;color:#666;font-family:'Montserrat',sans-serif;margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em;">Email <span style="color:#EF4444;">*</span></div>
               <div class="mp-inp" style="width:100%;box-sizing:border-box;">hello@norbielink.com</div>
             </div>
             <div>
-              <div style="font-size:9px;font-weight:700;color:#666;font-family:'Montserrat',sans-serif;margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em;">Role</div>
+              <div class="dm-mid" style="font-size:9px;font-weight:700;color:#666;font-family:'Montserrat',sans-serif;margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em;">Role</div>
               <div class="mp-inp" style="color:#bbb;width:100%;box-sizing:border-box;justify-content:space-between;"><span>Select role…</span><span class="material-icons-round" style="font-size:12px;color:#ccc;">expand_more</span></div>
             </div>
           </div>
@@ -414,12 +419,12 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
         <div class="comp-prev">
           <div class="mp-col" style="width:185px;gap:12px;">
             <div style="position:relative;height:16px;display:flex;align-items:center;">
-              <div style="width:100%;height:4px;background:#e0e0e0;border-radius:2px;"></div>
+              <div style="width:100%;height:4px;background:var(--mp-line);border-radius:2px;"></div>
               <div style="position:absolute;left:0;width:65%;height:4px;background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);border-radius:2px;"></div>
               <div style="position:absolute;left:65%;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);box-shadow:0 1px 4px rgba(0,0,0,.2);"></div>
             </div>
             <div style="position:relative;height:16px;display:flex;align-items:center;">
-              <div style="width:100%;height:4px;background:#e0e0e0;border-radius:2px;"></div>
+              <div style="width:100%;height:4px;background:var(--mp-line);border-radius:2px;"></div>
               <div style="position:absolute;left:20%;width:50%;height:4px;background:#A614C3;border-radius:2px;"></div>
               <div style="position:absolute;left:20%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid #A614C3;"></div>
               <div style="position:absolute;left:70%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid #A614C3;"></div>
@@ -438,7 +443,7 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
               <span class="mp-t">Enabled</span>
             </div>
             <div class="mp-row" style="gap:9px;">
-              <div style="width:36px;height:20px;border-radius:10px;background:#e0e0e0;position:relative;"><div class="sw-thumb" style="position:absolute;left:3px;top:3px;width:14px;height:14px;border-radius:50%;background:#fff;"></div></div>
+              <div style="width:36px;height:20px;border-radius:10px;background:var(--mp-line);position:relative;"><div class="sw-thumb" style="position:absolute;left:3px;top:3px;width:14px;height:14px;border-radius:50%;background:#fff;"></div></div>
               <span class="mp-t" style="color:#bbb;">Disabled</span>
             </div>
           </div>
@@ -501,15 +506,15 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
       <!-- App Bars -->
       <a class="comp-card" href="ds-14-appbar.html">
         <div class="comp-prev">
-          <div class="dm-bdr" style="width:190px;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;">
-            <div class="dm-surf" style="display:flex;align-items:center;gap:8px;height:26px;padding:0 8px;background:#fff;border-bottom:1px solid #ececec;">
-              <div class="dm-soft" style="flex:1;height:13px;border-radius:6px;background:#f5f5f7;border:1px solid #e8e8ea;"></div>
-              <span class="dm-m" style="font-size:6px;font-weight:600;letter-spacing:.1em;color:#bbb;font-family:'Montserrat',sans-serif;">BTIS</span>
+          <div class="dm-bdr" style="width:190px;border:1px solid var(--mp-line);border-radius:8px;overflow:hidden;">
+            <div class="dm-surf" style="display:flex;align-items:center;gap:8px;height:26px;padding:0 8px;background:#fff;border-bottom:1px solid var(--mp-line-soft);">
+              <div class="dm-soft" style="flex:1;height:13px;border-radius:6px;background:var(--mp-fill);border:1px solid var(--mp-line-soft);"></div>
+              <span class="dm-mid" style="font-size:6px;font-weight:600;letter-spacing:.1em;color:#bbb;font-family:'Montserrat',sans-serif;">BTIS</span>
             </div>
-            <div class="dm-surf" style="display:flex;align-items:center;height:30px;padding:0 10px;background:#fff;border-bottom:1px solid #ececec;">
+            <div class="dm-surf" style="display:flex;align-items:center;height:30px;padding:0 10px;background:#fff;border-bottom:1px solid var(--mp-line-soft);">
               <span class="dm-h" style="font-size:11px;color:#2D3653;font-family:'Montserrat',sans-serif;">Marketplace</span>
             </div>
-            <div class="dm-soft" style="height:22px;background:#fafafa;"></div>
+            <div class="dm-soft" style="height:22px;background:var(--mp-fill);"></div>
           </div>
         </div>
         <div class="comp-foot"><span class="comp-name">App Bars</span><span class="material-icons-round comp-arrow">arrow_forward</span></div>
@@ -559,16 +564,16 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
       <!-- Navigation -->
       <a class="comp-card" href="ds-07-navigation.html">
         <div class="comp-prev">
-          <div class="dm-bdr" style="display:flex;height:80px;width:170px;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;">
-            <div class="dm-soft dm-bdr" style="width:52px;background:#f8f8f8;border-right:1px solid #e0e0e0;display:flex;flex-direction:column;align-items:center;padding:8px 0;gap:8px;">
+          <div class="dm-bdr" style="display:flex;height:80px;width:170px;border:1px solid var(--mp-line);border-radius:8px;overflow:hidden;">
+            <div class="dm-soft dm-bdr" style="width:52px;background:#f8f8f8;border-right:1px solid var(--mp-line);display:flex;flex-direction:column;align-items:center;padding:8px 0;gap:8px;">
               <div style="width:36px;border-radius:9999px;background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);padding:5px 0;display:flex;align-items:center;justify-content:center;"><span class="material-icons-round" style="font-size:15px;color:#fff;">home</span></div>
               <span class="material-icons-round" style="font-size:16px;color:#ccc;">inbox</span>
               <span class="material-icons-round" style="font-size:16px;color:#ccc;">settings</span>
             </div>
             <div class="dm-soft" style="flex:1;padding:10px;display:flex;flex-direction:column;gap:5px;">
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:90%;"></div>
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:70%;"></div>
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:80%;"></div>
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:90%;"></div>
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:70%;"></div>
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:80%;"></div>
             </div>
           </div>
         </div>
@@ -579,12 +584,12 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
       <a class="comp-card" href="ds-48-pagination.html">
         <div class="comp-prev">
           <div class="mp-row" style="gap:4px;">
-            <div class="dm-bdr dm-mid" style="width:28px;height:28px;border:1px solid #e0e0e0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:'Montserrat',sans-serif;color:#bbb;">‹</div>
-            <div class="dm-bdr dm-b" style="width:28px;height:28px;border:1px solid #e0e0e0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:'Montserrat',sans-serif;color:#666;">1</div>
-            <div class="dm-bdr dm-b" style="width:28px;height:28px;border:1px solid #e0e0e0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:'Montserrat',sans-serif;color:#666;">2</div>
+            <div class="dm-bdr dm-mid" style="width:28px;height:28px;border:1px solid var(--mp-line);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:'Montserrat',sans-serif;color:#bbb;">‹</div>
+            <div class="dm-bdr dm-b" style="width:28px;height:28px;border:1px solid var(--mp-line);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:'Montserrat',sans-serif;color:#666;">1</div>
+            <div class="dm-bdr dm-b" style="width:28px;height:28px;border:1px solid var(--mp-line);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:'Montserrat',sans-serif;color:#666;">2</div>
             <div style="width:28px;height:28px;background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:'Montserrat',sans-serif;color:#fff;">3</div>
-            <div class="dm-bdr dm-b" style="width:28px;height:28px;border:1px solid #e0e0e0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:'Montserrat',sans-serif;color:#666;">4</div>
-            <div class="dm-bdr dm-mid" style="width:28px;height:28px;border:1px solid #e0e0e0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:'Montserrat',sans-serif;color:#bbb;">›</div>
+            <div class="dm-bdr dm-b" style="width:28px;height:28px;border:1px solid var(--mp-line);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:'Montserrat',sans-serif;color:#666;">4</div>
+            <div class="dm-bdr dm-mid" style="width:28px;height:28px;border:1px solid var(--mp-line);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:'Montserrat',sans-serif;color:#bbb;">›</div>
           </div>
         </div>
         <div class="comp-foot"><span class="comp-name">Pagination</span><span class="material-icons-round comp-arrow">arrow_forward</span></div>
@@ -594,7 +599,7 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
       <a class="comp-card" href="ds-11-tabs.html">
         <div class="comp-prev">
           <div class="mp-col" style="width:215px;gap:0;">
-            <div style="display:flex;border-bottom:1.5px solid #e8e8e8;width:100%;">
+            <div style="display:flex;border-bottom:1.5px solid var(--mp-line);width:100%;">
               <div style="padding:7px 12px;font-size:10px;font-weight:700;color:#A614C3;font-family:'Montserrat',sans-serif;border-bottom:2px solid #A614C3;margin-bottom:-1.5px;">Overview</div>
               <div style="padding:7px 12px;font-size:10px;font-weight:600;color:#aaa;font-family:'Montserrat',sans-serif;">Analytics</div>
               <div style="padding:7px 12px;font-size:10px;font-weight:600;color:#aaa;font-family:'Montserrat',sans-serif;">Settings</div>
@@ -615,14 +620,14 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
       <!-- Hover Card -->
       <a class="comp-card" href="ds-43-hover-card.html">
         <div class="comp-prev">
-          <div class="dm-surf dm-bdr" style="position:relative;width:160px;border:1px solid #e0e0e0;border-radius:10px;padding:12px;background:#fff;text-align:left;font-family:'Montserrat',sans-serif;">
-            <div class="dm-soft dm-bdr" style="position:absolute;top:8px;right:8px;display:flex;align-items:center;gap:3px;height:17px;padding:0 6px;border:1px solid #e0e0e0;border-radius:6px;background:#fff;">
-              <span class="material-icons-round" style="font-size:9px;color:#777;">edit</span>
+          <div class="dm-surf dm-bdr" style="position:relative;width:160px;border:1px solid var(--mp-line);border-radius:10px;padding:12px;background:#fff;text-align:left;font-family:'Montserrat',sans-serif;">
+            <div class="dm-soft dm-bdr" style="position:absolute;top:8px;right:8px;display:flex;align-items:center;gap:3px;height:17px;padding:0 6px;border:1px solid var(--mp-line);border-radius:6px;background:#fff;">
+              <span class="material-icons-round dm-mid" style="font-size:9px;color:#777;">edit</span>
               <span class="dm-h" style="font-size:8px;font-weight:600;color:#333;">Edit</span>
             </div>
             <div class="dm-h" style="font-size:10px;font-weight:600;color:#111;">Jane Smith</div>
-            <div class="dm-m" style="font-size:8px;color:#9CA3AF;margin-top:3px;">jane@amyntagroup.com</div>
-            <div class="dm-m" style="font-size:8px;color:#9CA3AF;margin-top:2px;">(555) 123-4567</div>
+            <div class="dm-mid" style="font-size:8px;color:#9CA3AF;margin-top:3px;">jane@amyntagroup.com</div>
+            <div class="dm-mid" style="font-size:8px;color:#9CA3AF;margin-top:2px;">(555) 123-4567</div>
           </div>
         </div>
         <div class="comp-foot"><span class="comp-name">Hover Card</span><span class="material-icons-round comp-arrow">arrow_forward</span></div>
@@ -632,7 +637,7 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
       <!-- Alert Dialog -->
       <a class="comp-card" href="ds-28-alert-dialog.html">
         <div class="comp-prev">
-          <div class="dm-surf" style="background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:14px;box-shadow:0 6px 24px rgba(0,0,0,.12);width:172px;">
+          <div class="dm-surf" style="background:#fff;border:1px solid var(--mp-line);border-radius:8px;padding:14px;box-shadow:0 6px 24px rgba(0,0,0,.12);width:172px;">
             <div class="dm-h" style="font-size:11px;font-weight:700;color:#111;font-family:'Montserrat',sans-serif;margin-bottom:5px;">Delete component?</div>
             <div style="font-size:9px;color:#888;font-family:'Montserrat',sans-serif;margin-bottom:10px;line-height:1.5;">This action cannot be undone and will permanently remove the item.</div>
             <div style="display:flex;gap:6px;justify-content:flex-end;">
@@ -681,17 +686,17 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
       <!-- Drawer -->
       <a class="comp-card" href="ds-40-drawer.html">
         <div class="comp-prev">
-          <div class="dm-bdr" style="display:flex;width:190px;height:78px;overflow:hidden;border:1px solid #e0e0e0;border-radius:8px;">
-            <div style="width:88px;background:#f5f5f7;padding:10px;display:flex;flex-direction:column;gap:5px;border-right:1px solid #ececec;">
+          <div class="dm-bdr" style="display:flex;width:190px;height:78px;overflow:hidden;border:1px solid var(--mp-line);border-radius:8px;">
+            <div style="width:88px;background:var(--mp-fill);padding:10px;display:flex;flex-direction:column;gap:5px;border-right:1px solid var(--mp-line-soft);">
               <div style="height:6px;border-radius:3px;background:#A614C3;width:80%;"></div>
               <div style="height:6px;border-radius:3px;background:#bbb;width:65%;"></div>
               <div style="height:6px;border-radius:3px;background:#bbb;width:72%;"></div>
               <div style="height:6px;border-radius:3px;background:#ddd;width:50%;"></div>
             </div>
-            <div class="dm-soft" style="flex:1;background:#fafafa;padding:8px;display:flex;flex-direction:column;gap:5px;">
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:90%;"></div>
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:70%;"></div>
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:80%;"></div>
+            <div class="dm-soft" style="flex:1;background:var(--mp-fill);padding:8px;display:flex;flex-direction:column;gap:5px;">
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:90%;"></div>
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:70%;"></div>
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:80%;"></div>
             </div>
           </div>
         </div>
@@ -733,18 +738,18 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
       <!-- Sheet -->
       <a class="comp-card" href="ds-53-sheet.html">
         <div class="comp-prev">
-          <div class="dm-bdr" style="display:flex;width:190px;height:78px;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;">
-            <div class="dm-soft dm-bdr" style="flex:1;background:#fafafa;padding:9px;display:flex;flex-direction:column;gap:5px;">
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:80%;"></div>
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:60%;"></div>
+          <div class="dm-bdr" style="display:flex;width:190px;height:78px;border:1px solid var(--mp-line);border-radius:8px;overflow:hidden;">
+            <div class="dm-soft dm-bdr" style="flex:1;background:var(--mp-fill);padding:9px;display:flex;flex-direction:column;gap:5px;">
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:80%;"></div>
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:60%;"></div>
             </div>
-            <div class="dm-surf dm-bdr" style="width:82px;background:#fff;border-left:1px solid #e0e0e0;padding:9px;">
+            <div class="dm-surf dm-bdr" style="width:82px;background:#fff;border-left:1px solid var(--mp-line);padding:9px;">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;">
                 <span class="dm-h" style="font-size:10px;font-weight:700;color:#111;font-family:'Montserrat',sans-serif;">Filters</span>
                 <span class="material-icons-round" style="font-size:13px;color:#bbb;">close</span>
               </div>
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:100%;margin-bottom:4px;"></div>
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:75%;"></div>
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:100%;margin-bottom:4px;"></div>
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:75%;"></div>
             </div>
           </div>
         </div>
@@ -776,12 +781,12 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
       <!-- Cards -->
       <a class="comp-card" href="ds-10-cards.html">
         <div class="comp-prev">
-          <div class="dm-surf dm-bdr" style="width:150px;border:1px solid #e0e0e0;border-radius:12px;padding:12px 14px;background:#fff;text-align:left;font-family:'Montserrat',sans-serif;">
+          <div class="dm-surf dm-bdr" style="width:150px;border:1px solid var(--mp-line);border-radius:12px;padding:12px 14px;background:#fff;text-align:left;font-family:'Montserrat',sans-serif;">
             <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
               <span class="dm-h" style="font-size:11px;font-weight:600;color:#111;">Active</span>
               <span style="font-size:19px;font-weight:600;line-height:1;color:#A614C3;">128</span>
             </div>
-            <div class="dm-m" style="font-size:8px;color:#9CA3AF;margin-top:3px;">Policies in force</div>
+            <div class="dm-mid" style="font-size:8px;color:#9CA3AF;margin-top:3px;">Policies in force</div>
           </div>
         </div>
         <div class="comp-foot"><span class="comp-name">Cards</span><span class="material-icons-round comp-arrow">arrow_forward</span></div>
@@ -792,17 +797,17 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
       <a class="comp-card" href="ds-26-accordion.html">
         <div class="comp-prev">
           <div class="mp-col" style="width:195px;gap:5px;">
-            <div class="dm-soft dm-bdr" style="border:1px solid #e0e0e0;border-radius:6px;background:#fafafb;overflow:hidden;">
+            <div class="dm-soft dm-bdr" style="border:1px solid var(--mp-line);border-radius:6px;background:var(--mp-fill);overflow:hidden;">
               <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 9px;">
                 <span class="dm-b" style="font-size:9px;font-weight:600;color:#A614C3;font-family:'Montserrat',sans-serif;">QCN03262409</span>
                 <span class="material-icons-round" style="font-size:12px;color:#A614C3;">remove</span>
               </div>
-              <div class="dm-surf dm-bdr" style="margin:0 7px 7px;padding:6px 8px;background:#fff;border:1px solid #e8e8ea;border-radius:6px;">
-                <div style="height:4px;border-radius:2px;background:#e8e8ea;width:100%;margin-bottom:3px;"></div>
-                <div style="height:4px;border-radius:2px;background:#e8e8ea;width:70%;"></div>
+              <div class="dm-surf dm-bdr" style="margin:0 7px 7px;padding:6px 8px;background:#fff;border:1px solid var(--mp-line-soft);border-radius:6px;">
+                <div style="height:4px;border-radius:2px;background:var(--mp-line-soft);width:100%;margin-bottom:3px;"></div>
+                <div style="height:4px;border-radius:2px;background:var(--mp-line-soft);width:70%;"></div>
               </div>
             </div>
-            <div class="dm-soft dm-bdr" style="display:flex;justify-content:space-between;align-items:center;padding:6px 9px;border:1px solid #e0e0e0;border-radius:6px;background:#fafafb;">
+            <div class="dm-soft dm-bdr" style="display:flex;justify-content:space-between;align-items:center;padding:6px 9px;border:1px solid var(--mp-line);border-radius:6px;background:var(--mp-fill);">
               <span class="dm-b" style="font-size:9px;font-weight:600;color:#A614C3;font-family:'Montserrat',sans-serif;">QCN03262408</span>
               <span class="material-icons-round" style="font-size:12px;color:#A614C3;">add</span>
             </div>
@@ -815,7 +820,7 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
       <a class="comp-card" href="ds-35-collapsible.html">
         <div class="comp-prev">
           <div class="mp-box" style="width:190px;overflow:hidden;">
-            <div class="dm-bdr" style="padding:9px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e0e0e0;">
+            <div class="dm-bdr" style="padding:9px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--mp-line);">
               <span class="mp-t">Show more sections</span>
               <span class="material-icons-round" style="font-size:14px;color:#A614C3;">expand_less</span>
             </div>
@@ -842,15 +847,15 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
       <!-- Resizable -->
       <a class="comp-card" href="ds-50-resizable.html">
         <div class="comp-prev">
-          <div class="dm-bdr" style="display:flex;width:190px;height:72px;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;">
-            <div class="dm-soft" style="width:60%;background:#fafafa;padding:10px;display:flex;flex-direction:column;gap:5px;">
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:85%;"></div>
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:65%;"></div>
+          <div class="dm-bdr" style="display:flex;width:190px;height:72px;border:1px solid var(--mp-line);border-radius:8px;overflow:hidden;">
+            <div class="dm-soft" style="width:60%;background:var(--mp-fill);padding:10px;display:flex;flex-direction:column;gap:5px;">
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:85%;"></div>
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:65%;"></div>
             </div>
             <div style="width:2px;background:#A614C3;cursor:col-resize;"></div>
-            <div class="dm-soft" style="flex:1;background:#fafafa;padding:10px;display:flex;flex-direction:column;gap:5px;">
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:90%;"></div>
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:72%;"></div>
+            <div class="dm-soft" style="flex:1;background:var(--mp-fill);padding:10px;display:flex;flex-direction:column;gap:5px;">
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:90%;"></div>
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:72%;"></div>
             </div>
           </div>
         </div>
@@ -862,12 +867,12 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
         <div class="comp-prev">
           <div class="mp-box" style="width:155px;height:72px;overflow:hidden;display:flex;">
             <div style="flex:1;padding:9px;display:flex;flex-direction:column;gap:5px;">
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:90%;"></div>
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:75%;"></div>
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:85%;"></div>
-              <div style="height:5px;border-radius:3px;background:#e0e0e0;width:60%;"></div>
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:90%;"></div>
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:75%;"></div>
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:85%;"></div>
+              <div style="height:5px;border-radius:3px;background:var(--mp-line);width:60%;"></div>
             </div>
-            <div style="width:5px;background:#e8e8e8;border-radius:3px;margin:6px 4px;position:relative;">
+            <div style="width:5px;background:var(--mp-line);border-radius:3px;margin:6px 4px;position:relative;">
               <div style="width:100%;height:40%;background:#bbb;border-radius:3px;"></div>
             </div>
           </div>
@@ -910,7 +915,7 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
                 <span style="font-size:9px;color:#888;font-family:'Montserrat',sans-serif;">Uploading…</span>
                 <span class="dm-h" style="font-size:9px;font-weight:700;color:#333;font-family:'Montserrat',sans-serif;">68%</span>
               </div>
-              <div style="height:5px;background:#e8e8e8;border-radius:3px;overflow:hidden;">
+              <div style="height:5px;background:var(--mp-line);border-radius:3px;overflow:hidden;">
                 <div style="width:68%;height:100%;background:linear-gradient(90deg,#A614C3,#A614C3);border-radius:3px;"></div>
               </div>
             </div>
@@ -925,7 +930,7 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
         <div class="comp-prev">
           <div class="mp-col" style="width:185px;gap:6px;">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
-              <div style="width:32px;height:32px;border-radius:50%;background:#e8e8e8;flex-shrink:0;"></div>
+              <div style="width:32px;height:32px;border-radius:50%;background:var(--mp-line);flex-shrink:0;"></div>
               <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
                 <div class="mp-skel" style="width:80%;"></div>
                 <div class="mp-skel" style="width:55%;height:6px;"></div>
@@ -954,9 +959,9 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
       <a class="comp-card" href="ds-55-spinner.html">
         <div class="comp-prev">
           <div class="mp-row" style="gap:18px;justify-content:center;">
-            <div style="width:38px;height:38px;border-radius:50%;border:3.5px solid #e0e0e0;border-top-color:#A614C3;"></div>
-            <div style="width:28px;height:28px;border-radius:50%;border:3px solid #e0e0e0;border-top-color:#A614C3;"></div>
-            <div style="width:20px;height:20px;border-radius:50%;border:2.5px solid #e0e0e0;border-top-color:#A614C3;"></div>
+            <div style="width:38px;height:38px;border-radius:50%;border:3.5px solid var(--mp-line);border-top-color:#A614C3;"></div>
+            <div style="width:28px;height:28px;border-radius:50%;border:3px solid var(--mp-line);border-top-color:#A614C3;"></div>
+            <div style="width:20px;height:20px;border-radius:50%;border:2.5px solid var(--mp-line);border-top-color:#A614C3;"></div>
           </div>
         </div>
         <div class="comp-foot"><span class="comp-name">Spinner</span><span class="material-icons-round comp-arrow">arrow_forward</span></div>
@@ -991,8 +996,8 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
           <div class="mp-row" style="gap:10px;justify-content:center;">
             <div class="mp-circ" style="width:44px;height:44px;background:linear-gradient(135deg,#A614C3,#A614C3);font-size:14px;font-weight:700;color:#fff;font-family:'Montserrat',sans-serif;">AB</div>
             <div class="mp-circ" style="width:36px;height:36px;background:#374151;font-size:11px;font-weight:700;color:#fff;font-family:'Montserrat',sans-serif;">CD</div>
-            <div class="mp-circ" style="width:28px;height:28px;background:#e0e0e0;font-size:9px;font-weight:700;color:#666;font-family:'Montserrat',sans-serif;">EF</div>
-            <div class="mp-circ" style="width:26px;height:26px;background:#f3f3f3;border:1.5px dashed #ccc;"><span class="material-icons-round" style="font-size:14px;color:#ccc;">person</span></div>
+            <div class="mp-circ dm-mid" style="width:28px;height:28px;background:var(--mp-line);font-size:9px;font-weight:700;color:#666;font-family:'Montserrat',sans-serif;">EF</div>
+            <div class="mp-circ" style="width:26px;height:26px;background:var(--mp-fill);border:1.5px dashed var(--mp-bdr);"><span class="material-icons-round" style="font-size:14px;color:#ccc;">person</span></div>
           </div>
         </div>
         <div class="comp-foot"><span class="comp-name">Avatar</span><span class="material-icons-round comp-arrow">arrow_forward</span></div>
@@ -1024,7 +1029,7 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
             <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center;">
               <div style="font-size:8px;color:#bbb;font-family:'Montserrat',sans-serif;">Su</div><div style="font-size:8px;color:#bbb;font-family:'Montserrat',sans-serif;">Mo</div><div style="font-size:8px;color:#bbb;font-family:'Montserrat',sans-serif;">Tu</div><div style="font-size:8px;color:#bbb;font-family:'Montserrat',sans-serif;">We</div><div style="font-size:8px;color:#bbb;font-family:'Montserrat',sans-serif;">Th</div><div style="font-size:8px;color:#bbb;font-family:'Montserrat',sans-serif;">Fr</div><div style="font-size:8px;color:#bbb;font-family:'Montserrat',sans-serif;">Sa</div>
               <div style="font-size:8px;color:#ccc;font-family:'Montserrat',sans-serif;">1</div><div style="font-size:8px;color:#ccc;font-family:'Montserrat',sans-serif;">2</div><div style="font-size:8px;color:#ccc;font-family:'Montserrat',sans-serif;">3</div><div style="font-size:8px;color:#ccc;font-family:'Montserrat',sans-serif;">4</div><div style="font-size:8px;color:#ccc;font-family:'Montserrat',sans-serif;">5</div><div style="font-size:8px;color:#ccc;font-family:'Montserrat',sans-serif;">6</div><div style="font-size:8px;color:#ccc;font-family:'Montserrat',sans-serif;">7</div>
-              <div style="font-size:8px;color:#555;font-family:'Montserrat',sans-serif;">8</div><div style="font-size:8px;color:#555;font-family:'Montserrat',sans-serif;">9</div><div style="font-size:8px;color:#555;font-family:'Montserrat',sans-serif;">10</div><div style="font-size:7px;background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:#fff;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;margin:auto;font-family:'Montserrat',sans-serif;">11</div><div style="font-size:8px;color:#555;font-family:'Montserrat',sans-serif;">12</div><div style="font-size:8px;color:#555;font-family:'Montserrat',sans-serif;">13</div><div style="font-size:8px;color:#555;font-family:'Montserrat',sans-serif;">14</div>
+              <div class="dm-b" style="font-size:8px;color:#555;font-family:'Montserrat',sans-serif;">8</div><div class="dm-b" style="font-size:8px;color:#555;font-family:'Montserrat',sans-serif;">9</div><div class="dm-b" style="font-size:8px;color:#555;font-family:'Montserrat',sans-serif;">10</div><div style="font-size:7px;background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:#fff;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;margin:auto;font-family:'Montserrat',sans-serif;">11</div><div class="dm-b" style="font-size:8px;color:#555;font-family:'Montserrat',sans-serif;">12</div><div class="dm-b" style="font-size:8px;color:#555;font-family:'Montserrat',sans-serif;">13</div><div class="dm-b" style="font-size:8px;color:#555;font-family:'Montserrat',sans-serif;">14</div>
             </div>
           </div>
         </div>
@@ -1038,13 +1043,13 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
             <div class="mp-box" style="width:100%;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;">
               <span class="material-icons-round" style="font-size:18px;color:#ccc;">chevron_left</span>
               <span style="font-size:10px;color:#aaa;font-family:'Montserrat',sans-serif;">Slide 2 / 4</span>
-              <span class="material-icons-round" style="font-size:18px;color:#555;">chevron_right</span>
+              <span class="material-icons-round dm-b" style="font-size:18px;color:#555;">chevron_right</span>
             </div>
             <div style="display:flex;gap:6px;">
-              <div style="width:8px;height:8px;border-radius:50%;background:#e0e0e0;"></div>
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--mp-line);"></div>
               <div style="width:8px;height:8px;border-radius:50%;background:#A614C3;"></div>
-              <div style="width:8px;height:8px;border-radius:50%;background:#e0e0e0;"></div>
-              <div style="width:8px;height:8px;border-radius:50%;background:#e0e0e0;"></div>
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--mp-line);"></div>
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--mp-line);"></div>
             </div>
           </div>
         </div>
@@ -1056,9 +1061,9 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
         <div class="comp-prev">
           <div class="mp-row" style="flex-wrap:wrap;gap:6px;justify-content:center;">
             <div style="padding:4px 11px;border-radius:9999px;background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:#fff;font-size:10px;font-weight:700;font-family:'Montserrat',sans-serif;">All</div>
-            <div class="dm-b dm-soft dm-bdr" style="padding:4px 11px;border-radius:9999px;background:#f3f3f3;color:#666;border:1px solid #e0e0e0;font-size:10px;font-weight:600;font-family:'Montserrat',sans-serif;">Design</div>
-            <div class="dm-b dm-soft dm-bdr" style="padding:4px 11px;border-radius:9999px;background:#f3f3f3;color:#666;border:1px solid #e0e0e0;font-size:10px;font-weight:600;font-family:'Montserrat',sans-serif;">Code</div>
-            <div class="dm-b dm-soft dm-bdr" style="padding:4px 11px;border-radius:9999px;background:#f3f3f3;color:#666;border:1px solid #e0e0e0;font-size:10px;font-weight:600;font-family:'Montserrat',sans-serif;">Assets</div>
+            <div class="dm-b dm-soft dm-bdr" style="padding:4px 11px;border-radius:9999px;background:var(--mp-fill);color:#666;border:1px solid var(--mp-line);font-size:10px;font-weight:600;font-family:'Montserrat',sans-serif;">Design</div>
+            <div class="dm-b dm-soft dm-bdr" style="padding:4px 11px;border-radius:9999px;background:var(--mp-fill);color:#666;border:1px solid var(--mp-line);font-size:10px;font-weight:600;font-family:'Montserrat',sans-serif;">Code</div>
+            <div class="dm-b dm-soft dm-bdr" style="padding:4px 11px;border-radius:9999px;background:var(--mp-fill);color:#666;border:1px solid var(--mp-line);font-size:10px;font-weight:600;font-family:'Montserrat',sans-serif;">Assets</div>
           </div>
         </div>
         <div class="comp-foot"><span class="comp-name">Chips</span><span class="material-icons-round comp-arrow">arrow_forward</span></div>
@@ -1081,22 +1086,22 @@ body.dark-mode .dm-appbar-dark { background:rgba(255,255,255,.10) !important; bo
       <!-- Lists -->
       <a class="comp-card" href="ds-19-lists.html">
         <div class="comp-prev">
-          <div class="dm-surf dm-bdr" style="width:195px;padding:10px;background:#fff;border:1px solid #e0e0e0;border-radius:8px;text-align:left;">
+          <div class="dm-surf dm-bdr" style="width:195px;padding:10px;background:#fff;border:1px solid var(--mp-line);border-radius:8px;text-align:left;">
             <div style="display:flex;gap:9px;">
               <div style="display:flex;flex-direction:column;align-items:center;">
                 <span style="width:17px;height:17px;border-radius:50%;background:rgba(116,195,183,.14);display:inline-flex;align-items:center;justify-content:center;"><span class="material-icons-round" style="font-size:10px;color:#74C3B7;">shield</span></span>
-                <span style="width:1px;flex:1;margin:3px 0;background:#ececee;"></span>
+                <span style="width:1px;flex:1;margin:3px 0;background:var(--mp-line-soft);"></span>
               </div>
               <div style="flex:1;padding-bottom:8px;">
                 <div class="dm-b" style="font-size:9px;font-weight:600;color:#333;font-family:'Montserrat',sans-serif;">Policy bound</div>
-                <div style="height:4px;border-radius:2px;background:#ececee;width:80%;margin-top:4px;"></div>
+                <div style="height:4px;border-radius:2px;background:var(--mp-line-soft);width:80%;margin-top:4px;"></div>
               </div>
             </div>
             <div style="display:flex;gap:9px;">
               <span style="width:17px;height:17px;border-radius:50%;background:rgba(167,139,250,.14);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;"><span class="material-icons-round" style="font-size:10px;color:#A78BFA;">description</span></span>
               <div style="flex:1;">
                 <div class="dm-b" style="font-size:9px;font-weight:600;color:#333;font-family:'Montserrat',sans-serif;">Quote submitted</div>
-                <div style="height:4px;border-radius:2px;background:#ececee;width:62%;margin-top:4px;"></div>
+                <div style="height:4px;border-radius:2px;background:var(--mp-line-soft);width:62%;margin-top:4px;"></div>
               </div>
             </div>
           </div>
