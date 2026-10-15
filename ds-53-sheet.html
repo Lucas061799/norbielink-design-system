@@ -3,29 +3,52 @@
 <title>Sheet — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.sh-scene{position:relative;width:100%;max-width:560px;height:280px;background:#f5f5f5;border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;font-family:'Montserrat',sans-serif;}
-body.dark-mode .sh-scene{border-color:rgba(255,255,255,0.10);background:#0F1120;}
-.sh-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.2);z-index:1;}
-.sh-panel{position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:16px 16px 0 0;box-shadow:0 -4px 20px rgba(0,0,0,.1);z-index:2;display:flex;flex-direction:column;}
-.sh-handle-bar{width:36px;height:4px;background:#ddd;border-radius:2px;margin:10px auto 0;}
-.sh-header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px 8px;}
-.sh-title{font-size:15px;font-weight:700;color:#111;}
-.sh-close{width:28px;height:28px;border:none;background:#f3f3f3;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-.sh-close .material-icons-round{font-size:16px;color:#666;}
-.sh-body{padding:8px 20px 20px;}
-.sh-body-text{font-size:13px;color:#888;line-height:1.6;}
-.sh-dk .sh-panel{background:#191D35;}
-.sh-dk .sh-title{color:rgba(255,255,255,.9);}
-.sh-dk .sh-close{background:rgba(255,255,255,.07);}
-.sh-dk .sh-close .material-icons-round{color:rgba(255,255,255,.5);}
-.sh-dk .sh-handle-bar{background:rgba(255,255,255,.2);}
-.sh-dk .sh-body-text{color:rgba(255,255,255,.45);}
-body.dark-mode .sh-panel{background:#191D35;}
-body.dark-mode .sh-title{color:rgba(255,255,255,.9);}
-body.dark-mode .sh-close{background:rgba(255,255,255,.07);}
-body.dark-mode .sh-close .material-icons-round{color:rgba(255,255,255,.5);}
-body.dark-mode .sh-handle-bar{background:rgba(255,255,255,.2);}
-body.dark-mode .sh-body-text{color:rgba(255,255,255,.45);}
+/* ── SHEET ── always the right edge, always a viewport fraction wide. */
+.sh-scene { position: relative; display: flex; width: 100%; height: 340px; overflow: hidden;
+  border-radius: 16px; background: var(--gray-50); font-family: 'Montserrat', sans-serif; }
+.sh-page { flex: 1; padding: 32px; font-size: 13px; line-height: 1.5; color: var(--gray-500); }
+.sh-scrim { position: absolute; inset: 0; background: rgba(0,0,0,0.25); }
+.sh-panel { position: absolute; top: 0; bottom: 0; right: 0; width: 58%; display: flex;
+  flex-direction: column; background: #fff; border-left: 1px solid var(--gray-200);
+  box-shadow: -12px 0 40px rgba(0,0,0,0.18); }
+.sh-head { display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 12px 24px; flex-shrink: 0; border-bottom: 1px solid var(--gray-200);
+  background: rgba(249,250,251,0.80); }
+.sh-crumbs { display: flex; align-items: center; gap: 8px; min-width: 0; color: var(--gray-500); }
+.sh-crumb { flex-shrink: 0; font-size: 11px; line-height: 1.5; color: var(--gray-500); }
+.sh-name { font-size: 12px; font-weight: 600; line-height: 1.5; color: var(--gray-800);
+  max-width: 420px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sh-tag { flex-shrink: 0; font-size: 10px; font-weight: 700; line-height: 1.5; text-transform: uppercase;
+  letter-spacing: .04em; padding: 2px 6px; border-radius: 4px;
+  color: #F59E0B; background: rgba(245,158,11,0.10); }
+.sh-acts { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
+.sh-icon { display: inline-flex; padding: 6px; border: none; border-radius: 6px; background: transparent;
+  cursor: pointer; color: var(--gray-500); transition: all .15s; }
+.sh-icon:hover { background: var(--gray-50); color: var(--gray-800); }
+.sh-collapse, .sh-collapse:hover { color: #A855F7; }
+.sh-svg { display: block; flex-shrink: 0; }
+.sh-body { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 4px; padding: 24px; }
+.sh-empty-ico { color: var(--gray-300); margin-bottom: 8px; }
+.sh-empty-t { font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--gray-700); }
+.sh-empty-s { font-size: 11px; line-height: 1.5; color: var(--gray-400); }
+
+.sh-inline { background: #fff; border: 1px solid var(--gray-200); border-radius: 16px; padding: 24px;
+  font-family: 'Montserrat', sans-serif; }
+.sh-inline-on { border-radius: 0; border: none; border-left: 1px solid var(--gray-200);
+  box-shadow: -12px 0 40px rgba(0,0,0,0.18); margin-left: 30%; }
+.sh-inline-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.sh-inline-title { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.5; color: var(--gray-800); }
+.sh-inline-body { font-size: 13px; line-height: 1.5; color: var(--gray-500); }
+
+body.dark-mode .sh-scene { background: #0F1120; }
+body.dark-mode .sh-panel, body.dark-mode .sh-inline { background: #191D35;
+  border-color: rgba(255,255,255,0.08); }
+body.dark-mode .sh-head { background: rgba(255,255,255,0.02); border-bottom-color: rgba(255,255,255,0.08); }
+body.dark-mode .sh-name, body.dark-mode .sh-inline-title { color: #F9FAFB; }
+body.dark-mode .sh-crumb, body.dark-mode .sh-icon, body.dark-mode .sh-inline-body { color: #8B8FA8; }
+body.dark-mode .sh-icon:hover { background: rgba(255,255,255,0.04); color: #F9FAFB; }
+body.dark-mode .sh-empty-t { color: #F9FAFB; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -126,9 +149,9 @@ body.dark-mode .sh-body-text{color:rgba(255,255,255,.45);}
 </nav>
 <aside class="ds-toc">
   <div class="ds-toc-title">On this page</div>
-  <a class="ds-toc-item active" href="#overview">Overview</a>
-  <a class="ds-toc-item" href="#installation">Installation</a>
-  <a class="ds-toc-item" href="#api">Api</a>
+  <a class="ds-toc-item active" href="#viewer">Viewer sheet</a>
+  <a class="ds-toc-item" href="#expand">Expand in place</a>
+  <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 <main class="ds-main">
   <div class="ds-content">
@@ -146,57 +169,109 @@ body.dark-mode .sh-body-text{color:rgba(255,255,255,.45);}
       <a class="ds-nav-arrow-btn" href="ds-54-skeleton.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">A panel that slides up from the bottom of the screen.</p>
-    <div class="ds-section" id="overview">      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
-        </div>
-        <div class="ds-preview-pane" id="prev-main" style="align-items:center;justify-content:center;">
-          <div class="sh-scene">
-            <div class="sh-backdrop"></div>
-            <div class="sh-panel">
-              <div class="sh-handle-bar"></div>
-              <div class="sh-header"><div class="sh-title">Quick Settings</div><button class="sh-close"><span class="material-icons-round">close</span></button></div>
-              <div class="sh-body"><div class="sh-body-text">Sheets slide up from the bottom of the screen. They are useful for mobile-friendly actions and settings panels.</div></div>
+    <p class="ds-page-desc">Every sheet in Norbielink enters from the <strong>right edge</strong>, full height,
+  with a <code>1px</code> left border and a deep shadow. There is no bottom sheet, no left sheet and no top
+  sheet. Width is a <strong>viewport fraction</strong>, never a fixed pixel value, and two forms ship: a
+  <em>viewer</em> that opens over the page, and an <em>expand-in-place</em> panel that is an inline card until
+  you expand it.</p>
+
+  <div class="ds-section" id="viewer">
+    <h2 class="ds-section-title">Viewer sheet</h2>
+    <p class="ds-section-desc">Opens a single record over the page — a note, a document, a statement. The
+    header is a breadcrumb plus icon actions; the scrim is a click-to-close strip on the sheet’s left.</p>
+    <div class="ds-example" style="padding:0;align-items:stretch;justify-content:stretch;">
+      <div class="sh-scene">
+        <div class="sh-page">Page content stays in place behind the sheet.</div>
+        <div class="sh-scrim"></div>
+        <div class="sh-panel">
+          <div class="sh-head">
+            <div class="sh-crumbs">
+              <svg class="sh-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+              <span class="sh-crumb">Documents</span>
+              <svg class="sh-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              <span class="sh-crumb">License</span>
+              <svg class="sh-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              <span class="sh-name">License-2026.pdf</span>
+              <span class="sh-tag">Archived</span>
+            </div>
+            <div class="sh-acts">
+              <button class="sh-icon" title="Download"><svg class="sh-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg></button>
+              <button class="sh-icon sh-collapse" title="Collapse"><svg class="sh-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14 10 7-7"/><path d="M20 10h-6V4"/><path d="m3 21 7-7"/><path d="M4 14h6v6"/></svg></button>
+              <button class="sh-icon" title="Close"><svg class="sh-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
             </div>
           </div>
-        </div>
-        <div class="ds-code-pane" id="code-main">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-main')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sh-panel"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sh-handle-bar"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sh-header"</span><span class="c-tag">&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sh-title"</span><span class="c-tag">&gt;</span>Title<span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-str">"sh-close"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"material-icons-round"</span><span class="c-tag">&gt;</span>close<span class="c-tag">&lt;/span&gt;</span><span class="c-tag">&lt;/button&gt;</span>
-  <span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sh-body"</span><span class="c-tag">&gt;</span>Content here.<span class="c-tag">&lt;/div&gt;</span>
-<span class="c-tag">&lt;/div&gt;</span></pre>
-        </div>
-      </div>
-    </div><div class="ds-divider"></div>    <div class="ds-section" id="installation">
-      <h2 class="ds-section-title">Installation</h2>
-      <p class="ds-section-desc">Built with pure HTML and CSS. Include <span class="ds-inline-code">ds-shared.css</span> in your project.</p>
-      <div class="ds-install-wrap">
-        <div class="ds-install-tabbar">
-          <button class="ds-install-tab active" onclick="switchInstall(this,'pnpm')">pnpm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'npm')">npm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'yarn')">yarn</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'bun')">bun</button>
-        </div>
-        <div class="ds-install-code">
-          <span class="ds-install-cmd" id="install-cmd"><span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span></span>
-          <button class="ds-copy-btn" style="position:static;" onclick="copyInstall(this)"><span class="material-icons-round">content_copy</span></button>
+          <div class="sh-body">
+            <svg class="sh-empty-ico" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+            <div class="sh-empty-t">License-2026.pdf</div>
+            <div class="sh-empty-s">Preview not available in demo</div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="ds-divider"></div>
-        <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
-      <h3 class="ds-subsection-title">Classes</h3>
-      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>sh-panel</code></td><td>Bottom sheet panel</td></tr><tr><td><code>sh-handle-bar</code></td><td>Drag indicator pill at top</td></tr><tr><td><code>sh-backdrop</code></td><td>Overlay behind the sheet</td></tr><tr><td><code>sh-header</code></td><td>Title + close button row</td></tr><tr><td><code>sh-dk</code></td><td>Dark mode modifier</td></tr></tbody></table></div>    </div>
+  </div>
 
-  
-    <!-- ── Prev / Next navigation ── -->
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="expand">
+    <h2 class="ds-section-title">Expand in place</h2>
+    <p class="ds-section-desc">The same block is an inline card by default and a <code>70vw</code> sheet when
+    expanded — one component, two layouts, toggled by the icon in its header. The icon turns
+    <code>#A855F7</code> while expanded.</p>
+    <div class="ds-example" style="padding:32px;gap:24px;align-items:stretch;flex-direction:column;">
+      <div class="sh-inline">
+        <div class="sh-inline-head">
+          <h3 class="sh-inline-title">Agency Information</h3>
+          <button class="sh-icon" title="Expand"><svg class="sh-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="m21 3-7 7"/><path d="m3 21 7-7"/><path d="M9 21H3v-6"/></svg></button>
+        </div>
+        <div class="sh-inline-body">Collapsed — a <code>rounded-2xl</code> card with <code>padding 24px</code>
+        and a <code>1px</code> border, in the flow of the page.</div>
+      </div>
+      <div class="sh-inline sh-inline-on">
+        <div class="sh-inline-head">
+          <h3 class="sh-inline-title">Agency Information</h3>
+          <button class="sh-icon sh-collapse" title="Collapse"><svg class="sh-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14 10 7-7"/><path d="M20 10h-6V4"/><path d="m3 21 7-7"/><path d="M4 14h6v6"/></svg></button>
+        </div>
+        <div class="sh-inline-body">Expanded — the card loses its border and radius and becomes a
+        <code>70vw</code> sheet pinned to the right edge, over a <code>rgba(0,0,0,.35)</code> scrim.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Part</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Position</td><td><code>fixed</code> · <code>inset-y-0 right-0</code> — always the right edge, always full height</td></tr>
+        <tr><td>Surface</td><td><code>#fff</code> · <code>border-left 1px #E5E7EB</code> · <code>shadow-2xl</code> · no radius</td></tr>
+        <tr><td>Header</td><td><code>padding 12px 24px</code> · <code>border-bottom 1px</code> · background <code>rgba(249,250,251,.80)</code> · <code>flex-shrink 0</code></td></tr>
+        <tr><td>Breadcrumb</td><td>14px leading icon · 11px muted segments · 12px chevrons · title 12px / 600, <code>max-width 420px</code>, truncated</td></tr>
+        <tr><td>Header actions</td><td><code>gap 2px</code> · buttons <code>padding 6px</code> · <code>radius 6px</code> · 14px icons · muted, hover adds <code>#F9FAFB</code> and darkens to <code>#1F2937</code></td></tr>
+        <tr><td>Status tag</td><td>10px / 700 uppercase · <code>letter-spacing .04em</code> · <code>padding 2px 6px</code> · Archived <code>#F59E0B</code> on 10% tint, In Trash <code>#EF4444</code> on 10% tint</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="ds-subsection-title" style="margin-top:28px;">Widths and scrims</h3>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Use</th><th>Width</th><th>Scrim</th><th>z-index</th></tr></thead>
+      <tbody>
+        <tr><td>Document viewer</td><td><code>50vw</code>, <code>min-width 480px</code></td><td>Strip inside the sheet box, <code>rgba(0,0,0,.25)</code></td><td><code>60</code></td></tr>
+        <tr><td>Note / document / statement detail</td><td><code>58vw</code></td><td>Strip inside the sheet box, <code>rgba(0,0,0,.25)</code></td><td><code>50</code></td></tr>
+        <tr><td>Agency Information, ITC Record</td><td><code>70vw</code></td><td>Separate full-screen layer, <code>rgba(0,0,0,.35)</code></td><td><code>50</code> over a <code>40</code> scrim</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td>The two forms scrim differently. A <strong>viewer</strong> puts the scrim <em>inside</em> its own fixed box as a <code>flex-1</code> sibling, so only the strip beside the sheet is dimmed and clickable. An <strong>expand-in-place</strong> panel uses a separate <code>fixed inset-0</code> layer at <code>z-40</code>, dimming the whole page.</td></tr>
+      <tr><td>Width is always <code>vw</code>. The one pixel value in the family is a <code>min-width</code>, not a width — nothing opens at a fixed size.</td></tr>
+      <tr><td>Expand-in-place is not a resize: it is two fixed layouts. See <a href="ds-50-resizable.html">Resizable</a>.</td></tr>
+      <tr><td>Nothing enters from the bottom, left or top — checked across the whole app. A centred overlay is a <a href="ds-17-dialogs.html">dialog</a>, not a sheet.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-52-select.html">
       <span class="ds-page-nav-label">← Previous</span>

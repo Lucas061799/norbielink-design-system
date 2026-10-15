@@ -6,7 +6,7 @@
 /* ── DRAWER ── transcribed from the record side panel. */
 .drw-scene { position: relative; display: flex; justify-content: flex-end; width: 100%;
   height: 300px; border-radius: 12px; overflow: hidden; background: rgba(0,0,0,0.35); }
-.drw-panel { display: flex; flex-direction: column; width: 320px; max-width: 90%;
+.drw-panel { display: flex; flex-direction: column; width: 58%; min-width: 320px; max-width: 90%;
   background: var(--card-bg); border-left: 1px solid var(--gray-200);
   box-shadow: -8px 0 30px rgba(0,0,0,0.12); font-family: 'Montserrat', sans-serif; }
 .drw-head { display: flex; align-items: center; justify-content: space-between; gap: 12px;
@@ -141,8 +141,10 @@ body.dark-mode .skel { background: rgba(255,255,255,0.08); }
       <a class="ds-nav-arrow-btn" href="ds-41-dropdown.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">A fixed panel on the right edge, full height, <code>480px</code> wide. It is the only
-  surface in the product with a horizontal shadow.</p>
+    <p class="ds-page-desc">A fixed panel on the right edge, full height. It is the only surface in the product
+  with a horizontal shadow. Drawer and <a href="ds-53-sheet.html">Sheet</a> are the <strong>same
+  family</strong> — this page covers the simple titled panel, Sheet covers the record viewer and the
+  expand-in-place variant, and both share the position, edge and shadow below.</p>
 
   <div class="ds-section" id="drawer">
     <h2 class="ds-section-title">Drawer</h2>
@@ -172,8 +174,8 @@ body.dark-mode .skel { background: rgba(255,255,255,0.08); }
     <div class="ds-table-wrap"><table class="ds-table">
       <thead><tr><th>Property</th><th>Value</th></tr></thead>
       <tbody>
-        <tr><td>Scrim</td><td><code>rgba(0,0,0,0.35)</code> — lighter than a dialog’s <code>0.45</code></td></tr>
-        <tr><td>Panel</td><td><code>width 480px</code> · <code>max-width 90vw</code> · pinned <code>top 0 / right 0 / bottom 0</code></td></tr>
+        <tr><td>Scrim</td><td><code>rgba(0,0,0,0.35)</code> — lighter than a dialog’s <code>0.45</code>. A record viewer dims only the strip beside itself, at <code>0.25</code></td></tr>
+        <tr><td>Panel</td><td>Pinned <code>top 0 / right 0 / bottom 0</code>. Width is a viewport fraction, never a fixed value — the app ships <code>50vw</code> (<code>min-width 480px</code>), <code>58vw</code> and <code>70vw</code>; see <a href="ds-53-sheet.html">Sheet</a> for which is used where</td></tr>
         <tr><td>Edge</td><td><code>border-left 1px #E5E7EB</code> · no radius — it meets the viewport edge</td></tr>
         <tr><td>Shadow</td><td><code>-8px 0 30px rgba(0,0,0,0.12)</code> — the only horizontal shadow in the system</td></tr>
         <tr><td>Header</td><td><code>padding 24px 24px 20px</code> · <code>border-bottom 1px</code> · fixed</td></tr>
