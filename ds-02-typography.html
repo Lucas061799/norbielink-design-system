@@ -4,47 +4,6 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
-.type-scale-row {
-  display: grid;
-  grid-template-columns: 180px 1fr 80px 90px 80px;
-  align-items: center;
-  gap: 24px;
-  padding: 20px 24px;
-  border-bottom: 1px solid var(--gray-100);
-}
-.type-scale-row:last-child { border-bottom: none; }
-.type-scale-row:hover { background: var(--gray-50); }
-.type-meta strong { display: block; font-size: 13px; font-weight: 700; color: var(--gray-800); margin-bottom: 2px; }
-.type-meta span { font-size: 11px; color: var(--gray-400); }
-.type-stat { font-size: 12px; color: var(--gray-500); text-align: center; }
-.type-stat strong { display: block; font-size: 14px; font-weight: 700; color: var(--gray-700); }
-.type-header-row {
-  display: grid;
-  grid-template-columns: 180px 1fr 80px 90px 80px;
-  gap: 24px;
-  padding: 10px 24px 10px;
-  background: var(--gray-50);
-  border-bottom: 1px solid var(--gray-200);
-}
-.type-header-label { font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--gray-400); }
-
-.pair-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.pair-card { background: white; border-radius: 16px; padding: 28px; border: 1px solid var(--gray-200); }
-.pair-card-label { font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 16px; }
-
-.usage-block {
-  
-  border-radius: 12px;
-  padding: 32px 40px;
-  margin-bottom: 16px;
-}
-
-/* Typography elements section */
-.ty-elem-row { display: flex; align-items: baseline; gap: 32px; padding: 20px 0; border-bottom: 1px solid var(--gray-100); }
-.ty-elem-row:last-child { border-bottom: none; }
-.ty-elem-label { width: 130px; flex-shrink: 0; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); font-family: monospace; }
-.ty-elem-demo { flex: 1; }
-.ty-code-chip { display: inline-block; font-size: 11px; font-family: monospace; background: var(--gray-100); color: var(--gray-600); padding: 1px 6px; border-radius: 4px; }
 body.dark-mode .pair-card { background: #191D35 !important; border-color: rgba(255,255,255,0.08) !important; }
 body.dark-mode .type-scale-row:hover { background: rgba(255,255,255,0.03) !important; }
 body.dark-mode .type-header-row { background: #191D35 !important; border-color: rgba(255,255,255,0.08) !important; }
@@ -145,7 +104,6 @@ body.dark-mode .ty-code-chip { background: rgba(255,255,255,0.08) !important; co
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>
@@ -165,280 +123,102 @@ body.dark-mode .ty-code-chip { background: rgba(255,255,255,0.08) !important; co
       <a class="ds-nav-arrow-btn" href="ds-03-elevation.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-  <p class="ds-page-desc">Norbielink uses <strong>Montserrat</strong> exclusively across all interfaces — a geometric sans-serif chosen for its clarity, professionalism, and versatility across headings and UI text.</p>
+  <p class="ds-page-desc">Montserrat throughout. The type system is small and flat: <strong>eleven sizes</strong>,
+  <strong>four weights</strong>, and a line-height that is <strong>1.5× the font size</strong> almost everywhere.
+  Letter-spacing is <code>normal</code> except in three places.</p>
 
-  <!-- HERO -->
-  <div style="border:1px solid var(--gray-200);border-radius:16px;padding:48px 56px;margin-bottom:0;">
-    <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#A614C3;margin-bottom:20px;">Montserrat — Primary Typeface</div>
-    <div style="font-family:'Montserrat',sans-serif;">
-      <div style="font-size:56px;font-weight:800;color:var(--gray-900);letter-spacing:-0.03em;line-height:1;margin-bottom:6px;">Aa</div>
-      <div style="font-size:22px;font-weight:400;color:var(--gray-500);letter-spacing:0.04em;margin-bottom:20px;">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</div>
-      <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:baseline;border-top:1px solid var(--gray-200);padding-top:20px;">
-        <div><div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-400);margin-bottom:6px;">Display</div><div style="font-size:36px;font-weight:800;color:var(--gray-900);letter-spacing:-0.02em;line-height:1;">Display</div></div>
-        <div><div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-400);margin-bottom:6px;">Heading</div><div style="font-size:24px;font-weight:700;color:var(--gray-900);line-height:1.1;">Heading</div></div>
-        <div><div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-400);margin-bottom:6px;">Body</div><div style="font-size:15px;font-weight:400;color:var(--gray-700);line-height:1.5;">Body text for content</div></div>
-        <div><div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-400);margin-bottom:6px;">Label</div><div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#A614C3;">OVERLINE LABEL</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ds-divider"></div>
-
-  <!-- TYPE SCALE TABLE -->
   <div class="ds-section" id="type-scale">
-    <h2 class="ds-section-title">Type scale</h2>
-    <p class="ds-section-desc">Thirteen styles across five categories provide a structured hierarchy for every UI context — from page-level displays to microcopy.</p>
-
+    <h2 class="ds-section-title">Scale</h2>
+    <p class="ds-section-desc">Measured off the running app. Line-height is inherited rather than declared, which is
+    why it tracks 1.5× so consistently — a rule that sets <code>font-size</code> and forgets
+    <code>line-height</code> will render ~1.2× and read noticeably tight.</p>
     <div class="ds-table-wrap">
-      <div class="type-header-row">
-        <div class="type-header-label">Role</div>
-        <div class="type-header-label">Preview</div>
-        <div class="type-header-label" style="text-align:center;">Size</div>
-        <div class="type-header-label" style="text-align:center;">Line Height</div>
-        <div class="type-header-label" style="text-align:center;">Weight</div>
-      </div>
-
-      <!-- Display -->
-      <div class="type-scale-row">
-        <div class="type-meta"><strong>Display Large</strong><span>Montserrat / 800</span></div>
-        <div style="font-size:52px;font-weight:800;color:#1A1A2E;line-height:1;letter-spacing:-0.02em;">Display</div>
-        <div class="type-stat"><strong>52px</strong></div>
-        <div class="type-stat"><strong>60px</strong></div>
-        <div class="type-stat"><strong>800</strong></div>
-      </div>
-
-      <!-- Headings -->
-      <div class="type-scale-row">
-        <div class="type-meta"><strong>H1 — Page Title</strong><span>Montserrat / 700</span></div>
-        <div style="font-size:36px;font-weight:700;color:#1A1A2E;line-height:1.1;letter-spacing:-0.01em;">Page Heading</div>
-        <div class="type-stat"><strong>36px</strong></div>
-        <div class="type-stat"><strong>44px</strong></div>
-        <div class="type-stat"><strong>700</strong></div>
-      </div>
-      <div class="type-scale-row">
-        <div class="type-meta"><strong>H2 — Section</strong><span>Montserrat / 600</span></div>
-        <div style="font-size:27px;font-weight:600;color:#1A1A2E;line-height:1.2;">Section Heading</div>
-        <div class="type-stat"><strong>27px</strong></div>
-        <div class="type-stat"><strong>34px</strong></div>
-        <div class="type-stat"><strong>600</strong></div>
-      </div>
-      <div class="type-scale-row">
-        <div class="type-meta"><strong>H3 — Subsection</strong><span>Montserrat / 600</span></div>
-        <div style="font-size:22px;font-weight:600;color:#1A1A2E;">Subsection Heading</div>
-        <div class="type-stat"><strong>22px</strong></div>
-        <div class="type-stat"><strong>28px</strong></div>
-        <div class="type-stat"><strong>600</strong></div>
-      </div>
-      <div class="type-scale-row">
-        <div class="type-meta"><strong>H4 — Card Title</strong><span>Montserrat / 600</span></div>
-        <div style="font-size:18px;font-weight:600;color:#1A1A2E;">Card Title</div>
-        <div class="type-stat"><strong>18px</strong></div>
-        <div class="type-stat"><strong>24px</strong></div>
-        <div class="type-stat"><strong>600</strong></div>
-      </div>
-
-      <!-- Body -->
-      <div class="type-scale-row">
-        <div class="type-meta"><strong>Body Large</strong><span>Montserrat / 400</span></div>
-        <div style="font-size:16px;font-weight:400;color:#374151;line-height:1.6;">Large body text for introductions and key content</div>
-        <div class="type-stat"><strong>16px</strong></div>
-        <div class="type-stat"><strong>26px</strong></div>
-        <div class="type-stat"><strong>400</strong></div>
-      </div>
-      <div class="type-scale-row">
-        <div class="type-meta"><strong>Body Medium</strong><span>Montserrat / 400</span></div>
-        <div style="font-size:14px;font-weight:400;color:#374151;line-height:1.6;">Standard body — nav items, table cells, form fields</div>
-        <div class="type-stat"><strong>14px</strong></div>
-        <div class="type-stat"><strong>22px</strong></div>
-        <div class="type-stat"><strong>400</strong></div>
-      </div>
-      <div class="type-scale-row">
-        <div class="type-meta"><strong>Body Small</strong><span>Montserrat / 400</span></div>
-        <div style="font-size:13px;font-weight:400;color:#374151;">Secondary body, form labels, metadata</div>
-        <div class="type-stat"><strong>13px</strong></div>
-        <div class="type-stat"><strong>20px</strong></div>
-        <div class="type-stat"><strong>400</strong></div>
-      </div>
-
-      <!-- Label -->
-      <div class="type-scale-row">
-        <div class="type-meta"><strong>Label Medium</strong><span>Montserrat / 500</span></div>
-        <div style="font-size:12px;font-weight:500;color:#374151;">Button text, input labels, captions</div>
-        <div class="type-stat"><strong>12px</strong></div>
-        <div class="type-stat"><strong>18px</strong></div>
-        <div class="type-stat"><strong>500</strong></div>
-      </div>
-      <div class="type-scale-row">
-        <div class="type-meta"><strong>Label Small</strong><span>Montserrat / 400</span></div>
-        <div style="font-size:11px;font-weight:400;color:#374151;">Helper text, tooltips, tiny captions</div>
-        <div class="type-stat"><strong>11px</strong></div>
-        <div class="type-stat"><strong>16px</strong></div>
-        <div class="type-stat"><strong>400</strong></div>
-      </div>
-
-      <!-- Overline -->
-      <div class="type-scale-row">
-        <div class="type-meta"><strong>Overline</strong><span>Montserrat / 700</span></div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#A614C3;">SECTION LABEL / OVERLINE</div>
-        <div class="type-stat"><strong>11px</strong></div>
-        <div class="type-stat"><strong>14px</strong></div>
-        <div class="type-stat"><strong>700</strong></div>
-      </div>
+      <table class="ds-table">
+        <thead><tr><th>Sample</th><th>Size</th><th>Weights</th><th>Line height</th><th>Tracking</th><th>Used for</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span style="font-size:24px;font-weight:600;line-height:1.5;">Aa</span></td>
+            <td><code>24px</code></td><td>600</td><td><code>24px</code></td><td><code>-0.6px</code></td><td>KPI numbers — the only place line-height is collapsed</td>
+          </tr>
+          <tr>
+            <td><span style="font-size:22px;font-weight:600;line-height:1.5;">Aa</span></td>
+            <td><code>22px</code></td><td>400</td><td><code>33px</code></td><td><code>normal</code></td><td>Page title</td>
+          </tr>
+          <tr>
+            <td><span style="font-size:17px;font-weight:600;line-height:1.5;">Aa</span></td>
+            <td><code>17px</code></td><td>700</td><td><code>25.5px</code></td><td><code>normal</code></td><td>Dialog title</td>
+          </tr>
+          <tr>
+            <td><span style="font-size:15px;font-weight:600;line-height:1.5;">Aa</span></td>
+            <td><code>15px</code></td><td>600</td><td><code>22.5px</code></td><td><code>normal</code></td><td>Card and section title</td>
+          </tr>
+          <tr>
+            <td><span style="font-size:13px;font-weight:600;line-height:1.5;">Aa</span></td>
+            <td><code>13px</code></td><td>400 · 500 · 600 · 700</td><td><code>19.5px</code></td><td><code>normal · 0.26px on tabs</code></td><td>Body — the workhorse size</td>
+          </tr>
+          <tr>
+            <td><span style="font-size:12.5px;font-weight:600;line-height:1.5;">Aa</span></td>
+            <td><code>12.5px</code></td><td>500</td><td><code>18.75px</code></td><td><code>normal</code></td><td>Segmented control</td>
+          </tr>
+          <tr>
+            <td><span style="font-size:12px;font-weight:600;line-height:1.5;">Aa</span></td>
+            <td><code>12px</code></td><td>400 · 600</td><td><code>18px</code></td><td><code>normal</code></td><td>Secondary text, small buttons, toast body</td>
+          </tr>
+          <tr>
+            <td><span style="font-size:11.5px;font-weight:600;line-height:1.5;">Aa</span></td>
+            <td><code>11.5px</code></td><td>400 · 500</td><td><code>17.25px</code></td><td><code>normal</code></td><td>Pagination</td>
+          </tr>
+          <tr>
+            <td><span style="font-size:11px;font-weight:600;line-height:1.5;">Aa</span></td>
+            <td><code>11px</code></td><td>400 · 500 · 600</td><td><code>16.5px · 16px on badges</code></td><td><code>normal</code></td><td>Badges, status chips, captions</td>
+          </tr>
+          <tr>
+            <td><span style="font-size:10px;font-weight:600;line-height:1.5;">Aa</span></td>
+            <td><code>10px</code></td><td>400 · 500 · 600</td><td><code>15px · 12.5px on PRO</code></td><td><code>normal · 1px</code></td><td>PRO badge, uppercase labels</td>
+          </tr>
+          <tr>
+            <td><span style="font-size:9px;font-weight:600;line-height:1.5;">Aa</span></td>
+            <td><code>9px</code></td><td>700</td><td><code>—</code></td><td><code>0.9px</code></td><td>NEW badge only</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
   <div class="ds-divider"></div>
 
-  <!-- TYPOGRAPHY ELEMENTS (shadcn style) -->
-  <div class="ds-section" id="elements">
-    <h2 class="ds-section-title">Typography elements</h2>
-    <p class="ds-section-desc">How each semantic HTML element is styled within Norbielink interfaces.</p>
-    <div style="border:1px solid var(--gray-200);border-radius:12px;overflow:hidden;">
-
-      <div class="ty-elem-row" style="padding:20px 28px;">
-        <div class="ty-elem-label">h1</div>
-        <div class="ty-elem-demo" style="font-size:36px;font-weight:700;color:var(--gray-900);letter-spacing:-0.01em;line-height:1.15;">The Art of Good Design</div>
-      </div>
-
-      <div class="ty-elem-row" style="padding:20px 28px;">
-        <div class="ty-elem-label">h2</div>
-        <div class="ty-elem-demo" style="font-size:27px;font-weight:600;color:var(--gray-900);line-height:1.25;">Section Heading</div>
-      </div>
-
-      <div class="ty-elem-row" style="padding:20px 28px;">
-        <div class="ty-elem-label">h3</div>
-        <div class="ty-elem-demo" style="font-size:22px;font-weight:600;color:var(--gray-900);line-height:1.3;">Subsection Heading</div>
-      </div>
-
-      <div class="ty-elem-row" style="padding:20px 28px;">
-        <div class="ty-elem-label">h4</div>
-        <div class="ty-elem-demo" style="font-size:18px;font-weight:600;color:var(--gray-900);line-height:1.4;">Card or Panel Title</div>
-      </div>
-
-      <div class="ty-elem-row" style="padding:20px 28px;align-items:flex-start;">
-        <div class="ty-elem-label" style="margin-top:2px;">p</div>
-        <div class="ty-elem-demo" style="font-size:15px;font-weight:400;color:var(--gray-700);line-height:1.7;max-width:580px;">The king, seeing how much he was distressed, permitted him, though sorely against his will, to return to his own country with all the honors due to his rank.</div>
-      </div>
-
-      <div class="ty-elem-row" style="padding:20px 28px;align-items:flex-start;">
-        <div class="ty-elem-label" style="margin-top:2px;">lead</div>
-        <div class="ty-elem-demo" style="font-size:18px;font-weight:400;color:var(--gray-600);line-height:1.6;max-width:580px;">A modal dialog that interrupts the user with important content and expects a response.</div>
-      </div>
-
-      <div class="ty-elem-row" style="padding:20px 28px;align-items:flex-start;">
-        <div class="ty-elem-label" style="margin-top:2px;">blockquote</div>
-        <div class="ty-elem-demo">
-          <blockquote style="border-left:3px solid #A614C3;padding:4px 0 4px 20px;margin:0;font-size:15px;font-style:italic;color:var(--gray-600);line-height:1.6;">"Simplicity is the ultimate sophistication — every element must earn its place in the design."</blockquote>
-        </div>
-      </div>
-
-      <div class="ty-elem-row" style="padding:20px 28px;align-items:flex-start;">
-        <div class="ty-elem-label" style="margin-top:4px;">table</div>
-        <div class="ty-elem-demo">
-          <table style="border-collapse:collapse;font-size:13px;width:auto;">
-            <thead><tr style="border-bottom:1px solid var(--gray-200);">
-              <th style="font-weight:600;color:var(--gray-500);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:6px 16px 6px 0;text-align:left;">King</th>
-              <th style="font-weight:600;color:var(--gray-500);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:6px 16px;text-align:left;">Status</th>
-              <th style="font-weight:600;color:var(--gray-500);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:6px 0 6px 16px;text-align:left;">Years</th>
-            </tr></thead>
-            <tbody>
-              <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:8px 16px 8px 0;color:var(--gray-800);">Albrecht I</td><td style="padding:8px 16px;color:var(--gray-600);">Holy Roman Emperor</td><td style="padding:8px 0 8px 16px;color:var(--gray-600);">1282–1308</td></tr>
-              <tr><td style="padding:8px 16px 8px 0;color:var(--gray-800);">Henry IV</td><td style="padding:8px 16px;color:var(--gray-600);">Holy Roman Emperor</td><td style="padding:8px 0 8px 16px;color:var(--gray-600);">1056–1105</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="ty-elem-row" style="padding:20px 28px;align-items:flex-start;">
-        <div class="ty-elem-label" style="margin-top:2px;">ul</div>
-        <div class="ty-elem-demo">
-          <ul style="margin:0;padding-left:20px;font-size:14px;color:var(--gray-700);line-height:1.8;">
-            <li>1st level of puns: 5 gold coins</li>
-            <li>2nd level of jokes: 10 silver coins</li>
-            <li>3rd level of riddles: 20 copper coins</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="ty-elem-row" style="padding:20px 28px;">
-        <div class="ty-elem-label">inline code</div>
-        <div class="ty-elem-demo" style="font-size:14px;color:var(--gray-700);">Use <span class="ty-code-chip">@font-face</span> to load <span class="ty-code-chip">Montserrat</span> or reference it via Google Fonts.</div>
-      </div>
-
-      <div class="ty-elem-row" style="padding:20px 28px;">
-        <div class="ty-elem-label">muted</div>
-        <div class="ty-elem-demo" style="font-size:13px;color:var(--gray-400);">Enter your email address to receive notifications.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="ds-divider"></div>
-
-  <!-- APPLYING TYPE -->
-  <div class="ds-section" id="applying-type">
-    <h2 class="ds-section-title">Applying type</h2>
-    <p class="ds-section-desc">These examples show how type styles work together in real UI contexts.</p>
-
-    <div class="pair-grid">
-      <!-- Page Layout -->
-      <div class="pair-card">
-        <div class="pair-card-label">Page header pattern</div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#A614C3;margin-bottom:4px;">STYLES / COLOR</div>
-        <div style="font-size:36px;font-weight:700;color:#1A1A2E;letter-spacing:-0.01em;margin-bottom:8px;line-height:1.1;">Marketplace</div>
-        <div style="font-size:14px;font-weight:400;color:#6B7280;line-height:1.6;">Start a new quote by selecting a line of business below.</div>
-      </div>
-
-      <!-- Card pattern -->
-      <div class="pair-card">
-        <div class="pair-card-label">Card content pattern</div>
-        <div style="font-size:15px;font-weight:700;color:#1A1A2E;margin-bottom:6px;">NorbieLink Tour</div>
-        <div style="font-size:13px;font-weight:400;color:#6B7280;line-height:1.5;margin-bottom:12px;">New to the dashboard? Take a guided tour to explore features and capabilities.</div>
-        <div style="font-size:13px;font-weight:700;color:#A614C3;">Launch Tour →</div>
-      </div>
-
-      <!-- Table pattern -->
-      <div class="pair-card">
-        <div class="pair-card-label">Table header pattern</div>
-        <div style="display:flex;gap:24px;border-bottom:1px solid #E5E7EB;padding-bottom:10px;margin-bottom:10px;">
-          <span style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9CA3AF;">APPLICANT</span>
-          <span style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9CA3AF;">STATUS</span>
-        </div>
-        <div style="display:flex;gap:24px;align-items:center;">
-          <span style="font-size:13px;font-weight:400;color:#374151;">Jane Smith</span>
-          <span style="font-size:11px;font-weight:700;background:rgba(16,185,129,0.1);color:#10B981;padding:2px 8px;border-radius:12px;">Sold/Issued</span>
-        </div>
-      </div>
-
-      <!-- Nav pattern -->
-      <div class="pair-card">
-        <div class="pair-card-label">Navigation text pattern</div>
-        <div style="display:flex;flex-direction:column;gap:4px;">
-          <div style="font-size:14px;font-weight:600;color:#A614C3;background:rgba(166,20,195,0.06);padding:8px 12px;border-radius:50px;">Marketplace</div>
-          <div style="font-size:14px;font-weight:500;color:#6B7280;padding:8px 12px;">Quotes</div>
-          <div style="font-size:14px;font-weight:500;color:#6B7280;padding:8px 12px;">Policies</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ds-divider"></div>
-
-  <!-- FONT WEIGHTS -->
   <div class="ds-section" id="font-weights">
-    <h2 class="ds-section-title">Font weights</h2>
-    <p class="ds-section-desc">Only four weights are used across the system to maintain visual coherence.</p>
-    <div class="ds-example" style="justify-content:flex-start; flex-direction:column; align-items:flex-start; gap:16px; padding:40px 56px;">
-      <div style="display:flex;align-items:baseline;gap:24px;"><div style="font-size:32px;font-weight:400;color:#1A1A2E;">Montserrat</div><div style="font-size:12px;color:#9CA3AF;font-weight:500;">400 — Regular</div></div>
-      <div style="display:flex;align-items:baseline;gap:24px;"><div style="font-size:32px;font-weight:500;color:#1A1A2E;">Montserrat</div><div style="font-size:12px;color:#9CA3AF;font-weight:500;">500 — Medium</div></div>
-      <div style="display:flex;align-items:baseline;gap:24px;"><div style="font-size:32px;font-weight:600;color:#1A1A2E;">Montserrat</div><div style="font-size:12px;color:#9CA3AF;font-weight:500;">600 — SemiBold</div></div>
-      <div style="display:flex;align-items:baseline;gap:24px;"><div style="font-size:32px;font-weight:700;color:#1A1A2E;">Montserrat</div><div style="font-size:12px;color:#9CA3AF;font-weight:500;">700 — Bold</div></div>
-      <div style="display:flex;align-items:baseline;gap:24px;"><div style="font-size:32px;font-weight:800;color:#1A1A2E;">Montserrat</div><div style="font-size:12px;color:#9CA3AF;font-weight:500;">800 — ExtraBold (logo only)</div></div>
+    <h2 class="ds-section-title">Weights</h2>
+    <p class="ds-section-desc">Four, and no more. <strong>800 and 900 do not appear anywhere in the product</strong> —
+    the DS used to carry 800 in 34 places.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Sample</th><th>Weight</th><th>Used for</th></tr></thead>
+        <tbody>
+          <tr><td><span style="font-size:15px;font-weight:400;line-height:1.5;">Montserrat</span></td><td><code>400</code></td><td>Body, table cells, tab labels</td></tr>
+          <tr><td><span style="font-size:15px;font-weight:500;line-height:1.5;">Montserrat</span></td><td><code>500</code></td><td>Nav items, secondary labels, status chips</td></tr>
+          <tr><td><span style="font-size:15px;font-weight:600;line-height:1.5;">Montserrat</span></td><td><code>600</code></td><td>Buttons, badges, card titles, emphasis</td></tr>
+          <tr><td><span style="font-size:15px;font-weight:700;line-height:1.5;">Montserrat</span></td><td><code>700</code></td><td>KPI numbers, dialog titles — used sparingly</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
+  <div class="ds-divider"></div>
 
-    <!-- ── Prev / Next navigation ── -->
+  <div class="ds-section" id="applying-type">
+    <h2 class="ds-section-title">Rules</h2>
+    <div class="ds-table-wrap">
+      <table class="ds-table"><tbody>
+        <tr><td>Set <code>line-height</code> whenever you set <code>font-size</code>. Omitting it falls back to <code>normal</code> (~1.2×), which is visibly tighter than the product.</td></tr>
+        <tr><td>Use <code>1.5</code> unless you are matching one of the three exceptions: the 24px KPI (<code>leading-none</code>), the dialog body (<code>1.625</code>), or badge labels (a flat <code>16px</code>).</td></tr>
+        <tr><td>Leave tracking at <code>normal</code>. The only deliberate exceptions are the 24px KPI (<code>-0.6px</code>), uppercase 10px labels (<code>1px</code>) and the NEW badge (<code>0.9px</code>).</td></tr>
+        <tr><td>Never reach past <code>700</code>.</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-01-color.html">
       <span class="ds-page-nav-label">← Previous</span>
@@ -455,10 +235,9 @@ body.dark-mode .ty-code-chip { background: rgba(255,255,255,0.08) !important; co
 
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
-  <a class="ds-toc-item active" href="#type-scale">Type scale</a>
-  <a class="ds-toc-item" href="#elements">Elements</a>
-  <a class="ds-toc-item" href="#applying-type">Applying type</a>
-  <a class="ds-toc-item" href="#font-weights">Font weights</a>
+  <a class="ds-toc-item active" href="#type-scale">Scale</a>
+  <a class="ds-toc-item" href="#applying-type">Rules</a>
+  <a class="ds-toc-item" href="#font-weights">Weights</a>
 </aside>
 
 

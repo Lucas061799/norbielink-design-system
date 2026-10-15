@@ -3,26 +3,36 @@
 <title>Alert Dialog — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.adlg-overlay{position:relative;width:100%;max-width:560px;min-height:240px;display:flex;align-items:center;justify-content:center;}
-.adlg{background:#fff;border-radius:16px;padding:24px;box-shadow:0 20px 50px rgba(0,0,0,0.12);width:100%;max-width:420px;font-family:'Montserrat',sans-serif;border:1px solid #E5E7EB;}
+/* ── ALERT DIALOG ──
+   Transcribed from the live Norbielink destructive confirm ("Delete Note").
+   Panel 400px / radius 16px / padding 24px. Title 17px/700, body 13px.
+   Buttons are padding 9px 17px, radius 8px, 12px — Cancel is a WHITE button
+   with a #E5E7EB hairline at weight 400, Confirm is weight 600. */
+.adlg-overlay{position:relative;width:100%;max-width:560px;min-height:240px;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,0.40);border-radius:12px;}
+.adlg{background:#FFFFFF;border-radius:16px;padding:24px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);
+  width:400px;max-width:100%;font-family:'Montserrat',sans-serif;}
 .adlg-content{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px;}
-.adlg-icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.adlg-icon{width:48px;height:48px;border-radius:9999px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.adlg-icon .material-icons-round{font-size:24px;}
 .adlg-icon.danger{background:rgba(239,68,68,0.10);}
-.adlg-icon.danger .material-icons-round{color:#EF4444;font-size:22px;}
+.adlg-icon.danger .material-icons-round{color:#EF4444;}
 .adlg-icon.confirm{background:rgba(166,20,195,0.08);}
-.adlg-icon.confirm .material-icons-round{color:#A614C3;font-size:22px;}
-.adlg-body{flex:1;}
-.adlg-title{font-size:16px;font-weight:700;color:#111827;margin-bottom:6px;}
-.adlg-desc{font-size:12px;color:#6B7280;line-height:1.6;}
-.adlg-actions{display:flex;gap:8px;justify-content:flex-end;}
-.adlg-btn{padding:7px 16px;border-radius:8px;font-size:12px;font-weight:600;font-family:'Montserrat',sans-serif;border:none;cursor:pointer;transition:opacity .15s;}
-.adlg-btn.cancel{background:transparent;color:#374151;border:1px solid #D1D5DB;}
-.adlg-btn.danger{background:#EF4444;color:#fff;}
-.adlg-btn.confirm{background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:#fff;box-shadow:0 4px 14px rgba(166,20,195,0.25);}
-.adlg-dk{background:#1e1e28;}
-.adlg-dk .adlg-title{color:rgba(255,255,255,.9);}
-.adlg-dk .adlg-desc{color:rgba(255,255,255,.45);}
-.adlg-dk .adlg-btn.cancel{background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.12);}
+.adlg-icon.confirm .material-icons-round{color:#A614C3;}
+.adlg-body{flex:1;min-width:0;}
+.adlg-title{font-size:17px;font-weight:700;color:#1F2937;margin-bottom:4px;line-height:1.5;}
+.adlg-desc{font-size:13px;color:#6B7280;line-height:1.625;}
+.adlg-actions{display:flex;gap:12px;justify-content:flex-end;}
+.adlg-btn{padding:9px 17px;border-radius:8px;font-size:12px;font-family:'Montserrat',sans-serif;border:none;cursor:pointer;transition:filter .12s,background .12s;line-height:1.5;}
+.adlg-btn.cancel{background:#FFFFFF;color:#1F2937;border:1px solid #E5E7EB;font-weight:400;}
+.adlg-btn.danger{background:#EF4444;color:#fff;font-weight:600;}
+.adlg-btn.confirm{background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:#fff;font-weight:600;}
+.adlg-btn.danger:hover,.adlg-btn.confirm:hover{filter:brightness(1.10);}
+
+body.dark-mode .adlg,.adlg-dk{background:#1E2240;}
+body.dark-mode .adlg-title,.adlg-dk .adlg-title{color:#F9FAFB;}
+body.dark-mode .adlg-desc,.adlg-dk .adlg-desc{color:#8B8FA8;}
+body.dark-mode .adlg-btn.cancel,.adlg-dk .adlg-btn.cancel{background:#1E2240;color:#F9FAFB;border-color:rgba(255,255,255,0.12);}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -118,7 +128,6 @@
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>

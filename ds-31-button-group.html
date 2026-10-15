@@ -3,16 +3,34 @@
 <title>Button Group — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.btn-grp{display:inline-flex;border:1px solid #E5E7EB;border-radius:8px;overflow:hidden;font-family:'Montserrat',sans-serif;}
-.btn-grp-item{padding:8px 18px;font-size:12px;font-weight:700;color:#374151;background:#fff;border:none;border-right:1px solid #E5E7EB;cursor:pointer;transition:background .15s,color .15s;}
-.btn-grp-item:last-child{border-right:none;}
-.btn-grp-item:hover{background:rgba(166,20,195,0.05);color:#A614C3;}
-.btn-grp-item.active{background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:#fff;}
-.btn-grp-item.active+.btn-grp-item{border-left-color:transparent;}
-.btn-grp-dk{border-color:rgba(255,255,255,0.08);}
-.btn-grp-dk .btn-grp-item{background:transparent;color:rgba(255,255,255,.6);border-right-color:rgba(255,255,255,0.08);}
-.btn-grp-dk .btn-grp-item:hover{background:rgba(255,255,255,.06);}
-.btn-grp-dk .btn-grp-item.active{background:#5C2ED4;color:#fff;}
+/* ── BUTTON GROUP / SEGMENTED CONTROL ──
+   Transcribed from the live Norbielink app (Agencies / All Users / Affiliations).
+   A light recessed track with a raised white pill for the active segment.
+   The active segment is NOT the brand gradient — the gradient is reserved for
+   primary actions, and using it here made the control read as a button bar. */
+.btn-grp {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px; border-radius: 8px;
+  background: #F3F4F6; border: 1px solid #E5E7EB;
+  font-family: 'Montserrat', sans-serif;
+}
+.btn-grp-item{
+  padding: 4px 12px; border-radius: 6px; border: none;
+  font-family: inherit; font-size: 12.5px; font-weight: 500;
+  color: #6B7280; background: transparent; cursor: pointer;
+  white-space: nowrap; transition: background .15s, color .15s;line-height:1.5;}
+.btn-grp-item:hover { color: #1F2937; }
+.btn-grp-item.active {
+  background: #FFFFFF; color: #1F2937;
+  box-shadow: 0 1px 2px rgba(15,23,42,0.08), 0 0 0 1px rgba(15,23,42,0.04);
+}
+body.dark-mode .btn-grp { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.06); }
+body.dark-mode .btn-grp-item { color: #8B8FA8; }
+body.dark-mode .btn-grp-item:hover { color: #F9FAFB; }
+body.dark-mode .btn-grp-item.active {
+  background: rgba(255,255,255,0.10); color: #F9FAFB;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.24);
+}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -108,7 +126,6 @@
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>

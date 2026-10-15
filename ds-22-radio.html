@@ -4,6 +4,28 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
+<style>
+/* ── RADIO ──
+   Transcribed from the live Norbielink app. 20px ring, 2px border, the track
+   is ALWAYS transparent (no fill), and the 10px inner dot carries the brand
+   GRADIENT — not a flat #A614C3. Unchecked border is the neutral #D1D5DB,
+   not the DS green-tinted gray. */
+.rd {
+  width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 2px solid #D1D5DB; background: transparent;
+  box-sizing: border-box; transition: border-color .12s;
+}
+.rd-dot { width: 10px; height: 10px; border-radius: 50%; }
+.rd-checked { border-color: #8B3DD4; }
+.rd-checked .rd-dot { background: linear-gradient(88.54deg, #5C2ED4 0.1%, #A614C3 63.88%); }
+.rd-disabled { border-color: #E5E7EB; }
+.rd-disabled .rd-dot { background: #E5E7EB; }
+body.dark-mode .rd { border-color: rgba(255,255,255,0.18); }
+body.dark-mode .rd-checked { border-color: #A855F7; }
+body.dark-mode .rd-disabled { border-color: rgba(255,255,255,0.10); }
+body.dark-mode .rd-disabled .rd-dot { background: rgba(255,255,255,0.10); }
+</style>
 </head>
 <body class="btis-layout">
 <header class="btis-header">
@@ -99,7 +121,6 @@
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>
@@ -127,16 +148,16 @@
 
 <div class="ds-section" id="states"><div class="ds-section-title">States</div>
 <div class="ds-example" style="gap:32px;">
-  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="width:20px;height:20px;border-radius:50%;border:2px solid #A614C3;display:flex;align-items:center;justify-content:center;"><div style="width:10px;height:10px;border-radius:50%;background:#A614C3;"></div></div><span style="font-size:12px;color:#9CA3AF;font-weight:500;">Selected</span></div>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="width:20px;height:20px;border-radius:50%;border:2px solid #9AACAA;"></div><span style="font-size:12px;color:#9CA3AF;font-weight:500;">Unselected</span></div>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="width:20px;height:20px;border-radius:50%;border:2px solid #DCE4E1;display:flex;align-items:center;justify-content:center;"><div style="width:10px;height:10px;border-radius:50%;background:#DCE4E1;"></div></div><span style="font-size:12px;color:#9CA3AF;font-weight:500;">Disabled</span></div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div class="rd rd-checked"><div class="rd-dot"></div></div><span style="font-size:12px;color:#9CA3AF;font-weight:500;">Selected</span></div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div class="rd"></div><span style="font-size:12px;color:#9CA3AF;font-weight:500;">Unselected</span></div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div class="rd rd-disabled"><div class="rd-dot"></div></div><span style="font-size:12px;color:#9CA3AF;font-weight:500;">Disabled</span></div>
 </div>
 <div class="ds-subsection-title">Radio group</div>
 <div class="ds-example" style="flex-direction:column;align-items:flex-start;gap:14px;">
   <div style="font-size:13px;font-weight:700;color:#374151;margin-bottom:4px;">Notification frequency</div>
-  <label style="display:flex;align-items:center;gap:12px;cursor:pointer;"><div style="width:20px;height:20px;border-radius:50%;border:2px solid #A614C3;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><div style="width:10px;height:10px;border-radius:50%;background:#A614C3;"></div></div><span style="font-size:14px;color:#253835;font-weight:500;">Immediately</span></label>
-  <label style="display:flex;align-items:center;gap:12px;cursor:pointer;"><div style="width:20px;height:20px;border-radius:50%;border:2px solid #9AACAA;flex-shrink:0;"></div><span style="font-size:14px;color:#253835;font-weight:500;">Daily digest</span></label>
-  <label style="display:flex;align-items:center;gap:12px;cursor:pointer;"><div style="width:20px;height:20px;border-radius:50%;border:2px solid #9AACAA;flex-shrink:0;"></div><span style="font-size:14px;color:#253835;font-weight:500;">Weekly summary</span></label>
+  <label style="display:flex;align-items:center;gap:12px;cursor:pointer;"><div class="rd rd-checked"><div class="rd-dot"></div></div><span style="font-size:14px;color:#253835;font-weight:500;">Immediately</span></label>
+  <label style="display:flex;align-items:center;gap:12px;cursor:pointer;"><div class="rd"></div><span style="font-size:14px;color:#253835;font-weight:500;">Daily digest</span></label>
+  <label style="display:flex;align-items:center;gap:12px;cursor:pointer;"><div class="rd"></div><span style="font-size:14px;color:#253835;font-weight:500;">Weekly summary</span></label>
 </div></div>
 <div class="ds-section" id="specs"><div class="ds-section-title">Specs</div>
 <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Property</th><th>Value</th><th>Token</th></tr></thead><tbody>

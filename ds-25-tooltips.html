@@ -5,20 +5,37 @@
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 <style>
+/* ── TOOLTIP ──
+   Norbielink itself ships no custom tooltip component: the product uses 54
+   native `title` attributes and has zero `role="tooltip"` nodes. This page is
+   therefore a DS-only extension. It is drawn in the product's own surface
+   language so that, if a styled tooltip is ever introduced, it already fits:
+   the dark pill borrows the dark card `#1E2240`, and the rich card is the
+   standard menu surface (12px radius, #E5E7EB hairline, shadow-lg) with the
+   brand-gradient title used by the alert banner. */
 .tt-wrap{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;}
 .tt-pop{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(4px);transition:opacity .18s ease,transform .18s ease;position:absolute;bottom:calc(100% + 10px);left:50%;}
 .tt-wrap:hover .tt-pop{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
-.tt-plain{background:#141F1E;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:500;color:white;white-space:nowrap;font-family:'Montserrat',sans-serif;}
-.tt-plain::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:8px;height:8px;background:#141F1E;clip-path:polygon(0 0,100% 0,50% 100%);}
-.tt-rich{background:#fff;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.14);padding:16px;min-width:240px;border:1px solid #EEF2F0;font-family:'Montserrat',sans-serif;}
-.tt-rich-title{font-size:13px;font-weight:700;color:#141F1E;margin-bottom:6px;}
+
+.tt-plain{background:#1E2240;border-radius:8px;padding:6px 10px;font-size:12px;font-weight:400;color:#F9FAFB;white-space:nowrap;font-family:'Montserrat',sans-serif;line-height:1.5;}
+.tt-plain::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:8px;height:8px;background:#1E2240;clip-path:polygon(0 0,100% 0,50% 100%);}
+
+.tt-rich{background:#FFFFFF;border-radius:12px;box-shadow:0 10px 15px -3px rgba(0,0,0,.10),0 4px 6px -4px rgba(0,0,0,.10);padding:16px;min-width:240px;border:1px solid #E5E7EB;font-family:'Montserrat',sans-serif;}
+.tt-rich-title{font-size:13px;font-weight:600;margin-bottom:4px;width:fit-content;
+  background:linear-gradient(88.54deg,#5C2ED4 0.1%,#A614C3 63.88%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;line-height:1.5;}
 .tt-rich-body{font-size:12px;color:#6B7280;line-height:1.5;margin-bottom:10px;}
-.tt-rich-body kbd{background:#EEF2F0;border-radius:4px;padding:1px 6px;font-size:11px;font-weight:600;}
-.tt-rich a{font-size:12px;font-weight:700;color:#A614C3;text-decoration:none;}
-body.dark-mode .tt-rich{background:#191D35;border-color:rgba(255,255,255,.10);}
-body.dark-mode .tt-rich-title{color:rgba(255,255,255,.92);}
-body.dark-mode .tt-rich-body{color:rgba(255,255,255,.55);}
-body.dark-mode .tt-rich-body kbd{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);}
+.tt-rich-body kbd{background:#F3F4F6;border-radius:4px;padding:1px 6px;font-size:11px;font-weight:600;color:#1F2937;}
+.tt-rich a{font-size:12px;font-weight:600;color:#A614C3;text-decoration:none;line-height:1.5;}
+
+body.dark-mode .tt-rich{background:#1E2240;border-color:rgba(255,255,255,.12);}
+body.dark-mode .tt-rich-title{background:linear-gradient(88.54deg,#A855F7 0.1%,#D946EF 63.88%);
+  -webkit-background-clip:text;background-clip:text;}
+body.dark-mode .tt-rich-body{color:#8B8FA8;}
+body.dark-mode .tt-rich-body kbd{background:rgba(255,255,255,.08);color:#F9FAFB;}
+body.dark-mode .tt-rich a{color:#C084FC;}
+body.dark-mode .tt-plain{background:#0F1120;}
+body.dark-mode .tt-plain::after{background:#0F1120;}
 </style>
 </head>
 <body class="btis-layout">
@@ -115,7 +132,6 @@ body.dark-mode .tt-rich-body kbd{background:rgba(255,255,255,.1);color:rgba(255,
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item active" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>
@@ -135,11 +151,11 @@ body.dark-mode .tt-rich-body kbd{background:rgba(255,255,255,.1);color:rgba(255,
     <div class="ds-title-row">
     <h1 class="ds-page-title">Tooltips</h1>
     <div class="ds-title-actions">
-      <a class="ds-nav-arrow-btn" href="ds-58-toggle-group.html" title="Previous"><span class="material-icons-round">arrow_back</span></a>
+      <a class="ds-nav-arrow-btn" href="ds-57-toggle.html" title="Previous"><span class="material-icons-round">arrow_back</span></a>
       <span class="ds-nav-arrow-btn disabled"><span class="material-icons-round">arrow_forward</span></span>
     </div>
   </div>
-    <p class="ds-page-desc">Tooltips display informative text when users hover or focus on an element. Two variants — plain and rich — serve different information needs.</p>
+    <p class="ds-page-desc">Tooltips display informative text when users hover or focus on an element. Two variants — plain and rich — serve different information needs. <strong>Note:</strong> Norbielink currently ships no custom tooltip — it uses the native <code>title</code> attribute throughout. These are drawn in the product’s surface language so they fit if a styled tooltip is introduced; until then, prefer <code>title</code>.</p>
 
 <div class="ds-section" id="variants"><div class="ds-section-title">Variants</div>
 <div class="ds-preview-wrap">
@@ -151,7 +167,7 @@ body.dark-mode .tt-rich-body kbd{background:rgba(255,255,255,.1);color:rgba(255,
     <div style="display:flex;gap:120px;align-items:flex-end;flex-wrap:wrap;justify-content:center;">
       <div class="tt-wrap">
         <div class="tt-pop"><div class="tt-plain">Add to favourites</div></div>
-        <button class="btn btn-tonal" style="font-size:13px;padding:8px 16px;"><span class="material-icons-round" style="font-size:18px;">favorite_border</span>Favourite</button>
+        <button class="btn btn-outlined" style="font-size:12px;padding:6px 12px;border-radius:8px;"><span class="material-icons-round" style="font-size:18px;">favorite_border</span>Favourite</button>
         <span style="font-size:11px;color:#9CA3AF;font-weight:500;">Plain tooltip · hover to show</span>
       </div>
       <div class="tt-wrap">
@@ -160,7 +176,7 @@ body.dark-mode .tt-rich-body kbd{background:rgba(255,255,255,.1);color:rgba(255,
           <div class="tt-rich-body">Use <kbd>&#8984;K</kbd> to search anywhere.</div>
           <a href="#">Learn more</a>
         </div></div>
-        <button class="btn btn-tonal" style="font-size:13px;padding:8px 16px;"><span class="material-icons-round" style="font-size:18px;">info</span>Rich tooltip</button>
+        <button class="btn btn-outlined" style="font-size:12px;padding:6px 12px;border-radius:8px;"><span class="material-icons-round" style="font-size:18px;">info</span>Rich tooltip</button>
         <span style="font-size:11px;color:#9CA3AF;font-weight:500;">Rich tooltip · hover to show</span>
       </div>
     </div>
@@ -199,9 +215,9 @@ body.dark-mode .tt-rich-body kbd{background:rgba(255,255,255,.1);color:rgba(255,
   
     <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
-    <a class="ds-page-nav-btn prev" href="ds-58-toggle-group.html">
+    <a class="ds-page-nav-btn prev" href="ds-57-toggle.html">
       <span class="ds-page-nav-label">← Previous</span>
-      <span class="ds-page-nav-name">Toggle Group</span>
+      <span class="ds-page-nav-name">Toggle</span>
     </a>
 
     </div>

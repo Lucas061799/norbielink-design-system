@@ -4,16 +4,16 @@
 <link rel="stylesheet" href="ds-shared.css">
 <style>
 .dd-wrap{position:relative;display:inline-block;font-family:'Montserrat',sans-serif;}
-.dd-trigger{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:8px 16px;background:#fff;border:1px solid #E5E7EB;border-radius:8px;font-size:13px;font-weight:600;color:#374151;cursor:pointer;transition:border-color .15s;min-width:160px;}
+.dd-trigger{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:8px 16px;background:#fff;border:1px solid #E5E7EB;border-radius:8px;font-size:13px;font-weight:600;color:#374151;cursor:pointer;transition:border-color .15s;min-width:160px;line-height:1.5;}
 .dd-trigger:hover{border-color:#D1D5DB;}
 .dd-trigger.open{border-color:#A614C3;box-shadow:0 0 0 3px rgba(166,20,195,0.10);}
 .dd-trigger .material-icons-round{font-size:17px;color:#aaa;margin-left:auto;}
-.dd-menu{position:absolute;top:calc(100% + 6px);left:0;min-width:200px;background:#fff;border:1px solid #e8e8e8;border-radius:9px;box-shadow:0 4px 20px rgba(0,0,0,.1);padding:5px;z-index:50;}
-.dd-item{display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:13px;color:#333;border-radius:6px;cursor:pointer;font-weight:600;transition:background .12s;}
-.dd-item:hover{background:rgba(166,20,195,0.06);color:#A614C3;}
+.dd-menu{position:absolute;top:calc(100% + 6px);left:0;min-width:180px;background:#fff;border:1px solid #E5E7EB;border-radius:12px;box-shadow:0 10px 15px -3px rgba(0,0,0,.10),0 4px 6px -4px rgba(0,0,0,.10);padding:4px 0;overflow:hidden;z-index:50;}
+.dd-item{display:flex;align-items:center;gap:8px;padding:10px 14px;font-size:12px;color:#1F2937;border-radius:0;cursor:pointer;font-weight:400;transition:background .12s;line-height:1.5;}
+.dd-item:hover{background:#F9FAFB;color:#1F2937;}
 .dd-item .material-icons-round{font-size:16px;color:#aaa;}
-.dd-item.danger{color:#C0392B;}
-.dd-item.danger .material-icons-round{color:#C0392B;}
+.dd-item.danger{color:#EF4444;}
+.dd-item.danger .material-icons-round{color:#EF4444;}
 .dd-sep{height:1px;background:#f0f0f0;margin:4px 0;}
 .dd-item kbd{margin-left:auto;font-size:10px;color:#bbb;font-family:monospace;}
 .dd-dk .dd-trigger{background:transparent;border-color:rgba(255,255,255,0.08);color:rgba(255,255,255,.8);}
@@ -122,7 +122,6 @@ body.dark-mode .dd-sep{background:rgba(255,255,255,0.08);}
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>

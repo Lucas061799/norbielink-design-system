@@ -3,27 +3,40 @@
 <title>Input OTP — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.otp-wrap{display:flex;flex-direction:column;gap:12px;font-family:'Montserrat',sans-serif;width:100%;max-width:320px;}
-.otp-label{font-size:13px;font-weight:600;color:#374151;}
-.otp-fields{display:flex;gap:8px;}
-.otp-box{flex:1;min-width:0;aspect-ratio:1/1;border:1px solid #E5E7EB;border-radius:10px;text-align:center;font-size:22px;font-weight:600;color:#111827;font-family:'Montserrat',sans-serif;outline:none;background:white;transition:border .15s,background .15s;}
-.otp-box:focus{border:1px solid transparent;background:linear-gradient(white,white) padding-box,linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%) border-box;}
-.otp-box.filled{border:1px solid #E5E7EB;background:white;}
+/* ── INPUT OTP ──
+   Typography follows the product's verification screen: a 24px/700 heading
+   with the object ("Code") in the brand gradient, a 13px muted sub-line, and
+   a 12px timer. The boxes are the standard input surface at 12px radius. */
+.otp-wrap{display:flex;flex-direction:column;gap:10px;font-family:'Montserrat',sans-serif;width:100%;max-width:360px;}
+.otp-label{font-size:24px;font-weight:700;color:#1F2937;letter-spacing:-0.01em;line-height:1.25;}
+.otp-label .accent{
+  background:linear-gradient(88.54deg,#5C2ED4 0.1%,#A614C3 63.88%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
+.otp-sub{font-size:13px;color:#6B7280;margin-top:-2px;line-height:1.5;}
+.otp-sub strong{color:#1F2937;font-weight:600;}
+.otp-fields{display:flex;gap:8px;margin-top:6px;}
+.otp-box{flex:1;min-width:0;aspect-ratio:1/1;border:1px solid #E5E7EB;border-radius:12px;text-align:center;
+  font-size:22px;font-weight:600;color:#1F2937;font-family:'Montserrat',sans-serif;outline:none;background:#fff;
+  transition:border .15s,background .15s;}
+.otp-box:focus{border:1px solid transparent;
+  background:linear-gradient(#fff,#fff) padding-box,linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%) border-box;}
+.otp-box.filled{border:1px solid #E5E7EB;background:#fff;}
 .otp-sep{display:none;}
-.otp-hint{font-size:12px;color:#9CA3AF;}
-.otp-timer{font-size:12px;color:#9CA3AF;}
-.otp-timer strong{color:#374151;font-weight:600;}
-.otp-dk .otp-box{background:#27272a;border-color:rgba(255,255,255,0.08);color:rgba(255,255,255,.9);}
-.otp-dk .otp-box:focus{border-color:#C084FC;box-shadow:0 0 0 3px rgba(192,132,252,.15);}
-.otp-dk .otp-box.filled{border-color:rgba(255,255,255,0.12);background:#27272a;}
-.otp-dk .otp-sep{color:rgba(255,255,255,.2);}
-.otp-dk .otp-hint{color:rgba(255,255,255,.3);}
-body.dark-mode .otp-box{background:#27272a;border-color:rgba(255,255,255,0.12);color:rgba(255,255,255,.9);}
-body.dark-mode .otp-box:focus{border-color:#A614C3;box-shadow:0 0 0 3px rgba(166,20,195,.15);}
-body.dark-mode .otp-box.filled{border-color:rgba(255,255,255,0.12);background:#27272a;}
-body.dark-mode .otp-sep{color:rgba(255,255,255,.2);}
-body.dark-mode .otp-label{color:rgba(255,255,255,.5);}
-body.dark-mode .otp-hint{color:rgba(255,255,255,.3);}
+.otp-timer{font-size:12px;color:#6B7280;margin-top:4px;line-height:1.5;}
+.otp-timer strong{color:#1F2937;font-weight:600;}
+
+body.dark-mode .otp-label,.otp-dk .otp-label{color:#F9FAFB;}
+body.dark-mode .otp-label .accent{background:linear-gradient(88.54deg,#A855F7 0.1%,#D946EF 63.88%);
+  -webkit-background-clip:text;background-clip:text;}
+body.dark-mode .otp-sub,.otp-dk .otp-sub{color:#8B8FA8;}
+body.dark-mode .otp-sub strong{color:#F9FAFB;}
+body.dark-mode .otp-box,.otp-dk .otp-box{background:#1E2240;border-color:rgba(255,255,255,0.12);color:#F9FAFB;}
+body.dark-mode .otp-box:focus{border:1px solid transparent;
+  background:linear-gradient(#1E2240,#1E2240) padding-box,linear-gradient(90deg,#A855F7 0%,#D946EF 65%) border-box;}
+body.dark-mode .otp-box.filled{border-color:rgba(255,255,255,0.12);background:#1E2240;}
+body.dark-mode .otp-hint,.otp-dk .otp-hint{color:#8B8FA8;}
+body.dark-mode .otp-timer{color:#8B8FA8;}
+body.dark-mode .otp-timer strong{color:#F9FAFB;}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -119,7 +132,6 @@ body.dark-mode .otp-hint{color:rgba(255,255,255,.3);}
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>
@@ -153,8 +165,8 @@ body.dark-mode .otp-hint{color:rgba(255,255,255,.3);}
         </div>
         <div class="ds-preview-pane" id="prev-main" style="align-items:center;justify-content:center;">
           <div class="otp-wrap">
-            <div class="otp-label">Verify your Code</div>
-            <div style="font-size:13px;color:#9CA3AF;margin-top:-4px;">We sent a 6-digit code to <strong style="color:#374151;">l***@email.com</strong></div>
+            <div class="otp-label">Verify Your <span class="accent">Code</span></div>
+            <div class="otp-sub">We sent a 6-digit code to <strong>l***@email.com</strong></div>
             <div class="otp-fields">
               <input class="otp-box filled" maxlength="1" value="4" readonly>
               <input class="otp-box filled" maxlength="1" value="2" readonly>

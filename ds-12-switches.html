@@ -4,16 +4,20 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
-.sw { width: 52px; height: 30px; border-radius: 15px; position: relative; flex-shrink: 0; cursor: pointer; }
-.sw-thumb { position: absolute; width: 22px; height: 22px; border-radius: 50%; background: white; top: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.25); transition: transform 0.2s; }
-.sw.on .sw-thumb { transform: translateX(26px); }
-.sw.off .sw-thumb { transform: translateX(4px); }
-.sw.on-teal { background: #E8622A; }
-.sw.on-purple { background: #E8622A; }
-.sw.on-orange { background: #F97316; }
+/* ── SWITCH ──
+   Transcribed from the live Norbielink sidebar (Dark Mode / Legacy View).
+   Track 36x20, thumb 16px white at top 2px, travelling 2px -> 19px.
+   There is exactly ONE "on" colour: #E8622A. The on-teal / on-purple /
+   on-orange variants the DS used to carry do not exist in the product. */
+.sw { width: 36px; height: 20px; border-radius: 9999px; position: relative; flex-shrink: 0; cursor: pointer; transition: background .2s; }
+.sw-thumb { position: absolute; width: 16px; height: 16px; border-radius: 50%; background: #fff; top: 2px; left: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.20); transition: transform .2s; }
+.sw.on  .sw-thumb { transform: translateX(19px); }
+.sw.off .sw-thumb { transform: translateX(2px); }
+.sw.on, .sw.on-teal, .sw.on-purple, .sw.on-orange { background: #E8622A; }
 .sw.off-state { background: #D1D5DB; }
-.sw.off-dark { background: rgba(255,255,255,0.2); }
-.sw.disabled { opacity: 0.4; cursor: not-allowed; }
+.sw.off-dark  { background: rgba(255,255,255,0.20); }
+.sw.disabled  { opacity: 0.4; cursor: not-allowed; }
+body.dark-mode .sw.off-state { background: rgba(255,255,255,0.20); }
 
 .sw-rows-card { background: #fff; }
 body.dark-mode .sw-rows-card { background: #191D35; }
@@ -24,12 +28,12 @@ body.dark-mode .sw-state-tag { color: rgba(255,255,255,0.40); }
 .sw-row { display: flex; align-items: center; gap: 16px; padding: 14px 24px; border-bottom: 1px solid var(--gray-100); }
 .sw-row:last-child { border-bottom: none; }
 .sw-info { flex: 1; }
-.sw-title { font-size: 14px; font-weight: 600; color: var(--gray-800); margin-bottom: 2px; }
-.sw-desc { font-size: 12px; color: var(--gray-400); }
-.sw-state-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--gray-400); width: 80px; flex-shrink: 0; }
+.sw-title{ font-size: 13px; font-weight: 400; color: var(--gray-800); margin-bottom: 2px;line-height:1.5;}
+.sw-desc{ font-size: 12px; color: var(--gray-400);line-height:1.5;}
+.sw-state-tag{ font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--gray-400); width: 80px; flex-shrink: 0;line-height:1.5;}
 
 /* Sidebar footer demo — light/dark variants */
-.sb-foot { background:#FFFFFF; border:1px solid #E5E7EB; border-radius:14px; padding:18px; width:240px; display:flex; flex-direction:column; gap:14px; }
+.sb-foot { background:#FFFFFF; border:1px solid #E5E7EB; border-radius:12px; padding:18px; width:240px; display:flex; flex-direction:column; gap:14px; }
 .sb-foot-btn { position:relative; box-sizing:border-box; height:57.84px; border:0.876px solid #E5E7EB; border-radius:8.76px; background:#FFFFFF; }
 .sb-foot-avatar { position:absolute; left:14.9px; top:13.14px; width:31.55px; height:31.55px; border-radius:50%; background:#FFFFFF; box-shadow:0 0 0 1.75px #E5E7EB; overflow:hidden; display:flex; align-items:center; justify-content:center; }
 .sb-foot-title { font-family:'Montserrat',sans-serif; font-weight:400; font-size:14.5px; line-height:18px; color:#6B7280; }
@@ -140,7 +144,6 @@ body.dark-mode .sb-foot-label { color:rgba(255,255,255,0.7); }
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>
@@ -225,22 +228,15 @@ body.dark-mode .sb-foot-label { color:rgba(255,255,255,0.7); }
       <div class="sw-row">
         <div class="sw on on-orange"><div class="sw-thumb"></div></div>
         <div class="sw-info">
-          <div class="sw-title">Orange — Dark Mode toggle</div>
-          <div class="sw-desc">Track: #F97316 (<code>color.warning</code>) · Used exclusively for the Dark Mode toggle in the sidebar footer. The orange signals a major visual mode change.</div>
+          <div class="sw-title">On</div>
+          <div class="sw-desc">Track <code>#E8622A</code> (<code>color.switch-on</code>) · the only "on" colour in the product. Used for the Dark Mode and Legacy View toggles in the sidebar footer, and for every settings and feature toggle.</div>
         </div>
       </div>
       <div class="sw-row">
-        <div class="sw on on-teal"><div class="sw-thumb"></div></div>
+        <div class="sw off off-state"><div class="sw-thumb"></div></div>
         <div class="sw-info">
-          <div class="sw-title">Orange — General settings</div>
-          <div class="sw-desc">Track: #E8622A (<code>color.warning</code>) · Used for notification preferences, user settings, and general feature toggles.</div>
-        </div>
-      </div>
-      <div class="sw-row">
-        <div class="sw on on-purple"><div class="sw-thumb"></div></div>
-        <div class="sw-info">
-          <div class="sw-title">Orange — Feature flags</div>
-          <div class="sw-desc">Track: #E8622A (<code>color.warning</code>) · Used for beta features, ProSuite unlocks, and admin-level feature toggles.</div>
+          <div class="sw-title">Off</div>
+          <div class="sw-desc">Track <code>#D1D5DB</code> · <code>rgba(255,255,255,0.20)</code> in dark mode. The thumb stays white in every state.</div>
         </div>
       </div>
     </div>
@@ -292,17 +288,15 @@ body.dark-mode .sb-foot-label { color:rgba(255,255,255,0.7); }
       <table class="ds-table">
         <thead><tr><th>Property</th><th>Value</th></tr></thead>
         <tbody>
-          <tr><td>Track width</td><td>52px</td></tr>
-          <tr><td>Track height</td><td>30px</td></tr>
-          <tr><td>Track radius</td><td>15px (shape.full)</td></tr>
-          <tr><td>Thumb size</td><td>22×22px circle</td></tr>
+          <tr><td>Track width</td><td>36px</td></tr>
+          <tr><td>Track height</td><td>20px</td></tr>
+          <tr><td>Track radius</td><td><code>9999px</code></td></tr>
+          <tr><td>Thumb size</td><td>16×16px circle, top 2px</td></tr>
           <tr><td>Thumb color</td><td>white always</td></tr>
-          <tr><td>Thumb shadow</td><td><code>0 1px 4px rgba(0,0,0,.25)</code></td></tr>
-          <tr><td>On position</td><td>Thumb at right: translateX(26px)</td></tr>
-          <tr><td>Off position</td><td>Thumb at left: translateX(4px)</td></tr>
-          <tr><td>Track on (Dark Mode)</td><td>#F97316 (warning)</td></tr>
-          <tr><td>Track on (General)</td><td>#E8622A (warning/orange)</td></tr>
-          <tr><td>Track on (Feature)</td><td>#E8622A (warning/orange)</td></tr>
+          <tr><td>Thumb shadow</td><td><code>0 1px 3px rgba(0,0,0,.20)</code></td></tr>
+          <tr><td>On position</td><td>Thumb at <code>translateX(19px)</code></td></tr>
+          <tr><td>Off position</td><td>Thumb at <code>translateX(2px)</code></td></tr>
+          <tr><td>Track on</td><td><code>#E8622A</code> — the only on colour</td></tr>
           <tr><td>Track off (light)</td><td>#D1D5DB (gray-300)</td></tr>
           <tr><td>Track off (dark)</td><td>rgba(white, 20%)</td></tr>
         </tbody>
@@ -323,7 +317,6 @@ body.dark-mode .sb-foot-label { color:rgba(255,255,255,0.7); }
     </a>
     </div>
 
-    </div>
   </div>
 </main>
 </div>
@@ -332,7 +325,7 @@ body.dark-mode .sb-foot-label { color:rgba(255,255,255,0.7); }
   <div class="ds-toc-title">In this article</div>
   <a class="ds-toc-item active" href="#states">States</a>
   <a class="ds-toc-item" href="#color-variants">Color variants</a>
-  <a class="ds-toc-item" href="#in-context">In context</a>
+  <a class="ds-toc-item" href="#in-context-sidebar-footer">In context</a>
   <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 

@@ -4,15 +4,33 @@
    ═══════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Round');
-/* Material Symbols Outlined — weight 300 (thin/light style) */
+/* Material Symbols Outlined — the ONLY icon font.
+   Norbielink's icon language is stroked outlines: a DOM census of the live app
+   found 0 elements using a filled icon font and 72 inline SVGs, 63 of them
+   stroked. The filled "Material Icons Round" font the DS used to load is gone;
+   .material-icons-round is remapped onto Symbols with FILL 0 below so the
+   ~1,010 existing call sites keep working and all render as outlines. */
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
-/* Usage: <span class="material-symbols-outlined ms-300">icon_name</span>
-   Weight axis: 300 = thin/light. Change 'wght' value to 100–700 as needed. */
-.material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+.material-symbols-outlined,
+.material-icons-round {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
 }
+/* wght 400 matches the 2px stroke Norbielink draws its inline SVG icons at. */
+.material-icons-round      { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
 
 /* ─── Reset & Base ─── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,40 +50,63 @@
   --primary-gradient: linear-gradient(90deg, #5C2ED4 0%, #A614C3 65%);
   --primary-gradient-dark: radial-gradient(171.32% 99.33% at 33.13% -9%, #282550 0%, #191735 55.82%, rgba(0,0,0,0.3) 74%, rgba(0,0,0,0) 100%), linear-gradient(88.34deg, #5C2ED4 0.11%, #A614C3 63.8%);
 
-  /* ── TEAL — Accent only ── */
-  --teal-50:  #E6F9F7;
-  --teal-100: #C2EDE8;
-  --teal-200: #9AE0D9;
-  --teal-300: #6FD2C9;
-  --teal-400: #4ECDC4;
-  --teal-500: #4ECDC4;
-  --teal-600: #2D9B8A;
-  --teal-700: #74C3B7;
-  --teal-800: #007D6E;
-  --teal-900: #005F54;
+  /* ── TEAL — Accent ──
+     The product uses two stops. #4ECDC4 appears once, as the dark-mode link
+     colour; it is NOT the teal accent, which the DS used to assume. */
+  --teal-50:  #E8F7F3;   /* successBg (light) */
+  --teal-400: #73C9B7;   /* teal / success — Active, Approved, avatars */
+  --teal-700: #74C3B7;   /* Upcoming Renewal(s) */
+  --teal-link-dark: #4ECDC4;
 
-  /* ── NEUTRALS (gray with subtle green tint) ── */
-  --gray-50:  #F6F8F7;
-  --gray-100: #EEF2F0;
-  --gray-200: #DCE4E1;
-  --gray-300: #C1CECC;
-  --gray-400: #9AACAA;
-  --gray-500: #728886;
-  --gray-600: #536563;
-  --gray-700: #3A4F4D;
-  --gray-800: #253835;
-  --gray-900: #141F1E;
+  /* ── NEUTRALS ──
+     The product's theme object defines these directly; the DS's old
+     green-tinted ramp (#DCE4E1, #9AACAA, #3A4F4D …) has no source in
+     Norbielink and read visibly warmer than the app. */
+  --gray-50:  #F9FAFB;   /* hoverBg, chipBg, raised rows */
+  --gray-100: #F3F4F6;   /* borderSoft, recessed track */
+  --gray-200: #E5E7EB;   /* border — the default hairline */
+  --gray-300: #D1D5DB;   /* borderStrong, switch off, unchecked control */
+  --gray-400: #9CA3AF;   /* sub / textDim, Inactive + Expired status */
+  --gray-500: #6B7280;   /* muted — the workhorse secondary text */
+  --gray-600: #4B5563;
+  --gray-700: #374151;
+  --gray-800: #1F2937;   /* text — primary body colour */
+  --gray-900: #111827;
 
-  /* ── SEMANTIC ── */
-  --success: #1D9E6B;
-  --warning: #E6A817;
-  --error:   #C0392B;
-  --info:    #2980B9;
+  /* ── PRODUCT TOKEN NAMES ──
+     The app's theme object names these itself. Use its names, not ours:
+     #A614C3 is `razz`, and #73C9B7 is `green` in the theme even though it
+     reads teal. Recorded so DS and product vocabulary stay the same. */
+  --razz:          #A614C3;
+  --razz-tint-bg:  rgba(168,85,247,0.08);
+  --soft-bg:       rgba(166,20,195,0.08);
+  --soft-border:   rgba(166,20,195,0.22);
+  --green:         #73C9B7;   /* the theme's name for the teal */
+  --green-bg:      rgba(115,201,183,0.14);
+  --green-border:  rgba(115,201,183,0.30);
+  --amber:         #B45309;   /* amber TEXT; #F59E0B is the fill */
+  --amber-bg:      rgba(245,158,11,0.10);
+  --body-text:     #4B5563;
+  --soft-divider:  #F3F4F6;
+  --helper-bg:     #F9FAFB;
+
+  /* ── SEMANTIC ──
+     Values transcribed from the live Norbielink status map (component `eP`).
+     Positive state is TEAL, not green — there is no green in the product's
+     status system, and no info state at all. `--neutral` covers Inactive and
+     Expired, which the product renders as plain gray rather than a colour. */
+  --success: #73C9B7;   /* Active, Approved          · fill rgba(115,201,183,0.10) */
+  --renewal: #74C3B7;   /* Upcoming Renewal(s)       · fill rgba(116,195,183,0.10) */
+  --warning: #F59E0B;   /* Pending, Action Required  · fill rgba(245,158,11,0.08)  */
+  --error:   #EF4444;   /* Declined, Cancelled, destructive actions, delete menu items */
+  --invalid: #DC2626;   /* form-field validation only */
+  --neutral: #9CA3AF;   /* Inactive, Expired         · fill #F3F4F6 */
+  --switch-on: #E8622A; /* the single switch "on" colour */
 
   /* ── DARK SURFACES ── */
-  --dark-bg:      #0F1120;
-  --dark-surface: #191D35;
-  --dark-raised:  #27272a;
+  --dark-bg:      #0F1120;   /* bg */
+  --dark-surface: #191D35;   /* cardBg */
+  --dark-raised:  #1E2240;   /* cardBg in the auth / agency surfaces */
 
   /* ── LAYOUT ── */
   --nav-width:    88px;
@@ -73,14 +114,21 @@
   --toc-width:    220px;
   --content-max:  900px;
 
-  /* ── PAGE / SURFACE ── */
-  --page-bg:     #FFFFFF;
+  /* ── PAGE / SURFACE ── (theme object, verbatim) */
+  --page-bg:     #FFFFFF;   /* bg */
+  --card-bg:     #FFFFFF;   /* cardBg */
   --nav-bg:      #FFFFFF;
+  --hover-bg:    #F9FAFB;   /* hoverBg */
+  --muted-bg:    #FAFAFB;   /* mutedBg */
+  --input-bg:    #FFFFFF;   /* inputBg */
+  --border:      #E5E7EB;   /* border */
+  --border-soft: #F3F4F6;   /* borderSoft */
+  --border-strong:#D1D5DB;  /* borderStrong */
   --surface-container-lowest: #FFFFFF;
-  --surface-container-low:    #F0F4F3;
-  --surface-container:        #EAF0EE;
-  --surface-container-high:   #E1E9E7;
-  --surface-container-highest:#D8E4E2;
+  --surface-container-low:    #F9FAFB;
+  --surface-container:        #F3F4F6;
+  --surface-container-high:   #E5E7EB;
+  --surface-container-highest:#D1D5DB;
 
   /* ── TYPOGRAPHY ── */
   --font: 'Montserrat', system-ui, sans-serif;
@@ -407,21 +455,152 @@ body { background: var(--page-bg); overflow-x: hidden; }
   flex: 1; display: flex; flex-direction: column;
   justify-content: flex-end; padding: 8px 10px;
 }
-.m3-swatch-name { font-size: 10px; font-weight: 700; line-height: 1.2; }
-.m3-swatch-hex { font-size: 9px; font-weight: 400; opacity: 0.8; font-family: monospace; }
+.m3-swatch-name { font-size: 10px; font-weight: 600; line-height: 1.5; }
+.m3-swatch-hex { font-size: 9px; font-weight: 400; line-height: 1.5; opacity: 0.85; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 
-/* ─── BADGE ─── */
-.badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 3px 10px; border-radius: 20px;
-  font-size: 11px; font-weight: 700; letter-spacing: 0.03em;
+/* ─── BADGE ───
+   Transcribed from the live Norbielink app (Marketplace, Agencies, sidebar),
+   not from any line-of-business app. Norbielink has no good/warn/stop roles:
+   its tonal badges are brand (purple gradient) and teal, and the solid
+   gradient is reserved for NEW and for the active filter.
+   Weight is 600 and letter-spacing is normal — 700/0.03em was DS invention. */
+.badge{
+  display: inline-flex; align-items: center; justify-content: center;
+  width: fit-content; gap: 6px;
+  padding: 3px 10px; border-radius: 9999px;
+  font-size: 11px; font-weight: 600; letter-spacing: normal;
+  white-space: nowrap;line-height:16px;}
+
+/* PRO — membership tier. 10px, tighter padding, 1px teal hairline. */
+.badge-pro{
+  padding: 1px 6px; font-size: 10px;
+  background: transparent; border: 1px solid #74C3B7; color: #74C3B7;line-height:16px;}
+body.dark-mode .badge-pro {
+  border: 1px solid transparent; color: #C084FC;
+  background: linear-gradient(#1E2240, #1E2240) padding-box,
+              linear-gradient(to right, #5C2ED4, #A614C3) border-box;
 }
-.badge-pro       { border: 1.5px solid #74C3B7; color: #74C3B7; background: transparent; }
-.badge-success   { background: rgba(29,158,107,0.12); color: #1D9E6B; }
-.badge-warning   { background: rgba(230,168,23,0.12); color: #B87A00; }
-.badge-error     { background: rgba(192,57,43,0.12); color: #C0392B; }
-.badge-neutral   { background: var(--gray-100); color: var(--gray-500); }
-.badge-info      { background: rgba(41,128,185,0.12); color: #2980B9; }
+
+/* NEW — flag on marketplace tiles. The only solid-gradient badge. */
+.badge-new{
+  padding: 3px 8px; font-size: 9px; font-weight: 700; letter-spacing: 0.9px;
+  background: linear-gradient(90deg, #5C2ED4 0%, #A614C3 65%); color: #FFFFFF;line-height:16px;}
+
+/* Brand — the primary tonal state (e.g. Appointed).
+   The pill carries a 5% gradient wash; the label is gradient text, so it
+   needs the inner .badge-text span. */
+.badge-brand {
+  background: linear-gradient(88.54deg, rgba(92,46,212,0.05) 0.1%, rgba(166,20,195,0.05) 63.88%);
+  color: #5C2ED4;
+}
+.badge-brand .badge-text {
+  background: linear-gradient(88.54deg, #5C2ED4 0.1%, #A614C3 63.88%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+body.dark-mode .badge-brand {
+  background: linear-gradient(88.54deg, rgba(92,46,212,0.20) 0.1%, rgba(166,20,195,0.20) 63.88%);
+}
+body.dark-mode .badge-brand .badge-text {
+  background: linear-gradient(88.54deg, #A855F7 0.1%, #D946EF 63.88%);
+  -webkit-background-clip: text; background-clip: text;
+}
+
+/* Teal — the secondary tonal state (e.g. Unappointed). Flat, not gradient. */
+.badge-teal           { background: rgba(115,201,183,0.10); color: #73C9B7; }
+body.dark-mode .badge-teal { background: rgba(115,201,183,0.22); color: #73C9B7; }
+
+/* Filter pills — active is the solid gradient, inactive is a solid hairline.
+   Not a dashed outline: that belongs to the LOB apps, not to Norbielink. */
+.badge-filter-on {
+  padding: 4px 10px;
+  background: linear-gradient(90deg, #5C2ED4 0%, #A614C3 100%);
+  color: #FFFFFF; border: 1px solid transparent;
+}
+.badge-filter-off {
+  padding: 4px 10px;
+  background: transparent; border: 1px solid #E5E7EB; color: #6B7280;
+}
+body.dark-mode .badge-filter-off {
+  background: #1E2240; border-color: rgba(255,255,255,0.12); color: #8B8FA8;
+}
+
+/* AI Assistant — system capability mark beside the Appetite Assistant nav item. */
+.badge-ai{
+  font-size: 10px;
+  background: rgba(166,20,195,0.08); border: 1px solid rgba(166,20,195,0.40); color: #A614C3;line-height:16px;}
+body.dark-mode .badge-ai {
+  background: rgba(232,121,249,0.16); border-color: rgba(232,121,249,0.40); color: #F0ABFC;
+}
+
+/* ─── STATUS PILL (tonal) ───
+   The SECOND status component, from the live app's `eP`. Unlike .badge-status
+   (neutral chip + coloured dot, used in the Quotes table) this one tints the
+   whole pill. Both ship; pick by surface, not by taste.
+   Values are the product's status map verbatim. */
+.badge-status-pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: fit-content; padding: 3px 12px; border-radius: 9999px;
+  font-size: 11px; font-weight: 600; line-height: 16px; white-space: nowrap;
+}
+.badge-sp-active   { color: #73C9B7; background: rgba(115,201,183,0.10); }  /* Active, Approved */
+.badge-sp-renewal  { color: #74C3B7; background: rgba(116,195,183,0.10); }  /* Upcoming Renewal(s) */
+.badge-sp-pending  { color: #F59E0B; background: rgba(245,158,11,0.08);  }  /* Pending, Action Req. */
+.badge-sp-declined { color: #EF4444; background: rgba(239,68,68,0.08);   }  /* Declined, Cancelled */
+.badge-sp-neutral  { color: #9CA3AF; background: #F3F4F6; }                 /* Inactive, Expired */
+body.dark-mode .badge-sp-neutral { color: #8B8FA8; background: rgba(255,255,255,0.06); }
+/* Prospect is the only status drawn as the brand gradient pill. */
+.badge-sp-prospect { padding: 3px 10px; background: linear-gradient(88.54deg, rgba(92,46,212,0.05) 0.1%, rgba(166,20,195,0.05) 63.88%); }
+.badge-sp-prospect .badge-text {
+  background: linear-gradient(88.54deg, #5C2ED4 0.1%, #A614C3 63.88%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+body.dark-mode .badge-sp-prospect .badge-text {
+  background: linear-gradient(88.54deg, #A855F7 0.1%, #D946EF 63.88%);
+  -webkit-background-clip: text; background-clip: text;
+}
+
+/* ─── STATUS CHIP ───
+   The Quotes / Policies table status, transcribed from the live app.
+   Not a badge pill: 6px radius, weight 500, and the chip itself is always
+   neutral — only the 6px dot carries the state. Norbielink uses three dot
+   colours in total: teal (done), magenta (in flight), gray (idle).
+   There is no red, amber or green anywhere in the status system. */
+.badge-status{
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 8px; border-radius: 6px;
+  font-size: 11px; font-weight: 500; letter-spacing: normal;
+  white-space: nowrap;
+  background: #F9FAFB; color: #1F2937; border: 1px solid #F3F4F6;line-height:1.5;}
+body.dark-mode .badge-status {
+  background: rgba(255,255,255,0.05); color: #F9FAFB; border-color: rgba(255,255,255,0.04);
+}
+.badge-dot { width: 6px; height: 6px; border-radius: 9999px; flex-shrink: 0; }
+.badge-dot-done   { background: #73C9B7; }
+.badge-dot-active { background: #A614C3; }
+.badge-dot-idle   { background: #9CA3AF; }
+
+/* ─── INDICATOR ICON ───
+   The 18px round icon that trails a cell value (Agencies → Last Login).
+   It is not a badge: no label, no padding, meaning carried by a tooltip.
+   The "new" mark is gradient-filled, so its two gradients live in a single
+   inline <svg><defs> block on the page and are swapped here by theme. */
+.badge-indicator {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; border-radius: 9999px;
+  flex-shrink: 0; vertical-align: middle;
+}
+.badge-indicator svg { display: block; }
+
+.badge-indicator-new      { background: rgba(166,20,195,0.10); }
+.badge-indicator-new path { fill: url(#ds-ind-new-light); }
+body.dark-mode .badge-indicator-new      { background: rgba(168,85,247,0.32); }
+body.dark-mode .badge-indicator-new path { fill: url(#ds-ind-new-dark); }
+
+.badge-indicator-dormant      { background: rgba(100,116,139,0.12); color: #64748B; }
+.badge-indicator-dormant path { fill: currentColor; }
+body.dark-mode .badge-indicator-dormant { background: rgba(148,163,184,0.30); color: #94A3B8; }
 
 /* ─── BUTTONS ─── */
 .btn {
@@ -576,26 +755,48 @@ body.dark-mode .ds-light-only { display: none !important; }
 /* ── Dark mode base — redefine ALL CSS vars so inline styles auto-adapt ── */
 body.dark-mode {
   background: #0F1120;
-  color: rgba(255,255,255,0.85);
+  color: #F9FAFB;
 
-  /* Gray scale → neutral whites */
-  --gray-50:  #191D35;
-  --gray-100: #27272a;
-  --gray-200: rgba(255,255,255,0.08);
-  --gray-300: rgba(255,255,255,0.12);
-  --gray-400: rgba(255,255,255,0.35);
-  --gray-500: rgba(255,255,255,0.50);
-  --gray-600: rgba(255,255,255,0.60);
-  --gray-700: rgba(255,255,255,0.70);
-  --gray-800: rgba(255,255,255,0.85);
-  --gray-900: rgba(255,255,255,0.95);
+  /* Neutrals — the dark half of the product's theme object. */
+  --gray-50:  rgba(255,255,255,0.04);  /* hoverBg */
+  --gray-100: rgba(255,255,255,0.05);  /* chipBg, inputBg */
+  --gray-200: rgba(255,255,255,0.12);  /* border */
+  --gray-300: rgba(255,255,255,0.18);  /* borderStrong */
+  --gray-400: #6B7280;                 /* sub / textDim */
+  --gray-500: #8B8FA8;                 /* muted */
+  --gray-600: #9CA3AF;
+  --gray-700: #D1D5DB;
+  --gray-800: #F9FAFB;                 /* text */
+  --gray-900: #FFFFFF;
 
-  /* Surface tokens */
+  --page-bg:      #0F1120;
+  --card-bg:      #191D35;
+  --nav-bg:       #191D35;
+  --hover-bg:     rgba(255,255,255,0.04);
+  --muted-bg:     rgba(255,255,255,0.03);
+  --input-bg:     rgba(255,255,255,0.05);
+  --border:       rgba(255,255,255,0.12);
+  --border-soft:  rgba(255,255,255,0.04);
+  --border-strong:rgba(255,255,255,0.18);
+
   --surface-container-lowest: #0F1120;
   --surface-container-low:    #191D35;
-  --surface-container:        #27272a;
-  --surface-container-high:   #3f3f46;
-  --surface-container-highest:#52525b;
+  --surface-container:        #1E2240;
+  --surface-container-high:   rgba(255,255,255,0.05);
+  --surface-container-highest:rgba(255,255,255,0.08);
+
+  /* Product token names — dark half. */
+  --razz-tint-bg: rgba(168,85,247,0.14);
+  --soft-bg:      rgba(166,20,195,0.14);
+  --soft-border:  rgba(166,20,195,0.30);
+  --green:        #8FDBC9;
+  --green-bg:     rgba(115,201,183,0.18);
+  --green-border: rgba(115,201,183,0.35);
+  --amber-bg:     rgba(245,158,11,0.15);
+  --body-text:    #C5CAD8;
+  --soft-divider: rgba(255,255,255,0.05);
+  --helper-bg:    rgba(255,255,255,0.03);
+  --teal-50:      rgba(115,201,183,0.15);
 }
 /* ── Override hardcoded white/light backgrounds on ALL component demos ── */
 body.dark-mode .pair-card,
@@ -619,8 +820,6 @@ body.dark-mode .acc-wrap,
 body.dark-mode .coll-trigger,
 /* Alert Dialog */
 body.dark-mode .adlg,
-/* Button Group */
-body.dark-mode .btn-grp-item,
 /* Calendar */
 body.dark-mode .cal,
 /* Combobox */
@@ -659,7 +858,6 @@ body.dark-mode .tog-group {
   color: rgba(255,255,255,0.85) !important;
 }
 /* Nested items inside demo containers */
-body.dark-mode .btn-grp-item { border-right-color: rgba(255,255,255,0.08) !important; }
 body.dark-mode .cmb-item:hover,
 body.dark-mode .dd-item:hover,
 body.dark-mode .ctx-item:hover,
@@ -703,21 +901,13 @@ body.dark-mode .coll-trigger { color: rgba(255,255,255,0.85) !important; border-
 body.dark-mode .coll-trigger .material-icons-round { color: rgba(255,255,255,0.32) !important; }
 body.dark-mode .coll.open .coll-trigger .material-icons-round { color: #C084FC !important; }
 body.dark-mode .coll-text { color: rgba(255,255,255,0.50) !important; }
-/* Alert component dark mode — increase background opacity + brighten warning */
-body.dark-mode .alert-info    { background: rgba(41,128,185,0.15) !important; }
-body.dark-mode .alert-success { background: rgba(29,158,107,0.15) !important; }
-body.dark-mode .alert-warning { background: rgba(230,168,23,0.15) !important; }
-body.dark-mode .alert-error   { background: rgba(192,57,43,0.15) !important; }
-body.dark-mode .alert-warning .alert-icon,
-body.dark-mode .alert-warning .alert-title,
-body.dark-mode .alert-warning .alert-desc { color: #E6A817 !important; }
 /* Alert Dialog dark mode */
 body.dark-mode .adlg-overlay { background: transparent !important; }
 body.dark-mode .adlg-title { color: rgba(255,255,255,0.92) !important; }
 body.dark-mode .adlg-desc { color: rgba(255,255,255,0.55) !important; }
 body.dark-mode .adlg-btn.cancel { background: rgba(255,255,255,0.08) !important; color: rgba(255,255,255,0.72) !important; }
 body.dark-mode .adlg-btn.confirm { background: rgba(255,255,255,0.12) !important; color: rgba(255,255,255,0.95) !important; }
-body.dark-mode .adlg-btn.danger { background: #c0392b !important; color: #fff !important; }
+body.dark-mode .adlg-btn.danger { background: #EF4444 !important; color: #fff !important; }
 /* Accordion header — broader rule covers flush variant (not inside .acc-wrap) */
 body.dark-mode .acc-header { color: rgba(255,255,255,0.85) !important; }
 body.dark-mode .acc-wrap .acc-header { color: rgba(255,255,255,0.85) !important; }
@@ -729,8 +919,6 @@ body.dark-mode .ds-content [style*="border:1px solid #EEF2F0"] { border-color: r
 /* Context menu right-click area dark mode */
 body.dark-mode .ctx-area { background: #1c1c1f !important; border-color: rgba(255,255,255,0.1) !important; color: rgba(255,255,255,0.25) !important; }
 /* Button Group outer border dark mode */
-body.dark-mode .btn-grp { border-color: rgba(255,255,255,0.08) !important; }
-body.dark-mode .btn-grp-item.active { background: linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%) !important; color: #fff !important; border-right-color: transparent !important; }
 body.dark-mode .acc-wrap .acc-item   { border-bottom-color: rgba(255,255,255,0.08) !important; }
 body.dark-mode .cal .cal-day:hover   { background: rgba(255,255,255,0.06) !important; }
 /* Inputs, anatomy, annotations */
@@ -1073,7 +1261,7 @@ body.dark-mode .ds-code-block .c-num     { color: #fb923c; }
 .ds-copy-btn .material-icons-round { font-size: 13px; }
 body.dark-mode .ds-copy-btn { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.6); }
 body.dark-mode .ds-copy-btn:hover { background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.9); }
-body.dark-mode .ds-copy-btn.copied { background: rgba(78,205,196,0.15); color: #4ECDC4; border-color: rgba(78,205,196,0.3); }
+body.dark-mode .ds-copy-btn.copied { background: rgba(115,201,183,0.15); color: #73C9B7; border-color: rgba(115,201,183,0.3); }
 
 /* ── Package manager install tabs ── */
 .ds-install-wrap {

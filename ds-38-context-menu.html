@@ -4,20 +4,20 @@
 <link rel="stylesheet" href="ds-shared.css">
 <style>
 .ctx-area{width:100%;max-width:400px;min-height:340px;background:#f7f7f7;border:2px dashed #E5E7EB;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:13px;color:#9CA3AF;cursor:context-menu;position:relative;}
-.ctx-menu{position:absolute;top:40px;left:50%;transform:translateX(-20%);background:#fff;border:1px solid #E5E7EB;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.08);padding:4px 0;min-width:200px;z-index:10;font-family:'Montserrat',sans-serif;}
-.ctx-item{display:flex;align-items:center;gap:10px;padding:9px 14px;font-size:13px;color:#374151;cursor:pointer;font-weight:500;font-family:'Montserrat',sans-serif;transition:background .12s;}
-.ctx-item:hover{background:rgba(166,20,195,0.06);color:#A614C3;}
-.ctx-item:hover .material-icons-round{color:#A614C3;}
+.ctx-menu{position:absolute;top:40px;left:50%;transform:translateX(-20%);background:#fff;border:1px solid #E5E7EB;border-radius:12px;box-shadow:0 10px 15px -3px rgba(0,0,0,.10),0 4px 6px -4px rgba(0,0,0,.10);padding:4px 0;min-width:180px;overflow:hidden;z-index:10;font-family:'Montserrat',sans-serif;}
+.ctx-item{display:flex;align-items:center;gap:10px;padding:10px 14px;font-size:12px;color:#1F2937;cursor:pointer;font-weight:400;font-family:'Montserrat',sans-serif;transition:background .12s;line-height:1.5;}
+.ctx-item:hover{background:#F9FAFB;color:#1F2937;}
+.ctx-item:hover .material-icons-round{color:#6B7280;}
 .ctx-item .material-icons-round{font-size:17px;color:#6B7280;flex-shrink:0;}
 .ctx-item kbd{margin-left:auto;font-size:11px;color:#9CA3AF;font-family:monospace;font-weight:400;}
 .ctx-sep{height:1px;background:#E5E7EB;margin:4px 0;}
 .ctx-item.danger{color:#EF4444;}
 .ctx-item.danger .material-icons-round{color:#EF4444;}
-.ctx-item.danger:hover{background:rgba(239,68,68,0.06);color:#EF4444;}
+.ctx-item.danger:hover{background:#F9FAFB;color:#EF4444;}
 .ctx-dk{background:#1e1e28;border-color:rgba(255,255,255,0.08);}
 .ctx-dk .ctx-item{color:rgba(255,255,255,.75);}
 .ctx-dk .ctx-item:hover{background:rgba(166,20,195,0.12);color:#A614C3;}
-.ctx-dk .ctx-item:hover .material-icons-round{color:#A614C3;}
+.ctx-dk .ctx-item:hover .material-icons-round{color:#6B7280;}
 .ctx-dk .ctx-item .material-icons-round{color:rgba(255,255,255,.3);}
 .ctx-dk .ctx-sep{background:rgba(255,255,255,0.08);}
 </style>
@@ -115,7 +115,6 @@
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>

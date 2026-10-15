@@ -4,17 +4,12 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
-.shape-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 24px; }
-.shape-item { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-.shape-box { width: 80px; height: 80px; background: rgba(166,20,195,0.06); border: 2px solid rgba(166,20,195,0.2); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #A614C3; }
-.shape-name { font-size: 12px; font-weight: 700; color: var(--gray-700); text-align: center; }
-.shape-value { font-size: 11px; font-family: monospace; color: var(--gray-400); text-align: center; }
-.shape-token { font-size: 10px; color: #A614C3; text-align: center; background: rgba(166,20,195,0.06); padding: 2px 8px; border-radius: 20px; }
 
-.usage-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.usage-item { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-.usage-label { font-size: 12px; font-weight: 600; color: var(--gray-600); text-align: center; }
-.usage-sub { font-size: 11px; color: var(--gray-400); text-align: center; }
+.shape-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 20px; text-align: left; }
+.shape-card { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+.shape-box { height: 64px; background: var(--surface-container); border: 1px solid var(--gray-200); margin-bottom: 4px; }
+.shape-name { font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--gray-800); }
+.shape-use { font-size: 12px; line-height: 1.5; color: var(--gray-500); }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -109,7 +104,6 @@
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>
@@ -127,127 +121,70 @@
       <a class="ds-nav-arrow-btn" href="ds-05-spacing.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-  <p class="ds-page-desc">Shape scales define the corner radius of surfaces and components. Norbielink uses a rounded, approachable aesthetic — with pill shapes for interactive elements and progressively larger radii for containers.</p>
+  <p class="ds-page-desc">Eight radii, and nothing between them. Every corner in the product is one of these values —
+  there is no <code>20px</code>, no fractional radius, and no continuous ramp.</p>
 
-  <!-- HERO -->
-  <div class="ds-example" style="padding: 56px 48px; gap: 32px; align-items: flex-end; ">
-    <div class="shape-grid" style="width:100%;">
-      <div class="shape-item">
-        <div class="shape-box" style="border-radius: 0;"></div>
-        <div class="shape-name">None</div>
-        <div class="shape-value">0px</div>
-        <div class="shape-token">shape.none</div>
-      </div>
-      <div class="shape-item">
-        <div class="shape-box" style="border-radius: 4px;"></div>
-        <div class="shape-name">Extra Small</div>
-        <div class="shape-value">4px</div>
-        <div class="shape-token">shape.xs</div>
-      </div>
-      <div class="shape-item">
-        <div class="shape-box" style="border-radius: 8px;"></div>
-        <div class="shape-name">Small</div>
-        <div class="shape-value">8px</div>
-        <div class="shape-token">shape.sm</div>
-      </div>
-      <div class="shape-item">
-        <div class="shape-box" style="border-radius: 12px;"></div>
-        <div class="shape-name">Medium</div>
-        <div class="shape-value">12px</div>
-        <div class="shape-token">shape.md</div>
-      </div>
-      <div class="shape-item">
-        <div class="shape-box" style="border-radius: 16px;"></div>
-        <div class="shape-name">Large</div>
-        <div class="shape-value">16px</div>
-        <div class="shape-token">shape.lg</div>
-      </div>
-      <div class="shape-item">
-        <div class="shape-box" style="border-radius: 9999px; width:120px;"></div>
-        <div class="shape-name">Full (Pill)</div>
-        <div class="shape-value">9999px</div>
-        <div class="shape-token">shape.full</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ds-divider"></div>
-
-  <!-- TOKEN TABLE -->
   <div class="ds-section" id="shape-tokens">
-    <h2 class="ds-section-title">Shape tokens</h2>
-    <p class="ds-section-desc">Always reference tokens — never hard-code raw radius values in product code.</p>
-    <div class="ds-table-wrap">
-      <table class="ds-table">
-        <thead><tr><th>Token</th><th>Value</th><th>Used for</th></tr></thead>
-        <tbody>
-          <tr><td><code>shape.none</code></td><td>0px</td><td>Table rows, flat surfaces (no rounding)</td></tr>
-          <tr><td><code>shape.xs</code></td><td>4px</td><td>Sort icons, small inline chips</td></tr>
-          <tr><td><code>shape.sm</code></td><td>8px</td><td>Buttons (medium/small), input fields, dropdowns</td></tr>
-          <tr><td><code>shape.md</code></td><td>12px</td><td>Marketplace tiles, color swatches, avatar images</td></tr>
-          <tr><td><code>shape.lg</code></td><td>16px</td><td>Cards, modals, feature cards, example containers</td></tr>
-          <tr><td><code>shape.xl</code></td><td>24px</td><td>Large containers, hero sections</td></tr>
-          <tr><td><code>shape.full</code></td><td>9999px</td><td>Buttons (primary large), nav items (active pill), badges, search bar, avatar circles</td></tr>
-        </tbody>
-      </table>
+    <h2 class="ds-section-title">Scale</h2>
+    <div class="shape-grid">
+      <div class="shape-card">
+        <div class="shape-box" style="border-radius:4px;"></div>
+        <div class="shape-name"><code>4px</code></div>
+        <div class="shape-use">Checkbox</div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-box" style="border-radius:6px;"></div>
+        <div class="shape-name"><code>6px</code></div>
+        <div class="shape-use">Status chip · segmented-control segment</div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-box" style="border-radius:8px;"></div>
+        <div class="shape-name"><code>8px</code></div>
+        <div class="shape-use">Secondary button · toolbar button · filter track · alert action · toast pill</div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-box" style="border-radius:9px;"></div>
+        <div class="shape-name"><code>9px</code></div>
+        <div class="shape-use">Toast icon disc — the one odd value, and it is deliberate</div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-box" style="border-radius:10px;"></div>
+        <div class="shape-name"><code>10px</code></div>
+        <div class="shape-use">Primary button · input</div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-box" style="border-radius:12px;"></div>
+        <div class="shape-name"><code>12px</code></div>
+        <div class="shape-use">Card · alert banner · menu · toast · KPI tile</div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-box" style="border-radius:16px;"></div>
+        <div class="shape-name"><code>16px</code></div>
+        <div class="shape-use">Dialog · large panel</div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-box" style="border-radius:9999px;"></div>
+        <div class="shape-name"><code>9999px</code></div>
+        <div class="shape-use">Badge · avatar · dot · switch track · filter pill</div>
+      </div>
     </div>
   </div>
 
   <div class="ds-divider"></div>
 
-  <!-- USAGE IN CONTEXT -->
   <div class="ds-section" id="shape-in-context">
-    <h2 class="ds-section-title">Shape in context</h2>
-    <p class="ds-section-desc">How each shape scale appears in real components.</p>
-
-    <div class="ds-example" style="gap: 32px; flex-wrap: wrap;">
-      <!-- Pill - Button -->
-      <div class="usage-item">
-        <button style="background:linear-gradient(135deg,#7B2FBE,#A614C3);color:white;padding:12px 28px;border-radius:9999px;border:none;font-family:Montserrat,sans-serif;font-size:14px;font-weight:600;">+ Start a Quote</button>
-        <div class="usage-label">Primary Button</div>
-        <div class="usage-sub">shape.full (pill)</div>
-      </div>
-      <!-- LG - Card -->
-      <div class="usage-item">
-        <div style="background:white;border-radius:16px;padding:16px 20px;width:140px;box-shadow:0 1px 3px rgba(0,0,0,0.1);font-size:12px;color:#374151;">
-          <div style="font-weight:700;margin-bottom:4px;font-size:13px;">NorbieLink Tour</div>
-          <div style="color:#9CA3AF;font-size:11px;">Explore features</div>
-        </div>
-        <div class="usage-label">Feature Card</div>
-        <div class="usage-sub">shape.lg (16px)</div>
-      </div>
-      <!-- MD - Tile -->
-      <div class="usage-item">
-        <div style="background:white;border-radius:12px;padding:16px;width:80px;display:flex;flex-direction:column;align-items:center;gap:8px;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
-          <div style="width:48px;height:48px;border-radius:50%;background:#F3F4F6;display:flex;align-items:center;justify-content:center;font-size:20px;">🏠</div>
-          <div style="font-size:10px;font-weight:500;color:#374151;text-align:center;">Gen. Liability</div>
-        </div>
-        <div class="usage-label">Marketplace Tile</div>
-        <div class="usage-sub">shape.md (12px)</div>
-      </div>
-      <!-- SM - Input -->
-      <div class="usage-item">
-        <div style="border:1.5px solid #E5E7EB;border-radius:8px;padding:10px 14px;width:160px;font-size:13px;color:#9CA3AF;background:white;">Job Title</div>
-        <div class="usage-label">Input Field</div>
-        <div class="usage-sub">shape.sm (8px)</div>
-      </div>
-      <!-- Full - Badge -->
-      <div class="usage-item">
-        <div style="border:1.5px solid #A614C3;color:#A614C3;padding:3px 12px;border-radius:9999px;font-size:11px;font-weight:700;background:transparent;">PRO</div>
-        <div class="usage-label">Badge</div>
-        <div class="usage-sub">shape.full (pill)</div>
-      </div>
-      <!-- Full - Nav pill -->
-      <div class="usage-item">
-        <div style="background:linear-gradient(135deg,#5C2ED4,#A614C3,#C054E0);color:white;padding:9px 20px;border-radius:9999px;font-size:13px;font-weight:600;">Marketplace</div>
-        <div class="usage-label">Active Nav Item</div>
-        <div class="usage-sub">shape.full (pill)</div>
-      </div>
+    <h2 class="ds-section-title">Choosing a radius</h2>
+    <div class="ds-table-wrap">
+      <table class="ds-table"><tbody>
+        <tr><td>Controls scale with their size: a 16px checkbox takes <code>4px</code>, a 20–32px chip takes <code>6px</code>, a button takes <code>8–10px</code>.</td></tr>
+        <tr><td>Containers take <code>12px</code>; only a dialog or a full panel goes to <code>16px</code>.</td></tr>
+        <tr><td><code>9999px</code> is for things that read as a token — badges, avatars, dots, switch tracks.</td></tr>
+        <tr><td>If a value is not on this list, it is a mistake. The DS previously shipped <code>5px</code>, <code>7px</code>, <code>9px</code>, <code>13px</code>, <code>14px</code>, <code>15px</code>, <code>18px</code> and <code>20px</code> across 60 rules.</td></tr>
+      </tbody></table>
     </div>
   </div>
 
-
-    <!-- ── Prev / Next navigation ── -->
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-03-elevation.html">
       <span class="ds-page-nav-label">← Previous</span>
@@ -263,8 +200,8 @@
 
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
-  <a class="ds-toc-item active" href="#shape-tokens">Shape tokens</a>
-  <a class="ds-toc-item" href="#shape-in-context">Shape in context</a>
+  <a class="ds-toc-item active" href="#shape-tokens">Scale</a>
+  <a class="ds-toc-item" href="#shape-in-context">Choosing a radius</a>
 </aside>
 
 

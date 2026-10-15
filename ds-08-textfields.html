@@ -11,7 +11,6 @@ body.dark-mode .light-mode-demo { display: none; }
 .field-wrap { display: flex; flex-direction: column; gap: 6px; }
 .field-label { font-size: 12px; font-weight: 600; color: var(--gray-600); }
 .field-state-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--gray-400); margin-bottom: 4px; }
-.input-outer { position: relative; }
 .helper { font-size: 12px; color: var(--gray-400); margin-top: 4px; }
 .error-text { font-size: 12px; color: var(--error); margin-top: 4px; }
 
@@ -116,7 +115,6 @@ body.dark-mode .light-mode-demo { display: none; }
     <a class="ds-sidenav-item active" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>
@@ -149,9 +147,9 @@ body.dark-mode .light-mode-demo { display: none; }
       <span style="font-size:12px;color:var(--gray-400);">Filled</span>
     </div>
     <div style="display:flex;flex-direction:column;gap:6px;width:240px;">
-      <label style="font-size:12px;font-weight:600;color:#EF4444;">Job Title</label>
-      <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:2px solid #EF4444;background:white;color:#1A1A2E;outline:none;box-shadow:0 0 0 3px rgba(239,68,68,.10);width:100%;" value="invalid@">
-      <span style="font-size:12px;color:#EF4444;">Invalid email format</span>
+      <label style="font-size:12px;font-weight:600;color:#DC2626;">Job Title</label>
+      <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:2px solid #DC2626;background:white;color:#1A1A2E;outline:none;box-shadow:0 0 0 3px rgba(220,38,38,.10);width:100%;" value="invalid@">
+      <span style="font-size:12px;color:#DC2626;">Invalid email format</span>
     </div>
   </div>
 
@@ -185,8 +183,8 @@ body.dark-mode .light-mode-demo { display: none; }
           </div>
           <div class="field-wrap">
             <div class="field-state-tag">Error</div>
-            <label class="field-label" style="color:#EF4444;">Email Address</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:2px solid #EF4444;background:white;color:#1A1A2E;outline:none;box-shadow:0 0 0 3px rgba(239,68,68,.10);width:100%;" value="notvalid">
+            <label class="field-label" style="color:#DC2626;">Email Address</label>
+            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:2px solid #DC2626;background:white;color:#1A1A2E;outline:none;box-shadow:0 0 0 3px rgba(220,38,38,.10);width:100%;" value="notvalid">
             <div class="error-text">Please enter a valid email address</div>
           </div>
           <div class="field-wrap">
@@ -218,9 +216,9 @@ body.dark-mode .light-mode-demo { display: none; }
           </div>
           <div class="field-wrap">
             <div class="field-state-tag" style="color:rgba(255,255,255,0.25);">Error</div>
-            <label style="font-size:12px;font-weight:600;color:#EF4444;">Email Address</label>
-            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:2px solid #EF4444;background:rgba(239,68,68,0.08);color:rgba(255,255,255,0.9);outline:none;width:100%;" value="notvalid">
-            <div style="font-size:12px;color:#EF4444;margin-top:4px;">Please enter a valid email address</div>
+            <label style="font-size:12px;font-weight:600;color:#DC2626;">Email Address</label>
+            <input style="font-family:Montserrat,sans-serif;font-size:14px;padding:11px 14px;border-radius:10px;border:2px solid #DC2626;background:rgba(220,38,38,0.08);color:rgba(255,255,255,0.9);outline:none;width:100%;" value="notvalid">
+            <div style="font-size:12px;color:#DC2626;margin-top:4px;">Please enter a valid email address</div>
           </div>
           <div class="field-wrap">
             <div class="field-state-tag" style="color:rgba(255,255,255,0.25);">Disabled</div>
@@ -313,8 +311,8 @@ body.dark-mode .light-mode-demo { display: none; }
           <tr><td>Border default</td><td>1.5px solid <code>color.outline</code> (#E5E7EB)</td></tr>
           <tr><td>Border focused</td><td>1px solid <code>color.primary</code> (#A614C3)</td></tr>
           <tr><td>Focus ring</td><td><code>0 0 0 2px rgba(92,46,212,0.2)</code></td></tr>
-          <tr><td>Border error</td><td>2px solid <code>color.error</code> (#EF4444)</td></tr>
-          <tr><td>Error ring</td><td><code>0 0 0 3px rgba(#EF4444, 10%)</code></td></tr>
+          <tr><td>Border error</td><td>2px solid <code>color.error</code> (#DC2626)</td></tr>
+          <tr><td>Error ring</td><td><code>0 0 0 3px rgba(#DC2626, 10%)</code></td></tr>
           <tr><td>Background light</td><td>white</td></tr>
           <tr><td>Background dark</td><td><code>rgba(#FFF, 5%)</code></td></tr>
           <tr><td>Shape</td><td><code>shape.sm</code> (10px) for inputs · <code>shape.full</code> for search</td></tr>

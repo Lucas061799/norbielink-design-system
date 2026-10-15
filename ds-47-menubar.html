@@ -3,24 +3,37 @@
 <title>Menubar — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.menubar{display:flex;align-items:center;gap:2px;padding:6px 8px;border:1px solid #e8e8e8;border-radius:8px;background:#fff;font-family:'Montserrat',sans-serif;}
-.mb-item{padding:6px 12px;font-size:12px;font-weight:600;color:#444;border-radius:6px;cursor:pointer;position:relative;transition:background .12s;}
-.mb-item:hover,.mb-item.open{background:#f5f5f5;color:#111;}
-.mb-drop{position:absolute;top:calc(100% + 14px);left:0;min-width:180px;background:#fff;border:1px solid #e8e8e8;border-radius:9px;box-shadow:0 4px 20px rgba(0,0,0,.1);padding:5px;z-index:50;}
-.mb-drop-item{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;font-size:12px;color:#333;border-radius:6px;cursor:pointer;font-weight:600;}
-.mb-drop-item:hover{background:#f5f5f5;}
-.mb-drop-item kbd{font-size:10px;color:#bbb;font-family:monospace;}
-.mb-sep{height:1px;background:#f0f0f0;margin:4px 0;}
-.mb-dk .menubar{background:#191D35;border-color:rgba(255,255,255,0.08);}
-.mb-dk .mb-item{color:rgba(255,255,255,.6);}
-.mb-dk .mb-item:hover,.mb-dk .mb-item.open{background:rgba(255,255,255,.07);color:rgba(255,255,255,.9);}
-body.dark-mode .menubar{background:#191D35;border-color:rgba(255,255,255,0.08);}
-body.dark-mode .mb-item{color:rgba(255,255,255,.6);}
-body.dark-mode .mb-item:hover,body.dark-mode .mb-item.open{background:rgba(255,255,255,.07);color:rgba(255,255,255,.9);}
-body.dark-mode .mb-drop{background:#191D35;border-color:rgba(255,255,255,0.08);}
-body.dark-mode .mb-drop-item{color:rgba(255,255,255,.7);}
-body.dark-mode .mb-drop-item:hover{background:rgba(255,255,255,.06);}
-body.dark-mode .mb-drop-item kbd{color:rgba(255,255,255,.3);}
+/* ── MENUBAR ──
+   Norbielink has no File/Edit/View menubar. This page is a DS-only extension,
+   redrawn in the product's own language: the strip reads as the app's TAB BAR
+   (13px/400, muted, active in brand with a 2px gradient underline) and the
+   drop panel is the standard menu surface (12px radius, #E5E7EB hairline,
+   180px min-width, items 10px 14px / 12px, neutral #F9FAFB hover). */
+.menubar{display:flex;align-items:center;gap:4px;padding:0;background:transparent;
+  border:none;border-bottom:1px solid #E5E7EB;font-family:'Montserrat',sans-serif;}
+.mb-item{position:relative;padding:12px 16px;font-size:13px;font-weight:400;letter-spacing:.01em;
+  color:#6B7280;background:transparent;border-radius:0;cursor:pointer;transition:color .12s;line-height:1.5;}
+.mb-item:hover{color:#1F2937;}
+.mb-item.open{color:#A614C3;}
+.mb-item.open::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;
+  background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);}
+.mb-drop{position:absolute;top:calc(100% + 6px);left:0;min-width:180px;background:#FFFFFF;
+  border:1px solid #E5E7EB;border-radius:12px;overflow:hidden;padding:4px 0;z-index:50;
+  box-shadow:0 10px 15px -3px rgba(0,0,0,.10),0 4px 6px -4px rgba(0,0,0,.10);}
+.mb-drop-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;
+  font-size:12px;font-weight:400;color:#1F2937;border-radius:0;cursor:pointer;transition:background .12s;line-height:1.5;}
+.mb-drop-item:hover{background:#F9FAFB;}
+.mb-drop-item kbd{font-size:11px;color:#9CA3AF;font-family:monospace;font-weight:400;}
+.mb-sep{height:1px;background:#F3F4F6;margin:4px 0;}
+
+body.dark-mode .menubar,.mb-dk .menubar{background:transparent;border-bottom-color:rgba(255,255,255,0.12);}
+body.dark-mode .mb-item,.mb-dk .mb-item{color:#8B8FA8;background:transparent;}
+body.dark-mode .mb-item:hover,.mb-dk .mb-item:hover{color:#F9FAFB;background:transparent;}
+body.dark-mode .mb-item.open,.mb-dk .mb-item.open{color:#FFFFFF;background:transparent;}
+body.dark-mode .mb-drop{background:#1E2240;border-color:rgba(255,255,255,0.10);}
+body.dark-mode .mb-drop-item{color:#F9FAFB;}
+body.dark-mode .mb-drop-item:hover{background:rgba(255,255,255,0.04);}
+body.dark-mode .mb-drop-item kbd{color:#8B8FA8;}
 body.dark-mode .mb-sep{background:rgba(255,255,255,0.08);}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
@@ -117,7 +130,6 @@ body.dark-mode .mb-sep{background:rgba(255,255,255,0.08);}
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>

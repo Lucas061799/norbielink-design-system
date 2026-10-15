@@ -4,17 +4,33 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
-.badge-showcase { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
-.badge-group { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
-.badge-group-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 4px; }
-.b { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 100px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .03em; }
+.badge-group-label{ font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 4px;line-height:1.5;}
 .b-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 .b-desc { font-size: 11px; color: var(--gray-400); }
 
+/* Role grid */
+.role-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 20px; width: 100%; }
+.role-cell { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.role-name { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gray-400); }
+.role-meta { font-size: 11px; color: var(--gray-400); font-family: monospace; }
+
+/* Dark preview panel — duplicates the body.dark-mode badge values from
+   ds-shared.css so both themes can be seen at once without toggling.
+   Keep in sync with the body.dark-mode .badge-* rules there. */
+/* Status chips are designed to sit on a table row, not on the gray example
+   panel: the chip fill (#F9FAFB) and the panel (#F8F9FA) are the same grey,
+   so the 1px border vanishes. This surface matches the row. */
+.chip-surface {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px; padding: 32px 40px;
+}
+
+/* Status table demo */
 .status-table-demo { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid var(--gray-200); }
-.std-header { display: grid; grid-template-columns: 1fr 1fr 1fr; background: var(--gray-50); border-bottom: 1px solid var(--gray-200); }
+.std-header { display: grid; grid-template-columns: 1fr 1.2fr 1fr 1fr; background: var(--gray-50); border-bottom: 1px solid var(--gray-200); }
 .std-th { padding: 10px 16px; font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--gray-400); }
-.std-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--gray-100); }
+.std-row { display: grid; grid-template-columns: 1fr 1.2fr 1fr 1fr; border-bottom: 1px solid var(--gray-100); }
 .std-row:last-child { border-bottom: none; }
 .std-td { padding: 12px 16px; font-size: 13px; color: var(--gray-700); display: flex; align-items: center; }
 </style>
@@ -112,11 +128,22 @@
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>
 <main class="ds-main"><div class="ds-content">
+  <!-- Gradient fills for .badge-indicator-new. Defined once; ds-shared.css
+       picks the light or dark one by theme. -->
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+    <defs>
+      <linearGradient id="ds-ind-new-light" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#5C2ED4"></stop><stop offset="100%" stop-color="#A614C3"></stop>
+      </linearGradient>
+      <linearGradient id="ds-ind-new-dark" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#A855F7"></stop><stop offset="100%" stop-color="#D946EF"></stop>
+      </linearGradient>
+    </defs>
+  </svg>
   <div class="ds-breadcrumb"><a href="ds-00-home.html">Home</a><span class="ds-breadcrumb-sep">›</span><a href="ds-nav-components.html">Components</a><span class="ds-breadcrumb-sep">›</span><span>Badges</span></div>
   <div class="ds-title-row">
     <h1 class="ds-page-title">Badges</h1>
@@ -125,19 +152,40 @@
       <a class="ds-nav-arrow-btn" href="ds-30-breadcrumb.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-  <p class="ds-page-desc">Badges communicate membership tiers, system capabilities, and record statuses. All badges use <code>shape.full</code> (pill) and Montserrat Bold. They are non-interactive and purely informational.</p>
+  <p class="ds-page-desc">Badges communicate membership tiers, system capabilities, appointment state, and record status. Norbielink has two families: <strong>pill badges</strong> at <code>9999px</code>, and <strong>status chips</strong> at <code>6px</code> whose chip is always neutral and whose 6px dot carries the only colour. Everything on this page is transcribed from the live app.</p>
 
   <!-- HERO -->
   <div class="ds-example" style="gap:14px; flex-wrap:wrap; padding:48px; justify-content:flex-start;">
-    <span class="b" style="border:1.5px solid #74C3B7;color:#74C3B7;background:transparent;">PRO</span>
-    <span class="b" style="background:rgba(166,20,195,0.08);border:1px solid rgba(166,20,195,0.4);color:#A614C3;font-size:10px;">✦ AI ASSISTANT</span>
-    <span class="b" style="background:rgba(16,185,129,.1);color:#059669;">● Sold/Issued</span>
-    <span class="b" style="background:rgba(245,158,11,.1);color:#F59E0B;">● Pending</span>
-    <span class="b" style="background:rgba(249,115,22,.1);color:#F97316;">● Upcoming Renewals</span>
-    <span class="b" style="background:rgba(239,68,68,.1);color:#EF4444;">● Declined</span>
-    <span class="b" style="background:rgba(239,68,68,.1);color:#EF4444;">● Pending/Action Req.</span>
-    <span class="b" style="background:rgba(245,158,11,.1);color:#F59E0B;">● Incomplete</span>
-    <span class="b" style="background:rgba(168,85,247,.1);color:#A855F7;">● Add'l Insured Request</span>
+    <span class="badge badge-pro">PRO</span>
+    <span class="badge badge-new">NEW</span>
+    <span class="badge badge-ai">✦ AI ASSISTANT</span>
+    <span class="badge badge-brand"><span class="badge-text">Appointed</span></span>
+    <span class="badge badge-teal">Unappointed</span>
+    <span class="badge-status"><span class="badge-dot badge-dot-done"></span>Issued</span>
+    <span class="badge-status"><span class="badge-dot badge-dot-active"></span>Under Review</span>
+    <span class="badge-status"><span class="badge-dot badge-dot-idle"></span>Incomplete</span>
+    <span class="badge-indicator badge-indicator-new" title="New agency · onboarded within the last 12 months"><svg width="12" height="12" viewBox="0 -960 960 960" aria-hidden="true"><path d="M440-120v-319q-64 0-123-24.5T213-533q-45-45-69-104t-24-123v-80h80q63 0 122 24.5T426-746q31 31 51.5 68t31.5 79q5-7 11-13.5t13-13.5q45-45 104-69.5T760-720h80v80q0 64-24.5 123T746-413q-45 45-103.5 69T520-320v200h-80Zm0-400q0-48-18.5-91.5T369-689q-34-34-77.5-52.5T200-760q0 48 18 92t52 78q34 34 78 52t92 18Zm80 120q48 0 91.5-18t77.5-52q34-34 52.5-78t18.5-92q-48 0-92 18.5T590-569q-34 34-52 77.5T520-400Zm0 0Zm-80-120Z"></path></svg></span>
+    <span class="badge-indicator badge-indicator-dormant" title="Dormant agency · no login activity for over 12 months"><svg width="12" height="12" viewBox="0 0 1024 1024" aria-hidden="true"><path d="M927.892105 480.285694c-0.005117 0-0.005117 0-0.010233 0-17.652032 0-31.968086 14.305821-31.973202 31.961946-0.025583 66.875107-17.822924 133.022643-51.467185 191.295837-51.232848 88.73702-133.953851 152.21475-232.927003 178.733731-98.978269 26.508747-202.354708 12.905938-291.086611-38.32691-88.73702-51.232848-152.209634-133.953851-178.728614-232.927003s-12.911054-202.348568 38.321794-291.085588c63.815421-110.531396 178.041976-181.90291 305.542858-190.916191 17.615193-1.248434 30.885428-16.537651 29.641087-34.147728-1.249457-17.615193-16.569374-30.848589-34.147728-29.641087-148.722206 10.517541-281.963837 93.779873-356.416526 222.732827C64.87045 391.496485 48.992831 512.102331 79.930447 627.577319c30.942733 115.469871 104.999402 211.981972 208.526267 271.753287 68.962651 39.814798 145.495722 60.151985 223.050052 60.151985 38.868239 0 78.006632-5.110391 116.562762-15.439644 115.469871-30.942733 211.980949-104.994286 271.753287-208.526267 39.242769-67.973114 60.001559-145.168264 60.032258-223.24755C959.860191 494.611981 945.549254 480.290811 927.892105 480.285694zM614.243639 149.879566l205.200522 0L593.302701 345.894891c-10.085706 8.742105-13.681604 22.829961-9.013281 35.33988 4.663206 12.504802 16.60519 20.794605 29.954219 20.794605l290.904463 0c17.657148 0 31.973202-14.316054 31.973202-31.973202 0-17.657148-14.316054-31.973202-31.973202-31.973202L699.946556 338.082972l226.14146-196.015326c10.084683-8.742105 13.681604-22.829961 9.013281-35.33988-4.663206-12.504802-16.60519-20.794605-29.954219-20.794605L614.243639 85.933161c-17.657148 0-31.973202 14.316054-31.973202 31.973202S596.58649 149.879566 614.243639 149.879566zM355.527273 498.609015l0 31.165814c0 17.657148 14.316054 31.973202 31.973202 31.973202s31.973202-14.316054 31.973202-31.973202L419.473677 498.609015c0-17.657148-14.316054-31.973202-31.973202-31.973202S355.527273 480.951867 355.527273 498.609015zM604.872201 498.609015l0 31.165814c0 17.657148 14.316054 31.973202 31.973202 31.973202 17.657148 0 31.973202-14.316054 31.973202-31.973202L668.818605 498.609015c0-17.657148-14.316054-31.973202-31.973202-31.973202C619.188254 466.635813 604.872201 480.951867 604.872201 498.609015zM479.33402 613.901855c-9.392928-14.763239-28.939099-19.234063-43.837414-9.986445-15.002692 9.320273-19.608593 29.03222-10.288321 44.029796 11.276834 18.151405 42.219567 48.864918 86.660732 48.864918 44.212968 0 75.534324-30.479175 87.072101-48.490388 9.434883-14.732539 5.157463-34.127262-9.450233-43.754526-14.602579-9.617032-34.366715-5.542226-44.181245 8.93551-0.135076 0.192382-13.368472 19.364023-33.440623 19.364023C492.375034 632.864742 480.18234 615.166661 479.33402 613.901855z"></path></svg></span>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- TWO FAMILIES -->
+  <div class="ds-section" id="two-families">
+    <h2 class="ds-section-title">Two families</h2>
+    <p class="ds-section-desc">Norbielink has two badge families and they are not interchangeable. <strong>Pill badges</strong> (<code>9999px</code>) mark an attribute of a thing — a tier, a flag, an appointment. <strong>Status chips</strong> (<code>6px</code>) report the state of a record in a table, and they are always neutral: only the dot carries colour.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th></th><th>Pill badge</th><th>Status chip</th></tr></thead>
+        <tbody>
+          <tr><td>Radius</td><td>9999px</td><td>6px</td></tr>
+          <tr><td>Weight</td><td>600</td><td>500</td></tr>
+          <tr><td>Padding</td><td>3px 10px</td><td>3px 8px</td></tr>
+          <tr><td>Colour lives in</td><td>the fill and the text</td><td>the 6px dot only</td></tr>
+          <tr><td>Used for</td><td>PRO, NEW, AI, Appointed / Unappointed, filters</td><td>the Status column of Quotes, Policies, Endorsements</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="ds-divider"></div>
@@ -145,110 +193,238 @@
   <!-- MEMBERSHIP BADGES -->
   <div class="ds-section" id="membership-amp-system-badges">
     <h2 class="ds-section-title">Membership &amp; system badges</h2>
-    <p class="ds-section-desc">Indicate user tier and system-level features. Appear inline next to user names, nav items, and section headings.</p>
+    <p class="ds-section-desc">Indicate user tier, new capability, and system-level features. Appear inline next to user names, nav items, and marketplace tiles.</p>
 
     <div class="ds-example" style="flex-direction:column; align-items:flex-start; gap:32px; padding:40px;">
       <div>
         <div class="badge-group-label">PRO Badge</div>
         <div class="b-row">
-          <span class="b" style="border:1.5px solid #74C3B7;color:#74C3B7;background:transparent;">PRO</span>
-          <div class="b-desc">Teal outlined · used next to "ProSuite" nav item and user name</div>
+          <span class="badge badge-pro">PRO</span>
+          <div class="b-desc">10px · 1px teal hairline · padding 1px 6px · next to "ProSuite" and the user name</div>
+        </div>
+      </div>
+      <div>
+        <div class="badge-group-label">NEW Badge</div>
+        <div class="b-row">
+          <span class="badge badge-new">NEW</span>
+          <div class="b-desc">9px / 700 · letter-spacing 0.9px · the only solid-gradient badge · marketplace tiles</div>
         </div>
       </div>
       <div>
         <div class="badge-group-label">AI Assistant Badge</div>
         <div class="b-row">
-          <span class="b" style="background:rgba(166,20,195,0.08);border:1px solid rgba(166,20,195,0.4);color:#A614C3;font-size:10px;">✦ AI ASSISTANT</span>
-          <div class="b-desc">Purple tonal · used next to Appetite Assistant nav item</div>
+          <span class="badge badge-ai">✦ AI ASSISTANT</span>
+          <div class="b-desc">Purple tonal · used next to the Appetite Assistant nav item</div>
         </div>
       </div>
-      <div>
-        <div class="badge-group-label">Partner branding</div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- TONAL PILLS -->
+  <div class="ds-section" id="tonal-pills">
+    <h2 class="ds-section-title">Tonal pill badges</h2>
+    <p class="ds-section-desc">Two tonal states, seen on the Agencies list. <strong>Brand</strong> carries a 5% gradient wash with gradient text; <strong>teal</strong> is a flat 10% tint. There is no success / warning / error trio — Norbielink does not have one.</p>
+
+    <div class="ds-example" style="padding:40px;">
+      <div class="role-grid">
+        <div class="role-cell">
+          <div class="role-name">Brand</div>
+          <span class="badge badge-brand"><span class="badge-text">Appointed</span></span>
+          <div class="role-meta">gradient wash + gradient text</div>
+        </div>
+        <div class="role-cell">
+          <div class="role-name">Teal</div>
+          <span class="badge badge-teal">Unappointed</span>
+          <div class="role-meta">flat teal tint</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- STATUS CHIPS -->
+  <div class="ds-section" id="status-chips">
+    <h2 class="ds-section-title">Status chips</h2>
+    <p class="ds-section-desc">Every status renders the same neutral chip. Only the 6px dot changes, and there are exactly three dot colours. Adding a status means picking one of the three — it never means adding a colour.</p>
+
+    <div class="chip-surface">
+      <div class="b-row" style="gap:12px;">
+        <span class="badge-status"><span class="badge-dot badge-dot-done"></span>Issued</span>
+        <span class="badge-status"><span class="badge-dot badge-dot-done"></span>Approved</span>
+        <span class="badge-status"><span class="badge-dot badge-dot-active"></span>Under Review</span>
+        <span class="badge-status"><span class="badge-dot badge-dot-active"></span>Requested Info</span>
+        <span class="badge-status"><span class="badge-dot badge-dot-active"></span>Renewal Pending</span>
+        <span class="badge-status"><span class="badge-dot badge-dot-idle"></span>Incomplete</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- STATUS PILL -->
+  <div class="ds-section" id="status-pill">
+    <h2 class="ds-section-title">Status pill (tonal)</h2>
+    <p class="ds-section-desc">The <strong>second</strong> status component. Where the chip above keeps the surface neutral and colours only the dot, this one tints the whole pill. Both ship in the product — the tonal pill on the Agencies and Clients lists, the neutral chip in the Quotes table. Pick by surface, not by taste.</p>
+
+    <div class="ds-example" style="padding:40px;">
+      <div class="b-row" style="gap:12px;">
+        <span class="badge-status-pill badge-sp-active">Active</span>
+        <span class="badge-status-pill badge-sp-active">Approved</span>
+        <span class="badge-status-pill badge-sp-renewal">Upcoming Renewal</span>
+        <span class="badge-status-pill badge-sp-pending">Pending</span>
+        <span class="badge-status-pill badge-sp-pending">Pending/Action Req.</span>
+        <span class="badge-status-pill badge-sp-declined">Declined</span>
+        <span class="badge-status-pill badge-sp-declined">Cancelled</span>
+        <span class="badge-status-pill badge-sp-neutral">Inactive</span>
+        <span class="badge-status-pill badge-sp-neutral">Expired</span>
+        <span class="badge-status-pill badge-sp-prospect"><span class="badge-text">Prospect</span></span>
+      </div>
+    </div>
+
+    <div class="ds-table-wrap" style="margin-top:24px;">
+      <table class="ds-table">
+        <thead><tr><th>Status</th><th>Class</th><th>Text</th><th>Fill</th></tr></thead>
+        <tbody>
+          <tr><td>Active, Approved</td><td><code>.badge-sp-active</code></td><td><code>#73C9B7</code></td><td><code>rgba(115,201,183,.10)</code></td></tr>
+          <tr><td>Upcoming Renewal(s)</td><td><code>.badge-sp-renewal</code></td><td><code>#74C3B7</code></td><td><code>rgba(116,195,183,.10)</code></td></tr>
+          <tr><td>Pending, Action Req.</td><td><code>.badge-sp-pending</code></td><td><code>#F59E0B</code></td><td><code>rgba(245,158,11,.08)</code></td></tr>
+          <tr><td>Declined, Cancelled</td><td><code>.badge-sp-declined</code></td><td><code>#EF4444</code></td><td><code>rgba(239,68,68,.08)</code></td></tr>
+          <tr><td>Inactive, Expired</td><td><code>.badge-sp-neutral</code></td><td><code>#9CA3AF</code></td><td><code>#F3F4F6</code></td></tr>
+          <tr><td>Prospect</td><td><code>.badge-sp-prospect</code></td><td>brand gradient</td><td>5% brand gradient wash</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="ds-section-desc" style="margin-top:16px;">Metrics: <code>radius 9999px</code> · <code>padding 3px 12px</code> · <code>11px/600</code> · <code>line-height 16px</code>. Prospect uses <code>padding 3px 10px</code> to match the other gradient pills.</p>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- STATUS MAPPING -->
+  <div class="ds-section" id="status-mapping">
+    <h2 class="ds-section-title">Status → dot mapping</h2>
+    <p class="ds-section-desc">The statuses currently live in the Quotes table, and the dot each one uses.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Status</th><th>Dot class</th><th>Dot colour</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge-status"><span class="badge-dot badge-dot-done"></span>Issued</span></td><td><code>.badge-dot-done</code></td><td>Teal #73C9B7</td><td>Policy is issued.</td></tr>
+          <tr><td><span class="badge-status"><span class="badge-dot badge-dot-done"></span>Approved</span></td><td><code>.badge-dot-done</code></td><td>Teal #73C9B7</td><td>Carrier approved the submission.</td></tr>
+          <tr><td><span class="badge-status"><span class="badge-dot badge-dot-active"></span>Under Review</span></td><td><code>.badge-dot-active</code></td><td>Magenta #A614C3</td><td>With the carrier.</td></tr>
+          <tr><td><span class="badge-status"><span class="badge-dot badge-dot-active"></span>Requested Info</span></td><td><code>.badge-dot-active</code></td><td>Magenta #A614C3</td><td>Carrier asked the agent for more.</td></tr>
+          <tr><td><span class="badge-status"><span class="badge-dot badge-dot-active"></span>Renewal Pending</span></td><td><code>.badge-dot-active</code></td><td>Magenta #A614C3</td><td>Renewal in flight.</td></tr>
+          <tr><td><span class="badge-status"><span class="badge-dot badge-dot-idle"></span>Incomplete</span></td><td><code>.badge-dot-idle</code></td><td>Gray #9CA3AF</td><td>Agent has not finished the submission.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- INDICATOR ICONS -->
+  <div class="ds-section" id="indicator-icons">
+    <h2 class="ds-section-title">Indicator icons</h2>
+    <p class="ds-section-desc">An 18px round mark that trails a cell value — in the Agencies table it follows the Last Login date. It is not a badge: there is no label and no padding, and the meaning is carried entirely by the <code>title</code> tooltip, so it is only ever used where the row already gives context.</p>
+
+    <div class="chip-surface">
+      <div style="display:flex; flex-direction:column; gap:22px;">
         <div class="b-row">
-          <span style="font-size:12px;font-weight:700;color:#9CA3AF;letter-spacing:.06em;font-family:Montserrat,sans-serif;">POWERED BY <span style="font-size:15px;font-weight:800;color:#374151;">btis</span></span>
-          <div class="b-desc">Top-right of header · not a pill shape — typographic treatment</div>
+          <span style="font-size:13px;color:var(--gray-500);font-variant-numeric:tabular-nums;min-width:78px;display:inline-block;">04/24/2026</span>
+          <span class="badge-indicator badge-indicator-new" title="New agency · onboarded within the last 12 months"><svg width="12" height="12" viewBox="0 -960 960 960" aria-hidden="true"><path d="M440-120v-319q-64 0-123-24.5T213-533q-45-45-69-104t-24-123v-80h80q63 0 122 24.5T426-746q31 31 51.5 68t31.5 79q5-7 11-13.5t13-13.5q45-45 104-69.5T760-720h80v80q0 64-24.5 123T746-413q-45 45-103.5 69T520-320v200h-80Zm0-400q0-48-18.5-91.5T369-689q-34-34-77.5-52.5T200-760q0 48 18 92t52 78q34 34 78 52t92 18Zm80 120q48 0 91.5-18t77.5-52q34-34 52.5-78t18.5-92q-48 0-92 18.5T590-569q-34 34-52 77.5T520-400Zm0 0Zm-80-120Z"></path></svg></span>
+          <div class="b-desc" style="margin-left:8px;">New agency · onboarded within the last 12 months — gradient-filled sprout on a 10% magenta disc</div>
         </div>
+        <div class="b-row">
+          <span style="font-size:13px;color:var(--gray-500);font-variant-numeric:tabular-nums;min-width:78px;display:inline-block;">01/10/2025</span>
+          <span class="badge-indicator badge-indicator-dormant" title="Dormant agency · no login activity for over 12 months"><svg width="12" height="12" viewBox="0 0 1024 1024" aria-hidden="true"><path d="M927.892105 480.285694c-0.005117 0-0.005117 0-0.010233 0-17.652032 0-31.968086 14.305821-31.973202 31.961946-0.025583 66.875107-17.822924 133.022643-51.467185 191.295837-51.232848 88.73702-133.953851 152.21475-232.927003 178.733731-98.978269 26.508747-202.354708 12.905938-291.086611-38.32691-88.73702-51.232848-152.209634-133.953851-178.728614-232.927003s-12.911054-202.348568 38.321794-291.085588c63.815421-110.531396 178.041976-181.90291 305.542858-190.916191 17.615193-1.248434 30.885428-16.537651 29.641087-34.147728-1.249457-17.615193-16.569374-30.848589-34.147728-29.641087-148.722206 10.517541-281.963837 93.779873-356.416526 222.732827C64.87045 391.496485 48.992831 512.102331 79.930447 627.577319c30.942733 115.469871 104.999402 211.981972 208.526267 271.753287 68.962651 39.814798 145.495722 60.151985 223.050052 60.151985 38.868239 0 78.006632-5.110391 116.562762-15.439644 115.469871-30.942733 211.980949-104.994286 271.753287-208.526267 39.242769-67.973114 60.001559-145.168264 60.032258-223.24755C959.860191 494.611981 945.549254 480.290811 927.892105 480.285694zM614.243639 149.879566l205.200522 0L593.302701 345.894891c-10.085706 8.742105-13.681604 22.829961-9.013281 35.33988 4.663206 12.504802 16.60519 20.794605 29.954219 20.794605l290.904463 0c17.657148 0 31.973202-14.316054 31.973202-31.973202 0-17.657148-14.316054-31.973202-31.973202-31.973202L699.946556 338.082972l226.14146-196.015326c10.084683-8.742105 13.681604-22.829961 9.013281-35.33988-4.663206-12.504802-16.60519-20.794605-29.954219-20.794605L614.243639 85.933161c-17.657148 0-31.973202 14.316054-31.973202 31.973202S596.58649 149.879566 614.243639 149.879566zM355.527273 498.609015l0 31.165814c0 17.657148 14.316054 31.973202 31.973202 31.973202s31.973202-14.316054 31.973202-31.973202L419.473677 498.609015c0-17.657148-14.316054-31.973202-31.973202-31.973202S355.527273 480.951867 355.527273 498.609015zM604.872201 498.609015l0 31.165814c0 17.657148 14.316054 31.973202 31.973202 31.973202 17.657148 0 31.973202-14.316054 31.973202-31.973202L668.818605 498.609015c0-17.657148-14.316054-31.973202-31.973202-31.973202C619.188254 466.635813 604.872201 480.951867 604.872201 498.609015zM479.33402 613.901855c-9.392928-14.763239-28.939099-19.234063-43.837414-9.986445-15.002692 9.320273-19.608593 29.03222-10.288321 44.029796 11.276834 18.151405 42.219567 48.864918 86.660732 48.864918 44.212968 0 75.534324-30.479175 87.072101-48.490388 9.434883-14.732539 5.157463-34.127262-9.450233-43.754526-14.602579-9.617032-34.366715-5.542226-44.181245 8.93551-0.135076 0.192382-13.368472 19.364023-33.440623 19.364023C492.375034 632.864742 480.18234 615.166661 479.33402 613.901855z"></path></svg></span>
+          <div class="b-desc" style="margin-left:8px;">Dormant agency · no login activity for over 12 months — flat slate icon on a 12% slate disc</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-table-wrap" style="margin-top:24px;">
+      <table class="ds-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Disc</td><td>18×18px · <code>9999px</code> · no padding, icon centred</td></tr>
+          <tr><td>Icon</td><td>12×12px</td></tr>
+          <tr><td>Gap from value</td><td>6px</td></tr>
+          <tr><td>New — disc</td><td><code>rgba(166,20,195,.10)</code> · <code>rgba(168,85,247,.32)</code> in dark</td></tr>
+          <tr><td>New — icon</td><td>Gradient <code>#5C2ED4 → #A614C3</code> · <code>#A855F7 → #D946EF</code> in dark</td></tr>
+          <tr><td>Dormant — disc</td><td><code>rgba(100,116,139,.12)</code> · <code>rgba(148,163,184,.30)</code> in dark</td></tr>
+          <tr><td>Dormant — icon</td><td><code>#64748B</code> · <code>#94A3B8</code> in dark</td></tr>
+          <tr><td>Accessibility</td><td><code>title</code> on the disc, <code>aria-hidden</code> on the svg</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- FILTER PILLS -->
+  <div class="ds-section" id="filter-pills">
+    <h2 class="ds-section-title">Filter pills</h2>
+    <p class="ds-section-desc">The marketplace filter row. Active is the solid brand gradient; inactive is a 1px hairline — a solid border, not a dashed one.</p>
+    <div class="ds-example" style="flex-direction:column; align-items:flex-start; gap:20px; padding:40px;">
+      <div class="b-row">
+        <span class="badge badge-filter-on">All</span>
+        <span class="badge badge-filter-off">Products</span>
+        <span class="badge badge-filter-off">Contests</span>
+        <span class="badge badge-filter-off">Promotions</span>
+        <span class="badge badge-filter-off">Learning</span>
       </div>
     </div>
   </div>
 
   <div class="ds-divider"></div>
 
-  <!-- STATUS BADGES -->
-  <div class="ds-section" id="status-badges">
-    <h2 class="ds-section-title">Status badges</h2>
-    <p class="ds-section-desc">Used in data tables to communicate the current state of a quote, policy, or submission. Each status maps to a semantic color role.</p>
-
-    <div class="ds-example" style="flex-direction:column; align-items:flex-start; gap:16px; padding:40px;">
-      <div class="b-row" style="gap:24px; flex-wrap:wrap;">
-        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
-          <span class="b" style="background:rgba(16,185,129,.1);color:#059669;">● Sold/Issued</span>
-          <div style="font-size:11px;color:var(--gray-400);">#10B981 · bg 10%</div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
-          <span class="b" style="background:rgba(245,158,11,.1);color:#F59E0B;">● Pending</span>
-          <div style="font-size:11px;color:var(--gray-400);">#F59E0B · bg 10%</div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
-          <span class="b" style="background:rgba(249,115,22,.1);color:#F97316;">● Upcoming Renewals</span>
-          <div style="font-size:11px;color:var(--gray-400);">#F97316 · bg 10%</div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
-          <span class="b" style="background:rgba(239,68,68,.1);color:#EF4444;">● Declined</span>
-          <div style="font-size:11px;color:var(--gray-400);">#EF4444 · bg 10%</div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
-          <span class="b" style="background:rgba(239,68,68,.1);color:#EF4444;">● Pending/Action Req.</span>
-          <div style="font-size:11px;color:var(--gray-400);">#EF4444 · bg 10%</div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
-          <span class="b" style="background:rgba(245,158,11,.1);color:#F59E0B;">● Incomplete</span>
-          <div style="font-size:11px;color:var(--gray-400);">#F59E0B · bg 10%</div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
-          <span class="b" style="background:rgba(168,85,247,.1);color:#A855F7;">● Add'l Insured Request</span>
-          <div style="font-size:11px;color:var(--gray-400);">#A855F7 · bg 10%</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ds-divider"></div>
-
-  <!-- STATUS IN CONTEXT -->
+  <!-- IN CONTEXT -->
   <div class="ds-section" id="in-context-data-table">
-    <h2 class="ds-section-title">In context — Data table</h2>
-    <p class="ds-section-desc">Status badges appear in the Status column of data tables. They are always left-aligned and paired with a bullet dot prefix.</p>
+    <h2 class="ds-section-title">In context — Quotes table</h2>
+    <p class="ds-section-desc">Status chips sit in the Status column, left-aligned, one per row.</p>
     <div class="status-table-demo">
       <div class="std-header">
         <div class="std-th">Applicant</div>
+        <div class="std-th">DBA</div>
         <div class="std-th">LOB</div>
         <div class="std-th">Status</div>
       </div>
       <div class="std-row">
-        <div class="std-td">Jane Smith</div>
+        <div class="std-td">Sarah Johnson</div>
+        <div class="std-td">BlueSky Consulting</div>
         <div class="std-td">Worker's Comp</div>
-        <div class="std-td"><span class="b" style="background:rgba(16,185,129,.1);color:#059669;font-size:12px;">● Sold/Issued</span></div>
+        <div class="std-td"><span class="badge-status"><span class="badge-dot badge-dot-active"></span>Requested Info</span></div>
       </div>
       <div class="std-row">
-        <div class="std-td">Elvis Pressley</div>
+        <div class="std-td">David Chen</div>
+        <div class="std-td">Dragon Express Logistics</div>
+        <div class="std-td">General Liability</div>
+        <div class="std-td"><span class="badge-status"><span class="badge-dot badge-dot-active"></span>Under Review</span></div>
+      </div>
+      <div class="std-row">
+        <div class="std-td">Amanda Martinez</div>
+        <div class="std-td">Martinez Contracting</div>
+        <div class="std-td">Bonds</div>
+        <div class="std-td"><span class="badge-status"><span class="badge-dot badge-dot-done"></span>Approved</span></div>
+      </div>
+      <div class="std-row">
+        <div class="std-td">Maria Garcia</div>
+        <div class="std-td">Garcia Landscaping</div>
+        <div class="std-td">Equipment Floater</div>
+        <div class="std-td"><span class="badge-status"><span class="badge-dot badge-dot-idle"></span>Incomplete</span></div>
+      </div>
+      <div class="std-row">
+        <div class="std-td">Elvis Presley</div>
+        <div class="std-td">Iron Gate Fencing</div>
         <div class="std-td">Vacant Risks</div>
-        <div class="std-td"><span class="b" style="background:rgba(249,115,22,.1);color:#F97316;font-size:12px;">● Upcoming Renewals</span></div>
+        <div class="std-td"><span class="badge-status"><span class="badge-dot badge-dot-active"></span>Renewal Pending</span></div>
       </div>
       <div class="std-row">
-        <div class="std-td">Joe Smith</div>
-        <div class="std-td">General Liability</div>
-        <div class="std-td"><span class="b" style="background:rgba(239,68,68,.1);color:#EF4444;font-size:12px;">● Declined</span></div>
-      </div>
-      <div class="std-row">
-        <div class="std-td">Elvis Pressley</div>
-        <div class="std-td">Worker's Comp</div>
-        <div class="std-td"><span class="b" style="background:rgba(245,158,11,.1);color:#F59E0B;font-size:12px;">● Incomplete</span></div>
-      </div>
-      <div class="std-row">
-        <div class="std-td">Joe Smith</div>
-        <div class="std-td">General Liability</div>
-        <div class="std-td"><span class="b" style="background:rgba(168,85,247,.1);color:#A855F7;font-size:12px;">● Add'l Insured Request</span></div>
+        <div class="std-td">Maria Garcia</div>
+        <div class="std-td">Sunset Bakery</div>
+        <div class="std-td">Business Owners</div>
+        <div class="std-td"><span class="badge-status"><span class="badge-dot badge-dot-done"></span>Issued</span></div>
       </div>
     </div>
   </div>
@@ -258,18 +434,52 @@
   <!-- SPECS -->
   <div class="ds-section" id="specs">
     <h2 class="ds-section-title">Specs</h2>
+
+    <div class="badge-group-label">Pill badge — <code>.badge</code></div>
     <div class="ds-table-wrap">
       <table class="ds-table">
         <thead><tr><th>Property</th><th>Value</th></tr></thead>
         <tbody>
-          <tr><td>Shape</td><td><code>shape.full</code> (pill)</td></tr>
-          <tr><td>Padding</td><td>4px 12px</td></tr>
+          <tr><td>Shape</td><td><code>9999px</code></td></tr>
+          <tr><td>Padding</td><td>3px 10px (PRO 1px 6px · NEW 3px 8px · filters 4px 10px)</td></tr>
+          <tr><td>Font size</td><td>11px (PRO 10px · NEW 9px)</td></tr>
+          <tr><td>Font weight</td><td>600 (NEW 700)</td></tr>
+          <tr><td>Letter spacing</td><td><code>normal</code> (NEW 0.9px)</td></tr>
+          <tr><td>Brand fill</td><td><code>linear-gradient(88.54deg, rgba(92,46,212,.05), rgba(166,20,195,.05))</code> · 20% in dark</td></tr>
+          <tr><td>Brand text</td><td>Gradient <code>#5C2ED4 → #A614C3</code>, clipped to text · <code>#A855F7 → #D946EF</code> in dark</td></tr>
+          <tr><td>Teal fill</td><td><code>rgba(115,201,183,.10)</code> · <code>.22</code> in dark · text <code>#73C9B7</code> in both</td></tr>
+          <tr><td>PRO border</td><td>1px solid <code>#74C3B7</code> · gradient border on <code>#1E2240</code> in dark, text <code>#C084FC</code></td></tr>
+          <tr><td>NEW fill</td><td><code>linear-gradient(90deg, #5C2ED4 0%, #A614C3 65%)</code>, white text</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="badge-group-label" style="margin-top:32px;">Status chip — <code>.badge-status</code></div>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Shape</td><td><code>6px</code> — not a pill</td></tr>
+          <tr><td>Padding</td><td>3px 8px</td></tr>
           <tr><td>Font size</td><td>11px</td></tr>
-          <tr><td>Font weight</td><td>700 (Bold)</td></tr>
-          <tr><td>Letter spacing</td><td>0.03em</td></tr>
-          <tr><td>Background opacity</td><td>10% of the semantic color</td></tr>
-          <tr><td>PRO badge border</td><td>1.5px solid <code>color.secondary</code> (#74C3B7)</td></tr>
-          <tr><td>AI badge bg</td><td><code>rgba(166,20,195,0.08)</code> · border <code>rgba(166,20,195,0.4)</code> · text <code>#A614C3</code></td></tr>
+          <tr><td>Font weight</td><td>500</td></tr>
+          <tr><td>Gap</td><td>6px, between dot and label</td></tr>
+          <tr><td>Chip fill</td><td><code>#F9FAFB</code> · text <code>#1F2937</code> · border 1px <code>#F3F4F6</code></td></tr>
+          <tr><td>Chip fill (dark)</td><td><code>rgba(255,255,255,.05)</code> · text <code>#F9FAFB</code> · border 1px <code>rgba(255,255,255,.04)</code></td></tr>
+          <tr><td>Dot</td><td>6×6px, <code>9999px</code> · same colour in both themes</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="badge-group-label" style="margin-top:32px;">Don't</div>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <tbody>
+          <tr><td>Give a status its own fill colour. The chip is neutral; the dot is the signal.</td></tr>
+          <tr><td>Add a fourth dot colour — map the status onto done / active / idle.</td></tr>
+          <tr><td>Use red, amber or green. None of them exist in Norbielink.</td></tr>
+          <tr><td>Make a status chip a pill, or a pill badge 6px.</td></tr>
+          <tr><td>Use <code>.badge-new</code>'s solid gradient for anything but NEW and the active filter.</td></tr>
         </tbody>
       </table>
     </div>
@@ -292,9 +502,15 @@
 
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
-  <a class="ds-toc-item active" href="#membership-badges">Membership badges</a>
-  <a class="ds-toc-item" href="#status-badges">Status badges</a>
-  <a class="ds-toc-item" href="#in-context">In context</a>
+  <a class="ds-toc-item active" href="#two-families">Two families</a>
+  <a class="ds-toc-item" href="#membership-amp-system-badges">Membership badges</a>
+  <a class="ds-toc-item" href="#tonal-pills">Tonal pill badges</a>
+  <a class="ds-toc-item" href="#status-chips">Status chips</a>
+  <a class="ds-toc-item" href="#status-pill">Status pill (tonal)</a>
+  <a class="ds-toc-item" href="#status-mapping">Status → dot mapping</a>
+  <a class="ds-toc-item" href="#indicator-icons">Indicator icons</a>
+  <a class="ds-toc-item" href="#filter-pills">Filter pills</a>
+  <a class="ds-toc-item" href="#in-context-data-table">In context</a>
   <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 

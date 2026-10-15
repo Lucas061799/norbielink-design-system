@@ -4,30 +4,9 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
-.tile-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-.tile { background: white; border-radius: 16px; padding: 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 10px; box-shadow: 0 1px 3px rgba(15,23,42,0.04); cursor: pointer; border: 1.5px solid transparent; position: relative; overflow: hidden; }
-.tile::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%); }
-.tile:hover { border-color: var(--gray-200); }
 .tile.active { border-color: #A614C3; box-shadow: 0 0 0 3px rgba(166,20,195,.12); }
-.tile-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--gray-100); display: flex; align-items: center; justify-content: center; font-size: 24px; }
-.tile-label { font-size: 11px; font-weight: 500; color: var(--gray-700); text-align: center; line-height: 1.3; }
-
-/* Marketplace card (info-card style — vertical with colored top) */
-.mk-card { background: white; border-radius: 16px; border: 1.5px solid #E5E7EB; padding: 0; display: flex; flex-direction: column; align-items: stretch; gap: 0; box-shadow: 0 1px 3px rgba(15,23,42,0.04); cursor: pointer; transition: all .15s; overflow: hidden; }
-.mk-card:hover { border-color: transparent; background: linear-gradient(white,white) padding-box, linear-gradient(to right,#5C2ED4 0%,#A614C3 65%) border-box; box-shadow: 0 6px 18px rgba(166,20,195,.14); transform: translateY(-2px); }
-.mk-card .mk-icon { width: 100% !important; height: 80px !important; border-radius: 0 !important; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .mk-card .mk-icon .material-icons-round { font-size: 32px !important; }
-.mk-card > div[style*="flex:1"] { padding: 18px 20px 20px; flex: 1; }
 .mk-card > .material-icons-round { display: none; }
-.mk-card > div[style*="flex:1"] > div:first-child { font-size: 15px !important; font-weight: 700 !important; }
-.mk-card > div[style*="flex:1"] > div:nth-child(2) { font-size: 12.5px !important; line-height: 1.5 !important; margin-bottom: 12px !important; }
-.mk-card > div[style*="flex:1"] > div:last-child { font-size: 11px !important; }
-.mk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 14px; align-content: start; }
-.mk-badge { font-size: 8.5px; font-weight: 700; letter-spacing: .04em; padding: 2px 6px; border-radius: 9999px; vertical-align: middle; margin-left: 4px; }
-.mk-cat-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; margin-top: 8px; }
-.mk-cat-header.first { margin-top: 8px; }
-.mk-cat-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-.dark-mk-card { background: #1E2240; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); padding: 16px; display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
 
 /* Dark mode — marketplace cards */
 body.dark-mode .mk-card { background: #1E2240; border-color: rgba(255,255,255,0.08); box-shadow: none; }
@@ -49,26 +28,51 @@ body.dark-mode .mk-tile-state-label { color: rgba(255,255,255,0.55) !important; 
 /* Marketplace tile demo cards in dark mode — override inline white bg */
 body.dark-mode #marketplace-tile .mk-card { background: #1E2240 !important; }
 body.dark-mode #marketplace-tile .mk-card[style*="border-color:transparent"] { background: linear-gradient(#1E2240,#1E2240) padding-box, linear-gradient(to right,#5C2ED4,#A614C3) border-box !important; }
-
-.feature-card { background: white; border-radius: 16px; padding: 24px; border: 1.5px solid var(--gray-200); width: 220px; flex-shrink: 0; box-shadow: 0 1px 3px rgba(15,23,42,0.04); position: relative; overflow: hidden; display: flex; flex-direction: column; align-self: stretch; }
-.feature-card .feature-desc { flex: 1; }
-.feature-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%); }
-.feature-icon-bg { width: 44px; height: 44px; border-radius: 10px; background: rgba(166,20,195,0.08); display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px; }
-.feature-title { font-size: 14px; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
-.feature-desc { font-size: 12px; color: var(--gray-500); line-height: 1.5; margin-bottom: 14px; }
-.feature-link { font-size: 12px; font-weight: 700; color: #A614C3; display: flex; align-items: center; gap: 4px; }
-
-.info-card { background: white; border-radius: 16px; border: 1.5px solid var(--gray-200); overflow: hidden; width: 260px; box-shadow: 0 1px 3px rgba(15,23,42,0.04); }
-.info-card-top { height: 80px; display: flex; align-items: center; justify-content: center; }
-.info-card-body { padding: 20px; }
-.info-card-title { font-size: 15px; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
-.info-card-desc { font-size: 12px; color: var(--gray-500); line-height: 1.5; margin-bottom: 14px; }
-.info-card-link { font-size: 13px; font-weight: 700; color: #A614C3; }
-
-.dark-tile { background: #191D35; border-radius: 16px; border: 1px solid rgba(255,255,255,.1); padding: 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; position: relative; overflow: hidden; }
-.dark-tile::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%); }
-.dark-tile-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; font-size: 22px; }
 .dark-tile.active { border-color: rgba(166,20,195,0.8); background: rgba(166,20,195,.12); }
+
+/* Cards — transcribed from the live Marketplace and Agencies screens. */
+.lob-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.lob-tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  width: 120px; padding: 20px 12px; border-radius: 16px; background: var(--card-bg);
+  border: 1px solid var(--gray-200); cursor: pointer; font-family: 'Montserrat', sans-serif; }
+.lob-icon { display: flex; align-items: center; justify-content: center; width: 60px; height: 60px;
+  border-radius: 9999px; background: #EFEFEF; flex-shrink: 0; }
+.lob-icon img { width: 38px; height: 38px; object-fit: contain; display: block; }
+.lob-label { font-size: 12px; font-weight: 500; line-height: 15px; color: #2D3653; text-align: center; padding: 0 4px; }
+body.dark-mode .lob-icon { background: rgba(255,255,255,0.06); }
+body.dark-mode .lob-label { color: #F9FAFB; }
+
+.promo-card { display: flex; align-items: stretch; gap: 12px; width: 100%; max-width: 450px;
+  padding: 12px; border-radius: 16px; background: var(--card-bg); border: 1px solid var(--gray-200);
+  text-decoration: none; font-family: 'Montserrat', sans-serif; }
+.promo-img { flex-shrink: 0; width: 96px; border-radius: 12px; overflow: hidden;
+  background: linear-gradient(135deg, #EDE5FF 0%, #F5E8FB 100%); }
+.promo-body { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 2px 0; }
+.promo-tag { font-size: 10px; font-weight: 700; line-height: 15px; text-transform: uppercase; letter-spacing: 1px; color: #A614C3; margin-bottom: 2px; }
+.promo-title { font-size: 13px; font-weight: 700; line-height: 16.25px; color: #2D3653; margin-bottom: 4px; }
+.promo-text { font-size: 11px; font-weight: 400; line-height: 15.125px; color: var(--gray-500); }
+.promo-cta { margin-top: 6px; font-size: 11px; font-weight: 600; line-height: 16.5px; color: #A614C3; }
+body.dark-mode .promo-title { color: #F9FAFB; }
+body.dark-mode .promo-tag, body.dark-mode .promo-cta { color: #C084FC; }
+
+.stat-row { display: flex; gap: 12px; width: 100%; flex-wrap: wrap; }
+/* A stat card is a filter BUTTON: selecting it turns the border and the number
+   razz (dark: #4ECDC4), and hovering an unselected one darkens its border. */
+.stat-card { flex: 1; min-width: 180px; padding: 16px 20px; border-radius: 16px; text-align: left;
+  background: var(--card-bg); border: 1px solid var(--gray-200); cursor: pointer;
+  font-family: 'Montserrat', sans-serif; transition: border-color .15s; }
+.stat-card:hover { border-color: var(--gray-300); }
+.stat-card.selected { border-color: #A614C3; }
+.stat-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 2px; }
+.stat-label { font-size: 15px; font-weight: 600; line-height: 22.5px; color: var(--gray-800);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.stat-num { font-size: 24px; font-weight: 600; line-height: 1; letter-spacing: -0.025em;
+  color: var(--gray-800); flex-shrink: 0; }
+.stat-card.selected .stat-num { color: #A614C3; }
+.stat-sub { font-size: 11px; font-weight: 400; line-height: 16.5px; color: var(--gray-500); }
+body.dark-mode .stat-card.selected { border-color: #4ECDC4; }
+body.dark-mode .stat-card.selected .stat-num { color: #4ECDC4; }
+body.dark-mode .stat-card:hover { border-color: rgba(255,255,255,0.20); }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -164,7 +168,6 @@ body.dark-mode #marketplace-tile .mk-card[style*="border-color:transparent"] { b
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>
@@ -177,137 +180,109 @@ body.dark-mode #marketplace-tile .mk-card[style*="border-color:transparent"] { b
       <a class="ds-nav-arrow-btn" href="ds-33-carousel.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-  <p class="ds-page-desc">Norbielink uses two card types: <strong>Feature cards</strong> for ProSuite content, and <strong>Info cards</strong> for marketplace LOBs, contextual promotions, and onboarding. All use <code>shape.lg</code> (16px).</p>
+  <p class="ds-page-desc">Three card types ship in the product, all at <code>16px</code> radius on a white surface
+  with a <code>1px #E5E7EB</code> hairline and <strong>no shadow</strong>. The DS previously published a
+  “marketplace card” with teal icon tiles, category dots, <code>N MARKETS</code> counters and a gradient top bar,
+  and a “ProSuite feature card” — none of which exist in Norbielink.</p>
 
-  <!-- HERO: marketplace cards (actual Norbielink design) -->
-  <div class="ds-example" style="flex-direction:column; align-items:stretch; padding:24px 32px; gap:0;">
-    <!-- Hero header -->
-    <div style="background:white;border-radius:16px;border:1px solid #E5E7EB;box-shadow:0 1px 3px rgba(15,23,42,0.04);overflow:hidden;">
-      <div style="height:4px;background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);"></div>
-      <div style="padding:20px 24px;">
-        <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#9CA3AF;margin-bottom:6px;">Marketplace</div>
-        <div style="font-size:20px;font-weight:700;color:#1F2937;margin-bottom:4px;">What are we quoting today?</div>
-        <div style="font-size:13px;color:#6B7280;">Pick a product below, search by name or risk type, or let Norbie find the right market.</div>
+  <div class="ds-section" id="lob-tile">
+    <h2 class="ds-section-title">LOB tile</h2>
+    <p class="ds-section-desc">The marketplace product picker. A <code>60px</code> round grey disc holding the product’s own <code>38px</code> PNG icon — the same asset the app serves from <code>/insurance-icons/</code>, with a centred two-line label beneath.</p>
+    <div class="ds-example" style="padding:40px;">
+      <div class="lob-grid">
+        <button class="lob-tile"><span class="lob-icon"><img src="insurance-icons/general-liability.png" alt="" width="38" height="38"></span><span class="lob-label">Contractor General Liability</span></button>
+        <button class="lob-tile"><span class="lob-icon"><img src="insurance-icons/workers-comp.png" alt="" width="38" height="38"></span><span class="lob-label">Worker's Comp</span></button>
+        <button class="lob-tile"><span class="lob-icon"><img src="insurance-icons/commercial-auto.png" alt="" width="38" height="38"></span><span class="lob-label">Commercial Auto</span></button>
+        <button class="lob-tile"><span class="lob-icon"><img src="insurance-icons/builders-risk.png" alt="" width="38" height="38"></span><span class="lob-label">Builders Risk</span></button>
+        <button class="lob-tile"><span class="lob-icon"><img src="insurance-icons/cyber.png" alt="" width="38" height="38"></span><span class="lob-label">Cyber Risk</span></button>
       </div>
     </div>
-
-    <!-- Casualty -->
-    <div>
-      <div class="mk-cat-header"><span class="mk-cat-dot" style="background:#7C3AED;"></span><span style="font-size:13px;font-weight:700;color:#1F2937;">Casualty</span><span style="font-size:11px;color:#9CA3AF;">4 products</span><div style="flex:1;height:1px;background:#E5E7EB;"></div></div>
-      <div class="mk-grid">
-        <div class="mk-card"><div class="mk-icon" style="background:#F3E8FF;color:#7C3AED;"><span class="material-icons-round" style="font-size:18px;">security</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">General Liability</div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">Bodily injury &amp; property damage</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">14 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-        <div class="mk-card"><div class="mk-icon" style="background:#F3E8FF;color:#7C3AED;"><span class="material-icons-round" style="font-size:18px;">engineering</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Workers' Comp</div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">Employee injury coverage</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">9 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-        <div class="mk-card"><div class="mk-icon" style="background:#F3E8FF;color:#7C3AED;"><span class="material-icons-round" style="font-size:18px;">verified_user</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Professional Liability</div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">Errors &amp; omissions</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">11 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-        <div class="mk-card"><div class="mk-icon" style="background:#F3E8FF;color:#7C3AED;"><span class="material-icons-round" style="font-size:18px;">layers</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Excess &amp; Umbrella</div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">Above primary limits</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">7 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-      </div>
-    </div>
-
-    <!-- Property -->
-    <div>
-      <div class="mk-cat-header"><span class="mk-cat-dot" style="background:#2D9B8A;"></span><span style="font-size:13px;font-weight:700;color:#1F2937;">Property</span><span style="font-size:11px;color:#9CA3AF;">5 products</span><div style="flex:1;height:1px;background:#E5E7EB;"></div></div>
-      <div class="mk-grid">
-        <div class="mk-card"><div class="mk-icon" style="background:#E8FAF9;color:#2D9B8A;"><span class="material-icons-round" style="font-size:18px;">construction</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Builders Risk</div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">Course-of-construction</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">8 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-        <div class="mk-card"><div class="mk-icon" style="background:#E8FAF9;color:#2D9B8A;"><span class="material-icons-round" style="font-size:18px;">home</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Vacant Risks</div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">Unoccupied buildings</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">6 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-        <div class="mk-card"><div class="mk-icon" style="background:#E8FAF9;color:#2D9B8A;"><span class="material-icons-round" style="font-size:18px;">inventory_2</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Inland Marine</div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">Tools, equipment &amp; cargo</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">9 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-        <div class="mk-card"><div class="mk-icon" style="background:#E8FAF9;color:#2D9B8A;"><span class="material-icons-round" style="font-size:18px;">key</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Lessor's Risk</div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">Landlord property</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">5 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-        <div class="mk-card"><div class="mk-icon" style="background:#E8FAF9;color:#2D9B8A;"><span class="material-icons-round" style="font-size:18px;">store</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Business Owners<span class="mk-badge" style="background:#F3E8FF;color:#7C3AED;">POPULAR</span></div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">Property + GL bundled</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">12 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-      </div>
-    </div>
-
-    <!-- Auto & Transport -->
-    <div>
-      <div class="mk-cat-header"><span class="mk-cat-dot" style="background:#E8622A;"></span><span style="font-size:13px;font-weight:700;color:#1F2937;">Auto &amp; Transport</span><span style="font-size:11px;color:#9CA3AF;">3 products</span><div style="flex:1;height:1px;background:#E5E7EB;"></div></div>
-      <div class="mk-grid">
-        <div class="mk-card"><div class="mk-icon" style="background:#FFF1E8;color:#E8622A;"><span class="material-icons-round" style="font-size:18px;">local_shipping</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Commercial Auto</div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">Light &amp; medium fleet</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">10 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-        <div class="mk-card"><div class="mk-icon" style="background:#FFF1E8;color:#E8622A;"><span class="material-icons-round" style="font-size:18px;">fire_truck</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Trucking</div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">OTR &amp; long-haul</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">6 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-        <div class="mk-card"><div class="mk-icon" style="background:#FFF1E8;color:#E8622A;"><span class="material-icons-round" style="font-size:18px;">anchor</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Marine Contractors</div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">Dock &amp; waterway work</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">4 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-      </div>
-    </div>
-
-    <!-- Specialty -->
-    <div>
-      <div class="mk-cat-header"><span class="mk-cat-dot" style="background:#5C2ED4;"></span><span style="font-size:13px;font-weight:700;color:#1F2937;">Specialty</span><span style="font-size:11px;color:#9CA3AF;">6 products</span><div style="flex:1;height:1px;background:#E5E7EB;"></div></div>
-      <div class="mk-grid">
-        <div class="mk-card"><div class="mk-icon" style="background:#EEE7FF;color:#5C2ED4;"><span class="material-icons-round" style="font-size:18px;">lock</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Cyber Risk<span class="mk-badge" style="background:linear-gradient(135deg,#4ECDC4,#2D9B8A);color:white;">NEW</span></div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">Breach &amp; liability</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">8 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-        <div class="mk-card"><div class="mk-icon" style="background:#EEE7FF;color:#5C2ED4;"><span class="material-icons-round" style="font-size:18px;">eco</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Cannabis<span class="mk-badge" style="background:linear-gradient(135deg,#4ECDC4,#2D9B8A);color:white;">NEW</span></div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">Dispensary &amp; cultivation</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">5 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-        <div class="mk-card"><div class="mk-icon" style="background:#EEE7FF;color:#5C2ED4;"><span class="material-icons-round" style="font-size:18px;">energy_savings_leaf</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Pollution Liability</div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">Environmental hazards</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">4 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-        <div class="mk-card"><div class="mk-icon" style="background:#EEE7FF;color:#5C2ED4;"><span class="material-icons-round" style="font-size:18px;">volunteer_activism</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Non-Profit</div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">D&amp;O + GL packages</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">7 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-        <div class="mk-card"><div class="mk-icon" style="background:#EEE7FF;color:#5C2ED4;"><span class="material-icons-round" style="font-size:18px;">event</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Special Events</div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">One-time gatherings</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">6 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-        <div class="mk-card"><div class="mk-icon" style="background:#EEE7FF;color:#5C2ED4;"><span class="material-icons-round" style="font-size:18px;">business</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Home-Based Business</div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">Side-hustle &amp; freelance</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">5 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-      </div>
-    </div>
-
-    <!-- Surety -->
-    <div>
-      <div class="mk-cat-header"><span class="mk-cat-dot" style="background:#0EA5A5;"></span><span style="font-size:13px;font-weight:700;color:#1F2937;">Surety</span><span style="font-size:11px;color:#9CA3AF;">1 product</span><div style="flex:1;height:1px;background:#E5E7EB;"></div></div>
-      <div class="mk-grid">
-        <div class="mk-card"><div class="mk-icon" style="background:#E0F7F7;color:#0EA5A5;"><span class="material-icons-round" style="font-size:18px;">draw</span></div><div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:700;color:#1F2937;margin-bottom:2px;">Bonds</div><div style="font-size:11.5px;color:#6B7280;margin-bottom:6px;">Performance &amp; contract</div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#9CA3AF;">6 markets</div></div><span class="material-icons-round" style="font-size:16px;color:#D1D5DB;flex-shrink:0;margin-top:2px;">arrow_outward</span></div>
-      </div>
+    <div class="ds-table-wrap" style="margin-top:20px;">
+      <table class="ds-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Size</td><td>120px wide · height follows the label</td></tr>
+          <tr><td>Surface</td><td><code>#FFFFFF</code> · <code>1px #E5E7EB</code> · <code>radius 16px</code> · no shadow</td></tr>
+          <tr><td>Padding</td><td><code>20px 12px</code> · <code>gap 12px</code>, column, centred</td></tr>
+          <tr><td>Icon disc</td><td>60×60px <code>9999px</code> · <code>#EFEFEF</code> · icon 38×38px</td></tr>
+          <tr><td>Label</td><td>12px / 500 · <code>line-height 15px</code> · <code>#2D3653</code> · centred</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
   <div class="ds-divider"></div>
 
-  <!-- FEATURE CARDS -->
-  <div class="ds-section" id="feature-card-prosuite">
-    <h2 class="ds-section-title">Feature card (ProSuite)</h2>
-    <p class="ds-section-desc">Used in ProSuite and onboarding contexts. Contains an icon, title, description, and a text link. Uses <code>shape.lg</code> (16px).</p>
-
-    <div class="ds-example" style="gap:16px; flex-wrap:wrap; align-items:flex-start; padding:40px;">
-      <div class="feature-card">
-        <div class="feature-icon-bg"><span class="material-icons-round" style="font-size:20px;color:#A614C3;">compare_arrows</span></div>
-        <div class="feature-title">Compare Quotes</div>
-        <div class="feature-desc">Compare quotes side-by-side with AI-powered insights to find the best option.</div>
-        <div class="feature-link">Compare Quotes →</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon-bg"><span class="material-icons-round" style="font-size:20px;color:#A614C3;">event</span></div>
-        <div class="feature-title">ProSessions</div>
-        <div class="feature-desc">Book a 1:1 session to unlock ProSuite and grow your business faster.</div>
-        <div class="feature-link">Schedule Session →</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon-bg"><span class="material-icons-round" style="font-size:20px;color:#A614C3;">menu_book</span></div>
-        <div class="feature-title">Document Library</div>
-        <div class="feature-desc">Access essential documents to save time and reduce operational costs.</div>
-        <div class="feature-link">Access Library →</div>
-      </div>
+  <div class="ds-section" id="promo-card">
+    <h2 class="ds-section-title">Promo card</h2>
+    <p class="ds-section-desc">The marketplace highlights rail. A fixed-size image on the left, then an uppercase
+    razz tag, a title, two lines of body, and a razz call to action.</p>
+    <div class="ds-example" style="padding:40px;">
+      <a class="promo-card" href="#">
+        <span class="promo-img"></span>
+        <div class="promo-body">
+          <div>
+            <div class="promo-tag">New bond</div>
+            <div class="promo-title">California MVD dealer bonds</div>
+            <div class="promo-text">$50k used-dealer bond from $80/yr. Verifier and yacht broker bonds too.</div>
+          </div>
+          <span class="promo-cta">Quote a bond ›</span>
+        </div>
+      </a>
+    </div>
+    <div class="ds-table-wrap" style="margin-top:20px;">
+      <table class="ds-table">
+        <thead><tr><th>Part</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Card</td><td><code>radius 16px</code> · <code>padding 12px</code> · <code>gap 12px</code> · items-stretch</td></tr>
+          <tr><td>Image</td><td>96px wide · <code>radius 12px</code> · <code>overflow hidden</code></td></tr>
+          <tr><td>Tag</td><td>10px / 700 · uppercase · <code>letter-spacing 1px</code> · <code>#A614C3</code></td></tr>
+          <tr><td>Title</td><td>13px / 700 · <code>line-height 16.25px</code> · <code>#2D3653</code></td></tr>
+          <tr><td>Body</td><td>11px / 400 · <code>line-height 15.125px</code> · <code>#6B7280</code></td></tr>
+          <tr><td>CTA</td><td>11px / 600 · <code>#A614C3</code> · <code>gap 4px</code></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
   <div class="ds-divider"></div>
 
-  <!-- INFO CARDS -->
-  <div class="ds-section" id="info-card">
-    <h2 class="ds-section-title">Info card</h2>
-    <p class="ds-section-desc">Appears on the Marketplace alongside tiles — used for contextual promotions, onboarding tours, and feature announcements. Uses a colored header zone.</p>
-
-    <div class="ds-example" style="gap:20px; flex-wrap:wrap; align-items:flex-start; padding:40px;">
-      <div class="info-card">
-        <div class="info-card-top" style="background:linear-gradient(135deg,#EDE9FF,#F5D5FF);">
-          <span class="material-icons-round" style="font-size:36px;color:#A614C3;">emoji_events</span>
-        </div>
-        <div class="info-card-body">
-          <div class="info-card-title">NorbieLink Tour</div>
-          <div class="info-card-desc"><strong>New to the dashboard?</strong> Take a guided tour to explore features and capabilities.</div>
-          <div class="info-card-link">Launch Tour →</div>
-        </div>
+  <div class="ds-section" id="stat-card">
+    <h2 class="ds-section-title">Stat card</h2>
+    <p class="ds-section-desc">The KPI row above a table. Each card is a <strong>filter</strong>: the label and count sit on one row, and selecting a card turns both its border and its number razz.</p>
+    <div class="ds-example" style="padding:40px;">
+      <div class="stat-row">
+        <button class="stat-card">
+          <div class="stat-head"><span class="stat-label">Prospect</span><span class="stat-num">4</span></div>
+          <div class="stat-sub">In pipeline</div>
+        </button>
+        <button class="stat-card selected">
+          <div class="stat-head"><span class="stat-label">Active</span><span class="stat-num">12</span></div>
+          <div class="stat-sub">Currently insured</div>
+        </button>
+        <button class="stat-card">
+          <div class="stat-head"><span class="stat-label">Inactive</span><span class="stat-num">3</span></div>
+          <div class="stat-sub">Lapsed or terminated</div>
+        </button>
       </div>
-      <div class="info-card">
-        <div class="info-card-top" style="background:linear-gradient(135deg,#EDE9FF,#D8B4FE);">
-          <span class="material-icons-round" style="font-size:36px;color:#A614C3;">search</span>
-        </div>
-        <div class="info-card-body">
-          <div class="info-card-title">Appetite Search</div>
-          <div class="info-card-desc"><strong>Not sure if we have a market?</strong> Search our appetite to find coverage options.</div>
-          <div class="info-card-link">Search Appetite →</div>
-        </div>
-      </div>
+    </div>
+    <div class="ds-table-wrap" style="margin-top:20px;">
+      <table class="ds-table">
+        <thead><tr><th>Part</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Card</td><td><code>radius 16px</code> · <code>padding 16px 20px</code> · <code>1px #E5E7EB</code> · it is a <strong>button</strong></td></tr>
+          <tr><td>Head row</td><td><code>flex</code> · <code>items-start</code> · <code>justify-between</code> · <code>gap 12px</code> · <code>margin-bottom 2px</code></td></tr>
+          <tr><td>Label</td><td>15px / 600 · truncates</td></tr>
+          <tr><td>Number</td><td>24px / 600 · <code>line-height 1</code> · <code>letter-spacing -0.025em</code> · right-aligned, never shrinks</td></tr>
+          <tr><td>Caption</td><td>11px / 400 · <code>#6B7280</code></td></tr>
+          <tr><td>Selected</td><td>Border and number both <code>#A614C3</code> · <code>#4ECDC4</code> in dark</td></tr>
+          <tr><td>Hover</td><td>Unselected border → <code>#D1D5DB</code> · <code>rgba(255,255,255,.20)</code> in dark</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-
-    <!-- ── Prev / Next navigation ── -->
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-32-calendar.html">
       <span class="ds-page-nav-label">← Previous</span>
@@ -323,9 +298,11 @@ body.dark-mode #marketplace-tile .mk-card[style*="border-color:transparent"] { b
 
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
-  <a class="ds-toc-item active" href="#feature-card">Feature card</a>
-  <a class="ds-toc-item" href="#info-card">Info card</a>
+  <a class="ds-toc-item active" href="#lob-tile">LOB tile</a>
+  <a class="ds-toc-item" href="#promo-card">Promo card</a>
+  <a class="ds-toc-item" href="#stat-card">Stat card</a>
 </aside>
+</div>
 
 
 

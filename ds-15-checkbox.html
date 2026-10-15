@@ -5,7 +5,26 @@
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 <style>
-body.dark-mode .cb-disabled{background:rgba(255,255,255,0.04) !important;border-color:rgba(255,255,255,0.10) !important;}
+/* ── CHECKBOX ──
+   Transcribed from the live Norbielink app (table View menu).
+   16px box, 4px radius. Checked is the brand GRADIENT with no border at all —
+   not a flat #A614C3 fill — and the tick is a 9x7 stroked path, not a
+   Material glyph. Unchecked sits on the card surface so it stays visible
+   in dark mode instead of disappearing into the page. */
+.cb {
+  width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #FFFFFF; border: 1.5px solid #D1D5DB;
+  box-sizing: border-box; transition: background .12s, border-color .12s;
+}
+.cb-checked {
+  background: linear-gradient(88.54deg, #5C2ED4 0.1%, #A614C3 63.88%);
+  border: none;
+}
+.cb-disabled { background: #F3F4F6; border: 1.5px solid #D1D5DB; opacity: .6; }
+body.dark-mode .cb { background: #1E2240; border-color: rgba(255,255,255,0.18); }
+body.dark-mode .cb-checked { background: linear-gradient(88.54deg, #5C2ED4 0.1%, #A614C3 63.88%); border: none; }
+body.dark-mode .cb-disabled { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.10); }
 </style>
 </head>
 <body class="btis-layout">
@@ -100,7 +119,6 @@ body.dark-mode .cb-disabled{background:rgba(255,255,255,0.04) !important;border-
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>
@@ -128,16 +146,16 @@ body.dark-mode .cb-disabled{background:rgba(255,255,255,0.04) !important;border-
 
 <div class="ds-section" id="states"><div class="ds-section-title">States</div>
 <div class="ds-example" style="gap:32px;">
-  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="width:20px;height:20px;border-radius:4px;background:#A614C3;display:flex;align-items:center;justify-content:center;"><span class="material-icons-round" style="font-size:14px;color:white;">check</span></div><span style="font-size:12px;color:#9CA3AF;font-weight:500;">Selected</span></div>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="width:20px;height:20px;border-radius:4px;border:2px solid #D1D5DB;background:white;"></div><span style="font-size:12px;color:#9CA3AF;font-weight:500;">Unselected</span></div>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="width:20px;height:20px;border-radius:4px;background:#A614C3;display:flex;align-items:center;justify-content:center;"><span class="material-icons-round" style="font-size:14px;color:white;">remove</span></div><span style="font-size:12px;color:#9CA3AF;font-weight:500;">Indeterminate</span></div>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div class="cb-disabled" style="width:20px;height:20px;border-radius:4px;background:#F3F4F6;border:2px solid #D1D5DB;"></div><span style="font-size:12px;color:#9CA3AF;font-weight:500;">Disabled</span></div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div class="cb cb-checked"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" aria-hidden="true"><path d="M1 3.5L3.5 6L8 1" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-size:12px;color:#9CA3AF;font-weight:500;">Selected</span></div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div class="cb"></div><span style="font-size:12px;color:#9CA3AF;font-weight:500;">Unselected</span></div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div class="cb cb-checked"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" aria-hidden="true"><path d="M1 3.5H8" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"></path></svg></div><span style="font-size:12px;color:#9CA3AF;font-weight:500;">Indeterminate</span></div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div class="cb cb-disabled"></div><span style="font-size:12px;color:#9CA3AF;font-weight:500;">Disabled</span></div>
 </div>
 <div class="ds-subsection-title">With labels</div>
 <div class="ds-example" style="flex-direction:column;align-items:flex-start;gap:14px;">
-  <label style="display:flex;align-items:center;gap:12px;cursor:pointer;"><div style="width:20px;height:20px;border-radius:4px;background:#A614C3;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span class="material-icons-round" style="font-size:14px;color:white;">check</span></div><span style="font-size:14px;font-weight:500;color:#374151;">Enable notifications</span></label>
-  <label style="display:flex;align-items:center;gap:12px;cursor:pointer;"><div style="width:20px;height:20px;border-radius:4px;border:2px solid #D1D5DB;background:white;flex-shrink:0;"></div><span style="font-size:14px;font-weight:500;color:#374151;">Remember me</span></label>
-  <label style="display:flex;align-items:center;gap:12px;cursor:pointer;"><div style="width:20px;height:20px;border-radius:4px;border:2px solid #D1D5DB;background:white;flex-shrink:0;"></div><span style="font-size:14px;font-weight:500;color:#374151;">Subscribe to newsletter</span></label>
+  <label style="display:flex;align-items:center;gap:12px;cursor:pointer;"><div class="cb cb-checked"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" aria-hidden="true"><path d="M1 3.5L3.5 6L8 1" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-size:14px;font-weight:500;color:#374151;">Enable notifications</span></label>
+  <label style="display:flex;align-items:center;gap:12px;cursor:pointer;"><div class="cb"></div><span style="font-size:14px;font-weight:500;color:#374151;">Remember me</span></label>
+  <label style="display:flex;align-items:center;gap:12px;cursor:pointer;"><div class="cb"></div><span style="font-size:14px;font-weight:500;color:#374151;">Subscribe to newsletter</span></label>
 </div></div>
 <div class="ds-section" id="specs"><div class="ds-section-title">Specs</div>
 <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Property</th><th>Value</th><th>Token</th></tr></thead><tbody>

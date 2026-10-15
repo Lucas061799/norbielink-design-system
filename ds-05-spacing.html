@@ -4,26 +4,6 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
-.space-row { display: flex; align-items: center; gap: 20px; padding: 14px 24px; border-bottom: 1px solid var(--gray-100); }
-.space-row:last-child { border-bottom: none; }
-.space-row:hover { background: var(--gray-50); }
-.space-bar-wrap { width: 200px; flex-shrink: 0; }
-.space-bar { height: 20px; background: linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%); border-radius: 4px; }
-.space-token { font-size: 13px; font-weight: 600; color: var(--gray-800); width: 90px; flex-shrink: 0; }
-.space-px { font-size: 13px; color: var(--gray-500); width: 50px; flex-shrink: 0; font-family: monospace; }
-.space-rem { font-size: 12px; color: var(--gray-400); width: 60px; flex-shrink: 0; font-family: monospace; }
-.space-usage { font-size: 12px; color: var(--gray-500); flex: 1; }
-
-.grid-demo { background: white; border-radius: 16px; padding: 32px; border: 1px solid var(--gray-200); }
-.grid-cols { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-bottom: 12px; }
-.grid-col { background: rgba(92,46,212,0.08); border: 1px solid rgba(92,46,212,0.2); border-radius: 4px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #A614C3; }
-
-.inset-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.inset-box { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.inset-demo { background: rgba(166,20,195,0.06); border-radius: 8px; display: flex; }
-.inset-inner { background: rgba(92,46,212,0.15); border-radius: 4px; width: 48px; height: 48px; }
-.inset-label { font-size: 11px; font-weight: 700; color: var(--gray-700); }
-.inset-val { font-size: 10px; color: var(--gray-400); font-family: monospace; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -118,7 +98,6 @@
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>
@@ -132,116 +111,89 @@
       <a class="ds-nav-arrow-btn" href="ds-26-accordion.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-  <p class="ds-page-desc">Norbielink uses a <strong>4px base unit</strong> spacing scale. All padding, margin, and gap values must be multiples of 4. This creates visual rhythm and ensures pixel-perfect alignment across components.</p>
+  <p class="ds-page-desc">Norbielink has no 4- or 8-point grid. Spacing is a short set of values chosen per
+  component — gaps cluster tightly around <code>12px</code>, and padding is almost always an asymmetric
+  vertical/horizontal pair tuned to the control.</p>
 
-  <!-- HERO SCALE -->
-  <div class="ds-example" style="flex-direction:column; align-items:center; justify-content:center; gap:16px; padding:48px; ">
-    <div style="display:flex; gap:10px; align-items:flex-end; justify-content:center;">
-      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-        <div style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);width:4px;height:20px;border-radius:2px;"></div>
-        <span style="font-size:10px;font-family:monospace;color:#A614C3;">4</span>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-        <div style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);width:8px;height:28px;border-radius:2px;"></div>
-        <span style="font-size:10px;font-family:monospace;color:#A614C3;">8</span>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-        <div style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);width:12px;height:36px;border-radius:2px;"></div>
-        <span style="font-size:10px;font-family:monospace;color:#A614C3;">12</span>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-        <div style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);width:16px;height:44px;border-radius:2px;"></div>
-        <span style="font-size:10px;font-family:monospace;color:#A614C3;">16</span>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-        <div style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);width:20px;height:52px;border-radius:2px;"></div>
-        <span style="font-size:10px;font-family:monospace;color:#A614C3;">20</span>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-        <div style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);width:24px;height:60px;border-radius:2px;"></div>
-        <span style="font-size:10px;font-family:monospace;color:#A614C3;">24</span>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-        <div style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);width:32px;height:68px;border-radius:2px;"></div>
-        <span style="font-size:10px;font-family:monospace;color:#A614C3;">32</span>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-        <div style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);width:40px;height:76px;border-radius:2px;"></div>
-        <span style="font-size:10px;font-family:monospace;color:#A614C3;">40</span>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-        <div style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);width:48px;height:84px;border-radius:2px;"></div>
-        <span style="font-size:10px;font-family:monospace;color:#A614C3;">48</span>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-        <div style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);width:64px;height:92px;border-radius:2px;"></div>
-        <span style="font-size:10px;font-family:monospace;color:#A614C3;">64</span>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-        <div style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);width:80px;height:100px;border-radius:2px;"></div>
-        <span style="font-size:10px;font-family:monospace;color:#A614C3;">80</span>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-        <div style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);width:96px;height:108px;border-radius:2px;"></div>
-        <span style="font-size:10px;font-family:monospace;color:#A614C3;">96</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="ds-divider"></div>
-
-  <!-- SPACING TABLE -->
   <div class="ds-section" id="spacing-scale">
-    <h2 class="ds-section-title">Spacing scale</h2>
-    <p class="ds-section-desc">The full token set from <code>space-1</code> (4px) to <code>space-24</code> (96px).</p>
-
+    <h2 class="ds-section-title">Gaps</h2>
+    <p class="ds-section-desc">Five values cover every flex gap in the app. Counts are occurrences on a representative screen.</p>
     <div class="ds-table-wrap">
-      <div style="display:grid;grid-template-columns:90px 60px 60px 200px 1fr;gap:0;background:var(--gray-50);border-bottom:1px solid var(--gray-200);padding:10px 24px;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gray-400);">Token</div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gray-400);">px</div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gray-400);">rem</div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gray-400);">Visual</div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gray-400);">Common uses</div>
-      </div>
-      <div class="space-row"><div class="space-token">space-1</div><div class="space-px">4px</div><div class="space-rem">0.25rem</div><div class="space-bar-wrap"><div class="space-bar" style="width:4px;"></div></div><div class="space-usage">Icon gap, micro nudge</div></div>
-      <div class="space-row"><div class="space-token">space-2</div><div class="space-px">8px</div><div class="space-rem">0.5rem</div><div class="space-bar-wrap"><div class="space-bar" style="width:8px;"></div></div><div class="space-usage">Badge padding, tight rows</div></div>
-      <div class="space-row"><div class="space-token">space-3</div><div class="space-px">12px</div><div class="space-rem">0.75rem</div><div class="space-bar-wrap"><div class="space-bar" style="width:12px;"></div></div><div class="space-usage">Nav item gap, button icon gap</div></div>
-      <div class="space-row"><div class="space-token">space-4</div><div class="space-px">16px</div><div class="space-rem">1rem</div><div class="space-bar-wrap"><div class="space-bar" style="width:16px;"></div></div><div class="space-usage">Standard gap, nav item padding-x, card gap</div></div>
-      <div class="space-row"><div class="space-token">space-5</div><div class="space-px">20px</div><div class="space-rem">1.25rem</div><div class="space-bar-wrap"><div class="space-bar" style="width:20px;"></div></div><div class="space-usage">Nav item padding, sidebar internal spacing</div></div>
-      <div class="space-row"><div class="space-token">space-6</div><div class="space-px">24px</div><div class="space-rem">1.5rem</div><div class="space-bar-wrap"><div class="space-bar" style="width:24px;"></div></div><div class="space-usage">Card padding, section gap, table padding-x</div></div>
-      <div class="space-row"><div class="space-token">space-8</div><div class="space-px">32px</div><div class="space-rem">2rem</div><div class="space-bar-wrap"><div class="space-bar" style="width:32px;"></div></div><div class="space-usage">Grid gap, modal padding, section bottom</div></div>
-      <div class="space-row"><div class="space-token">space-10</div><div class="space-px">40px</div><div class="space-rem">2.5rem</div><div class="space-bar-wrap"><div class="space-bar" style="width:40px;"></div></div><div class="space-usage">Example container padding, hero spacing</div></div>
-      <div class="space-row"><div class="space-token">space-12</div><div class="space-px">48px</div><div class="space-rem">3rem</div><div class="space-bar-wrap"><div class="space-bar" style="width:48px;"></div></div><div class="space-usage">Page header top margin, section spacing</div></div>
-      <div class="space-row"><div class="space-token">space-16</div><div class="space-px">64px</div><div class="space-rem">4rem</div><div class="space-bar-wrap"><div class="space-bar" style="width:64px;"></div></div><div class="space-usage">Section margin-bottom, divider spacing</div></div>
-      <div class="space-row"><div class="space-token">space-20</div><div class="space-px">80px</div><div class="space-rem">5rem</div><div class="space-bar-wrap"><div class="space-bar" style="width:80px;"></div></div><div class="space-usage">Page content padding-x, layout gutter</div></div>
-      <div class="space-row"><div class="space-token">space-24</div><div class="space-px">96px</div><div class="space-rem">6rem</div><div class="space-bar-wrap"><div class="space-bar" style="width:96px;"></div></div><div class="space-usage">Page bottom padding, hero vertical padding</div></div>
+      <table class="ds-table">
+        <thead><tr><th>Sample</th><th>Gap</th><th>Seen</th><th>Used for</th></tr></thead>
+        <tbody>
+          <tr><td><div style="display:flex;gap:4px;align-items:center;">
+            <span style="width:22px;height:22px;border-radius:6px;background:var(--surface-container);"></span>
+            <span style="width:22px;height:22px;border-radius:6px;background:var(--surface-container);"></span>
+            <span style="width:22px;height:22px;border-radius:6px;background:var(--surface-container);"></span>
+          </div></td><td><code>4px</code></td><td>×8</td><td>Segmented-control segments, tight icon rows</td></tr>
+          <tr><td><div style="display:flex;gap:6px;align-items:center;">
+            <span style="width:22px;height:22px;border-radius:6px;background:var(--surface-container);"></span>
+            <span style="width:22px;height:22px;border-radius:6px;background:var(--surface-container);"></span>
+            <span style="width:22px;height:22px;border-radius:6px;background:var(--surface-container);"></span>
+          </div></td><td><code>6px</code></td><td>×16</td><td>Icon ↔ label inside a chip or status pill</td></tr>
+          <tr><td><div style="display:flex;gap:8px;align-items:center;">
+            <span style="width:22px;height:22px;border-radius:6px;background:var(--surface-container);"></span>
+            <span style="width:22px;height:22px;border-radius:6px;background:var(--surface-container);"></span>
+            <span style="width:22px;height:22px;border-radius:6px;background:var(--surface-container);"></span>
+          </div></td><td><code>8px</code></td><td>×3</td><td>Button content, small clusters</td></tr>
+          <tr><td><div style="display:flex;gap:12px;align-items:center;">
+            <span style="width:22px;height:22px;border-radius:6px;background:var(--surface-container);"></span>
+            <span style="width:22px;height:22px;border-radius:6px;background:var(--surface-container);"></span>
+            <span style="width:22px;height:22px;border-radius:6px;background:var(--surface-container);"></span>
+          </div></td><td><code>12px</code></td><td>×26</td><td>The default — toast parts, alert parts, form rows</td></tr>
+          <tr><td><div style="display:flex;gap:16px;align-items:center;">
+            <span style="width:22px;height:22px;border-radius:6px;background:var(--surface-container);"></span>
+            <span style="width:22px;height:22px;border-radius:6px;background:var(--surface-container);"></span>
+            <span style="width:22px;height:22px;border-radius:6px;background:var(--surface-container);"></span>
+          </div></td><td><code>16px</code></td><td>×12</td><td>Card and section groupings</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
   <div class="ds-divider"></div>
 
-  <!-- LAYOUT GRID -->
   <div class="ds-section" id="layout-grid">
-    <h2 class="ds-section-title">Layout grid</h2>
-    <p class="ds-section-desc">Norbielink layouts use a 12-column grid with a 16px gutter at 1440px wide (1920px for full-bleed screens). The sidebar occupies 2–3 columns; content fills the remaining columns.</p>
-    <div class="grid-demo">
-      <div style="font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gray-400);margin-bottom:12px;">12-Column Grid — 1440px canvas, 16px gutter</div>
-      <div class="grid-cols">
-        <div class="grid-col">1</div><div class="grid-col">2</div><div class="grid-col">3</div>
-        <div class="grid-col">4</div><div class="grid-col">5</div><div class="grid-col">6</div>
-        <div class="grid-col">7</div><div class="grid-col">8</div><div class="grid-col">9</div>
-        <div class="grid-col">10</div><div class="grid-col">11</div><div class="grid-col">12</div>
-      </div>
-      <div style="display:grid;grid-template-columns:2fr 8fr 2fr;gap:16px;margin-top:4px;">
-        <div style="background:rgba(92,46,212,0.12);border:1px solid rgba(92,46,212,0.3);border-radius:4px;padding:8px;text-align:center;font-size:11px;font-weight:700;color:#A614C3;">Sidebar<br>2 col / 280px</div>
-        <div style="background:rgba(92,46,212,0.06);border:1px solid rgba(92,46,212,0.15);border-radius:4px;padding:8px;text-align:center;font-size:11px;font-weight:700;color:#A614C3;">Main Content<br>8 col / ~900px</div>
-        <div style="background:rgba(92,46,212,0.08);border:1px solid rgba(92,46,212,0.2);border-radius:4px;padding:8px;text-align:center;font-size:11px;font-weight:700;color:#A614C3;">TOC<br>2 col / 220px</div>
-      </div>
+    <h2 class="ds-section-title">Padding</h2>
+    <p class="ds-section-desc">Paired values, smallest to largest. The vertical figure is almost always well under the
+    horizontal one — that ratio is what makes the product’s controls read compact.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Padding</th><th>Applies to</th></tr></thead>
+        <tbody>
+          <tr><td><code>1px 6px</code></td><td>PRO badge</td></tr>
+          <tr><td><code>3px 8px</code></td><td>Status chip · NEW badge</td></tr>
+          <tr><td><code>3px 10px</code></td><td>Pill badge</td></tr>
+          <tr><td><code>3px 12px</code></td><td>Tonal status pill</td></tr>
+          <tr><td><code>4px 10px</code></td><td>Filter pill</td></tr>
+          <tr><td><code>4px 12px</code></td><td>Segmented segment</td></tr>
+          <tr><td><code>6px 10px</code></td><td>Toast pill</td></tr>
+          <tr><td><code>6px 12px</code></td><td>Secondary button</td></tr>
+          <tr><td><code>7px 12px</code></td><td>Toolbar control — the most common padding</td></tr>
+          <tr><td><code>9px 16px</code></td><td>Primary button</td></tr>
+          <tr><td><code>9px 17px</code></td><td>Dialog button</td></tr>
+          <tr><td><code>9px 18px</code></td><td>Elevated primary</td></tr>
+          <tr><td><code>10px 14px</code></td><td>Menu item</td></tr>
+          <tr><td><code>12px 14px</code></td><td>Toast card</td></tr>
+          <tr><td><code>12px 16px</code></td><td>Tab</td></tr>
+          <tr><td><code>14px 20px</code></td><td>Table row</td></tr>
+          <tr><td><code>16px</code></td><td>Alert banner</td></tr>
+          <tr><td><code>16px 20px</code></td><td>KPI tile</td></tr>
+          <tr><td><code>24px</code></td><td>Dialog panel</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ds-table-wrap" style="margin-top:24px;">
+      <table class="ds-table"><tbody>
+        <tr><td>Pick the pair that belongs to the component, do not derive it from a grid step.</td></tr>
+        <tr><td><code>7px 12px</code> is the most common value in the product — it is the toolbar control.</td></tr>
+        <tr><td>Page content sits in a <code>48px</code> gutter; cards use <code>16–24px</code> internally.</td></tr>
+      </tbody></table>
     </div>
   </div>
 
-
-    <!-- ── Prev / Next navigation ── -->
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-04-shape.html">
       <span class="ds-page-nav-label">← Previous</span>
@@ -257,8 +209,8 @@
 
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
-  <a class="ds-toc-item active" href="#spacing-scale">Spacing scale</a>
-  <a class="ds-toc-item" href="#layout-grid">Layout grid</a>
+  <a class="ds-toc-item active" href="#spacing-scale">Gaps</a>
+  <a class="ds-toc-item" href="#layout-grid">Padding</a>
 </aside>
 
 

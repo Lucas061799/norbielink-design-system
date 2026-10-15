@@ -3,23 +3,57 @@
 <title>Avatar — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;overflow:hidden;flex-shrink:0;}
-.av-sm{width:32px;height:32px;font-size:11px;}
-.av-lg{width:56px;height:56px;font-size:20px;}
-.av-xl{width:72px;height:72px;font-size:26px;}
-.av-img{background:#eee;}
-.av-img img{width:100%;height:100%;object-fit:cover;}
-.av-initials{background:#f0f0f0;color:#555;}
-.av-teal{background:rgba(78,205,196,0.10);border:1.5px solid #4ECDC4;color:#2D9B8A;}
-.av-purple{background:rgba(166,20,195,0.10);border:1.5px solid #A614C3;color:#A614C3;}
-.av-dark-bg{background:#27272a;color:rgba(255,255,255,.7);}
+/* ── AVATAR ──
+   Transcribed from the live Norbielink sidebar / table rows.
+   36px default, 2.5px teal ring on a 10% teal wash, initials drawn as TEAL
+   GRADIENT TEXT. The old near-white `.av-initials` chip became a glaring
+   white blob on a dark page, which is what it was reported for. */
+.av{width:36px;height:36px;border-radius:9999px;display:flex;align-items:center;justify-content:center;
+    font-family:'Montserrat',sans-serif;font-weight:600;font-size:13px;overflow:hidden;flex-shrink:0;
+    background:rgba(115,201,183,0.10);border:2.5px solid #73C9B7;box-sizing:border-box;}
+.av-sm{width:28px;height:28px;font-size:11px;border-width:2px;}
+.av-lg{width:48px;height:48px;font-size:16px;}
+.av-xl{width:64px;height:64px;font-size:20px;}
+
+/* Initials are gradient-filled, so they need no own colour. */
+.av-initials,.av-teal{
+  background:rgba(115,201,183,0.10);border-color:#73C9B7;
+  background-image:none;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+}
+.av-initials,.av-teal{
+  background:linear-gradient(135deg,#73C9B7 0%,#4FA897 100%) text, rgba(115,201,183,0.10);
+  -webkit-background-clip:text, border-box;background-clip:text, border-box;
+}
+/* Brand variant — same construction in the purple ramp. */
+.av-purple{
+  border-color:#A614C3;
+  background:linear-gradient(88.54deg,#5C2ED4 0.1%,#A614C3 63.88%) text, rgba(166,20,195,0.08);
+  -webkit-background-clip:text, border-box;background-clip:text, border-box;
+  color:transparent;-webkit-text-fill-color:transparent;
+}
+body.dark-mode .av,.av-dark-bg{background:rgba(115,201,183,0.18);}
+body.dark-mode .av-initials,body.dark-mode .av-teal{
+  background:linear-gradient(135deg,#73C9B7 0%,#4FA897 100%) text, rgba(115,201,183,0.18);
+  -webkit-background-clip:text, border-box;background-clip:text, border-box;
+}
+body.dark-mode .av-purple{
+  background:linear-gradient(88.54deg,#A855F7 0.1%,#D946EF 63.88%) text, rgba(167,139,250,0.18);
+  -webkit-background-clip:text, border-box;background-clip:text, border-box;
+}
+body.dark-mode .av-img{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.12);}
+
 .av-group{display:flex;align-items:center;}
-.av-group .av{border:2px solid #fff;margin-left:-10px;}
+.av-group .av{margin-left:-10px;outline:2px solid #FFFFFF;outline-offset:0;}
 .av-group .av:first-child{margin-left:0;}
+body.dark-mode .av-group .av{outline-color:#1E2240;}
+
 .av-badge{position:relative;display:inline-flex;}
-.av-status{position:absolute;bottom:1px;right:1px;width:10px;height:10px;border-radius:50%;border:2px solid #fff;background:#1D9E6B;}
-.av-status.away{background:#E6A817;}
-.av-status.offline{background:#aaa;}
+.av-status{position:absolute;bottom:0;right:0;width:10px;height:10px;border-radius:9999px;border:2px solid #FFFFFF;background:#73C9B7;}
+.av-status.away{background:#F59E0B;}
+.av-status.offline{background:#9CA3AF;}
+body.dark-mode .av-status{border-color:#1E2240;}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -115,7 +149,6 @@
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>

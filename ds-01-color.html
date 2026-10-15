@@ -4,42 +4,29 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
-.scheme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
-.role-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.role-swatch { border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-.role-block { height: 72px; }
-.role-info { padding: 10px 12px; background: white; }
-.role-name { font-size: 12px; font-weight: 700; color: var(--gray-800); margin-bottom: 2px; }
-.role-desc { font-size: 11px; color: var(--gray-400); }
-.role-hex  { font-size: 11px; font-family: monospace; color: var(--gray-500); }
-
-.scale-row { display: flex; border-radius: 12px; overflow: hidden; margin-bottom: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
-.scale-cell { flex: 1; height: 56px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2px; }
-.scale-num { font-size: 10px; font-weight: 700; }
-.scale-val { font-size: 9px; font-family: monospace; opacity: 0.8; }
-
-.semantic-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.sem-card { border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 8px; }
-.sem-title { font-size: 13px; font-weight: 700; }
-.sem-hex { font-size: 11px; font-family: monospace; }
-.sem-usage { font-size: 11px; opacity: 0.8; }
-
-.dark-swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 20px; background: #0F1120; border-radius: 16px; }
-.dark-swatch { border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #191D35; }
-.dark-block { height: 64px; }
-.dark-info { padding: 10px 12px; }
-.dark-name { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.85); }
-.dark-hex  { font-size: 10px; font-family: monospace; color: rgba(255,255,255,0.45); }
+/* Role cards. `.role-use` and `.role-dark` had no rules at all, so they fell
+   back to the page's 14px — which is what made these cards read oversized and
+   unevenly spaced. Type follows the product scale: 13/600, 12, 11. */
+.role-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(208px, 1fr)); gap: 16px; align-items: stretch; }
+.role-swatch { display: flex; flex-direction: column; border-radius: 12px; overflow: hidden;
+  background: var(--card-bg); border: 1px solid var(--gray-200); }
+.role-block { height: 64px; flex-shrink: 0; }
+.role-info { display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; flex: 1; }
+.role-name { font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--gray-800); }
+.role-hex  { font-size: 11px; line-height: 1.5; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--gray-400); letter-spacing: 0; }
+.role-use  { font-size: 12px; line-height: 1.5; color: var(--gray-500); }
+.role-dark { margin-top: auto; padding-top: 8px; border-top: 1px solid var(--gray-100);
+  font-size: 11px; line-height: 1.5; color: var(--gray-400); }
+.role-dark code { font-size: 10px; word-break: break-word; }
 
 /* Dark-scheme section + its preceding divider + its TOC entry only visible in dark mode */
 #dark-scheme,
 #dark-scheme + .ds-divider,
 .ds-divider:has(+ #dark-scheme),
-.ds-toc-item[href="#dark-scheme"] { display: none; }
 body.dark-mode #dark-scheme,
 body.dark-mode #dark-scheme + .ds-divider,
 body.dark-mode .ds-divider:has(+ #dark-scheme),
-body.dark-mode .ds-toc-item[href="#dark-scheme"] { display: block; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -134,7 +121,6 @@ body.dark-mode .ds-toc-item[href="#dark-scheme"] { display: block; }
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>
@@ -157,146 +143,125 @@ body.dark-mode .ds-toc-item[href="#dark-scheme"] { display: block; }
       <a class="ds-nav-arrow-btn" href="ds-02-typography.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-  <p class="ds-page-desc">Norbielink's color system is built on a <strong>purple gradient</strong> as the primary brand identity (<code>#5C2ED4 → #A614C3</code>) and <strong>Teal</strong> as the secondary accent. Both light and dark schemes are fully supported.</p>
+  <p class="ds-page-desc">Transcribed from the theme object the Norbielink app ships. The brand is a
+  <strong>purple gradient</strong> (<code>#5C2ED4 → #A614C3</code>); <strong>teal</strong> <code>#73C9B7</code> is the
+  accent and also the positive state. Neutrals are a cool gray ramp — there is no green tint anywhere in the product.</p>
 
-  <!-- HERO PREVIEW -->
-  <div class="ds-example" style="padding: 48px; gap: 0; flex-direction: column;">
+  <!-- HERO -->
+  <div class="ds-example" style="padding:48px; gap:0; flex-direction:column;">
     <div class="m3-swatch-row" style="width:100%; border-radius:12px 12px 0 0;">
-      <div class="m3-swatch" style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%); flex:3;">
-        <div class="m3-swatch-name" style="color:white;">Primary Gradient</div>
-        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.7);">#5C2ED4 → #A614C3</div>
+      <div class="m3-swatch" style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);flex:3;">
+        <div class="m3-swatch-name" style="color:#fff;">Primary Gradient</div>
+        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.72);">#5C2ED4 → #A614C3</div>
       </div>
-      <div class="m3-swatch" style="background:#5C2ED4;">
-        <div class="m3-swatch-name" style="color:white;">Primary Deep</div>
-        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.7);">#5C2ED4</div>
+      <div class="m3-swatch" style="background:#5C2ED4;flex:1;">
+        <div class="m3-swatch-name" style="color:#fff;">Gradient Start</div>
+        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.72);">#5C2ED4</div>
       </div>
-      <div class="m3-swatch" style="background:#A614C3;">
-        <div class="m3-swatch-name" style="color:white;">Primary Highlight</div>
-        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.7);">#A614C3</div>
+      <div class="m3-swatch" style="background:#A614C3;flex:1;">
+        <div class="m3-swatch-name" style="color:#fff;">Razz</div>
+        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.72);">#A614C3</div>
       </div>
-      <div class="m3-swatch" style="background:#EDE7FF;">
-        <div class="m3-swatch-name" style="color:#5C2ED4;">Primary Tint</div>
-        <div class="m3-swatch-hex" style="color:#5C2ED4;">#EDE7FF</div>
+      <div class="m3-swatch" style="background:#73C9B7;flex:1;">
+        <div class="m3-swatch-name" style="color:#fff;">Teal</div>
+        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.72);">#73C9B7</div>
       </div>
-      <div class="m3-swatch" style="background:#4ECDC4; flex:2;">
-        <div class="m3-swatch-name" style="color:white;">Teal (Accent)</div>
-        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.7);">#4ECDC4</div>
-      </div>
-      <div class="m3-swatch" style="background:#74C3B7;">
-        <div class="m3-swatch-name" style="color:white;">Teal Light</div>
-        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.7);">#74C3B7</div>
-      </div>
-      <div class="m3-swatch" style="background:#E0F6F5;">
-        <div class="m3-swatch-name" style="color:#1A7A74;">Teal Tint</div>
-        <div class="m3-swatch-hex" style="color:#1A7A74;">#E0F6F5</div>
+      <div class="m3-swatch" style="background:#74C3B7;flex:1;">
+        <div class="m3-swatch-name" style="color:#fff;">Teal Renewal</div>
+        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.72);">#74C3B7</div>
       </div>
     </div>
-    <div class="m3-swatch-row" style="width:100%; border-radius:0 0 12px 12px; margin-top:4px; height:56px;">
-      <div class="m3-swatch" style="background:#111827;">
-        <div class="m3-swatch-name" style="color:white;font-size:9px;">On Surface</div>
-        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.5);">#111827</div>
+    <div class="m3-swatch-row" style="width:100%; border-radius:0 0 12px 12px;">
+      <div class="m3-swatch" style="background:#1F2937;flex:1;">
+        <div class="m3-swatch-name" style="color:#fff;">Text</div>
+        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.72);">#1F2937</div>
       </div>
-      <div class="m3-swatch" style="background:#374151;">
-        <div class="m3-swatch-name" style="color:white;font-size:9px;">Outline Variant</div>
+      <div class="m3-swatch" style="background:#6B7280;flex:1;">
+        <div class="m3-swatch-name" style="color:#fff;">Muted</div>
+        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.72);">#6B7280</div>
       </div>
-      <div class="m3-swatch" style="background:#6B7280;">
-        <div class="m3-swatch-name" style="color:white;font-size:9px;">Outline</div>
+      <div class="m3-swatch" style="background:#9CA3AF;flex:1;">
+        <div class="m3-swatch-name" style="color:#fff;">Sub</div>
+        <div class="m3-swatch-hex" style="color:rgba(255,255,255,0.72);">#9CA3AF</div>
       </div>
-      <div class="m3-swatch" style="background:#E5E7EB;">
-        <div class="m3-swatch-name" style="color:#374151;font-size:9px;">Surface Variant</div>
+      <div class="m3-swatch" style="background:#D1D5DB;flex:1;">
+        <div class="m3-swatch-name" style="color:#1F2937;">Border Strong</div>
+        <div class="m3-swatch-hex" style="color:rgba(31,41,55,0.65);">#D1D5DB</div>
       </div>
-      <div class="m3-swatch" style="background:#F3F4F6;">
-        <div class="m3-swatch-name" style="color:#374151;font-size:9px;">Surface Container</div>
+      <div class="m3-swatch" style="background:#E5E7EB;flex:1;">
+        <div class="m3-swatch-name" style="color:#1F2937;">Border</div>
+        <div class="m3-swatch-hex" style="color:rgba(31,41,55,0.65);">#E5E7EB</div>
       </div>
-      <div class="m3-swatch" style="background:var(--page-bg); border:1px solid #E5E7EB;">
-        <div class="m3-swatch-name" style="color:#374151;font-size:9px;">Surface / Background</div>
+      <div class="m3-swatch" style="background:#F3F4F6;flex:1;">
+        <div class="m3-swatch-name" style="color:#1F2937;">Border Soft</div>
+        <div class="m3-swatch-hex" style="color:rgba(31,41,55,0.65);">#F3F4F6</div>
       </div>
-      <div class="m3-swatch" style="background:#10B981;">
-        <div class="m3-swatch-name" style="color:white;font-size:9px;">Success</div>
-      </div>
-      <div class="m3-swatch" style="background:#F97316;">
-        <div class="m3-swatch-name" style="color:white;font-size:9px;">Warning</div>
-      </div>
-      <div class="m3-swatch" style="background:#EF4444;">
-        <div class="m3-swatch-name" style="color:white;font-size:9px;">Error</div>
+      <div class="m3-swatch" style="background:#F9FAFB;flex:1;border:1px solid #E5E7EB;">
+        <div class="m3-swatch-name" style="color:#1F2937;">Hover / Chip</div>
+        <div class="m3-swatch-hex" style="color:rgba(31,41,55,0.65);">#F9FAFB</div>
       </div>
     </div>
   </div>
 
   <div class="ds-divider"></div>
 
-  <!-- COLOR ROLES -->
+  <!-- BRAND -->
   <div class="ds-section" id="color-roles">
-    <h2 class="ds-section-title">Color roles</h2>
-    <p class="ds-section-desc">Each color role has a specific purpose. Primary roles drive brand identity; secondary roles drive actions; error/semantic roles communicate state.</p>
-
+    <h2 class="ds-section-title">Brand &amp; accent</h2>
+    <p class="ds-section-desc">The gradient is the brand. It fills primary buttons, the active tab underline, the NEW badge and gradient text; the flat <code>#A614C3</code> — the product calls it <strong>Razz</strong> — is used for links, active icons and status dots.</p>
     <div class="role-grid">
-      <!-- Primary (Purple Gradient) -->
       <div class="role-swatch">
-        <div class="role-block" style="background: linear-gradient(90deg, #5C2ED4 0%, #A614C3 65%);"></div>
+        <div class="role-block" style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);"></div>
         <div class="role-info">
           <div class="role-name">Primary Gradient</div>
           <div class="role-hex">#5C2ED4 → #A614C3</div>
-          <div class="role-desc">Buttons, nav active state, focus rings, highlights</div>
+          <div class="role-use">Primary buttons, NEW badge, active tab underline</div>
+          <div class="role-dark">Dark · radial wash over <code>88.34deg</code></div>
         </div>
       </div>
       <div class="role-swatch">
-        <div class="role-block" style="background: #EDE7FF;"></div>
+        <div class="role-block" style="background:linear-gradient(88.54deg,#5C2ED4 0.1%,#A614C3 63.88%);"></div>
         <div class="role-info">
-          <div class="role-name">Primary Tint</div>
-          <div class="role-hex">#EDE7FF</div>
-          <div class="role-desc">Tonal button fill, icon backgrounds, active chip</div>
-        </div>
-      </div>
-      <!-- Secondary (Teal Accent) -->
-      <div class="role-swatch">
-        <div class="role-block" style="background: linear-gradient(135deg, #4ECDC4, #74C3B7);"></div>
-        <div class="role-info">
-          <div class="role-name">Teal (Accent)</div>
-          <div class="role-hex">#4ECDC4</div>
-          <div class="role-desc">Secondary actions, accent badges, avatar fills</div>
+          <div class="role-name">Gradient (tonal / text)</div>
+          <div class="role-hex">88.54deg</div>
+          <div class="role-use">Gradient text, tonal pills, checkbox fill · 5% as a wash</div>
+          <div class="role-dark">Dark · <code>#A855F7 → #D946EF</code></div>
         </div>
       </div>
       <div class="role-swatch">
-        <div class="role-block" style="background: #E0F6F5;"></div>
+        <div class="role-block" style="background:#A614C3;"></div>
         <div class="role-info">
-          <div class="role-name">Teal Container</div>
-          <div class="role-hex">#E0F6F5</div>
-          <div class="role-desc">Teal badge backgrounds, tonal teal fills</div>
-        </div>
-      </div>
-      <!-- Error -->
-      <div class="role-swatch">
-        <div class="role-block" style="background: #EF4444;"></div>
-        <div class="role-info">
-          <div class="role-name">Error</div>
-          <div class="role-hex">#EF4444</div>
-          <div class="role-desc">Declined status, destructive actions</div>
+          <div class="role-name">Razz</div>
+          <div class="role-hex">#A614C3</div>
+          <div class="role-use">Links, active icons, in-flight status dot</div>
+          <div class="role-dark">Dark · <code>#C084FC</code></div>
         </div>
       </div>
       <div class="role-swatch">
-        <div class="role-block" style="background: #FEE2E2;"></div>
+        <div class="role-block" style="background:#F5E8FB;"></div>
         <div class="role-info">
-          <div class="role-name">Error Container</div>
-          <div class="role-hex">#FEE2E2</div>
-          <div class="role-desc">Error badge backgrounds</div>
-        </div>
-      </div>
-      <!-- Surface -->
-      <div class="role-swatch">
-        <div class="role-block" style="background: #FFFBFE; border:1px solid #E5E7EB;"></div>
-        <div class="role-info">
-          <div class="role-name">Surface</div>
-          <div class="role-hex">#FFFBFE</div>
-          <div class="role-desc">Main page background (light mode)</div>
+          <div class="role-name">Razz Tint</div>
+          <div class="role-hex">#F5E8FB</div>
+          <div class="role-use">Tonal accent backgrounds</div>
+          <div class="role-dark">Dark · <code>rgba(166,20,195,0.15)</code></div>
         </div>
       </div>
       <div class="role-swatch">
-        <div class="role-block" style="background: #F5F5F7;"></div>
+        <div class="role-block" style="background:#73C9B7;"></div>
         <div class="role-info">
-          <div class="role-name">Surface Container</div>
-          <div class="role-hex">#F5F5F7</div>
-          <div class="role-desc">Component example areas, section backgrounds</div>
+          <div class="role-name">Teal</div>
+          <div class="role-hex">#73C9B7</div>
+          <div class="role-use">Accent, avatars, Active + Approved, done dot</div>
+          <div class="role-dark">Dark · <code>#73C9B7 — unchanged</code></div>
+        </div>
+      </div>
+      <div class="role-swatch">
+        <div class="role-block" style="background:#74C3B7;"></div>
+        <div class="role-info">
+          <div class="role-name">Teal Renewal</div>
+          <div class="role-hex">#74C3B7</div>
+          <div class="role-use">Upcoming Renewal(s) only</div>
+          <div class="role-dark">Dark · <code>#74C3B7 — unchanged</code></div>
         </div>
       </div>
     </div>
@@ -304,157 +269,90 @@ body.dark-mode .ds-toc-item[href="#dark-scheme"] { display: block; }
 
   <div class="ds-divider"></div>
 
-  <!-- PURPLE SCALE -->
+  <!-- NEUTRALS -->
   <div class="ds-section" id="color-scale">
-    <h2 class="ds-section-title">Color scale</h2>
-    <p class="ds-section-desc">Full tone scales for both brand colors. Use named roles rather than raw scale values in product code.</p>
-
-    <h3 class="ds-subsection-title">Purple — Primary Deep</h3>
-    <div class="scale-row">
-      <div class="scale-cell" style="background:#EDE7FF;"><div class="scale-num" style="color:#5C2ED4;">50</div><div class="scale-val" style="color:#5C2ED4;">#EDE7FF</div></div>
-      <div class="scale-cell" style="background:#D4C5FF;"><div class="scale-num" style="color:#5C2ED4;">100</div><div class="scale-val" style="color:#5C2ED4;">#D4C5FF</div></div>
-      <div class="scale-cell" style="background:#B09AF7;"><div class="scale-num" style="color:#5C2ED4;">200</div><div class="scale-val" style="color:#5C2ED4;">#B09AF7</div></div>
-      <div class="scale-cell" style="background:#8A6EEB;"><div class="scale-num" style="color:white;">300</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#8A6EEB</div></div>
-      <div class="scale-cell" style="background:#7050DC;"><div class="scale-num" style="color:white;">400</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#7050DC</div></div>
-      <div class="scale-cell" style="background:#5C2ED4;"><div class="scale-num" style="color:white;">500 ★</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#5C2ED4</div></div>
-      <div class="scale-cell" style="background:#4B25B0;"><div class="scale-num" style="color:white;">600</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#4B25B0</div></div>
-      <div class="scale-cell" style="background:#3C1C8C;"><div class="scale-num" style="color:white;">700</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#3C1C8C</div></div>
-      <div class="scale-cell" style="background:#2D1468;"><div class="scale-num" style="color:white;">800</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#2D1468</div></div>
-      <div class="scale-cell" style="background:#1E0D44;"><div class="scale-num" style="color:white;">900</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#1E0D44</div></div>
-    </div>
-
-    <h3 class="ds-subsection-title" style="margin-top:24px;">Purple — Primary Highlight</h3>
-    <div class="scale-row">
-      <div class="scale-cell" style="background:#FCE6FA;"><div class="scale-num" style="color:#A614C3;">50</div><div class="scale-val" style="color:#A614C3;">#FCE6FA</div></div>
-      <div class="scale-cell" style="background:#F5BEF0;"><div class="scale-num" style="color:#A614C3;">100</div><div class="scale-val" style="color:#A614C3;">#F5BEF0</div></div>
-      <div class="scale-cell" style="background:#EC8CE2;"><div class="scale-num" style="color:#A614C3;">200</div><div class="scale-val" style="color:#A614C3;">#EC8CE2</div></div>
-      <div class="scale-cell" style="background:#E060D4;"><div class="scale-num" style="color:white;">300</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#E060D4</div></div>
-      <div class="scale-cell" style="background:#CB33CB;"><div class="scale-num" style="color:white;">400</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#CB33CB</div></div>
-      <div class="scale-cell" style="background:#A614C3;"><div class="scale-num" style="color:white;">500 ★</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#A614C3</div></div>
-      <div class="scale-cell" style="background:#8C10A6;"><div class="scale-num" style="color:white;">600</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#8C10A6</div></div>
-      <div class="scale-cell" style="background:#6F0C85;"><div class="scale-num" style="color:white;">700</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#6F0C85</div></div>
-      <div class="scale-cell" style="background:#520964;"><div class="scale-num" style="color:white;">800</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#520964</div></div>
-      <div class="scale-cell" style="background:#360645;"><div class="scale-num" style="color:white;">900</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#360645</div></div>
-    </div>
-
-    <h3 class="ds-subsection-title" style="margin-top:24px;">Teal — Accent</h3>
-    <div class="scale-row">
-      <div class="scale-cell" style="background:#E0F6F5;"><div class="scale-num" style="color:#1A7A74;">50</div><div class="scale-val" style="color:#1A7A74;">#E0F6F5</div></div>
-      <div class="scale-cell" style="background:#B3ECEB;"><div class="scale-num" style="color:#1A7A74;">100</div><div class="scale-val" style="color:#1A7A74;">#B3ECEB</div></div>
-      <div class="scale-cell" style="background:#80DFDB;"><div class="scale-num" style="color:#1A7A74;">200</div><div class="scale-val" style="color:#1A7A74;">#80DFDB</div></div>
-      <div class="scale-cell" style="background:#4ECDC4;"><div class="scale-num" style="color:white;">300 ★</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#4ECDC4</div></div>
-      <div class="scale-cell" style="background:#38B8AE;"><div class="scale-num" style="color:white;">400</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#38B8AE</div></div>
-      <div class="scale-cell" style="background:#74C3B7;"><div class="scale-num" style="color:white;">500</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#74C3B7</div></div>
-      <div class="scale-cell" style="background:#2A9A92;"><div class="scale-num" style="color:white;">600</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#2A9A92</div></div>
-      <div class="scale-cell" style="background:#1F7A74;"><div class="scale-num" style="color:white;">700</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#1F7A74</div></div>
-      <div class="scale-cell" style="background:#155C58;"><div class="scale-num" style="color:white;">800</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#155C58</div></div>
-      <div class="scale-cell" style="background:#0C3D3A;"><div class="scale-num" style="color:white;">900</div><div class="scale-val" style="color:rgba(255,255,255,0.8);">#0C3D3A</div></div>
-    </div>
-
-  </div>
-
-  <div class="ds-divider"></div>
-
-  <!-- SEMANTIC COLORS -->
-  <div class="ds-section" id="semantic-colors">
-    <h2 class="ds-section-title">Semantic colors</h2>
-    <p class="ds-section-desc">Status and state colors communicate meaning across the platform — used in badges, record statuses, and inline alerts.</p>
-    <div class="semantic-grid">
-      <div class="sem-card" style="background: rgba(16,185,129,0.08); border:1.5px solid rgba(16,185,129,0.2);">
-        <div style="width:36px;height:36px;border-radius:50%;background:#10B981;"></div>
-        <div class="sem-title" style="color:#059669;">Success</div>
-        <div class="sem-hex" style="color:#059669;">#10B981</div>
-        <div class="sem-usage" style="color:#065F46;">Sold/Issued</div>
-      </div>
-      <div class="sem-card" style="background: rgba(249,115,22,0.08); border:1.5px solid rgba(249,115,22,0.2);">
-        <div style="width:36px;height:36px;border-radius:50%;background:#F97316;"></div>
-        <div class="sem-title" style="color:#EA580C;">Warning</div>
-        <div class="sem-hex" style="color:#EA580C;">#F97316</div>
-        <div class="sem-usage" style="color:#9A3412;">Upcoming Renewals, Pending</div>
-      </div>
-      <div class="sem-card" style="background: rgba(239,68,68,0.08); border:1.5px solid rgba(239,68,68,0.2);">
-        <div style="width:36px;height:36px;border-radius:50%;background:#EF4444;"></div>
-        <div class="sem-title" style="color:#DC2626;">Error</div>
-        <div class="sem-hex" style="color:#DC2626;">#EF4444</div>
-        <div class="sem-usage" style="color:#991B1B;">Declined, destructive actions</div>
-      </div>
-      <div class="sem-card" style="background: rgba(59,130,246,0.08); border:1.5px solid rgba(59,130,246,0.2);">
-        <div style="width:36px;height:36px;border-radius:50%;background:#3B82F6;"></div>
-        <div class="sem-title" style="color:#2563EB;">Info</div>
-        <div class="sem-hex" style="color:#2563EB;">#3B82F6</div>
-        <div class="sem-usage" style="color:#1D4ED8;">Add'l Insured, informational</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ds-divider"></div>
-
-  <!-- DARK MODE -->
-  <div class="ds-section" id="dark-scheme">
-    <h2 class="ds-section-title">Dark scheme</h2>
-    <p class="ds-section-desc">Dark mode uses very deep navy surfaces with identical brand accents. All color roles maintain a consistent mapping.</p>
-    <div class="dark-swatches">
-      <div class="dark-swatch">
-        <div class="dark-block" style="background:#0F1120;"></div>
-        <div class="dark-info"><div class="dark-name">Background</div><div class="dark-hex">#0F1120</div></div>
-      </div>
-      <div class="dark-swatch">
-        <div class="dark-block" style="background:#191D35;"></div>
-        <div class="dark-info"><div class="dark-name">Surface / Sidebar</div><div class="dark-hex">#191D35</div></div>
-      </div>
-      <div class="dark-swatch">
-        <div class="dark-block" style="background:#27272a;"></div>
-        <div class="dark-info"><div class="dark-name">Surface Raised</div><div class="dark-hex">#27272a</div></div>
-      </div>
-      <div class="dark-swatch">
-        <div class="dark-block" style="background:rgba(255,255,255,0.06); border:1px dashed rgba(255,255,255,0.15);"></div>
-        <div class="dark-info"><div class="dark-name">Surface Overlay</div><div class="dark-hex">rgba(#FFF, 6%)</div></div>
-      </div>
-      <div class="dark-swatch">
-        <div class="dark-block" style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);"></div>
-        <div class="dark-info"><div class="dark-name">Primary (same)</div><div class="dark-hex">#5C2ED4 → #A614C3</div></div>
-      </div>
-      <div class="dark-swatch">
-        <div class="dark-block" style="background:linear-gradient(135deg,#4ECDC4,#74C3B7);"></div>
-        <div class="dark-info"><div class="dark-name">Teal Accent (same)</div><div class="dark-hex">#4ECDC4</div></div>
-      </div>
-      <div class="dark-swatch">
-        <div class="dark-block" style="background:rgba(255,255,255,0.85);"></div>
-        <div class="dark-info"><div class="dark-name">On Surface</div><div class="dark-hex">rgba(#FFF, 85%)</div></div>
-      </div>
-      <div class="dark-swatch">
-        <div class="dark-block" style="background:rgba(255,255,255,0.12);"></div>
-        <div class="dark-info"><div class="dark-name">Outline</div><div class="dark-hex">rgba(#FFF, 12%)</div></div>
-      </div>
-    </div>
-  
-
-  </div>
-
-  <div class="ds-divider"></div>
-
-  <!-- TOKEN TABLE -->
-  <div class="ds-section" id="color-tokens">
-    <h2 class="ds-section-title">Color tokens</h2>
-    <p class="ds-section-desc">Reference these token names in all design and code decisions.</p>
+    <h2 class="ds-section-title">Neutrals</h2>
+    <p class="ds-section-desc">A cool gray ramp, taken directly from the theme object. The DS previously carried a green-tinted ramp (<code>#DCE4E1</code>, <code>#9AACAA</code>, <code>#3A4F4D</code> …) that has no counterpart in the product and read noticeably warmer than the app.</p>
     <div class="ds-table-wrap">
       <table class="ds-table">
-        <thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Usage</th></tr></thead>
+        <thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Role in the product</th></tr></thead>
         <tbody>
-          <tr><td><code>color.primary</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:32px;height:14px;border-radius:3px;background:linear-gradient(90deg,#5C2ED4,#A614C3);display:inline-block;"></span>#5C2ED4 → #A614C3</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:32px;height:14px;border-radius:3px;background:linear-gradient(90deg,#5C2ED4,#A614C3);display:inline-block;"></span>#5C2ED4 → #A614C3</span></td><td>Buttons, nav active, focus ring, highlights</td></tr>
-          <tr><td><code>color.primary-tint</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#EDE7FF;border:1px solid #E5E7EB;display:inline-block;"></span>#EDE7FF</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#2D1260;display:inline-block;"></span>#2D1260</span></td><td>Tonal btn fill, chip bg, icon bg</td></tr>
-          <tr><td><code>color.teal-accent</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#4ECDC4;display:inline-block;"></span>#4ECDC4</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#4ECDC4;display:inline-block;"></span>#4ECDC4</span></td><td>Secondary actions, accent badges, avatars</td></tr>
-          <tr><td><code>color.background</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:var(--page-bg);border:1px solid #E5E7EB;display:inline-block;"></span>#FFFBFE</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#0F1120;display:inline-block;"></span>#0F1120</span></td><td>Page background</td></tr>
-          <tr><td><code>color.surface</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#FFFFFF;border:1px solid #E5E7EB;display:inline-block;"></span>#FFFFFF</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#191D35;display:inline-block;"></span>#191D35</span></td><td>Cards, sidebar</td></tr>
-          <tr><td><code>color.on-surface</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#111827;display:inline-block;"></span>#111827</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:rgba(255,255,255,0.85);border:1px solid #333;display:inline-block;"></span>rgba(FFF,85%)</span></td><td>Primary text</td></tr>
-          <tr><td><code>color.outline</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#E5E7EB;border:1px solid #D1D5DB;display:inline-block;"></span>#E5E7EB</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:rgba(255,255,255,0.12);border:1px solid #444;display:inline-block;"></span>rgba(FFF,12%)</span></td><td>Borders, dividers</td></tr>
-          <tr><td><code>color.error</code></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#EF4444;display:inline-block;"></span>#EF4444</span></td><td><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#EF4444;display:inline-block;"></span>#EF4444</span></td><td>Declined, errors</td></tr>
+          <tr><td><code>--gray-800</code></td><td><code>#1F2937</code></td><td><code>#F9FAFB</code></td><td><code>text</code> — primary body colour</td></tr>
+          <tr><td><code>--gray-500</code></td><td><code>#6B7280</code></td><td><code>#8B8FA8</code></td><td><code>muted</code> — secondary text, the workhorse</td></tr>
+          <tr><td><code>--gray-400</code></td><td><code>#9CA3AF</code></td><td><code>#6B7280</code></td><td><code>sub</code> / <code>textDim</code>, Inactive + Expired</td></tr>
+          <tr><td><code>--gray-300</code></td><td><code>#D1D5DB</code></td><td><code>rgba(255,255,255,.18)</code></td><td><code>borderStrong</code>, switch off, unchecked control</td></tr>
+          <tr><td><code>--gray-200</code></td><td><code>#E5E7EB</code></td><td><code>rgba(255,255,255,.12)</code></td><td><code>border</code> — the default hairline</td></tr>
+          <tr><td><code>--gray-100</code></td><td><code>#F3F4F6</code></td><td><code>rgba(255,255,255,.05)</code></td><td><code>borderSoft</code>, recessed track, chip fill</td></tr>
+          <tr><td><code>--gray-50</code></td><td><code>#F9FAFB</code></td><td><code>rgba(255,255,255,.04)</code></td><td><code>hoverBg</code> — menu + row hover</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 
+  <div class="ds-divider"></div>
 
+  <!-- SEMANTIC -->
+  <div class="ds-section" id="semantic-colors">
+    <h2 class="ds-section-title">Semantic</h2>
+    <p class="ds-section-desc">Taken from the product's status map. <strong>The positive state is teal, not green</strong>, and there is no info state. Each hue is theme-independent — only the tint behind it changes.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Role</th><th>Colour</th><th>Tint (light)</th><th>Tint (dark)</th><th>Applies to</th></tr></thead>
+        <tbody>
+          <tr><td>Success</td><td><code>#73C9B7</code></td><td><code>#E8F7F3</code></td><td><code>rgba(115,201,183,.15)</code></td><td>Active, Approved, Issued</td></tr>
+          <tr><td>Renewal</td><td><code>#74C3B7</code></td><td><code>rgba(116,195,183,.10)</code></td><td>same</td><td>Upcoming Renewal(s)</td></tr>
+          <tr><td>Warning</td><td><code>#F59E0B</code></td><td><code>#FEF3C7</code></td><td><code>rgba(245,158,11,.15)</code></td><td>Pending, Action Required, starred</td></tr>
+          <tr><td>Danger</td><td><code>#EF4444</code></td><td><code>#FEE2E2</code></td><td><code>rgba(239,68,68,.15)</code></td><td>Declined, Cancelled, destructive actions, delete menu items</td></tr>
+          <tr><td>Invalid</td><td><code>#DC2626</code></td><td colspan="2"><code>box-shadow 0 0 0 1px rgba(220,38,38,.15)</code></td><td>Form-field validation only</td></tr>
+          <tr><td>Neutral</td><td><code>#9CA3AF</code></td><td><code>#F3F4F6</code></td><td><code>rgba(255,255,255,.06)</code></td><td>Inactive, Expired</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- SURFACES -->
+  <div class="ds-section" id="dark-scheme">
+    <h2 class="ds-section-title">Surfaces</h2>
+    <p class="ds-section-desc">Light mode is white-on-white separated by hairlines; dark mode is deep navy with the card lifted off the page. Both halves come from the same theme object.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td><code>bg</code></td><td><code>#FFFFFF</code></td><td><code>#0F1120</code></td><td>Page</td></tr>
+          <tr><td><code>cardBg</code></td><td><code>#FFFFFF</code></td><td><code>#191D35</code> · <code>#1E2240</code></td><td>Cards, menus, toasts, dialogs</td></tr>
+          <tr><td><code>hoverBg</code></td><td><code>#F9FAFB</code></td><td><code>rgba(255,255,255,.04)</code></td><td>Row and menu-item hover</td></tr>
+          <tr><td><code>mutedBg</code></td><td><code>#FAFAFB</code></td><td><code>rgba(255,255,255,.03)</code></td><td>Inset panels</td></tr>
+          <tr><td><code>inputBg</code></td><td><code>#FFFFFF</code></td><td><code>rgba(255,255,255,.05)</code></td><td>Inputs</td></tr>
+          <tr><td><code>chipBg</code></td><td><code>#F9FAFB</code></td><td><code>rgba(255,255,255,.05)</code></td><td>Status chips, filter pills</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <!-- NOT IN THE PRODUCT -->
+  <div class="ds-section" id="color-tokens">
+    <h2 class="ds-section-title">Not in the product</h2>
+    <p class="ds-section-desc">Colours the DS used to publish that have no source in Norbielink. They are listed so nobody reintroduces them.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Retired</th><th>Was used as</th><th>Replaced by</th></tr></thead>
+        <tbody>
+          <tr><td><code>#1D9E6B</code></td><td>Success green</td><td><code>#73C9B7</code> — the positive state is teal</td></tr>
+          <tr><td><code>#10B981</code> <code>#059669</code></td><td>Tailwind green</td><td><code>#73C9B7</code></td></tr>
+          <tr><td><code>#E6A817</code> <code>#B87A00</code></td><td>Warning amber</td><td><code>#F59E0B</code></td></tr>
+          <tr><td><code>#C0392B</code></td><td>Error red</td><td><code>#EF4444</code></td></tr>
+          <tr><td><code>#2980B9</code> <code>#3B82F6</code></td><td>Info blue</td><td>— there is no info state</td></tr>
+          <tr><td><code>#F97316</code></td><td>Upcoming Renewals orange</td><td><code>#74C3B7</code> · switches use <code>#E8622A</code></td></tr>
+          <tr><td><code>#4ECDC4</code></td><td>Teal accent</td><td><code>#73C9B7</code>. <code>#4ECDC4</code> survives in one place only: the dark-mode link colour</td></tr>
+          <tr><td>Green-tinted grays</td><td><code>#F6F8F7 … #141F1E</code></td><td>The cool ramp above</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
     <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
@@ -465,8 +363,6 @@ body.dark-mode .ds-toc-item[href="#dark-scheme"] { display: block; }
     </a>
     </div>
 
-  
-  </div>
   </div>
 </main>
 </div>
@@ -474,11 +370,11 @@ body.dark-mode .ds-toc-item[href="#dark-scheme"] { display: block; }
 <!-- RIGHT TOC -->
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
-  <a class="ds-toc-item active" href="#color-roles">Color roles</a>
-  <a class="ds-toc-item" href="#color-scale">Color scale</a>
-  <a class="ds-toc-item" href="#semantic-colors">Semantic colors</a>
-  <a class="ds-toc-item" href="#dark-scheme">Dark scheme</a>
-  <a class="ds-toc-item" href="#color-tokens">Color tokens</a>
+  <a class="ds-toc-item active" href="#color-roles">Brand &amp; accent</a>
+  <a class="ds-toc-item" href="#color-scale">Neutrals</a>
+  <a class="ds-toc-item" href="#semantic-colors">Semantic</a>
+  <a class="ds-toc-item" href="#dark-scheme">Surfaces</a>
+  <a class="ds-toc-item" href="#color-tokens">Not in the product</a>
 </aside>
 
 <!-- ds-shell -->

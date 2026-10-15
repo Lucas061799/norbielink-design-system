@@ -4,32 +4,13 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
-.elev-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
-.elev-card {
-  background: white;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 32px 20px;
-  text-align: center;
-}
-.elev-label { font-size: 13px; font-weight: 700; color: var(--gray-700); }
-.elev-value { font-size: 11px; font-family: monospace; color: var(--gray-400); line-height: 1.5; }
-.elev-level { font-size: 22px; font-weight: 800; color: #A614C3; }
 
-.dark-elev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.dark-elev-card {
-  border-radius: 16px;
-  padding: 28px 24px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
+.elev-grid { display: grid; text-align: left; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+.elev-card { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+.elev-box { height: 72px; border-radius: 12px; background: var(--card-bg); border: 1px solid var(--gray-100); margin-bottom: 6px; }
+.elev-name { font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--gray-800); }
+.elev-val { font-size: 10px; line-height: 1.5; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--gray-400); word-break: break-word; }
+.elev-use { font-size: 12px; line-height: 1.5; color: var(--gray-500); }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -124,7 +105,6 @@
     <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
     <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
     <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-58-toggle-group.html">Toggle Group</a>
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>
@@ -143,141 +123,126 @@
       <a class="ds-nav-arrow-btn" href="ds-04-shape.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-  <p class="ds-page-desc">Elevation is expressed through shadows, communicating the z-position of surfaces. Norbielink uses five elevation levels, plus two brand-tinted shadow variants for interactive elements.</p>
+  <p class="ds-page-desc">Norbielink is a mostly flat interface. Elevation comes from three places: Tailwind's
+  shadow scale applied by class, a short list of bespoke shadows for specific floating surfaces, and a brand-tinted
+  glow reserved for primary actions. The DS previously published an invented four-step ramp
+  (<code>.08 / .12 / .18 / .24</code>) that appears nowhere in the product.</p>
 
-  <!-- HERO -->
-  <div class="ds-example" style=" padding: 56px 48px;">
-    <div class="elev-grid" style="width:100%;">
-      <div class="elev-card" style="box-shadow: none; border: 1px solid var(--gray-200);">
-        <div class="elev-level">0</div>
-        <div class="elev-label">Level 0</div>
-        <div class="elev-value">No shadow<br>border only</div>
-      </div>
-      <div class="elev-card" style="box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
-        <div class="elev-level">1</div>
-        <div class="elev-label">Level 1</div>
-        <div class="elev-value">0 1px 3px<br>rgba(0,0,0,.08)</div>
-      </div>
-      <div class="elev-card" style="box-shadow: 0 4px 16px rgba(0,0,0,0.12);">
-        <div class="elev-level">2</div>
-        <div class="elev-label">Level 2</div>
-        <div class="elev-value">0 4px 16px<br>rgba(0,0,0,.12)</div>
-      </div>
-      <div class="elev-card" style="box-shadow: 0 8px 32px rgba(0,0,0,0.18);">
-        <div class="elev-level">3</div>
-        <div class="elev-label">Level 3</div>
-        <div class="elev-value">0 8px 32px<br>rgba(0,0,0,.18)</div>
-      </div>
-      <div class="elev-card" style="box-shadow: 0 16px 48px rgba(0,0,0,0.24);">
-        <div class="elev-level">4</div>
-        <div class="elev-label">Level 4</div>
-        <div class="elev-value">0 16px 48px<br>rgba(0,0,0,.24)</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ds-divider"></div>
-
-  <!-- LEVELS -->
   <div class="ds-section" id="elevation-levels">
-    <h2 class="ds-section-title">Elevation levels</h2>
-    <p class="ds-section-desc">Each level corresponds to a specific UI context. Never skip levels — progression should always be sequential.</p>
-
-    <div class="ds-table-wrap">
-      <table class="ds-table">
-        <thead><tr><th>Level</th><th>Token</th><th>Shadow value</th><th>Used for</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><strong>Level 0</strong></td>
-            <td><code>elevation.0</code></td>
-            <td><code>none</code> + 1px border</td>
-            <td>Flat surfaces, input fields in outlined style</td>
-          </tr>
-          <tr>
-            <td><strong>Level 1</strong></td>
-            <td><code>elevation.1</code></td>
-            <td><code>0 1px 3px rgba(0,0,0,.08)</code></td>
-            <td>Cards, tiles, data table, icon containers</td>
-          </tr>
-          <tr>
-            <td><strong>Level 2</strong></td>
-            <td><code>elevation.2</code></td>
-            <td><code>0 4px 16px rgba(0,0,0,.12)</code></td>
-            <td>Dropdown menus, popovers, search results</td>
-          </tr>
-          <tr>
-            <td><strong>Level 3</strong></td>
-            <td><code>elevation.3</code></td>
-            <td><code>0 8px 32px rgba(0,0,0,.18)</code></td>
-            <td>Modals, dialogs, side sheets</td>
-          </tr>
-          <tr>
-            <td><strong>Level 4</strong></td>
-            <td><code>elevation.4</code></td>
-            <td><code>0 16px 48px rgba(0,0,0,.24)</code></td>
-            <td>Full-page overlays, tooltips at high z</td>
-          </tr>
-        </tbody>
-      </table>
+    <h2 class="ds-section-title">Scale</h2>
+    <p class="ds-section-desc">Applied by class. Usage counts in the shipped bundle: <code>shadow-2xl</code> ×37,
+    <code>shadow-lg</code> ×36, <code>shadow-xl</code> ×32, <code>shadow-sm</code> ×7, <code>shadow-md</code> ×1.</p>
+    <div class="elev-grid">
+      <div class="elev-card">
+        <div class="elev-box" style="box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);"></div>
+        <div class="elev-name"><code>shadow-sm</code></div>
+        <div class="elev-val">0 1px 2px 0 rgba(0,0,0,0.05)</div>
+        <div class="elev-use">Switch thumb</div>
+      </div>
+      <div class="elev-card">
+        <div class="elev-box" style="box-shadow:0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);"></div>
+        <div class="elev-name"><code>shadow-md</code></div>
+        <div class="elev-val">0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1)</div>
+        <div class="elev-use">Rare — one use</div>
+      </div>
+      <div class="elev-card">
+        <div class="elev-box" style="box-shadow:0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);"></div>
+        <div class="elev-name"><code>shadow-lg</code></div>
+        <div class="elev-val">0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)</div>
+        <div class="elev-use">Menus, dropdowns, context menus</div>
+      </div>
+      <div class="elev-card">
+        <div class="elev-box" style="box-shadow:0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);"></div>
+        <div class="elev-name"><code>shadow-xl</code></div>
+        <div class="elev-val">0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)</div>
+        <div class="elev-use">Large popovers</div>
+      </div>
+      <div class="elev-card">
+        <div class="elev-box" style="box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);"></div>
+        <div class="elev-name"><code>shadow-2xl</code></div>
+        <div class="elev-val">0 25px 50px -12px rgba(0,0,0,0.25)</div>
+        <div class="elev-use">Modals and confirm dialogs</div>
+      </div>
     </div>
   </div>
 
   <div class="ds-divider"></div>
 
-  <!-- BRAND SHADOWS -->
-  <div class="ds-section" id="brand-tinted-shadows">
-    <h2 class="ds-section-title">Brand-tinted shadows</h2>
-    <p class="ds-section-desc">Interactive elements use coloured shadows to reinforce brand identity. Only used on primary action buttons and active nav elements.</p>
-
-    <div class="ds-example" style="gap: 32px;">
-      <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
-        <div style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:white;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 4px 14px rgba(166,20,195,0.25);">+ Start a Quote</div>
-        <div style="text-align:center;">
-          <div style="font-size:12px;font-weight:700;color:var(--gray-700);">Primary Button Shadow</div>
-          <div style="font-size:11px;font-family:monospace;color:var(--gray-400);">0 4px 14px rgba(166,20,195,0.25)</div>
-          <div style="font-size:11px;color:var(--gray-400);">elevation.primary</div>
-        </div>
+  <div class="ds-section" id="bespoke">
+    <h2 class="ds-section-title">Bespoke surfaces</h2>
+    <p class="ds-section-desc">Written inline because each one is tuned to its surface. Note that several use
+    <code>rgba(15,23,42,…)</code> — a slate tint rather than pure black.</p>
+    <div class="elev-grid">
+      <div class="elev-card">
+        <div class="elev-box" style="box-shadow:0 1px 2px rgba(15,23,42,0.08), 0 0 0 1px rgba(15,23,42,0.04);"></div>
+        <div class="elev-name">Segmented active</div>
+        <div class="elev-val">0 1px 2px rgba(15,23,42,0.08), 0 0 0 1px rgba(15,23,42,0.04)</div>
+        <div class="elev-use">The raised pill in a segmented control</div>
       </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
-        <div style="background:radial-gradient(171.32% 99.33% at 33.13% -9%,#282550 0%,#191735 55.82%,rgba(0,0,0,0.3) 74%,rgba(0,0,0,0) 100%),linear-gradient(88.34deg,#5C2ED4 0.11%,#A614C3 63.8%);color:white;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 4px 14px rgba(166,20,195,0.35);">+ Start a Quote</div>
-        <div style="text-align:center;">
-          <div style="font-size:12px;font-weight:700;color:var(--gray-700);">Dark Mode Button Shadow</div>
-          <div style="font-size:11px;font-family:monospace;color:var(--gray-400);">0 4px 14px rgba(166,20,195,0.35)</div>
-          <div style="font-size:11px;color:var(--gray-400);">elevation.primary-dark</div>
-        </div>
+      <div class="elev-card">
+        <div class="elev-box" style="box-shadow:0 12px 30px rgba(0,0,0,0.12);"></div>
+        <div class="elev-name">Toast — card</div>
+        <div class="elev-val">0 12px 30px rgba(0,0,0,0.12)</div>
+        <div class="elev-use">The auth / notification toast</div>
       </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
-        <div style="background:linear-gradient(white,white) padding-box,linear-gradient(to right,#5C2ED4 0%,#A614C3 65%) border-box;color:#2D3653;padding:7px 12px;border-radius:12px;font-size:13px;font-weight:500;border:1px solid transparent;box-shadow:0 0 8px rgba(166,20,195,0.4);display:inline-flex;align-items:center;gap:8px;"><span class="material-icons-round" style="font-size:16px;color:#A614C3;">grid_view</span>Marketplace</div>
-        <div style="text-align:center;">
-          <div style="font-size:12px;font-weight:700;color:var(--gray-700);">Active Nav Glow</div>
-          <div style="font-size:11px;font-family:monospace;color:var(--gray-400);">0 0 8px rgba(166,20,195,0.4)</div>
-          <div style="font-size:11px;color:var(--gray-400);">elevation.nav-active</div>
-        </div>
+      <div class="elev-card">
+        <div class="elev-box" style="box-shadow:0 4px 16px rgba(0,0,0,0.10);"></div>
+        <div class="elev-name">Toast — profile</div>
+        <div class="elev-val">0 4px 16px rgba(0,0,0,0.10)</div>
+        <div class="elev-use">The lighter in-app toast</div>
+      </div>
+      <div class="elev-card">
+        <div class="elev-box" style="box-shadow:0 8px 24px rgba(15,23,42,0.18);"></div>
+        <div class="elev-name">Toast — pill</div>
+        <div class="elev-val">0 8px 24px rgba(15,23,42,0.18)</div>
+        <div class="elev-use">The inverted single-line toast</div>
+      </div>
+      <div class="elev-card">
+        <div class="elev-box" style="box-shadow:0 8px 24px rgba(0,0,0,0.12);"></div>
+        <div class="elev-name">Panel</div>
+        <div class="elev-val">0 8px 24px rgba(0,0,0,0.12)</div>
+        <div class="elev-use">Floating panels — the most-used bespoke shadow</div>
+      </div>
+      <div class="elev-card">
+        <div class="elev-box" style="box-shadow:-8px 0 30px rgba(0,0,0,0.12);"></div>
+        <div class="elev-name">Drawer</div>
+        <div class="elev-val">-8px 0 30px rgba(0,0,0,0.12)</div>
+        <div class="elev-use">Side drawer — the only horizontal shadow</div>
+      </div>
+      <div class="elev-card">
+        <div class="elev-box" style="box-shadow:0 20px 50px rgba(0,0,0,0.20);"></div>
+        <div class="elev-name">Deep overlay</div>
+        <div class="elev-val">0 20px 50px rgba(0,0,0,0.20)</div>
+        <div class="elev-use">Full-screen overlays</div>
       </div>
     </div>
   </div>
 
-  <div class="ds-divider ds-dark-only"></div>
+  <div class="ds-divider"></div>
 
-  <!-- DARK MODE ELEVATION -->
-  <div class="ds-section ds-dark-only" id="dark-mode-elevation">
-    <h2 class="ds-section-title">Dark mode elevation</h2>
-    <p class="ds-section-desc">In dark mode, elevation is expressed primarily through surface color lightness rather than shadow depth. Shadows use lower opacity.</p>
-    <div class="dark-elev-grid">
-      <div class="dark-elev-card" style="background:#0F1120; box-shadow:none; border:1px solid rgba(255,255,255,0.08);">
-        <div style="font-size:20px;font-weight:800;color:rgba(255,255,255,0.5);">0</div>
-        <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);">Background</div>
-        <div style="font-size:10px;font-family:monospace;color:rgba(255,255,255,0.3);">#0F1120</div>
+  <div class="ds-section" id="brand-tinted-shadows">
+    <h2 class="ds-section-title">Brand glow</h2>
+    <p class="ds-section-desc">Reserved for primary actions. It is <strong>conditional</strong>: a toolbar primary
+    sits flat, a confirming primary in a dialog or wizard glows, and a disabled primary always drops to
+    <code>none</code>.</p>
+    <div class="elev-grid">
+      <div class="elev-card">
+        <div class="elev-box" style="box-shadow:0 4px 14px rgba(166,20,195,0.25);"></div>
+        <div class="elev-name">Primary glow</div>
+        <div class="elev-val">0 4px 14px rgba(166,20,195,0.25)</div>
+        <div class="elev-use">Confirming primaries in dialogs and toolbars</div>
       </div>
-      <div class="dark-elev-card" style="background:#191D35; box-shadow:0 1px 3px rgba(0,0,0,0.4);">
-        <div style="font-size:20px;font-weight:800;color:rgba(255,255,255,0.6);">1</div>
-        <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);">Surface</div>
-        <div style="font-size:10px;font-family:monospace;color:rgba(255,255,255,0.35);">#191D35</div>
+      <div class="elev-card">
+        <div class="elev-box" style="box-shadow:0 2px 10px rgba(166,20,195,0.25);"></div>
+        <div class="elev-name">Primary glow — small</div>
+        <div class="elev-val">0 2px 10px rgba(166,20,195,0.25)</div>
+        <div class="elev-use">Wizard Continue buttons</div>
       </div>
-      <div class="dark-elev-card" style="background:#27272a; box-shadow:0 4px 16px rgba(0,0,0,0.5);">
-        <div style="font-size:20px;font-weight:800;color:rgba(255,255,255,0.7);">2</div>
-        <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);">Surface Raised</div>
-        <div style="font-size:10px;font-family:monospace;color:rgba(255,255,255,0.4);">#27272a</div>
+      <div class="elev-card">
+        <div class="elev-box" style="box-shadow:0 0 8px rgba(166,20,195,0.40);"></div>
+        <div class="elev-name">Focus ring</div>
+        <div class="elev-val">0 0 8px rgba(166,20,195,0.40)</div>
+        <div class="elev-use">Focused control</div>
       </div>
     </div>
   </div>
@@ -298,10 +263,11 @@
 
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
-  <a class="ds-toc-item active" href="#elevation-levels">Elevation levels</a>
-  <a class="ds-toc-item" href="#brand-tinted-shadows">Brand-tinted shadows</a>
-  <a class="ds-toc-item ds-dark-only" href="#dark-mode-elevation">Dark mode elevation</a>
+  <a class="ds-toc-item active" href="#elevation-levels">Scale</a>
+  <a class="ds-toc-item" href="#bespoke">Bespoke surfaces</a>
+  <a class="ds-toc-item" href="#brand-tinted-shadows">Brand glow</a>
 </aside>
+</div>
 
 
 
