@@ -3,29 +3,17 @@
 <title>Select — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.sel-wrap{display:flex;flex-direction:column;gap:6px;font-family:'Montserrat',sans-serif;width:100%;max-width:280px;}
-.sel-label{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.06em;}
-.sel-trigger{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border:1px solid #E5E7EB;border-radius:8px;font-size:13px;color:#374151;background:#fff;cursor:pointer;transition:border-color .15s,box-shadow .15s;}
-.sel-trigger:hover{border-color:#D1D5DB;}
-.sel-trigger.open{border-color:#A614C3;box-shadow:0 0 0 3px rgba(166,20,195,0.10);}
-.sel-trigger .material-icons-round{font-size:18px;color:#9CA3AF;}
-.sel-menu{border:1px solid #E5E7EB;border-radius:8px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.08);overflow:hidden;margin-top:4px;}
-.sel-option{padding:9px 14px;font-size:13px;color:#374151;cursor:pointer;font-weight:500;transition:background .12s;}
-.sel-option:hover{background:rgba(166,20,195,0.06);color:#A614C3;}
-.sel-option.active{background:rgba(166,20,195,0.08);color:#A614C3;font-weight:600;}
-.sel-dk .sel-trigger{background:transparent;border-color:rgba(255,255,255,0.08);color:rgba(255,255,255,.8);}
-.sel-dk .sel-menu{background:#191D35;border-color:rgba(255,255,255,0.08);}
-.sel-dk .sel-option{color:rgba(255,255,255,.6);}
-.sel-dk .sel-option:hover{background:rgba(255,255,255,.06);}
-.sel-dk .sel-option.active{background:rgba(255,255,255,0.08);color:#C084FC;}
-body.dark-mode .sel-label{color:rgba(255,255,255,.5);}
-body.dark-mode .sel-trigger{background:transparent;border-color:rgba(255,255,255,0.12);color:rgba(255,255,255,.85);}
-body.dark-mode .sel-trigger:hover,body.dark-mode .sel-trigger.open{border-color:#A614C3;}
-body.dark-mode .sel-trigger .material-icons-round{color:rgba(255,255,255,.4);}
-body.dark-mode .sel-menu{background:#191D35;border-color:rgba(255,255,255,0.08);}
-body.dark-mode .sel-option{color:rgba(255,255,255,.7);}
-body.dark-mode .sel-option:hover{background:rgba(255,255,255,.06);}
-body.dark-mode .sel-option.active{background:rgba(192,84,252,0.12);color:#C084FC;font-weight:600;}
+.fld { width: 100%; box-sizing: border-box; padding: 9px 12px; border-radius: 10px;
+  border: 1px solid var(--gray-300); background: var(--input-bg);
+  font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
+  color: var(--gray-800); outline: none; }
+.fld::placeholder { color: var(--gray-400); }
+.fld-label { display: block; margin-bottom: 6px; font-family: 'Montserrat', sans-serif;
+  font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--gray-800); }
+.fld-wrap { display: flex; flex-direction: column; width: 100%; max-width: 420px; }
+
+.sel { appearance: none; -webkit-appearance: none; cursor: pointer; padding-right: 32px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -126,9 +114,8 @@ body.dark-mode .sel-option.active{background:rgba(192,84,252,0.12);color:#C084FC
 </nav>
 <aside class="ds-toc">
   <div class="ds-toc-title">On this page</div>
-  <a class="ds-toc-item active" href="#overview">Overview</a>
-  <a class="ds-toc-item" href="#installation">Installation</a>
-  <a class="ds-toc-item" href="#api">Api</a>
+  <a class="ds-toc-item active" href="#select">Select</a>
+  <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 <main class="ds-main">
   <div class="ds-content">
@@ -146,63 +133,45 @@ body.dark-mode .sel-option.active{background:rgba(192,84,252,0.12);color:#C084FC
       <a class="ds-nav-arrow-btn" href="ds-53-sheet.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">A styled native select replacement with a custom dropdown.</p>
-    <div class="ds-section" id="overview">      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
+    <p class="ds-page-desc">A native <code>&lt;select&gt;</code> with <code>appearance: none</code> and the chevron
+  painted as a background image. The product does not build a custom listbox for simple choices.</p>
+
+  <div class="ds-section" id="select">
+    <h2 class="ds-section-title">Select</h2>
+    <div class="ds-example" style="padding:40px;">
+      <div class="fld-wrap" style="gap:20px;">
+        <div>
+          <label class="fld-label">Agency Type</label>
+          <select class="fld sel"><option>Retail</option><option>Wholesale</option></select>
         </div>
-        <div class="ds-preview-pane" id="prev-main" style="align-items:center;justify-content:center;">
-          <div style="display:flex;flex-direction:column;gap:4px;width:100%;max-width:280px;">
-            <div class="sel-label">Category</div>
-            <div class="sel-trigger open">Components <span class="material-icons-round">expand_more</span></div>
-            <div class="sel-menu">
-              <div class="sel-option">Foundations</div>
-              <div class="sel-option">Styles</div>
-              <div class="sel-option active">Components</div>
-              <div class="sel-option">Patterns</div>
-            </div>
-          </div>
-        </div>
-        <div class="ds-code-pane" id="code-main">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-main')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sel-wrap"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sel-label"</span><span class="c-tag">&gt;</span>Select option<span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sel-trigger"</span><span class="c-tag">&gt;</span>
-    Select...
-    <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"material-icons-round"</span><span class="c-tag">&gt;</span>expand_more<span class="c-tag">&lt;/span&gt;</span>
-  <span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sel-menu"</span><span class="c-tag">&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sel-option"</span><span class="c-tag">&gt;</span>Option A<span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sel-option active"</span><span class="c-tag">&gt;</span>Option B<span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sel-option"</span><span class="c-tag">&gt;</span>Option C<span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;/div&gt;</span>
-<span class="c-tag">&lt;/div&gt;</span></pre>
-        </div>
-      </div>
-    </div><div class="ds-divider"></div>    <div class="ds-section" id="installation">
-      <h2 class="ds-section-title">Installation</h2>
-      <p class="ds-section-desc">Built with pure HTML and CSS. Include <span class="ds-inline-code">ds-shared.css</span> in your project.</p>
-      <div class="ds-install-wrap">
-        <div class="ds-install-tabbar">
-          <button class="ds-install-tab active" onclick="switchInstall(this,'pnpm')">pnpm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'npm')">npm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'yarn')">yarn</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'bun')">bun</button>
-        </div>
-        <div class="ds-install-code">
-          <span class="ds-install-cmd" id="install-cmd"><span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span></span>
-          <button class="ds-copy-btn" style="position:static;" onclick="copyInstall(this)"><span class="material-icons-round">content_copy</span></button>
+        <div>
+          <label class="fld-label">Country</label>
+          <select class="fld sel"><option>United States of America</option><option>Canada</option><option>Mexico</option></select>
         </div>
       </div>
     </div>
-    <div class="ds-divider"></div>
-        <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
-      <h3 class="ds-subsection-title">Classes</h3>
-      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>sel-wrap</code></td><td>Column container</td></tr><tr><td><code>sel-label</code></td><td>Field label</td></tr><tr><td><code>sel-trigger</code></td><td>Dropdown button</td></tr><tr><td><code>sel-menu</code></td><td>Options list panel</td></tr><tr><td><code>sel-option</code></td><td>Individual option</td></tr><tr><td><code>sel-option.active</code></td><td>Currently selected option</td></tr><tr><td><code>sel-dk</code></td><td>Dark mode modifier</td></tr></tbody></table></div>    </div>
+  </div>
 
-  
-    <!-- ── Prev / Next navigation ── -->
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Base</td><td>The text field — <code>9px 12px</code>, <code>radius 10px</code>, 13px</td></tr>
+        <tr><td>Appearance</td><td><code>none</code> · <code>cursor: pointer</code></td></tr>
+        <tr><td>Right padding</td><td><code>32px</code>, to clear the chevron</td></tr>
+        <tr><td>Chevron</td><td>12×12 inline SVG data URI, <code>stroke #9CA3AF</code>, <code>stroke-width 2</code></td></tr>
+        <tr><td>Position</td><td><code>right 12px center</code>, <code>no-repeat</code></td></tr>
+      </tbody>
+    </table></div>
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td>When the choice needs search or multi-select the product uses a dropdown button and a menu panel, not a styled select. See <a href="ds-41-dropdown.html">Dropdown</a>.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-51-scroll-area.html">
       <span class="ds-page-nav-label">← Previous</span>

@@ -3,26 +3,16 @@
 <title>Textarea — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.ta-wrap{display:flex;flex-direction:column;gap:6px;font-family:'Montserrat',sans-serif;width:100%;max-width:400px;}
-.ta-label{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.06em;}
-.ta{width:100%;padding:12px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;font-family:'Montserrat',sans-serif;color:#333;resize:vertical;min-height:100px;outline:none;transition:border-color .15s;box-sizing:border-box;line-height:1.6;}
-.ta:focus{border-color:#A614C3;box-shadow:0 0 0 3px rgba(166,20,195,.12);}
-.ta-hint{font-size:11px;color:#aaa;}
-.ta-count{font-size:11px;color:#ccc;text-align:right;}
-.ta-error .ta{border-color:#EF4444;}
-.ta-error .ta-hint{color:#EF4444;}
-.ta-dk .ta-label{color:rgba(255,255,255,.4);}
-.ta-dk .ta{background:#27272a;border-color:rgba(255,255,255,0.08);color:rgba(255,255,255,.85);}
-.ta-dk .ta:focus{border-color:#C084FC;box-shadow:0 0 0 3px rgba(192,132,252,.12);}
-.ta-dk .ta-hint{color:rgba(255,255,255,.3);}
-.ta-dk .ta-count{color:rgba(255,255,255,.2);}
-body.dark-mode .ta-label{color:rgba(255,255,255,.4);}
-body.dark-mode .ta{background:#191D35;border-color:rgba(255,255,255,0.08);color:rgba(255,255,255,.85);}
-body.dark-mode .ta:focus{border-color:#C084FC;box-shadow:0 0 0 3px rgba(192,132,252,.12);}
-body.dark-mode .ta-hint{color:rgba(255,255,255,.3);}
-body.dark-mode .ta-count{color:rgba(255,255,255,.2);}
-body.dark-mode .ta-error .ta{border-color:#DC2626;}
-body.dark-mode .ta-error .ta-hint{color:#DC2626;}
+.fld { width: 100%; box-sizing: border-box; padding: 9px 12px; border-radius: 10px;
+  border: 1px solid var(--gray-300); background: var(--input-bg);
+  font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
+  color: var(--gray-800); outline: none; }
+.fld::placeholder { color: var(--gray-400); }
+.fld-label { display: block; margin-bottom: 6px; font-family: 'Montserrat', sans-serif;
+  font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--gray-800); }
+.fld-wrap { display: flex; flex-direction: column; width: 100%; max-width: 420px; }
+
+.ta { resize: none; min-height: 92px; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -123,9 +113,8 @@ body.dark-mode .ta-error .ta-hint{color:#DC2626;}
 </nav>
 <aside class="ds-toc">
   <div class="ds-toc-title">On this page</div>
-  <a class="ds-toc-item active" href="#overview">Overview</a>
-  <a class="ds-toc-item" href="#installation">Installation</a>
-  <a class="ds-toc-item" href="#api">Api</a>
+  <a class="ds-toc-item active" href="#textarea">Textarea</a>
+  <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 <main class="ds-main">
   <div class="ds-content">
@@ -143,59 +132,35 @@ body.dark-mode .ta-error .ta-hint{color:#DC2626;}
       <a class="ds-nav-arrow-btn" href="ds-57-toggle.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">A multi-line text input with resize support and validation states.</p>
-    <div class="ds-section" id="overview">      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
-        </div>
-        <div class="ds-preview-pane" id="prev-main" style="align-items:center;justify-content:center;">
-          <div style="display:flex;flex-direction:column;gap:20px;width:100%;max-width:400px;">
-            <div class="ta-wrap">
-              <div class="ta-label">Bio</div>
-              <textarea class="ta" placeholder="Tell us a little about yourself..."></textarea>
-              <div style="display:flex;justify-content:space-between;"><div class="ta-hint">Write up to 200 characters.</div><div class="ta-count">0 / 200</div></div>
-            </div>
-            <div class="ta-wrap ta-error">
-              <div class="ta-label">Message</div>
-              <textarea class="ta" placeholder="Your message..."></textarea>
-              <div class="ta-hint">Message is required.</div>
-            </div>
-          </div>
-        </div>
-        <div class="ds-code-pane" id="code-main">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-main')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"ta-wrap"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"ta-label"</span><span class="c-tag">&gt;</span>Message<span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;textarea</span> <span class="c-attr">class</span>=<span class="c-str">"ta"</span> <span class="c-attr">placeholder</span>=<span class="c-str">"Write your message..."</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/textarea&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"ta-hint"</span><span class="c-tag">&gt;</span>Be as detailed as possible.<span class="c-tag">&lt;/div&gt;</span>
-<span class="c-tag">&lt;/div&gt;</span></pre>
-        </div>
-      </div>
-    </div><div class="ds-divider"></div>    <div class="ds-section" id="installation">
-      <h2 class="ds-section-title">Installation</h2>
-      <p class="ds-section-desc">Built with pure HTML and CSS. Include <span class="ds-inline-code">ds-shared.css</span> in your project.</p>
-      <div class="ds-install-wrap">
-        <div class="ds-install-tabbar">
-          <button class="ds-install-tab active" onclick="switchInstall(this,'pnpm')">pnpm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'npm')">npm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'yarn')">yarn</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'bun')">bun</button>
-        </div>
-        <div class="ds-install-code">
-          <span class="ds-install-cmd" id="install-cmd"><span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span></span>
-          <button class="ds-copy-btn" style="position:static;" onclick="copyInstall(this)"><span class="material-icons-round">content_copy</span></button>
-        </div>
+    <p class="ds-page-desc">The text field with <code>rows="4"</code> and <code>resize: none</code>. Nothing else
+  changes — same padding, radius, border and type.</p>
+
+  <div class="ds-section" id="textarea">
+    <h2 class="ds-section-title">Textarea</h2>
+    <div class="ds-example" style="padding:40px;">
+      <div class="fld-wrap">
+        <label class="fld-label">Description of Operations</label>
+        <textarea class="fld ta" rows="4" placeholder="Installation, maintenance, and repair of water, sewage, and drainage systems in residential and commercial properties…"></textarea>
       </div>
     </div>
-    <div class="ds-divider"></div>
+  </div>
 
-        <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
-      <h3 class="ds-subsection-title">Classes</h3>
-      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>ta-wrap</code></td><td>Column container</td></tr><tr><td><code>ta-label</code></td><td>Label text</td></tr><tr><td><code>ta</code></td><td>The textarea element (resize:vertical)</td></tr><tr><td><code>ta-hint</code></td><td>Helper text</td></tr><tr><td><code>ta-count</code></td><td>Character count indicator</td></tr><tr><td><code>ta-error</code></td><td>Error state modifier</td></tr><tr><td><code>ta-dk</code></td><td>Dark mode modifier</td></tr></tbody></table></div>    </div>
+  <div class="ds-divider"></div>
 
-  
-    <!-- ── Prev / Next navigation ── -->
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Base</td><td>Identical to <a href="ds-08-textfields.html">Text Field</a> — <code>9px 12px</code>, <code>radius 10px</code>, 13px, <code>1px #D1D5DB</code></td></tr>
+        <tr><td>Rows</td><td><code>4</code></td></tr>
+        <tr><td>Resize</td><td><code>none</code> — the product never lets a textarea be dragged</td></tr>
+        <tr><td>Height</td><td>Fills its grid cell where one is given; otherwise the row count decides</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-11-tabs.html">
       <span class="ds-page-nav-label">← Previous</span>

@@ -3,23 +3,25 @@
 <title>Popover — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.pop-wrap{position:relative;display:inline-block;font-family:'Montserrat',sans-serif;}
-.pop-trigger{padding:8px 16px;background:#fff;border:1.5px solid #ddd;border-radius:8px;font-size:13px;font-weight:600;color:#333;cursor:pointer;font-family:'Montserrat',sans-serif;}
-.pop-trigger:hover{border-color:#111;}
-.pop{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:260px;background:#fff;border:1px solid #e8e8e8;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.18);padding:18px;z-index:50;display:none;}
-.pop-wrap.open .pop{display:block;}
-.pop-title{font-size:13px;font-weight:700;color:#111;margin-bottom:6px;}
-.pop-text{font-size:12px;color:#888;line-height:1.6;}
-.pop-row{display:flex;justify-content:flex-end;margin-top:12px;}
-.pop-btn{padding:6px 14px;background:#111;color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:700;font-family:'Montserrat',sans-serif;cursor:pointer;}
-.pop-dk .pop{background:#191D35;border-color:rgba(255,255,255,0.08);}
-.pop-dk .pop-title{color:rgba(255,255,255,.9);}
-.pop-dk .pop-text{color:rgba(255,255,255,.45);}
-body.dark-mode .pop-trigger{background:transparent;border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,.85);}
-body.dark-mode .pop{background:#191D35;border-color:rgba(255,255,255,0.08);}
-body.dark-mode .pop::after{border-top-color:rgba(255,255,255,0.08);}
-body.dark-mode .pop-title{color:rgba(255,255,255,.9);}
-body.dark-mode .pop-text{color:rgba(255,255,255,.45);}
+/* ── POPOVER ── transcribed from the date-picker panel. */
+.pop-anchor { position: relative; width: 100%; max-width: 280px; }
+.pop-trigger { width: 100%; box-sizing: border-box; padding: 9px 12px; border-radius: 10px;
+  border: 1px solid var(--gray-300); background: var(--input-bg); cursor: pointer;
+  font-family: 'Montserrat', sans-serif; font-size: 13px; line-height: 1.5; color: var(--gray-800); outline: none; }
+.pop-chev { position: absolute; right: 12px; top: 19px; transform: translateY(-50%);
+  font-size: 16px; color: var(--gray-500); pointer-events: none; }
+.pop { position: absolute; left: 0; top: 100%; margin-top: 8px; width: 280px; padding: 16px;
+  border-radius: 16px; background: var(--card-bg); border: 1px solid var(--gray-200);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12); font-family: 'Montserrat', sans-serif; z-index: 5; }
+.pop-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.pop-title { font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--gray-800); }
+.pop-nav { display: inline-flex; padding: 4px; border: none; border-radius: 6px; background: transparent;
+  color: var(--gray-500); cursor: pointer; }
+.pop-nav:hover { background: var(--hover-bg); }
+.pop-nav .material-icons-round { font-size: 16px; }
+.pop-body { display: flex; flex-direction: column; gap: 10px; }
+.skel { height: 8px; border-radius: 4px; background: #E5E7EB; }
+body.dark-mode .skel { background: rgba(255,255,255,0.08); }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -120,9 +122,8 @@ body.dark-mode .pop-text{color:rgba(255,255,255,.45);}
 </nav>
 <aside class="ds-toc">
   <div class="ds-toc-title">On this page</div>
-  <a class="ds-toc-item active" href="#overview">Overview</a>
-  <a class="ds-toc-item" href="#installation">Installation</a>
-  <a class="ds-toc-item" href="#api">Api</a>
+  <a class="ds-toc-item active" href="#popover">Popover</a>
+  <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 <main class="ds-main">
   <div class="ds-content">
@@ -140,58 +141,53 @@ body.dark-mode .pop-text{color:rgba(255,255,255,.45);}
       <a class="ds-nav-arrow-btn" href="ds-22-radio.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">A floating panel triggered by a button — similar to a tooltip but interactive.</p>
-    <div class="ds-section" id="overview">      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
-        </div>
-        <div class="ds-preview-pane" id="prev-main" style="align-items:center;justify-content:center;min-height:280px;">
-          <div style="display:flex;justify-content:center;">
-            <div class="pop-wrap" id="demo-pop">
-              <button class="pop-trigger" onclick="togglePop(this)">Open popover</button>
-              <div class="pop">
-                <div class="pop-title">Popover title</div>
-                <div class="pop-text">This is a small overlay popup with supporting content. It can contain any HTML.</div>
-                <div class="pop-row"><button class="pop-btn" onclick="togglePop(this)">Got it</button></div>
-              </div>
-            </div>
+    <p class="ds-page-desc">A floating panel anchored to the control that opened it — the date picker and the
+  column chooser both use it. <code>280px</code> wide, <code>16px</code> radius, <code>8px</code> below its anchor.</p>
+
+  <div class="ds-section" id="popover">
+    <h2 class="ds-section-title">Popover</h2>
+    <div class="ds-example" style="padding:40px 40px 140px;">
+      <div class="pop-anchor">
+        <input class="pop-trigger" value="03/14/2026" readonly>
+        <span class="material-icons-round pop-chev">calendar_today</span>
+        <div class="pop">
+          <div class="pop-head">
+            <button class="pop-nav"><span class="material-icons-round">chevron_left</span></button>
+            <span class="pop-title">March 2026</span>
+            <button class="pop-nav"><span class="material-icons-round">chevron_right</span></button>
           </div>
-        </div>
-        <div class="ds-code-pane" id="code-main">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-main')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"pop-wrap"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-str">"pop-trigger"</span><span class="c-tag">&gt;</span>Open<span class="c-tag">&lt;/button&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"pop"</span><span class="c-tag">&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"pop-title"</span><span class="c-tag">&gt;</span>Title<span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"pop-text"</span><span class="c-tag">&gt;</span>Supporting text here.<span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;/div&gt;</span>
-<span class="c-tag">&lt;/div&gt;</span></pre>
-        </div>
-      </div>
-    </div><div class="ds-divider"></div>    <div class="ds-section" id="installation">
-      <h2 class="ds-section-title">Installation</h2>
-      <p class="ds-section-desc">Built with pure HTML and CSS. Include <span class="ds-inline-code">ds-shared.css</span> in your project.</p>
-      <div class="ds-install-wrap">
-        <div class="ds-install-tabbar">
-          <button class="ds-install-tab active" onclick="switchInstall(this,'pnpm')">pnpm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'npm')">npm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'yarn')">yarn</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'bun')">bun</button>
-        </div>
-        <div class="ds-install-code">
-          <span class="ds-install-cmd" id="install-cmd"><span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span></span>
-          <button class="ds-copy-btn" style="position:static;" onclick="copyInstall(this)"><span class="material-icons-round">content_copy</span></button>
+          <div class="pop-body">
+            <div class="skel" style="width:100%"></div><div class="skel" style="width:100%"></div>
+            <div class="skel" style="width:100%"></div><div class="skel" style="width:70%"></div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="ds-divider"></div>
-        <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
-      <h3 class="ds-subsection-title">Classes</h3>
-      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>pop-wrap</code></td><td>Outer container (position:relative)</td></tr><tr><td><code>pop-trigger</code></td><td>Button that opens the popover</td></tr><tr><td><code>pop</code></td><td>Floating panel (position:absolute)</td></tr><tr><td><code>pop-title</code></td><td>Bold heading</td></tr><tr><td><code>pop-text</code></td><td>Content text</td></tr><tr><td><code>pop-dk</code></td><td>Dark mode modifier</td></tr></tbody></table></div>    </div>
+  </div>
 
-  
-    <!-- ── Prev / Next navigation ── -->
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Position</td><td><code>absolute</code> · <code>left 0</code> · <code>margin-top 8px</code> below the anchor</td></tr>
+        <tr><td>Width</td><td><code>280px</code></td></tr>
+        <tr><td>Radius</td><td><code>16px</code></td></tr>
+        <tr><td>Padding</td><td><code>16px</code></td></tr>
+        <tr><td>Surface</td><td><code>#FFFFFF</code> · <code>1px #E5E7EB</code></td></tr>
+        <tr><td>Shadow</td><td><code>0 10px 30px rgba(0,0,0,0.12)</code></td></tr>
+        <tr><td>Trigger</td><td>A read-only field with a trailing icon at <code>right 12px</code>, both opening the panel</td></tr>
+      </tbody>
+    </table></div>
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td>No arrow or tail. The panel is a plain rectangle offset below its anchor.</td></tr>
+      <tr><td>A list of choices belongs in a <a href="ds-41-dropdown.html">Dropdown</a> menu (12px radius, 180px min-width); a popover holds a small interface.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-48-pagination.html">
       <span class="ds-page-nav-label">← Previous</span>

@@ -3,22 +3,15 @@
 <title>Scroll Area — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.sa{width:100%;max-width:360px;height:220px;border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;position:relative;font-family:'Montserrat',sans-serif;}
-.sa-viewport{width:100%;height:100%;overflow-y:auto;padding:16px;box-sizing:border-box;}
-.sa-viewport::-webkit-scrollbar{width:6px;}
-.sa-viewport::-webkit-scrollbar-track{background:transparent;}
-.sa-viewport::-webkit-scrollbar-thumb{background:#ddd;border-radius:4px;}
-.sa-viewport::-webkit-scrollbar-thumb:hover{background:#bbb;}
-.sa-item{padding:10px 12px;border-bottom:1px solid #f3f3f3;font-size:13px;color:#444;display:flex;align-items:center;gap:10px;}
-.sa-item:last-child{border-bottom:none;}
-.sa-item-dot{width:8px;height:8px;border-radius:50%;background:#A614C3;flex-shrink:0;}
-.sa-dk{border-color:rgba(255,255,255,0.08);}
-.sa-dk .sa-viewport::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);}
-.sa-dk .sa-item{color:rgba(255,255,255,.65);border-bottom-color:rgba(255,255,255,0.06);}
-body.dark-mode .sa{border-color:rgba(255,255,255,0.08) !important;}
-body.dark-mode .sa-viewport::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);}
-body.dark-mode .sa-item{color:rgba(255,255,255,.65);border-bottom-color:rgba(255,255,255,0.06);}
-body.dark-mode .scr-box { border-color: rgba(255,255,255,0.08) !important; }
+/* ── SCROLL AREA ── the product hides the scrollbar entirely. */
+.scr { height: 200px; overflow-y: auto; width: 100%; max-width: 420px;
+  border: 1px solid var(--gray-200); border-radius: 12px; background: var(--card-bg);
+  scrollbar-width: none; -ms-overflow-style: none; }
+.scr::-webkit-scrollbar { display: none; }
+.scr-inner { display: flex; flex-direction: column; }
+.scr-row { padding: 12px 16px; border-bottom: 1px solid var(--gray-100);
+  font-family: 'Montserrat', sans-serif; font-size: 13px; line-height: 1.5; color: var(--gray-800); }
+.scr-row:last-child { border-bottom: none; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -119,9 +112,8 @@ body.dark-mode .scr-box { border-color: rgba(255,255,255,0.08) !important; }
 </nav>
 <aside class="ds-toc">
   <div class="ds-toc-title">On this page</div>
-  <a class="ds-toc-item active" href="#overview">Overview</a>
-  <a class="ds-toc-item" href="#installation">Installation</a>
-  <a class="ds-toc-item" href="#api">Api</a>
+  <a class="ds-toc-item active" href="#scroll-area">Scroll area</a>
+  <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 <main class="ds-main">
   <div class="ds-content">
@@ -139,54 +131,48 @@ body.dark-mode .scr-box { border-color: rgba(255,255,255,0.08) !important; }
       <a class="ds-nav-arrow-btn" href="ds-52-select.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">An overflow container with a custom-styled scrollbar.</p>
-    <div class="ds-section" id="overview">      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
-        </div>
-        <div class="ds-preview-pane" id="prev-main" style="align-items:center;justify-content:center;">
-          <div class="sa">
-            <div class="sa-viewport">
-              <div class="sa-item"><div class="sa-item-dot"></div>Component 1</div><div class="sa-item"><div class="sa-item-dot"></div>Component 2</div><div class="sa-item"><div class="sa-item-dot"></div>Component 3</div><div class="sa-item"><div class="sa-item-dot"></div>Component 4</div><div class="sa-item"><div class="sa-item-dot"></div>Component 5</div><div class="sa-item"><div class="sa-item-dot"></div>Component 6</div><div class="sa-item"><div class="sa-item-dot"></div>Component 7</div><div class="sa-item"><div class="sa-item-dot"></div>Component 8</div><div class="sa-item"><div class="sa-item-dot"></div>Component 9</div><div class="sa-item"><div class="sa-item-dot"></div>Component 10</div><div class="sa-item"><div class="sa-item-dot"></div>Component 11</div><div class="sa-item"><div class="sa-item-dot"></div>Component 12</div><div class="sa-item"><div class="sa-item-dot"></div>Component 13</div>
-            </div>
-          </div>
-        </div>
-        <div class="ds-code-pane" id="code-main">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-main')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sa"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sa-viewport"</span><span class="c-tag">&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sa-item"</span><span class="c-tag">&gt;</span>Item 1<span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sa-item"</span><span class="c-tag">&gt;</span>Item 2<span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-comment">&lt;!-- more items --&gt;</span>
-  <span class="c-tag">&lt;/div&gt;</span>
-<span class="c-tag">&lt;/div&gt;</span></pre>
-        </div>
-      </div>
-    </div><div class="ds-divider"></div>    <div class="ds-section" id="installation">
-      <h2 class="ds-section-title">Installation</h2>
-      <p class="ds-section-desc">Built with pure HTML and CSS. Include <span class="ds-inline-code">ds-shared.css</span> in your project.</p>
-      <div class="ds-install-wrap">
-        <div class="ds-install-tabbar">
-          <button class="ds-install-tab active" onclick="switchInstall(this,'pnpm')">pnpm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'npm')">npm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'yarn')">yarn</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'bun')">bun</button>
-        </div>
-        <div class="ds-install-code">
-          <span class="ds-install-cmd" id="install-cmd"><span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span></span>
-          <button class="ds-copy-btn" style="position:static;" onclick="copyInstall(this)"><span class="material-icons-round">content_copy</span></button>
+    <p class="ds-page-desc">The product scrolls with <code>overflow-y: auto</code> and <strong>hides the
+  scrollbar</strong> (<code>scrollbar-width: none</code>). There is no custom track, thumb or shadow.</p>
+
+  <div class="ds-section" id="scroll-area">
+    <h2 class="ds-section-title">Scroll area</h2>
+    <p class="ds-section-desc">Used on the sidebar nav, dialog bodies and drawer bodies — every scrolling region
+    in the app.</p>
+    <div class="ds-example" style="padding:40px;">
+      <div class="scr">
+        <div class="scr-inner">
+          <div class="scr-row">Contractor General Liability</div>
+          <div class="scr-row">Worker’s Comp</div>
+          <div class="scr-row">Commercial Auto</div>
+          <div class="scr-row">Builders Risk</div>
+          <div class="scr-row">Cyber Risk</div>
+          <div class="scr-row">Inland Marine</div>
+          <div class="scr-row">Professional Liability</div>
+          <div class="scr-row">Vacant Risks</div>
         </div>
       </div>
     </div>
-    <div class="ds-divider"></div>
-      
-        <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
-      <h3 class="ds-subsection-title">Classes</h3>
-      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>sa</code></td><td>Fixed-size container with overflow:hidden</td></tr><tr><td><code>sa-viewport</code></td><td>Scrollable inner area (overflow-y:auto)</td></tr><tr><td><code>sa-item</code></td><td>Individual list item</td></tr><tr><td><code>sa-dk</code></td><td>Dark mode modifier</td></tr></tbody></table></div>    </div>
+  </div>
 
-  
-    <!-- ── Prev / Next navigation ── -->
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Overflow</td><td><code>overflow-y: auto</code> on a <code>flex-1 min-h-0</code> region</td></tr>
+        <tr><td>Scrollbar</td><td><code>scrollbar-width: none</code> · <code>::-webkit-scrollbar { display: none }</code></td></tr>
+        <tr><td>Fade or shadow</td><td><strong>None</strong> — content simply clips at the edge</td></tr>
+        <tr><td>Container</td><td>No border or radius of its own; the surrounding panel provides those</td></tr>
+      </tbody>
+    </table></div>
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td>Because the scrollbar is hidden, a scrolling region must be obviously clipped — give it a fixed height inside a panel, never let it end flush with a page edge.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-50-resizable.html">
       <span class="ds-page-nav-label">← Previous</span>
