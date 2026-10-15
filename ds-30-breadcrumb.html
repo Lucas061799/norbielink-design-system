@@ -3,19 +3,12 @@
 <title>Breadcrumb — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.bc{display:flex;align-items:center;gap:0;font-family:'Montserrat',sans-serif;font-size:13px;}
-.bc-item{color:#888;text-decoration:none;transition:color .15s;}
-.bc-item:hover{color:#111;}
-.bc-item.active{color:#111;font-weight:600;}
-.bc-sep{color:#ccc;margin:0 8px;font-size:12px;}
-.bc-home{display:flex;align-items:center;gap:3px;}
-.bc-home .material-icons-round{font-size:15px;}
-.bc-ellipsis{display:flex;align-items:center;justify-content:center;width:22px;height:22px;background:#f3f3f3;border-radius:6px;cursor:pointer;}
-.bc-ellipsis .material-icons-round{font-size:14px;color:#888;}
-.bc-dk .bc-item{color:rgba(255,255,255,.4);}
-.bc-dk .bc-item:hover{color:rgba(255,255,255,.85);}
-.bc-dk .bc-item.active{color:rgba(255,255,255,.85);}
-.bc-dk .bc-sep{color:rgba(255,255,255,.2);}
+/* ── BACK LINK ── the product's only "breadcrumb". */
+.bc-back { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: none;
+  background: transparent; cursor: pointer; font-family: 'Montserrat', sans-serif;
+  font-size: 12px; font-weight: 400; line-height: 1.5; color: var(--gray-500); transition: color .12s; }
+.bc-back:hover { color: var(--gray-800); }
+.bc-back .material-icons-round { font-size: 14px; color: inherit; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -116,11 +109,8 @@
 </nav>
 <aside class="ds-toc">
   <div class="ds-toc-title">On this page</div>
-  <a class="ds-toc-item active" href="#overview">Overview</a>
-  <a class="ds-toc-item" href="#installation">Installation</a>
-  <a class="ds-toc-item" href="#usage">Usage</a>
-  <a class="ds-toc-item" href="#examples">Examples</a>
-  <a class="ds-toc-item" href="#api">Api</a>
+  <a class="ds-toc-item active" href="#back-link">Back link</a>
+  <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 <main class="ds-main">
   <div class="ds-content">
@@ -138,115 +128,35 @@
       <a class="ds-nav-arrow-btn" href="ds-06-buttons.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">Displays the path to the current resource using a hierarchy of links.</p>
-    <div class="ds-section" id="overview">
-      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
-        </div>
-        <div class="ds-preview-pane" id="prev-main" style="align-items:center;justify-content:center;">
-          <div style="display:flex;flex-direction:column;gap:20px;width:100%;max-width:560px;">
-            <nav class="bc">
-              <a class="bc-item bc-home" href="#"><span class="material-icons-round">home</span></a>
-              <span class="bc-sep">/</span>
-              <a class="bc-item" href="#">Components</a>
-              <span class="bc-sep">/</span>
-              <span class="bc-item active">Breadcrumb</span>
-            </nav>
-            <nav class="bc">
-              <a class="bc-item" href="#">Home</a>
-              <span class="bc-sep">›</span>
-              <span class="bc-ellipsis"><span class="material-icons-round">more_horiz</span></span>
-              <span class="bc-sep">›</span>
-              <a class="bc-item" href="#">Components</a>
-              <span class="bc-sep">›</span>
-              <span class="bc-item active">Breadcrumb</span>
-            </nav>
-          </div>
-        </div>
-        <div class="ds-code-pane" id="code-main">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-main')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;nav</span> <span class="c-attr">class</span>=<span class="c-str">"bc"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;a</span> <span class="c-attr">class</span>=<span class="c-str">"bc-item bc-home"</span> <span class="c-attr">href</span>=<span class="c-str">"/"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"material-icons-round"</span><span class="c-tag">&gt;</span>home<span class="c-tag">&lt;/span&gt;</span><span class="c-tag">&lt;/a&gt;</span>
-  <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"bc-sep"</span><span class="c-tag">&gt;</span>/<span class="c-tag">&lt;/span&gt;</span>
-  <span class="c-tag">&lt;a</span> <span class="c-attr">class</span>=<span class="c-str">"bc-item"</span> <span class="c-attr">href</span>=<span class="c-str">"/components"</span><span class="c-tag">&gt;</span>Components<span class="c-tag">&lt;/a&gt;</span>
-  <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"bc-sep"</span><span class="c-tag">&gt;</span>/<span class="c-tag">&lt;/span&gt;</span>
-  <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"bc-item active"</span><span class="c-tag">&gt;</span>Breadcrumb<span class="c-tag">&lt;/span&gt;</span>
-<span class="c-tag">&lt;/nav&gt;</span></pre>
-        </div>
-      </div>
-    </div><div class="ds-divider"></div>
-    <div class="ds-section" id="installation">
-      <h2 class="ds-section-title">Installation</h2>
-      <p class="ds-section-desc">Built with pure HTML and CSS. Include <span class="ds-inline-code">ds-shared.css</span> in your project.</p>
-      <div class="ds-install-wrap">
-        <div class="ds-install-tabbar">
-          <button class="ds-install-tab active" onclick="switchInstall(this,'pnpm')">pnpm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'npm')">npm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'yarn')">yarn</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'bun')">bun</button>
-        </div>
-        <div class="ds-install-code">
-          <span class="ds-install-cmd" id="install-cmd"><span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span></span>
-          <button class="ds-copy-btn" style="position:static;" onclick="copyInstall(this)"><span class="material-icons-round">content_copy</span></button>
-        </div>
-      </div>
-    </div>
-    <div class="ds-divider"></div>
-    <div class="ds-section" id="usage"><h2 class="ds-section-title">Usage</h2>
-      <div class="ds-usage-title">Import</div>
-      <div class="ds-preview-wrap">
-        <div class="ds-code-pane visible">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-import')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block" id="code-import"><span class="c-tag">&lt;link</span> <span class="c-attr">rel</span>=<span class="c-str">"stylesheet"</span> <span class="c-attr">href</span>=<span class="c-str">"ds-shared.css"</span><span class="c-tag">&gt;</span></pre>
-        </div>
-      </div>
-      <div class="ds-usage-title">Basic structure</div>
-      <div class="ds-preview-wrap">
-        <div class="ds-code-pane visible">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-usage')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block" id="code-usage"><span class="c-tag">&lt;nav</span> <span class="c-attr">class</span>=<span class="c-str">"bc"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;a</span> <span class="c-attr">class</span>=<span class="c-str">"bc-item"</span> <span class="c-attr">href</span>=<span class="c-str">"/"</span><span class="c-tag">&gt;</span>Home<span class="c-tag">&lt;/a&gt;</span>
-  <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"bc-sep"</span><span class="c-tag">&gt;</span>/<span class="c-tag">&lt;/span&gt;</span>
-  <span class="c-tag">&lt;a</span> <span class="c-attr">class</span>=<span class="c-str">"bc-item"</span> <span class="c-attr">href</span>=<span class="c-str">"/components"</span><span class="c-tag">&gt;</span>Components<span class="c-tag">&lt;/a&gt;</span>
-  <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"bc-sep"</span><span class="c-tag">&gt;</span>/<span class="c-tag">&lt;/span&gt;</span>
-  <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"bc-item active"</span><span class="c-tag">&gt;</span>Current<span class="c-tag">&lt;/span&gt;</span>
-<span class="c-tag">&lt;/nav&gt;</span></pre>
-        </div>
-      </div>
-    </div><div class="ds-divider"></div>
-    <div class="ds-section" id="examples"><h2 class="ds-section-title">Examples</h2>
-      <h3 class="ds-subsection-title">Separator variations</h3>
-      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-ex1')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-ex1')">Code</button>
-        </div>
-        <div class="ds-preview-pane" id="prev-ex1" style="align-items:center;justify-content:center;">
-          <div style="display:flex;flex-direction:column;gap:16px;width:100%;max-width:560px;">
-            <nav class="bc"><a class="bc-item" href="#">Home</a><span class="bc-sep">›</span><span class="bc-item active">About</span></nav>
-            <nav class="bc"><a class="bc-item" href="#">Home</a><span class="bc-sep">·</span><a class="bc-item" href="#">Docs</a><span class="bc-sep">·</span><span class="bc-item active">Guide</span></nav>
-            <nav class="bc" style="font-size:12px;"><a class="bc-item" href="#">Home</a><span class="bc-sep">/</span><a class="bc-item" href="#">Products</a><span class="bc-sep">/</span><a class="bc-item" href="#">Category</a><span class="bc-sep">/</span><span class="bc-item active">Item</span></nav>
-          </div>
-        </div>
-        <div class="ds-code-pane" id="code-ex1">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-ex1')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;nav</span> <span class="c-attr">class</span>=<span class="c-str">"bc"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;a</span> <span class="c-attr">class</span>=<span class="c-str">"bc-item"</span> <span class="c-attr">href</span>=<span class="c-str">"/"</span><span class="c-tag">&gt;</span>Home<span class="c-tag">&lt;/a&gt;</span>
-  <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"bc-sep"</span><span class="c-tag">&gt;</span>·<span class="c-tag">&lt;/span&gt;</span>
-  <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"bc-item active"</span><span class="c-tag">&gt;</span>Page<span class="c-tag">&lt;/span&gt;</span>
-<span class="c-tag">&lt;/nav&gt;</span></pre>
-        </div>
-      </div>
-    </div><div class="ds-divider"></div>
-        <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
-      <h3 class="ds-subsection-title">Classes</h3>
-      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>bc</code></td><td>Breadcrumb container (flex row)</td></tr><tr><td><code>bc-item</code></td><td>Individual breadcrumb link</td></tr><tr><td><code>bc-item.active</code></td><td>Current (non-linked) page — bold</td></tr><tr><td><code>bc-sep</code></td><td>Separator character</td></tr><tr><td><code>bc-dk</code></td><td>Dark mode modifier</td></tr></tbody></table></div>
-    </div>
+    <p class="ds-page-desc">Norbielink has no slash-separated breadcrumb trail. Going up a level is a single
+  <strong>back link</strong> above the record title — one target, not a path.</p>
 
-  
-    <!-- ── Prev / Next navigation ── -->
+  <div class="ds-section" id="back-link">
+    <h2 class="ds-section-title">Back link</h2>
+    <div class="ds-example" style="padding:40px;">
+      <button class="bc-back"><span class="material-icons-round">chevron_left</span>Back to Agencies</button>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Type</td><td>12px / 400 · <code>#6B7280</code></td></tr>
+        <tr><td>Icon</td><td>14×14px chevron, <code>gap 6px</code></td></tr>
+        <tr><td>Hover</td><td>Text darkens to <code>#1F2937</code> — no underline, no background</td></tr>
+        <tr><td>Placement</td><td>Above the record title, <code>padding-bottom 16px</code></td></tr>
+      </tbody>
+    </table></div>
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td>Do not build a multi-level trail. The product never shows more than one step back.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-09-badges.html">
       <span class="ds-page-nav-label">← Previous</span>

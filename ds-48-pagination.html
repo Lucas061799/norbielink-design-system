@@ -3,21 +3,21 @@
 <title>Pagination — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.pag{display:flex;align-items:center;gap:4px;font-family:'Montserrat',sans-serif;}
-.pag-btn{min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1.5px solid #e0e0e0;border-radius:8px;font-size:12px;font-weight:700;color:#555;background:#fff;cursor:pointer;transition:all .15s;padding:0 8px;}
-.pag-btn:hover{border-color:#5C2ED4;color:#5C2ED4;}
-.pag-btn.active{width:28px;height:28px;min-width:28px;background:linear-gradient(88.54deg,#5C2ED4 0.1%,#A614C3 63.88%);color:#fff;border:none;border-radius:8px;}
-.pag-btn.disabled{opacity:.35;cursor:default;pointer-events:none;}
-.pag-btn .material-icons-round{font-size:17px;}
-.pag-ellipsis{min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:14px;}
-.pag-dk .pag-btn{background:transparent;border-color:rgba(255,255,255,0.08);color:rgba(255,255,255,.55);}
-.pag-dk .pag-btn:hover{border-color:rgba(255,255,255,.5);color:rgba(255,255,255,.9);}
-.pag-dk .pag-btn.active{background:linear-gradient(88.54deg,#5C2ED4 0.1%,#A614C3 63.88%);border:none;color:#fff;width:28px;height:28px;min-width:28px;border-radius:8px;}
-.pag-dk .pag-ellipsis{color:rgba(255,255,255,.25);}
-body.dark-mode .pag-btn{background:transparent;border-color:rgba(255,255,255,0.12);color:rgba(255,255,255,.6);}
-body.dark-mode .pag-btn:hover{border-color:rgba(255,255,255,.5);color:rgba(255,255,255,.9);}
-body.dark-mode .pag-btn.active{background:linear-gradient(88.54deg,#5C2ED4 0.1%,#A614C3 63.88%);border:none;color:#fff;}
-body.dark-mode .pag-ellipsis{color:rgba(255,255,255,.25);}
+/* ── PAGINATION ── transcribed from the table footer. */
+.pg-row { display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  width: 100%; flex-wrap: wrap; }
+.pg-count { font-family: 'Montserrat', sans-serif; font-size: 11.5px; line-height: 1.5; color: var(--gray-500); }
+.pg-actions { display: flex; align-items: center; gap: 8px; }
+.pg-btn, .pg-range {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 6px 12px; border-radius: 8px; border: 1px solid var(--gray-200);
+  background: var(--card-bg); cursor: pointer;
+  font-family: 'Montserrat', sans-serif; font-size: 11.5px; font-weight: 500;
+  line-height: 1.5; color: var(--gray-800); transition: background .12s;
+}
+.pg-btn:hover:not(:disabled), .pg-range:hover { background: var(--hover-bg); }
+.pg-btn:disabled { opacity: .5; cursor: not-allowed; }
+.pg-range .material-icons-round { font-size: 14px; color: #A614C3; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -118,9 +118,8 @@ body.dark-mode .pag-ellipsis{color:rgba(255,255,255,.25);}
 </nav>
 <aside class="ds-toc">
   <div class="ds-toc-title">On this page</div>
-  <a class="ds-toc-item active" href="#overview">Overview</a>
-  <a class="ds-toc-item" href="#installation">Installation</a>
-  <a class="ds-toc-item" href="#api">Api</a>
+  <a class="ds-toc-item active" href="#pagination">Pagination</a>
+  <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 <main class="ds-main">
   <div class="ds-content">
@@ -138,71 +137,43 @@ body.dark-mode .pag-ellipsis{color:rgba(255,255,255,.25);}
       <a class="ds-nav-arrow-btn" href="ds-49-popover.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">Navigation controls for moving between pages of content.</p>
-    <div class="ds-section" id="overview">      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
-        </div>
-        <div class="ds-preview-pane" id="prev-main" style="align-items:center;justify-content:center;">
-          <div style="display:flex;flex-direction:column;gap:20px;align-items:center;">
-            <div class="pag">
-              <button class="pag-btn disabled"><span class="material-icons-round">chevron_left</span></button>
-              <button class="pag-btn active">1</button>
-              <button class="pag-btn">2</button>
-              <button class="pag-btn">3</button>
-              <div class="pag-ellipsis">···</div>
-              <button class="pag-btn">12</button>
-              <button class="pag-btn"><span class="material-icons-round">chevron_right</span></button>
-            </div>
-            <div class="pag">
-              <button class="pag-btn"><span class="material-icons-round">chevron_left</span></button>
-              <button class="pag-btn">4</button>
-              <button class="pag-btn">5</button>
-              <button class="pag-btn active">6</button>
-              <button class="pag-btn">7</button>
-              <button class="pag-btn">8</button>
-              <button class="pag-btn"><span class="material-icons-round">chevron_right</span></button>
-            </div>
-          </div>
-        </div>
-        <div class="ds-code-pane" id="code-main">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-main')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"pag"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-str">"pag-btn"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"material-icons-round"</span><span class="c-tag">&gt;</span>chevron_left<span class="c-tag">&lt;/span&gt;</span><span class="c-tag">&lt;/button&gt;</span>
-  <span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-str">"pag-btn active"</span><span class="c-tag">&gt;</span>1<span class="c-tag">&lt;/button&gt;</span>
-  <span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-str">"pag-btn"</span><span class="c-tag">&gt;</span>2<span class="c-tag">&lt;/button&gt;</span>
-  <span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-str">"pag-btn"</span><span class="c-tag">&gt;</span>3<span class="c-tag">&lt;/button&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"pag-ellipsis"</span><span class="c-tag">&gt;</span>···<span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-str">"pag-btn"</span><span class="c-tag">&gt;</span>10<span class="c-tag">&lt;/button&gt;</span>
-  <span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-str">"pag-btn"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"material-icons-round"</span><span class="c-tag">&gt;</span>chevron_right<span class="c-tag">&lt;/span&gt;</span><span class="c-tag">&lt;/button&gt;</span>
-<span class="c-tag">&lt;/div&gt;</span></pre>
-        </div>
-      </div>
-    </div><div class="ds-divider"></div>    <div class="ds-section" id="installation">
-      <h2 class="ds-section-title">Installation</h2>
-      <p class="ds-section-desc">Built with pure HTML and CSS. Include <span class="ds-inline-code">ds-shared.css</span> in your project.</p>
-      <div class="ds-install-wrap">
-        <div class="ds-install-tabbar">
-          <button class="ds-install-tab active" onclick="switchInstall(this,'pnpm')">pnpm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'npm')">npm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'yarn')">yarn</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'bun')">bun</button>
-        </div>
-        <div class="ds-install-code">
-          <span class="ds-install-cmd" id="install-cmd"><span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span></span>
-          <button class="ds-copy-btn" style="position:static;" onclick="copyInstall(this)"><span class="material-icons-round">content_copy</span></button>
+    <p class="ds-page-desc">A range read-out and two stepper buttons. There are no numbered pages, no first/last
+  jump and no ellipsis — the table tells you where you are and lets you step.</p>
+
+  <div class="ds-section" id="pagination">
+    <h2 class="ds-section-title">Pagination</h2>
+    <div class="ds-example" style="padding:40px;">
+      <div class="pg-row">
+        <span class="pg-count">1 – 10 of 22 agencies</span>
+        <div class="pg-actions">
+          <button class="pg-range">1 – 10<span class="material-icons-round">expand_more</span></button>
+          <button class="pg-btn" disabled>Previous</button>
+          <button class="pg-btn">Next</button>
         </div>
       </div>
     </div>
-    <div class="ds-divider"></div>
-      
-        <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
-      <h3 class="ds-subsection-title">Classes</h3>
-      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>pag</code></td><td>Flex row container</td></tr><tr><td><code>pag-btn</code></td><td>Page number or nav button</td></tr><tr><td><code>pag-btn.active</code></td><td>Current page (purple gradient, 28×28px, radius 8px)</td></tr><tr><td><code>pag-btn.disabled</code></td><td>Non-interactive (prev on page 1)</td></tr><tr><td><code>pag-ellipsis</code></td><td>"···" gap indicator</td></tr><tr><td><code>pag-dk</code></td><td>Dark mode modifier</td></tr></tbody></table></div>    </div>
+  </div>
 
-  
-    <!-- ── Prev / Next navigation ── -->
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Button</td><td><code>padding 6px 12px</code> · <code>radius 8px</code> · 11.5px / 500</td></tr>
+        <tr><td>Surface</td><td><code>#FFFFFF</code> · <code>1px #E5E7EB</code> · hover <code>#F9FAFB</code></td></tr>
+        <tr><td>Disabled</td><td><code>opacity .5</code> · <code>cursor: not-allowed</code> — the button stays visible</td></tr>
+        <tr><td>Range control</td><td>Same button with a trailing chevron tinted <code>#A614C3</code></td></tr>
+        <tr><td>Count</td><td>11.5px · <code>#6B7280</code> · sits at the far left of the row</td></tr>
+      </tbody>
+    </table></div>
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td>No page numbers. Adding them would be a new pattern, not a variant.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-07-navigation.html">
       <span class="ds-page-nav-label">← Previous</span>

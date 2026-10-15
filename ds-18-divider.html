@@ -4,6 +4,12 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
+<style>
+/* ── DIVIDER ── a 1px div, not a border or an <hr>. */
+.dv { height: 1px; background: var(--gray-200); margin-bottom: 12px; }
+.dv-text { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600;
+  line-height: 1.5; color: var(--gray-800); margin-bottom: 12px; }
+</style>
 </head>
 <body class="btis-layout">
 <header class="btis-header">
@@ -103,7 +109,7 @@
 
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
-  <a class="ds-toc-item active" href="#variants">Variants</a>
+  <a class="ds-toc-item active" href="#divider">Divider</a>
   <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 
@@ -120,66 +126,39 @@
       <a class="ds-nav-arrow-btn" href="ds-40-drawer.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">Dividers are thin lines that group content in lists and layouts. They separate sections horizontally or vertically.</p>
+    <p class="ds-page-desc">A <code>1px</code> line in the border colour. The product uses exactly one weight and
+  never a dashed, thick or coloured rule.</p>
 
-<style>
-.dv-label{font-size:12px;color:#9CA3AF;font-weight:600;margin-bottom:10px;font-family:'Montserrat',sans-serif;}
-.dv-line{height:1px;background:#DCE4E1;}
-.dv-vline{width:1px;height:24px;background:#DCE4E1;}
-.dv-row-text{font-size:14px;color:#374151;font-family:'Montserrat',sans-serif;}
-body.dark-mode .dv-label{color:rgba(255,255,255,0.45);}
-body.dark-mode .dv-line,body.dark-mode .dv-vline{background:rgba(255,255,255,0.10);}
-body.dark-mode .dv-row-text{color:rgba(255,255,255,0.85);}
-</style>
-<div class="ds-section" id="variants"><div class="ds-section-title">Variants</div>
-<div class="ds-preview-wrap">
-  <div class="ds-preview-tabbar">
-    <button class="ds-preview-tab active" onclick="switchTab(this,'prev-vari')">Preview</button>
-    <button class="ds-preview-tab" onclick="switchTab(this,'code-vari')">Code</button>
-  </div>
-  <div class="ds-preview-pane" id="prev-vari" style="flex-direction:column;gap:28px;align-items:stretch;padding:32px 48px;">
-    <div><div class="dv-label">Full-width</div><div class="dv-line"></div></div>
-    <div><div class="dv-label">Inset (16px left)</div><div class="dv-line" style="margin-left:16px;"></div></div>
-    <div><div class="dv-label">Middle inset</div><div class="dv-line" style="margin:0 16px;"></div></div>
-    <div>
-      <div class="dv-label">Vertical</div>
-      <div style="display:flex;align-items:center;gap:16px;height:40px;">
-        <span class="dv-row-text">Item A</span>
-        <div class="dv-vline"></div>
-        <span class="dv-row-text">Item B</span>
-        <div class="dv-vline"></div>
-        <span class="dv-row-text">Item C</span>
-      </div>
+  <div class="ds-section" id="divider">
+    <h2 class="ds-section-title">Divider</h2>
+    <div class="ds-example" style="flex-direction:column; align-items:stretch; gap:0; padding:40px;">
+      <div class="dv-text">Agency Contact</div>
+      <div class="dv"></div>
+      <div class="dv-text">Appointment</div>
+      <div class="dv"></div>
+      <div class="dv-text">Affiliations</div>
     </div>
   </div>
-  <div class="ds-code-pane" id="code-vari">
-    <button class="ds-copy-btn" onclick="copyCode(this,'code-vari')"><span class="material-icons-round">content_copy</span> Copy</button>
-    <pre class="ds-code-block"><span class="c-comment">&lt;!-- Full-width --&gt;</span>
-<span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"dv-line"</span><span class="c-tag">&gt;&lt;/div&gt;</span>
 
-<span class="c-comment">&lt;!-- Inset (16px left) --&gt;</span>
-<span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"dv-line"</span> <span class="c-attr">style</span>=<span class="c-str">"margin-left:16px;"</span><span class="c-tag">&gt;&lt;/div&gt;</span>
+  <div class="ds-divider"></div>
 
-<span class="c-comment">&lt;!-- Middle inset --&gt;</span>
-<span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"dv-line"</span> <span class="c-attr">style</span>=<span class="c-str">"margin:0 16px;"</span><span class="c-tag">&gt;&lt;/div&gt;</span>
-
-<span class="c-comment">&lt;!-- Vertical --&gt;</span>
-<span class="c-tag">&lt;div</span> <span class="c-attr">style</span>=<span class="c-str">"display:flex;align-items:center;gap:16px;"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;span&gt;</span>Item A<span class="c-tag">&lt;/span&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"dv-vline"</span><span class="c-tag">&gt;&lt;/div&gt;</span>
-  <span class="c-tag">&lt;span&gt;</span>Item B<span class="c-tag">&lt;/span&gt;</span>
-<span class="c-tag">&lt;/div&gt;</span></pre>
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Height</td><td><code>1px</code> — drawn as a <code>div</code> with a background, not a border or an <code>&lt;hr&gt;</code></td></tr>
+        <tr><td>Colour</td><td><code>#E5E7EB</code> · <code>rgba(255,255,255,.12)</code> in dark</td></tr>
+        <tr><td>Spacing</td><td><code>margin-bottom 12px</code> where it separates stacked blocks</td></tr>
+        <tr><td>Soft variant</td><td><code>#F3F4F6</code> · <code>rgba(255,255,255,.05)</code> — inside a list, between rows</td></tr>
+      </tbody>
+    </table></div>
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td>No vertical divider, no inset variant, no label-in-the-middle variant.</td></tr>
+    </tbody></table></div>
   </div>
-</div>
-</div>
-<div class="ds-section" id="specs"><div class="ds-section-title">Specs</div>
-<div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Property</th><th>Value</th><th>Token</th></tr></thead><tbody>
-<tr><td>Thickness</td><td>1px</td><td><code>divider.thickness</code></td></tr>
-<tr><td>Color</td><td>#DCE4E1</td><td><code>color.outline-variant</code></td></tr>
-<tr><td>Inset offset</td><td>16px</td><td><code>divider.inset</code></td></tr>
-</tbody></table></div></div>
-  
-    <!-- ── Prev / Next navigation ── -->
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-17-dialogs.html">
       <span class="ds-page-nav-label">← Previous</span>
