@@ -3,24 +3,59 @@
 <title>Hover Card — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.hc-wrap{position:relative;display:inline-block;font-family:'Montserrat',sans-serif;}
-.hc-trigger{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:#A614C3;cursor:pointer;font-family:'Montserrat',sans-serif;padding:6px 12px;border-radius:6px;transition:background .15s;}
-.hc-trigger:hover{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;}
-body.dark-mode .hc-trigger{color:#C084FC;}
-.hc-card{position:absolute;top:calc(100% + 8px);left:50%;width:240px;background:#fff;border:1px solid #E5E7EB;border-radius:10px;box-shadow:0 4px 20px rgba(15,17,32,.08),0 2px 6px rgba(15,17,32,.04);padding:14px;z-index:50;opacity:0;pointer-events:none;transition:opacity .15s ease, transform .15s ease;transform:translateX(-50%) translateY(4px);font-family:'Montserrat',sans-serif;display:flex;flex-direction:column;gap:1px;}
-.hc-wrap:hover .hc-card{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
-.hc-handle{font-size:12px;font-weight:600;color:#0F1120;font-family:'Montserrat',sans-serif;}
-.hc-bio{font-size:12px;font-weight:400;color:#0F1120;line-height:1.45;font-family:'Montserrat',sans-serif;}
-.hc-meta{font-size:10px;font-weight:400;color:#9CA3AF;margin-top:6px;font-family:'Montserrat',sans-serif;}
-.hc-dk .hc-card{background:#191D35;border-color:rgba(255,255,255,0.08);}
-.hc-dk .hc-handle{color:rgba(255,255,255,.92);}
-.hc-dk .hc-bio{color:rgba(255,255,255,.78);}
-.hc-dk .hc-meta{color:rgba(255,255,255,.40);}
-body.dark-mode .hc-trigger{color:rgba(255,255,255,.85);}
-body.dark-mode .hc-card{background:#191D35;border-color:rgba(255,255,255,0.08);box-shadow:0 4px 24px rgba(0,0,0,.40),0 2px 6px rgba(0,0,0,.20);}
-body.dark-mode .hc-handle{color:rgba(255,255,255,.92);}
-body.dark-mode .hc-bio{color:rgba(255,255,255,.78);}
-body.dark-mode .hc-meta{color:rgba(255,255,255,.40);}
+/* ── HOVER REVEAL ── the product has no hover card; it hides secondary actions until hover. */
+.hv-card { position: relative; width: 340px; padding: 20px; background: #fff;
+  border: 1px solid #E9EAEC; border-radius: 16px; font-family: 'Montserrat', sans-serif; }
+.hv-badge { position: absolute; top: 16px; right: 16px; display: inline-flex; padding: 8px;
+  border-radius: 8px; background: rgba(168,85,247,0.10); color: #A855F7; }
+.hv-action { position: absolute; top: 16px; right: 16px; display: inline-flex; align-items: center;
+  gap: 6px; height: 36px; padding: 0 12px; border: 1px solid var(--gray-200); border-radius: 8px;
+  background: #fff; cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 12px;
+  font-weight: 600; line-height: 1; color: var(--gray-800);
+  opacity: 0; transition: opacity .2s, background .15s; }
+.hv-card:hover .hv-action, .hv-card:hover .hv-lockwrap { opacity: 1; }
+.hv-action:hover { background: var(--gray-50); }
+.hv-svg { display: block; flex-shrink: 0; }
+
+.hv-lockwrap { position: absolute; top: 16px; right: 56px; opacity: 0; transition: opacity .2s; }
+.hv-lockwrap .hv-action { position: static; opacity: .75; cursor: not-allowed;
+  color: var(--gray-500); }
+.hv-lockwrap .hv-action:hover { background: #fff; }
+.hv-tip { position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
+  background: #111827; color: #fff; font-family: 'Montserrat', sans-serif; font-size: 11px;
+  line-height: 1.5; padding: 6px 10px; border-radius: 8px; white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(15,23,42,0.15); pointer-events: none;
+  opacity: 0; transition: opacity .2s; }
+.hv-lockwrap:hover .hv-tip { opacity: 1; }
+
+.hv-name { margin: 0 0 2px; font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--gray-800); }
+.hv-meta { margin: 0; font-size: 12px; line-height: 1.5; color: var(--gray-500); }
+
+.hv-rows { width: 100%; max-width: 420px; font-family: 'Montserrat', sans-serif; }
+.hv-row { position: relative; display: flex; align-items: center; gap: 8px; padding: 10px 12px;
+  border-radius: 8px; font-size: 13px; line-height: 1.5; color: var(--gray-800);
+  transition: background .15s; }
+.hv-row:hover { background: var(--gray-50); }
+.hv-rowlabel { flex: 1; min-width: 0; padding-right: 22px; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.hv-check { flex-shrink: 0; color: #73C9B7; opacity: 1; transition: opacity .2s; }
+.hv-row:hover .hv-check { opacity: 0; }
+.hv-remove { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); padding: 4px;
+  border: none; border-radius: 4px; background: transparent; cursor: pointer; color: var(--gray-500);
+  opacity: 0; transition: opacity .2s; }
+.hv-row:hover .hv-remove { opacity: 1; }
+
+body.dark-mode .hv-card { background: #191D35; border-color: rgba(255,255,255,0.08); }
+body.dark-mode .hv-action { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.15);
+  color: #F9FAFB; }
+body.dark-mode .hv-action:hover { background: rgba(255,255,255,0.04); }
+body.dark-mode .hv-lockwrap .hv-action { background: rgba(255,255,255,0.03);
+  border-color: rgba(255,255,255,0.10); color: #8B8FA8; }
+body.dark-mode .hv-tip { background: #1F2233; }
+body.dark-mode .hv-name { color: #F9FAFB; }
+body.dark-mode .hv-meta, body.dark-mode .hv-remove { color: #8B8FA8; }
+body.dark-mode .hv-row { color: #F9FAFB; }
+body.dark-mode .hv-row:hover { background: rgba(255,255,255,0.04); }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -121,9 +156,10 @@ body.dark-mode .hc-meta{color:rgba(255,255,255,.40);}
 </nav>
 <aside class="ds-toc">
   <div class="ds-toc-title">On this page</div>
-  <a class="ds-toc-item active" href="#overview">Overview</a>
-  <a class="ds-toc-item" href="#installation">Installation</a>
-  <a class="ds-toc-item" href="#api">Api</a>
+  <a class="ds-toc-item active" href="#card">Card action</a>
+  <a class="ds-toc-item" href="#locked">Locked action</a>
+  <a class="ds-toc-item" href="#swap">Row swap</a>
+  <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 <main class="ds-main">
   <div class="ds-content">
@@ -141,62 +177,94 @@ body.dark-mode .hc-meta{color:rgba(255,255,255,.40);}
       <a class="ds-nav-arrow-btn" href="ds-44-input-otp.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">A card that appears when hovering over a linked element.</p>
-    <div class="ds-section" id="overview">      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
-        </div>
-        <div class="ds-preview-pane" id="prev-main" style="align-items:center;justify-content:center;overflow:visible;">
-          <div style="padding:60px 32px 220px;display:flex;align-items:center;justify-content:center;">
-            <div class="hc-wrap">
-              <div class="hc-trigger">Hover Here</div>
-              <div class="hc-card">
-                <div class="hc-handle">@norbielink</div>
-                <div class="hc-bio">The Norbielink Design System – 53 components, full dark mode, Figma kit included.</div>
-                <div class="hc-meta">Joined March 2025</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="ds-code-pane" id="code-main">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-main')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"hc-wrap"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"hc-trigger"</span><span class="c-tag">&gt;</span>@username<span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-comment">&lt;!-- Card shown on hover --&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"hc-card"</span><span class="c-tag">&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"hc-avatar"</span><span class="c-tag">&gt;</span>A<span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"hc-name"</span><span class="c-tag">&gt;</span>Display Name<span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"hc-handle"</span><span class="c-tag">&gt;</span>@handle<span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"hc-bio"</span><span class="c-tag">&gt;</span>Description text.<span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"hc-meta"</span><span class="c-tag">&gt;</span>Joined March 2025<span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;/div&gt;</span>
-<span class="c-tag">&lt;/div&gt;</span></pre>
-        </div>
-      </div>
-    </div><div class="ds-divider"></div>    <div class="ds-section" id="installation">
-      <h2 class="ds-section-title">Installation</h2>
-      <p class="ds-section-desc">Built with pure HTML and CSS. Include <span class="ds-inline-code">ds-shared.css</span> in your project.</p>
-      <div class="ds-install-wrap">
-        <div class="ds-install-tabbar">
-          <button class="ds-install-tab active" onclick="switchInstall(this,'pnpm')">pnpm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'npm')">npm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'yarn')">yarn</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'bun')">bun</button>
-        </div>
-        <div class="ds-install-code">
-          <span class="ds-install-cmd" id="install-cmd"><span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span></span>
-          <button class="ds-copy-btn" style="position:static;" onclick="copyInstall(this)"><span class="material-icons-round">content_copy</span></button>
-        </div>
+    <p class="ds-page-desc">Norbielink has <strong>no hover card</strong> — no rich panel of content opens on
+  hover anywhere in the product. What it does have is <strong>hover reveal</strong>: a card or row keeps its
+  actions hidden until the pointer is over it, so a dense screen stays quiet. That pattern is documented here.
+  For a short label on hover, see <a href="ds-25-tooltips.html">Tooltip</a>.</p>
+
+  <div class="ds-section" id="card">
+    <h2 class="ds-section-title">Card action</h2>
+    <p class="ds-section-desc">An Edit button pinned to the card’s top-right corner, at zero opacity until the
+    card is hovered. The card itself is the hover target, not the button — move the pointer anywhere over it.</p>
+    <div class="ds-example" style="padding:40px;justify-content:center;">
+      <div class="hv-card">
+        <span class="hv-badge"><svg class="hv-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg></span>
+        <button class="hv-action"><svg class="hv-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg> Edit</button>
+        <p class="hv-name">Jane Smith</p>
+        <p class="hv-meta">jane.smith@amyntagroup.com</p>
+        <p class="hv-meta">(555) 123-4567</p>
       </div>
     </div>
-    <div class="ds-divider"></div>
-    <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
-      <h3 class="ds-subsection-title">Classes</h3>
-      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>hc-wrap</code></td><td>Outer (position:relative, inline-block)</td></tr><tr><td><code>hc-trigger</code></td><td>Element that activates the hover card</td></tr><tr><td><code>hc-card</code></td><td>Floating card panel</td></tr><tr><td><code>hc-avatar</code></td><td>48px circular avatar</td></tr><tr><td><code>hc-stats</code></td><td>Stat row at bottom of card</td></tr></tbody></table></div>    </div>
+  </div>
 
-  
-    <!-- ── Prev / Next navigation ── -->
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="locked">
+    <h2 class="ds-section-title">Locked action</h2>
+    <p class="ds-section-desc">When the action is not permitted the button still appears on hover, disabled, and
+    carries a second hover target of its own: hovering the button reveals a dark bubble explaining why. Two
+    nested hover scopes, which is as close as the product gets to a hover card.</p>
+    <div class="ds-example" style="padding:40px 40px 72px;justify-content:center;">
+      <div class="hv-card">
+        <span class="hv-badge"><svg class="hv-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <div class="hv-lockwrap">
+          <button class="hv-action hv-locked" disabled><svg class="hv-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Edit</button>
+          <span class="hv-tip">You don’t have permission — only your admin can modify this</span>
+        </div>
+        <p class="hv-name">Jane Smith</p>
+        <p class="hv-meta">jane.smith@amyntagroup.com</p>
+        <p class="hv-meta">(555) 123-4567</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="swap">
+    <h2 class="ds-section-title">Row swap</h2>
+    <p class="ds-section-desc">On a list row the reveal is a <em>swap</em>: the trailing status check fades out
+    as the remove button fades in, in the same place. The row never changes width, so nothing shifts.</p>
+    <div class="ds-example" style="padding:40px;justify-content:center;">
+      <div class="hv-rows">
+        <div class="hv-row"><span class="hv-rowlabel">Add Hired &amp; Non-Owned Auto</span>
+          <svg class="hv-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <button class="hv-remove" title="Remove this change"><svg class="hv-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+        <div class="hv-row"><span class="hv-rowlabel">Increase General Aggregate to $4M</span>
+          <svg class="hv-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <button class="hv-remove" title="Remove this change"><svg class="hv-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+        <div class="hv-row"><span class="hv-rowlabel">Add Additional Insured — Garcia LLC</span>
+          <svg class="hv-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <button class="hv-remove" title="Remove this change"><svg class="hv-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Part</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Mechanism</td><td><code>opacity 0</code> → <code>1</code> on the <em>container’s</em> hover, never <code>display</code> — the element keeps its box so nothing reflows</td></tr>
+        <tr><td>Card action</td><td><code>position:absolute</code> · <code>top 16px</code> · <code>right 16px</code> · <code>height 36px</code> · <code>padding 0 12px</code> · <code>radius 8px</code> · <code>gap 6px</code> · 12px / 600</td></tr>
+        <tr><td>Card action fill</td><td><code>#fff</code> on <code>1px #E5E7EB</code>; its own hover is <code>#F9FAFB</code></td></tr>
+        <tr><td>Locked action</td><td>Same box · <code>opacity .75</code> · <code>cursor:not-allowed</code> · text <code>#6B7280</code> · sits at <code>right 56px</code> to leave room for the card’s own icon</td></tr>
+        <tr><td>Explanation bubble</td><td><code>top calc(100% + 6px)</code> · <code>right 0</code> · <code>#111827</code> on white text · 11px · <code>padding 6px 10px</code> · <code>radius 8px</code> · <code>shadow 0 6px 20px rgba(15,23,42,.15)</code> · <code>white-space:nowrap</code> · <code>pointer-events:none</code></td></tr>
+        <tr><td>Row swap</td><td>Check <code>opacity 1 → 0</code> and remove button <code>0 → 1</code> on the same row hover · button <code>absolute</code> at <code>right 6px</code>, vertically centred · <code>padding 4px</code></td></tr>
+        <tr><td>Icons</td><td>14×14 in actions, 20×20 in the card’s corner badge, check at <code>stroke-width 3</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td>Hover reveal is for a <strong>secondary</strong> action on a repeated element. A primary action is never hidden behind hover — it sits in the toolbar above the list.</td></tr>
+      <tr><td>Because reveal is opacity-only, the hidden button still occupies its box and is still focusable. It is a visual affordance, not a gate.</td></tr>
+      <tr><td>None of this works on touch. Every revealed action has a non-hover route to it — opening the record, or the row’s context menu.</td></tr>
+      <tr><td>The locked bubble is the product’s only <em>nested</em> hover scope: the card reveals the button, then the button reveals the bubble.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-42-empty-state.html">
       <span class="ds-page-nav-label">← Previous</span>
