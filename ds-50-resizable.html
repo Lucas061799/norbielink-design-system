@@ -3,23 +3,20 @@
 <title>Resizable — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.res-wrap{display:flex;gap:0;width:100%;max-width:520px;height:220px;border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;font-family:'Montserrat',sans-serif;}
-.res-pane{flex:1;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#aaa;background:#fff;min-width:80px;}
-.res-pane.left{background:#fafafa;}
-.res-handle{width:5px;background:#e8e8e8;cursor:col-resize;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;}
-.res-handle:hover,.res-handle.dragging{background:#A614C3;}
-.res-handle::after{content:'';width:2px;height:32px;background:rgba(0,0,0,.12);border-radius:2px;}
-.res-dk .res-pane{background:#191D35;color:rgba(255,255,255,.3);}
-.res-dk .res-pane.left{background:#0F1120;}
-.res-dk .res-handle{background:rgba(255,255,255,0.08);}
-.res-dk .res-handle:hover{background:#5C2ED4;}
-.res-dk .res-handle::after{background:rgba(255,255,255,.15);}
-body.dark-mode .res-wrap{border-color:rgba(255,255,255,0.08);}
-body.dark-mode .res-pane{background:#191D35;color:rgba(255,255,255,.5);}
-body.dark-mode .res-pane.left{background:#0F1120;}
-body.dark-mode .res-handle{background:rgba(255,255,255,0.08);}
-body.dark-mode .res-handle:hover{background:#A614C3;}
-body.dark-mode .res-handle::after{background:rgba(255,255,255,.15);}
+/* ── RESIZABLE ── the product's only resize affordance is a textarea's vertical grip. */
+.rz-field { display: flex; flex-direction: column; gap: 6px; width: 100%; max-width: 460px;
+  font-family: 'Montserrat', sans-serif; }
+.rz-label { display: flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600;
+  line-height: 1.5; color: var(--gray-800); }
+.rz-area { width: 100%; min-height: 80px; padding: 9px 12px; border: 1px solid var(--gray-200);
+  border-radius: 8px; background: #fff; font-family: 'Montserrat', sans-serif; font-size: 13px;
+  line-height: 1.5; color: var(--gray-800); outline: none; resize: vertical; }
+.rz-area::placeholder { color: var(--gray-400); }
+.rz-fixed { resize: none; }
+
+body.dark-mode .rz-label { color: #F9FAFB; }
+body.dark-mode .rz-area { background: #1E2240; border-color: rgba(255,255,255,0.10); color: #F9FAFB; }
+body.dark-mode .rz-area::placeholder { color: #6B7280; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -120,9 +117,9 @@ body.dark-mode .res-handle::after{background:rgba(255,255,255,.15);}
 </nav>
 <aside class="ds-toc">
   <div class="ds-toc-title">On this page</div>
-  <a class="ds-toc-item active" href="#overview">Overview</a>
-  <a class="ds-toc-item" href="#installation">Installation</a>
-  <a class="ds-toc-item" href="#api">Api</a>
+  <a class="ds-toc-item active" href="#allowed">Resizable textarea</a>
+  <a class="ds-toc-item" href="#locked">Fixed textarea</a>
+  <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 <main class="ds-main">
   <div class="ds-content">
@@ -140,55 +137,74 @@ body.dark-mode .res-handle::after{background:rgba(255,255,255,.15);}
       <a class="ds-nav-arrow-btn" href="ds-51-scroll-area.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">Accessible resizable panel groups with a drag handle.</p>
-    <div class="ds-section" id="overview">      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
-        </div>
-        <div class="ds-preview-pane" id="prev-main" style="align-items:center;justify-content:center;">
-          <div class="res-wrap">
-            <div class="res-pane left" style="flex:0 0 40%;">Left panel</div>
-            <div class="res-handle"></div>
-            <div class="res-pane" style="flex:1;">Right panel</div>
-          </div>
-        </div>
-        <div class="ds-code-pane" id="code-main">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-main')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"res-wrap"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"res-pane left"</span> <span class="c-attr">style</span>=<span class="c-str">"flex:0 0 40%;"</span><span class="c-tag">&gt;</span>
-    Left panel
-  <span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"res-handle"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"res-pane"</span> <span class="c-attr">style</span>=<span class="c-str">"flex:1;"</span><span class="c-tag">&gt;</span>
-    Right panel
-  <span class="c-tag">&lt;/div&gt;</span>
-<span class="c-tag">&lt;/div&gt;</span></pre>
-        </div>
-      </div>
-    </div><div class="ds-divider"></div>    <div class="ds-section" id="installation">
-      <h2 class="ds-section-title">Installation</h2>
-      <p class="ds-section-desc">Built with pure HTML and CSS. Include <span class="ds-inline-code">ds-shared.css</span> in your project.</p>
-      <div class="ds-install-wrap">
-        <div class="ds-install-tabbar">
-          <button class="ds-install-tab active" onclick="switchInstall(this,'pnpm')">pnpm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'npm')">npm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'yarn')">yarn</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'bun')">bun</button>
-        </div>
-        <div class="ds-install-code">
-          <span class="ds-install-cmd" id="install-cmd"><span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span></span>
-          <button class="ds-copy-btn" style="position:static;" onclick="copyInstall(this)"><span class="material-icons-round">content_copy</span></button>
-        </div>
+    <p class="ds-page-desc">Norbielink has <strong>no split panes and no drag handles</strong>. Nothing in the
+  product is resized by dragging a divider. The single resize affordance is the browser’s own
+  <strong>vertical grip on a textarea</strong>, and it is granted deliberately — five fields allow it, ten
+  switch it off.</p>
+
+  <div class="ds-section" id="allowed">
+    <h2 class="ds-section-title">Resizable textarea</h2>
+    <p class="ds-section-desc">Granted where the answer has no predictable length: free-form descriptions on an
+    endorsement request. The field starts at three rows and can only grow <em>down</em>.</p>
+    <div class="ds-example" style="padding:40px;justify-content:center;">
+      <div class="rz-field">
+        <label class="rz-label">Additional comment</label>
+        <textarea class="rz-area" rows="3" placeholder="Please provide detailed information about the changes you’re requesting…"></textarea>
       </div>
     </div>
-    <div class="ds-divider"></div>
-        <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
-      <h3 class="ds-subsection-title">Classes</h3>
-      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>res-wrap</code></td><td>Flex row container</td></tr><tr><td><code>res-pane</code></td><td>Content panel (use flex to control size)</td></tr><tr><td><code>res-handle</code></td><td>Drag handle between panes</td></tr><tr><td><code>res-handle.dragging</code></td><td>Active drag state</td></tr><tr><td><code>res-dk</code></td><td>Dark mode modifier</td></tr></tbody></table></div>    </div>
+  </div>
 
-  
-    <!-- ── Prev / Next navigation ── -->
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="locked">
+    <h2 class="ds-section-title">Fixed textarea</h2>
+    <p class="ds-section-desc">Denied where the field sits in a fixed-height panel or a dialog, because growing
+    it would push the surrounding layout. These use <code>resize: none</code> and a row count instead.</p>
+    <div class="ds-example" style="padding:40px;justify-content:center;">
+      <div class="rz-field">
+        <label class="rz-label">Description</label>
+        <textarea class="rz-area rz-fixed" rows="3" placeholder="Describe what happened…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Axis</td><td><code>resize: vertical</code> — never <code>horizontal</code>, never <code>both</code></td></tr>
+        <tr><td>Start height</td><td><code>rows="3"</code></td></tr>
+        <tr><td>Floor</td><td><code>min-height 80px</code>, or <code>96px</code> on the two exposure-change fields</td></tr>
+        <tr><td>Ceiling</td><td>None — the form scrolls</td></tr>
+        <tr><td>Field</td><td>13px · <code>padding 9px 12px</code> · <code>radius 8px</code> · <code>1px #E5E7EB</code> · <code>#fff</code> · <code>outline:none</code> · <code>width 100%</code></td></tr>
+        <tr><td>Label</td><td>11.5px / 600 · required marker is a <code>#A614C3</code> asterisk, <code>gap 4px</code></td></tr>
+        <tr><td>Fixed variant</td><td><code>resize: none</code> · height set by <code>rows</code> alone (3, 4, 12 or 22 depending on the surface)</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="ds-subsection-title" style="margin-top:28px;">Where each is used</h3>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Surface</th><th>Resize</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Endorsement request — operations, exposure change, additional comment</td><td><code>vertical</code></td><td>Free-form answer, no predictable length, and the page already scrolls</td></tr>
+        <tr><td>Add Activity dialog</td><td><code>none</code></td><td>Fixed-height dialog; growing the field would push the footer buttons</td></tr>
+        <tr><td>Notes editor</td><td><code>none</code></td><td>Fills its pane with <code>rows 12</code>–<code>22</code>; the pane is the scroll container</td></tr>
+        <tr><td>Operations description on a quote</td><td><code>none</code></td><td>Sized to the card with <code>height: calc(100% - 22px)</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td>The rule is positional, not aesthetic: <strong>resize is allowed when the field’s container scrolls, and denied when it does not.</strong> A field in a fixed-height dialog or pane is always <code>resize: none</code>.</td></tr>
+      <tr><td>The grip is the browser’s, not a drawn control — there is no custom handle, and it renders differently per platform. Nothing in the product styles or replaces it.</td></tr>
+      <tr><td>Panels that change size do so in <strong>two fixed states</strong>, not by dragging: a detail panel expands to <code>70vw</code> and collapses back. That is a <a href="ds-53-sheet.html">sheet</a>, not a resizable pane.</td></tr>
+      <tr><td>See <a href="ds-56-textarea.html">Textarea</a> for the field itself; this page only covers the resize decision.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-22-radio.html">
       <span class="ds-page-nav-label">← Previous</span>
