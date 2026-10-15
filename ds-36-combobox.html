@@ -51,6 +51,29 @@ body.dark-mode .cb-opt:hover { background: rgba(255,255,255,0.04); }
 body.dark-mode .cb-box { background: #191D35; border-color: rgba(255,255,255,0.18); }
 body.dark-mode .cb-reset { border-top-color: rgba(255,255,255,0.08); }
 body.dark-mode .cb-reset:hover { background: rgba(255,255,255,0.04); }
+
+/* table context — the filter only ever appears in a column heading */
+.cb-table { width: 100%; max-width: 640px; background: #fff; border: 1px solid #E9EAEC;
+  border-radius: 12px; font-family: 'Montserrat', sans-serif; }
+.cb-thead { display: grid; grid-template-columns: 1.1fr 1.4fr 1.5fr 1.3fr 1.2fr; gap: 16px;
+  padding: 12px 20px; background: var(--gray-50); border-bottom: 1px solid #E9EAEC;
+  border-radius: 12px 12px 0 0; }
+.cb-sortcol { display: inline-flex; align-items: center; gap: 4px; padding: 0; border: none;
+  background: transparent; cursor: pointer; text-align: left; font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 700; line-height: 1.5; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--gray-500); white-space: nowrap; }
+.cb-sort { display: inline-flex; margin-left: 2px; color: var(--gray-400); }
+.cb-row { display: grid; grid-template-columns: 1.1fr 1.4fr 1.5fr 1.3fr 1.2fr; gap: 16px;
+  padding: 12px 20px; border-bottom: 1px solid var(--gray-100); font-size: 12px; line-height: 1.5;
+  color: var(--gray-800); }
+.cb-row:last-child { border-bottom: none; }
+.cb-link { color: #A614C3; font-weight: 600; }
+
+body.dark-mode .cb-table { background: #191D35; border-color: rgba(255,255,255,0.08); }
+body.dark-mode .cb-thead { background: rgba(255,255,255,0.03); border-bottom-color: rgba(255,255,255,0.08); }
+body.dark-mode .cb-sortcol { color: #8B8FA8; }
+body.dark-mode .cb-sort { color: #6B7280; }
+body.dark-mode .cb-row { color: #F9FAFB; border-bottom-color: rgba(255,255,255,0.06); }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -177,15 +200,18 @@ body.dark-mode .cb-reset:hover { background: rgba(255,255,255,0.04); }
 
   <div class="ds-section" id="overview">
     <h2 class="ds-section-title">Column filter</h2>
-    <p class="ds-section-desc">The trigger is the column heading itself, with a small caret. Both heading and
-    caret turn <code>#A614C3</code> while any value is selected, so an active filter is visible without opening
-    the panel.</p>
-    <div class="ds-example" style="padding:32px 32px 300px;gap:48px;align-items:flex-start;justify-content:center;">
-      <div class="cb-col">
-        <button class="cb-trigger">Status <svg class="cb-caret" width="7" height="5" viewBox="0 0 7 5" fill="none"><path d="M3.5 5L0.5 0H6.5L3.5 5Z" fill="currentColor"/></svg></button>
-      </div>
-      <div class="cb-col">
-        <button class="cb-trigger on">LOB <svg class="cb-caret" width="7" height="5" viewBox="0 0 7 5" fill="none"><path d="M3.5 5L0.5 0H6.5L3.5 5Z" fill="currentColor"/></svg></button>
+    <p class="ds-section-desc">The trigger is the column heading itself, with a small caret. Sortable columns
+    sit beside it carrying a double arrow instead — same 11px uppercase type, different affordance. Both
+    heading and caret turn <code>#A614C3</code> while any value is selected, so an applied filter reads without
+    opening the panel.</p>
+    <div class="ds-example" style="padding:32px 32px 195px;align-items:flex-start;justify-content:center;">
+      <div class="cb-table">
+        <div class="cb-thead">
+          <button class="cb-sortcol">Created <span class="cb-sort"><svg width="14" height="9" viewBox="0 0 14 9" fill="none"><path d="M4 8V1M4 1L2 3M4 1L6 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 1V8M10 8L8 6M10 8L12 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+          <button class="cb-sortcol">Quote&nbsp;# <span class="cb-sort"><svg width="14" height="9" viewBox="0 0 14 9" fill="none"><path d="M4 8V1M4 1L2 3M4 1L6 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 1V8M10 8L8 6M10 8L12 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+          <button class="cb-sortcol">Applicant <span class="cb-sort"><svg width="14" height="9" viewBox="0 0 14 9" fill="none"><path d="M4 8V1M4 1L2 3M4 1L6 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 1V8M10 8L8 6M10 8L12 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+          <div class="cb-col">
+            <button class="cb-trigger on">LOB <svg class="cb-caret" width="7" height="5" viewBox="0 0 7 5" fill="none"><path d="M3.5 5L0.5 0H6.5L3.5 5Z" fill="currentColor"/></svg></button>
         <div class="cb-panel">
           <div class="cb-searchwrap">
             <div class="cb-search"><svg class="cb-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg><input class="cb-input" placeholder="Search LOB" value=""></div>
@@ -196,6 +222,14 @@ body.dark-mode .cb-reset:hover { background: rgba(255,255,255,0.04); }
           <div class="cb-list"><button class="cb-opt"><span class="cb-box"><svg class="cb-tick" width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="#A614C3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>General Liability</button><button class="cb-opt"><span class="cb-box"><svg class="cb-tick" width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="#A614C3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Commercial Auto</button><button class="cb-opt"><span class="cb-box"></span>Workers’ Comp</button><button class="cb-opt"><span class="cb-box"></span>Professional Liability</button><button class="cb-opt"><span class="cb-box"></span>Inland Marine</button><button class="cb-opt"><span class="cb-box"></span>Cyber Risk</button><button class="cb-opt"><span class="cb-box"></span>Excess</button></div>
           <button class="cb-reset"><svg class="cb-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg> Reset Filter</button>
         </div>
+          </div>
+          <div class="cb-col">
+            <button class="cb-trigger">Status <svg class="cb-caret" width="7" height="5" viewBox="0 0 7 5" fill="none"><path d="M3.5 5L0.5 0H6.5L3.5 5Z" fill="currentColor"/></svg></button>
+          </div>
+        </div>
+          <div class="cb-row"><span>08/14/2026</span><span class="cb-link">QCN03262409</span><span>Garcia Landscaping</span><span>General Liability</span><span>Under Review</span></div>
+          <div class="cb-row"><span>08/02/2026</span><span class="cb-link">QCN03262402</span><span>Northgate Contractors</span><span>Commercial Auto</span><span>Issued</span></div>
+          <div class="cb-row"><span>07/28/2026</span><span class="cb-link">QCN03261987</span><span>Lakeside Roofing</span><span>General Liability</span><span>Incomplete</span></div>
       </div>
     </div>
   </div>
