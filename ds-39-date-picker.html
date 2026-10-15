@@ -3,37 +3,59 @@
 <title>Date Picker — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.dp-wrap{display:flex;flex-direction:column;gap:4px;font-family:'Montserrat',sans-serif;width:100%;max-width:280px;}
-.dp-label{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.06em;}
-.dp-input{display:flex;align-items:center;gap:8px;padding:9px 14px;border:1.5px solid #ddd;border-radius:10px;cursor:pointer;font-size:13px;color:#333;background:#fff;transition:border-color .15s;}
-.dp-input:hover{border-color:#A614C3;}
-.dp-input .material-icons-round{font-size:18px;color:#aaa;margin-left:auto;}
-.dp-popup{background:#fff;border:1px solid #e8e8e8;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.12);overflow:hidden;margin-top:6px;width:300px;}
-.dp-popup .cal-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid #eee;}
-.dp-popup .cal-title{font-size:14px;font-weight:700;color:#111;}
-.dp-popup .cal-nav{display:flex;gap:4px;}
-.dp-popup .cal-nav-btn{width:28px;height:28px;border:none;background:#f5f5f5;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-.dp-popup .cal-nav-btn .material-icons-round{font-size:16px;color:#666;}
-.dp-popup .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);padding:10px 14px 14px;gap:2px;}
-.dp-popup .cal-day-label{text-align:center;font-size:10px;font-weight:700;color:#aaa;padding:3px 0;}
-.dp-popup .cal-day{text-align:center;padding:5px 0;font-size:12px;font-weight:600;color:#555;border-radius:6px;cursor:pointer;}
-.dp-popup .cal-day:hover{background:rgba(92,46,212,0.06);}
-.dp-popup .cal-day.today{color:#A614C3;border:1px solid rgba(166,20,195,0.45);font-weight:700;}
-.dp-popup .cal-day.selected{background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:#fff;font-weight:700;}
-.dp-popup .cal-day.other-month{color:#ddd;}
-body.dark-mode .dp-input{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);}
-body.dark-mode .dp-input:hover{border-color:#A614C3;}
-body.dark-mode .dp-popup{background:#191D35;border-color:rgba(255,255,255,0.08);}
-body.dark-mode .dp-popup .cal-header{border-bottom-color:rgba(255,255,255,0.08);}
-body.dark-mode .dp-popup .cal-title{color:rgba(255,255,255,.9);}
-body.dark-mode .dp-popup .cal-nav-btn{background:rgba(255,255,255,.07);}
-body.dark-mode .dp-popup .cal-nav-btn .material-icons-round{color:rgba(255,255,255,.5);}
-body.dark-mode .dp-popup .cal-day-label{color:rgba(255,255,255,.25);}
-body.dark-mode .dp-popup .cal-day{color:rgba(255,255,255,.6);}
-body.dark-mode .dp-popup .cal-day:hover{background:rgba(92,46,212,0.15);}
-body.dark-mode .dp-popup .cal-day.today{color:#A855F7;border:1px solid rgba(168,85,247,0.45);background:transparent;}
-body.dark-mode .dp-popup .cal-day.selected{background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:#fff;font-weight:700;}
-body.dark-mode .dp-popup .cal-day.other-month{color:rgba(255,255,255,.15);}
+/* ── DATE PICKER ── read-only field + the calendar panel. One component with Calendar. */
+.dp-field { width: 240px; font-family: 'Montserrat', sans-serif; }
+.dp-label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600; line-height: 1.5;
+  color: var(--gray-800); }
+.dp-req { color: #DC2626; }
+.dp-wrap { position: relative; }
+.dp-input { width: 100%; padding: 9px 32px 9px 12px; border: 1px solid var(--gray-300);
+  border-radius: 8px; background: #fff; font-family: 'Montserrat', sans-serif; font-size: 13px;
+  line-height: 1.5; color: var(--gray-800); outline: none; cursor: pointer; }
+.dp-input.invalid { border-color: #DC2626; box-shadow: 0 0 0 1px rgba(220,38,38,0.15); }
+.dp-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  display: inline-flex; color: var(--gray-500); cursor: pointer; }
+.dp-svg { display: block; }
+.dp-err { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 11px;
+  line-height: 1.5; color: #DC2626; }
+
+/* panel — identical to the Calendar page */
+.cal { position: absolute; left: 0; top: calc(100% + 8px); z-index: 50; width: 280px; padding: 16px;
+  background: #fff; border: 1px solid #E9EAEC; border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12); font-family: 'Montserrat', sans-serif; }
+.cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.cal-nav { display: inline-flex; padding: 6px; border: none; border-radius: 8px; background: transparent;
+  cursor: pointer; color: var(--gray-800); transition: background .15s; }
+.cal-nav:hover { background: var(--gray-50); }
+.cal-title { padding: 4px 8px; border: none; border-radius: 8px; background: transparent; cursor: pointer;
+  font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; line-height: 1.5;
+  color: var(--gray-800); transition: background .15s; }
+.cal-title:hover { background: var(--gray-50); }
+.cal-svg { display: block; }
+.cal-wdrow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 4px; }
+.cal-wd { text-align: center; padding: 4px 0; font-size: 10px; font-weight: 600; line-height: 1.5;
+  color: var(--gray-500); }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.cal-day { height: 30px; border: 1px solid transparent; border-radius: 8px; background: transparent;
+  cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500;
+  line-height: 1; color: var(--gray-800); transition: all .15s; }
+.cal-day:hover { background: var(--gray-50); }
+.cal-day.today { font-weight: 700; color: #A855F7; border: 1px solid rgba(168,85,247,0.45);
+  background: transparent; }
+.cal-day.sel, .cal-day.sel:hover { font-weight: 700; color: #fff; border: 1px solid transparent;
+  background: linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%); }
+.cal-blank { }
+
+body.dark-mode .dp-label { color: #F9FAFB; }
+body.dark-mode .dp-input { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.18);
+  color: #F9FAFB; }
+body.dark-mode .dp-icon { color: #8B8FA8; }
+body.dark-mode .cal { background: #191D35; border-color: rgba(255,255,255,0.08); }
+body.dark-mode .cal-nav, body.dark-mode .cal-title, body.dark-mode .cal-day { color: #F9FAFB; }
+body.dark-mode .cal-wd { color: #8B8FA8; }
+body.dark-mode .cal-nav:hover, body.dark-mode .cal-title:hover,
+body.dark-mode .cal-day:hover { background: rgba(255,255,255,0.04); }
+body.dark-mode .cal-day.today { color: #A855F7; background: transparent; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -134,9 +156,9 @@ body.dark-mode .dp-popup .cal-day.other-month{color:rgba(255,255,255,.15);}
 </nav>
 <aside class="ds-toc">
   <div class="ds-toc-title">On this page</div>
-  <a class="ds-toc-item active" href="#overview">Overview</a>
-  <a class="ds-toc-item" href="#installation">Installation</a>
-  <a class="ds-toc-item" href="#api">Api</a>
+  <a class="ds-toc-item active" href="#overview">Closed and open</a>
+  <a class="ds-toc-item" href="#states">Invalid</a>
+  <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 <main class="ds-main">
   <div class="ds-content">
@@ -154,62 +176,87 @@ body.dark-mode .dp-popup .cal-day.other-month{color:rgba(255,255,255,.15);}
       <a class="ds-nav-arrow-btn" href="ds-17-dialogs.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">A calendar-based date selection input component.</p>
-    <div class="ds-section" id="overview">      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
-        </div>
-        <div class="ds-preview-pane" id="prev-main" style="align-items:center;justify-content:center;">
-          <div style="display:flex;flex-direction:column;gap:4px;width:100%;max-width:300px;">
-            <div class="dp-label">Select date</div>
-            <div class="dp-input"><span>March 14, 2026</span><span class="material-icons-round">calendar_today</span></div>
-            <div class="dp-popup">
-              <div class="cal-header"><div class="cal-title">March 2026</div><div class="cal-nav"><button class="cal-nav-btn"><span class="material-icons-round">chevron_left</span></button><button class="cal-nav-btn"><span class="material-icons-round">chevron_right</span></button></div></div>
-              <div class="cal-grid">
-                <div class="cal-day-label">SU</div><div class="cal-day-label">MO</div><div class="cal-day-label">TU</div><div class="cal-day-label">WE</div><div class="cal-day-label">TH</div><div class="cal-day-label">FR</div><div class="cal-day-label">SA</div>
-                <div class="cal-day other-month">&nbsp;</div><div class="cal-day other-month">&nbsp;</div><div class="cal-day other-month">&nbsp;</div><div class="cal-day other-month">&nbsp;</div><div class="cal-day other-month">&nbsp;</div><div class="cal-day other-month">&nbsp;</div><div class="cal-day">1</div>
-                <div class="cal-day">2</div><div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day today">7</div><div class="cal-day">8</div>
-                <div class="cal-day">9</div><div class="cal-day">10</div><div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day selected">14</div><div class="cal-day">15</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="ds-code-pane" id="code-main">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-main')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"dp-wrap"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"dp-label"</span><span class="c-tag">&gt;</span>Select date<span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"dp-input"</span><span class="c-tag">&gt;</span>
-    <span class="c-tag">&lt;span</span><span class="c-tag">&gt;</span>Select a date...<span class="c-tag">&lt;/span&gt;</span>
-    <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"material-icons-round"</span><span class="c-tag">&gt;</span>calendar_today<span class="c-tag">&lt;/span&gt;</span>
-  <span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-comment">&lt;!-- dp-popup shown on click --&gt;</span>
-<span class="c-tag">&lt;/div&gt;</span></pre>
+    <p class="ds-page-desc">A read-only text field with a calendar icon that opens the
+  <a href="ds-32-calendar.html">calendar</a> panel beneath it. One implementation ships, used for
+  <em>Appt. Date</em> and the two <em>Expiration Date</em> fields on an agency record. The value is always
+  <code>MM/DD/YYYY</code>.</p>
+
+  <div class="ds-section" id="overview">
+    <h2 class="ds-section-title">Closed and open</h2>
+    <p class="ds-section-desc">The field inherits whatever input style surrounds it — on an agency record that
+    is the 8px-radius form field. Only the icon and the <code>readonly</code> behaviour belong to the picker.</p>
+    <div class="ds-example" style="padding:40px 40px 230px;gap:40px;align-items:flex-start;justify-content:center;">
+      <div class="dp-field">
+        <label class="dp-label">Expiration Date</label>
+        <div class="dp-wrap">
+          <input class="dp-input" value="10/15/2026" readonly>
+          <span class="dp-icon"><svg class="dp-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span>
         </div>
       </div>
-    </div><div class="ds-divider"></div>    <div class="ds-section" id="installation">
-      <h2 class="ds-section-title">Installation</h2>
-      <p class="ds-section-desc">Built with pure HTML and CSS. Include <span class="ds-inline-code">ds-shared.css</span> in your project.</p>
-      <div class="ds-install-wrap">
-        <div class="ds-install-tabbar">
-          <button class="ds-install-tab active" onclick="switchInstall(this,'pnpm')">pnpm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'npm')">npm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'yarn')">yarn</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'bun')">bun</button>
+      <div class="dp-field">
+        <label class="dp-label">Appt. Date</label>
+        <div class="dp-wrap">
+          <input class="dp-input" value="10/15/2026" readonly>
+          <span class="dp-icon"><svg class="dp-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span>
+        <div class="cal">
+          <div class="cal-head">
+            <button class="cal-nav"><svg class="cal-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+            <button class="cal-title">October 2026</button>
+            <button class="cal-nav"><svg class="cal-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+          </div>
+          <div class="cal-wdrow"><div class="cal-wd">Su</div><div class="cal-wd">Mo</div><div class="cal-wd">Tu</div><div class="cal-wd">We</div><div class="cal-wd">Th</div><div class="cal-wd">Fr</div><div class="cal-wd">Sa</div></div>
+          <div class="cal-grid"><div class="cal-blank"></div><div class="cal-blank"></div><div class="cal-blank"></div><div class="cal-blank"></div><button class="cal-day">1</button><button class="cal-day">2</button><button class="cal-day">3</button><button class="cal-day">4</button><button class="cal-day">5</button><button class="cal-day">6</button><button class="cal-day">7</button><button class="cal-day">8</button><button class="cal-day">9</button><button class="cal-day">10</button><button class="cal-day">11</button><button class="cal-day">12</button><button class="cal-day">13</button><button class="cal-day">14</button><button class="cal-day sel">15</button><button class="cal-day">16</button><button class="cal-day">17</button><button class="cal-day">18</button><button class="cal-day">19</button><button class="cal-day">20</button><button class="cal-day">21</button><button class="cal-day today">22</button><button class="cal-day">23</button><button class="cal-day">24</button><button class="cal-day">25</button><button class="cal-day">26</button><button class="cal-day">27</button><button class="cal-day">28</button><button class="cal-day">29</button><button class="cal-day">30</button><button class="cal-day">31</button></div>
         </div>
-        <div class="ds-install-code">
-          <span class="ds-install-cmd" id="install-cmd"><span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span></span>
-          <button class="ds-copy-btn" style="position:static;" onclick="copyInstall(this)"><span class="material-icons-round">content_copy</span></button>
         </div>
       </div>
     </div>
-    <div class="ds-divider"></div>
-    <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
-      <h3 class="ds-subsection-title">Classes</h3>
-      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>dp-wrap</code></td><td>Container column</td></tr><tr><td><code>dp-label</code></td><td>Field label</td></tr><tr><td><code>dp-input</code></td><td>Trigger input display</td></tr><tr><td><code>dp-popup</code></td><td>Floating calendar panel</td></tr></tbody></table></div>    </div>
+  </div>
 
-  
-    <!-- ── Prev / Next navigation ── -->
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="states">
+    <h2 class="ds-section-title">Invalid</h2>
+    <p class="ds-section-desc">A required date that fails validation takes the same treatment as any other form
+    field, with the message below rather than inside the control.</p>
+    <div class="ds-example" style="padding:40px;justify-content:center;">
+      <div class="dp-field">
+        <label class="dp-label">Expiration Date<span class="dp-req"> *</span></label>
+        <div class="dp-wrap">
+          <input class="dp-input invalid" value="" readonly>
+          <span class="dp-icon"><svg class="dp-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span>
+        </div>
+        <div class="dp-err"><svg class="dp-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg> Expiration Date is required.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Part</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Label</td><td>13px / 600 · <code>display:block</code> · <code>margin-bottom 6px</code></td></tr>
+        <tr><td>Field</td><td><code>padding 9px 12px</code> · <code>radius 8px</code> · <code>1px #D1D5DB</code> · 13px · <code>outline:none</code> · <code>width 100%</code></td></tr>
+        <tr><td>Behaviour</td><td><code>readonly</code> with <code>cursor:pointer</code> — the field cannot be typed into</td></tr>
+        <tr><td>Icon</td><td>16×16 lucide <code>calendar</code> · <code>#6B7280</code> · <code>right 12px</code>, vertically centred · clickable</td></tr>
+        <tr><td>Panel</td><td>280px, opens <code>8px</code> below at <code>left 0</code> — see <a href="ds-32-calendar.html">Calendar</a></td></tr>
+        <tr><td>Value</td><td><code>MM/DD/YYYY</code>, zero-padded</td></tr>
+        <tr><td>Invalid</td><td><code>border-color #DC2626</code> + <code>box-shadow 0 0 0 1px rgba(220,38,38,.15)</code></td></tr>
+        <tr><td>Error text</td><td>11px <code>#DC2626</code> · <code>margin-top 4px</code> · <code>gap 6px</code> with a 12px icon</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td>Date Picker and <a href="ds-32-calendar.html">Calendar</a> are <strong>one component</strong>, not two. This page documents the trigger; the Calendar page documents the panel and its three views. Neither ships without the other.</td></tr>
+      <tr><td>Clicking outside closes the panel <em>and</em> resets it to the day view, so it never reopens on the month or year grid.</td></tr>
+      <tr><td>There is no clear button, no “today” shortcut and no keyboard entry. A date is changed only by opening the panel and picking one.</td></tr>
+      <tr><td>Fields elsewhere in the product use a <code>10px</code> radius; the record editor this control lives in uses <code>8px</code>. The picker follows its surroundings rather than carrying its own.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-38-context-menu.html">
       <span class="ds-page-nav-label">← Previous</span>
