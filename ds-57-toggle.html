@@ -3,27 +3,44 @@
 <title>Toggle — Norbielink Design System</title>
 <link rel="stylesheet" href="ds-shared.css">
 <style>
-.tog{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid #E5E7EB;border-radius:8px;cursor:pointer;background:#fff;transition:all .15s;font-family:'Montserrat',sans-serif;}
-.tog:hover{border-color:#D1D5DB;background:#f5f5f5;}
-.tog.active,.tog[aria-pressed="true"]{background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);border-color:transparent;}
-.tog .material-icons-round{font-size:18px;color:#6B7280;}
-.tog.active .material-icons-round,.tog[aria-pressed="true"] .material-icons-round{color:#fff;}
-.tog-outline{background:transparent;border-color:rgba(255,255,255,0.08);}
-.tog-outline .material-icons-round{color:rgba(255,255,255,.55);}
-.tog-outline.active{background:#5C2ED4;border-color:#5C2ED4;}
-.tog-outline.active .material-icons-round{color:#fff;}
-.tog-label-wrap{display:flex;align-items:center;gap:8px;font-family:'Montserrat',sans-serif;font-size:13px;color:#555;}
+/* ── TOGGLE ── a bare icon; the glyph's fill is the state. No box anywhere. */
+.tg-star { display: inline-flex; padding: 0; border: none; background: none; cursor: pointer;
+  color: var(--gray-400); flex-shrink: 0; transition: transform .15s, color .15s; }
+.tg-star:hover { transform: scale(1.15); }
+.tg-star .tg-svg { fill: none; }
+.tg-star.on { color: #F59E0B; }
+.tg-star.on .tg-svg { fill: #F59E0B; }
+.tg-lg:hover { transform: scale(1.18); }
+.tg-svg { display: block; }
 
-/* Dark mode */
-body.dark-mode .tog{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.10);}
-body.dark-mode .tog:hover{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.20);}
-body.dark-mode .tog .material-icons-round{color:rgba(255,255,255,0.65);}
-body.dark-mode .tog.active,
-body.dark-mode .tog[aria-pressed="true"]{background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);border-color:transparent;}
-body.dark-mode .tog.active .material-icons-round,
-body.dark-mode .tog[aria-pressed="true"] .material-icons-round{color:#fff;}
-body.dark-mode .tog-label-wrap{color:rgba(255,255,255,0.75);}
-body.dark-mode .tog-divider{background:rgba(255,255,255,0.10) !important;}
+.tg-table { width: 100%; max-width: 520px; background: #fff; border: 1px solid #E9EAEC;
+  border-radius: 12px; font-family: 'Montserrat', sans-serif; }
+.tg-thead { display: grid; grid-template-columns: 24px 1fr 140px; align-items: center; gap: 20px;
+  padding: 12px 20px; background: var(--gray-50); border-bottom: 1px solid #E9EAEC;
+  border-radius: 12px 12px 0 0; font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--gray-500); }
+.tg-thead .tg-star { color: var(--gray-500); }
+.tg-row { display: grid; grid-template-columns: 24px 1fr 140px; align-items: center; gap: 20px;
+  padding: 14px 20px; border-bottom: 1px solid var(--gray-100); transition: background .15s; }
+.tg-row:last-child { border-bottom: none; }
+.tg-row:hover { background: var(--gray-50); }
+.tg-rowname { font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--gray-800); }
+.tg-rowtype { font-size: 12px; font-weight: 600; line-height: 1.5; color: #A614C3; }
+
+.tg-demo { display: flex; flex-direction: column; align-items: center; gap: 12px;
+  font-family: 'Montserrat', sans-serif; }
+.tg-cap { font-size: 11px; line-height: 1.5; color: var(--gray-400); }
+
+body.dark-mode .tg-table { background: #191D35; border-color: rgba(255,255,255,0.08); }
+body.dark-mode .tg-thead { background: rgba(255,255,255,0.03); border-bottom-color: rgba(255,255,255,0.08);
+  color: #8B8FA8; }
+body.dark-mode .tg-thead .tg-star { color: #8B8FA8; }
+body.dark-mode .tg-star { color: #6B7280; }
+body.dark-mode .tg-row { border-bottom-color: rgba(255,255,255,0.06); }
+body.dark-mode .tg-row:hover { background: rgba(255,255,255,0.04); }
+body.dark-mode .tg-rowname { color: #F9FAFB; }
+body.dark-mode .tg-rowtype { color: #4ECDC4; }
+body.dark-mode .tg-cap { color: #6B7280; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -124,9 +141,9 @@ body.dark-mode .tog-divider{background:rgba(255,255,255,0.10) !important;}
 </nav>
 <aside class="ds-toc">
   <div class="ds-toc-title">On this page</div>
-  <a class="ds-toc-item active" href="#overview">Overview</a>
-  <a class="ds-toc-item" href="#installation">Installation</a>
-  <a class="ds-toc-item" href="#api">Api</a>
+  <a class="ds-toc-item active" href="#row">Row toggle</a>
+  <a class="ds-toc-item" href="#sizes">Sizes and hover</a>
+  <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 <main class="ds-main">
   <div class="ds-content">
@@ -144,66 +161,86 @@ body.dark-mode .tog-divider{background:rgba(255,255,255,0.10) !important;}
       <a class="ds-nav-arrow-btn" href="ds-25-tooltips.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">A two-state button that can be on or off.</p>
-    <div class="ds-section" id="overview">      <div class="ds-preview-wrap">
-        <div class="ds-preview-tabbar">
-          <button class="ds-preview-tab active" onclick="switchTab(this,'prev-main')">Preview</button>
-          <button class="ds-preview-tab" onclick="switchTab(this,'code-main')">Code</button>
-        </div>
-        <div class="ds-preview-pane" id="prev-main">
-          <div style="display:flex;flex-direction:column;gap:24px;align-items:center;">
-            <div style="display:flex;gap:8px;align-items:center;">
-              <div class="tog active" onclick="this.classList.toggle('active')"><span class="material-icons-round">format_bold</span></div>
-              <div class="tog" onclick="this.classList.toggle('active')"><span class="material-icons-round">format_italic</span></div>
-              <div class="tog" onclick="this.classList.toggle('active')"><span class="material-icons-round">format_underlined</span></div>
-              <div class="tog-divider" style="width:1px;height:24px;background:#e0e0e0;margin:0 4px;"></div>
-              <div class="tog" onclick="this.classList.toggle('active')"><span class="material-icons-round">format_align_left</span></div>
-              <div class="tog active" onclick="this.classList.toggle('active')"><span class="material-icons-round">format_align_center</span></div>
-              <div class="tog" onclick="this.classList.toggle('active')"><span class="material-icons-round">format_align_right</span></div>
-            </div>
-            <div class="tog-label-wrap">
-              <div class="tog active" onclick="this.classList.toggle('active')"><span class="material-icons-round">star</span></div>
-              <span>Mark as favourite</span>
-            </div>
-          </div>
-        </div>
-        <div class="ds-code-pane" id="code-main">
-          <button class="ds-copy-btn" onclick="copyCode(this,'code-main')"><span class="material-icons-round">content_copy</span> Copy</button>
-          <pre class="ds-code-block"><span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-str">"tog"</span> <span class="c-attr">onclick</span>="this.classList.toggle('<span class="c-attr">active</span>')"<span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"material-icons-round"</span><span class="c-tag">&gt;</span>format_bold<span class="c-tag">&lt;/span&gt;</span>
-<span class="c-tag">&lt;/button&gt;</span>
+    <p class="ds-page-desc">Norbielink’s toggle is a <strong>bare icon</strong>. No box, no border, no
+  background, no padding — the state is carried by whether the glyph is <strong>filled</strong>. One icon
+  ships in this role, the star, and it is always <code>#F59E0B</code> when on.</p>
 
-<span class="c-comment">&lt;!-- With label --&gt;</span>
-<span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"tog-label-wrap"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-str">"tog active"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"material-icons-round"</span><span class="c-tag">&gt;</span>star<span class="c-tag">&lt;/span&gt;</span><span class="c-tag">&lt;/button&gt;</span>
-  <span class="c-tag">&lt;span</span><span class="c-tag">&gt;</span>Favourite<span class="c-tag">&lt;/span&gt;</span>
-<span class="c-tag">&lt;/div&gt;</span></pre>
+  <div class="ds-section" id="row">
+    <h2 class="ds-section-title">Row toggle</h2>
+    <p class="ds-section-desc">Starring a client or an agency. Off is an outline in the muted grey; on fills the
+    same glyph amber. The star in the column heading is the same control used as a filter — it switches the
+    table between all records and starred only.</p>
+    <div class="ds-example" style="padding:32px;align-items:stretch;justify-content:center;">
+      <div class="tg-table">
+        <div class="tg-thead">
+          <button class="tg-star on" title="Show all clients"><svg class="tg-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></button>
+          <span>Client Name</span>
+          <span>Entity</span>
         </div>
-      </div>
-    </div><div class="ds-divider"></div>    <div class="ds-section" id="installation">
-      <h2 class="ds-section-title">Installation</h2>
-      <p class="ds-section-desc">Built with pure HTML and CSS. Include <span class="ds-inline-code">ds-shared.css</span> in your project.</p>
-      <div class="ds-install-wrap">
-        <div class="ds-install-tabbar">
-          <button class="ds-install-tab active" onclick="switchInstall(this,'pnpm')">pnpm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'npm')">npm</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'yarn')">yarn</button>
-          <button class="ds-install-tab" onclick="switchInstall(this,'bun')">bun</button>
-        </div>
-        <div class="ds-install-code">
-          <span class="ds-install-cmd" id="install-cmd"><span class="c-kw">pnpm</span> add <span class="c-pkg">@norbielink/ds</span></span>
-          <button class="ds-copy-btn" style="position:static;" onclick="copyInstall(this)"><span class="material-icons-round">content_copy</span></button>
-        </div>
+          <div class="tg-row">
+            <button class="tg-star on" title="Unstar"><svg class="tg-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></button>
+            <span class="tg-rowname">Garcia Landscaping</span>
+            <span class="tg-rowtype">Corporation</span>
+          </div>
+          <div class="tg-row">
+            <button class="tg-star" title="Star"><svg class="tg-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></button>
+            <span class="tg-rowname">Northgate Contractors</span>
+            <span class="tg-rowtype">LLC</span>
+          </div>
+          <div class="tg-row">
+            <button class="tg-star on" title="Unstar"><svg class="tg-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></button>
+            <span class="tg-rowname">Lakeside Roofing</span>
+            <span class="tg-rowtype">Sole Proprietor</span>
+          </div>
+          <div class="tg-row">
+            <button class="tg-star" title="Star"><svg class="tg-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></button>
+            <span class="tg-rowname">Summit Electrical</span>
+            <span class="tg-rowtype">Partnership</span>
+          </div>
       </div>
     </div>
-    <div class="ds-divider"></div>
+  </div>
 
-        <div class="ds-section" id="api"><h2 class="ds-section-title">API Reference</h2>
-      <h3 class="ds-subsection-title">Classes</h3>
-      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Class</th><th>Description</th></tr></thead><tbody><tr><td><code>tog</code></td><td>Default toggle button (36×36px)</td></tr><tr><td><code>tog.active</code></td><td>Pressed / selected state (black bg)</td></tr><tr><td><code>tog-outline</code></td><td>Outline variant for dark surfaces</td></tr><tr><td><code>tog-outline.active</code></td><td>Pressed outline (purple bg)</td></tr><tr><td><code>tog-label-wrap</code></td><td>Flex row with toggle + text label</td></tr></tbody></table></div>    </div>
+  <div class="ds-divider"></div>
 
-  
-    <!-- ── Prev / Next navigation ── -->
+  <div class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes and hover</h2>
+    <p class="ds-section-desc">16px in a table, 20px on a record heading. Hover scales the glyph instead of
+    drawing a background — there is nothing behind it to tint.</p>
+    <div class="ds-example" style="padding:48px;gap:56px;justify-content:center;">
+      <div class="tg-demo"><button class="tg-star"><svg class="tg-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></button><span class="tg-cap">16px off</span></div>
+      <div class="tg-demo"><button class="tg-star on"><svg class="tg-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></button><span class="tg-cap">16px on</span></div>
+      <div class="tg-demo"><button class="tg-star tg-lg"><svg class="tg-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></button><span class="tg-cap">20px off</span></div>
+      <div class="tg-demo"><button class="tg-star tg-lg on"><svg class="tg-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></button><span class="tg-cap">20px on</span></div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Box</td><td>None — <code>background: none</code>, <code>border: none</code>, <code>padding: 0</code></td></tr>
+        <tr><td>Off</td><td><code>fill: none</code> · <code>stroke #9CA3AF</code> on a row, <code>#6B7280</code> in a heading</td></tr>
+        <tr><td>On</td><td><code>fill: #F59E0B</code> and <code>stroke: #F59E0B</code> — one colour, both properties</td></tr>
+        <tr><td>Size</td><td>16×16 in a table row or heading · 20×20 on a record title</td></tr>
+        <tr><td>Hover</td><td><code>transform: scale(1.15)</code>, or <code>1.18</code> on the 20px variant · no background, no colour change</td></tr>
+        <tr><td>Transition</td><td><code>transition-colors</code> on the row star, <code>transition-all</code> where it scales</td></tr>
+        <tr><td>Hit area</td><td>The glyph itself. It sits in a <code>flex-shrink-0</code> cell, and the row’s own click is stopped with <code>stopPropagation</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td>Starring is <strong>not</strong> a status. <code>#F59E0B</code> here means “I marked this”, not “warning” — the same value does mean warning on a <a href="ds-09-badges.html">badge</a>, so read it by context.</td></tr>
+      <tr><td>The same glyph is the control and the indicator. There is no separate “starred” badge on the row.</td></tr>
+      <tr><td>A toggle that needs a <em>label</em> is not this control — it is a <a href="ds-12-switches.html">switch</a> (settings) or a filter chip (lists). A boxed, pressable toolbar button with a purple fill does not exist in the product.</td></tr>
+      <tr><td>Pinning a note reuses the idea but not the control: it shows a <code>#F59E0B</code> <code>pin</code> icon with the word <em>Pinned</em> at 11px, as a read-only indicator in the editor footer.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-08-textfields.html">
       <span class="ds-page-nav-label">← Previous</span>
