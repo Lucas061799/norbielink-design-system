@@ -365,12 +365,15 @@ body { background: var(--page-bg); overflow-x: hidden; }
 
 /* ─── EXAMPLE CONTAINERS ─── */
 .ds-example {
-  background: #f8f9fa;
+  /* Near-white so a component's own 1px hairline still reads inside it.
+     The tint alone cannot carry the edge, so the box keeps a border. */
+  background: #fdfdfe;
+  border: 1px solid #f0f1f3;
   border-radius: 16px; padding: 40px; margin-bottom: 24px;
   display: flex; align-items: center; justify-content: center;
   flex-wrap: wrap; gap: 16px; min-height: 120px;
 }
-.ds-example.dark-bg { background: var(--dark-bg); }
+.ds-example.dark-bg { background: var(--dark-bg); border-color: rgba(255,255,255,0.08); }
 .ds-example.grid-3 {
   display: grid; grid-template-columns: repeat(3,1fr);
   gap: 24px; align-items: start; justify-items: center;
@@ -993,7 +996,7 @@ body.dark-mode .ds-toc-item:hover { color: #C084FC; border-left-color: rgba(166,
 body.dark-mode .ds-toc-item.active { color: #C084FC; border-left-color: #A614C3; font-weight: 600; }
 
 /* ── Example containers ── */
-body.dark-mode .ds-example { background: #191D35; border-radius: 16px; }
+body.dark-mode .ds-example { background: #191D35; border-color: rgba(255,255,255,0.08); border-radius: 16px; }
 /* Override inline background:white on .ds-example in dark mode */
 body.dark-mode .ds-example[style*="background:white"],
 body.dark-mode .ds-example[style*="background: white"],
