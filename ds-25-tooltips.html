@@ -10,15 +10,17 @@
    native `title` attributes and has zero `role="tooltip"` nodes. This page is
    therefore a DS-only extension. It is drawn in the product's own surface
    language so that, if a styled tooltip is ever introduced, it already fits:
-   the dark pill borrows the dark card `#1E2240`, and the rich card is the
+   the plain pill is filled with the brand gradient, and the rich card is the
    standard menu surface (12px radius, #E5E7EB hairline, shadow-lg) with the
    brand-gradient title used by the alert banner. */
 .tt-wrap{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;}
 .tt-pop{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(4px);transition:opacity .18s ease,transform .18s ease;position:absolute;bottom:calc(100% + 10px);left:50%;}
 .tt-wrap:hover .tt-pop{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
 
-.tt-plain{background:#1E2240;border-radius:8px;padding:6px 10px;font-size:12px;font-weight:400;color:#F9FAFB;white-space:nowrap;font-family:'Montserrat',sans-serif;line-height:1.5;}
-.tt-plain::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:8px;height:8px;background:#1E2240;clip-path:polygon(0 0,100% 0,50% 100%);}
+.tt-plain{background:linear-gradient(88.54deg,#5C2ED4 0.1%,#A614C3 63.88%);border-radius:8px;padding:6px 10px;font-size:12px;font-weight:400;color:#FFFFFF;white-space:nowrap;font-family:'Montserrat',sans-serif;line-height:1.5;box-shadow:0 6px 20px rgba(92,46,212,.22);}
+/* The arrow takes the gradient's colour at the bubble's midpoint (t=.77 between
+   the two stops), so the join reads continuous at this size. */
+.tt-plain::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:8px;height:8px;background:#951AC7;clip-path:polygon(0 0,100% 0,50% 100%);}
 
 .tt-rich{background:#FFFFFF;border-radius:12px;box-shadow:0 10px 15px -3px rgba(0,0,0,.10),0 4px 6px -4px rgba(0,0,0,.10);padding:16px;min-width:240px;border:1px solid #E5E7EB;font-family:'Montserrat',sans-serif;}
 .tt-rich-title{font-size:13px;font-weight:600;margin-bottom:4px;width:fit-content;
@@ -207,8 +209,10 @@ body.dark-mode .tt-plain::after{background:#0F1120;}
 </div>
 <div class="ds-section" id="specs"><div class="ds-section-title">Specs</div>
 <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Property</th><th>Value</th><th>Token</th></tr></thead><tbody>
-<tr><td>Plain bg</td><td>#141F1E</td><td><code>color.inverse-surface</code></td></tr>
-<tr><td>Plain radius</td><td>6px</td><td><code>tooltip.plain.radius</code></td></tr>
+<tr><td>Plain bg</td><td><code>linear-gradient(88.54deg, #5C2ED4 0.1%, #A614C3 63.88%)</code></td><td><code>gradient.brand</code></td></tr>
+<tr><td>Plain radius</td><td>8px</td><td><code>tooltip.plain.radius</code></td></tr>
+<tr><td>Plain text</td><td>12px · <code>#FFFFFF</code></td><td><code>tooltip.plain.color</code></td></tr>
+<tr><td>Plain shadow</td><td><code>0 6px 20px rgba(92,46,212,.22)</code></td><td><code>tooltip.plain.shadow</code></td></tr>
 <tr><td>Rich radius</td><td>12px</td><td><code>tooltip.rich.radius</code></td></tr>
 <tr><td>Show delay</td><td>500ms</td><td><code>tooltip.delay</code></td></tr>
 </tbody></table></div></div>
