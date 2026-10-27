@@ -70,28 +70,6 @@ body.dark-mode .nb-text { background: linear-gradient(90deg,#C9A6FF 0%,#E68BF2 6
 body.dark-mode .btn-note { color: #8B8FA8; }
 body.dark-mode .btn-tag { color: #6B7280; }
 
-.nb-tonal { background-image: linear-gradient(88.54deg, rgba(92,46,212,0.08) 0.1%, rgba(166,20,195,0.10) 63.88%);
-  border: 1px solid rgba(166,20,195,0.22); border-radius: 12px; padding: 8px 14px; color: var(--gray-800); }
-.nb-tonal:hover { filter: brightness(0.96); transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(166,20,195,0.18); }
-
-.nb-inverse { background: #ffffff; color: #5C2ED4; box-shadow: 0 2px 8px rgba(0,0,0,0.10); }
-.nb-inverse:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); filter: none; }
-
-/* the inverse button only ever appears on a promo card, so show it on one */
-.inv-chip { justify-self: start; display: inline-flex; padding: 8px; border-radius: 10px;
-  background: linear-gradient(135deg,#5C2ED4 0%,#7A2FBE 40%,#A614C3 70%,#C8408E 100%); }
-.lift-demo { display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
-  font-family: 'Montserrat', sans-serif; }
-.lift-dark { padding: 20px; border-radius: 12px;
-  background: linear-gradient(135deg,#5C2ED4 0%,#7A2FBE 40%,#A614C3 70%,#C8408E 100%); }
-.lift-cap { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px;
-  line-height: 1.5; color: var(--gray-500); }
-.lift-dark .lift-cap { color: rgba(255,255,255,.85); }
-.lift-dark .lift-cap code { color: #fff; background: rgba(255,255,255,.14); }
-
-body.dark-mode .nb-tonal { color: #F9FAFB; }
-body.dark-mode .lift-cap { color: #8B8FA8; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -193,7 +171,6 @@ body.dark-mode .lift-cap { color: #8B8FA8; }
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
   <a class="ds-toc-item active" href="#roles">The six roles</a>
-  <a class="ds-toc-item" href="#lift">The lift</a>
   <a class="ds-toc-item" href="#sizes">Primary sizes</a>
   <a class="ds-toc-item" href="#states">States</a>
   <a class="ds-toc-item" href="#auth">Auth primary</a>
@@ -210,16 +187,15 @@ body.dark-mode .lift-cap { color: #8B8FA8; }
       <a class="ds-nav-arrow-btn" href="ds-31-button-group.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">Seven button roles ship. Only one is filled with the brand gradient; the rest are an
-  outline, a soft brand tint, bare text, an icon, or white on a dark card. Hover is not uniform either — the
-  primary shifts <strong>brightness</strong>, most fill with a tint, and two roles physically
-  <strong>lift</strong>.</p>
+    <p class="ds-page-desc">Five button roles ship. Only one is filled with the brand gradient — the rest are a
+  neutral outline, bare text, or an icon. The gradient primary is also the only button whose hover is a
+  <strong>brightness shift</strong>; everything else fills with a tint.</p>
 
   <div class="ds-section" id="roles">
-    <h2 class="ds-section-title">The seven roles</h2>
+    <h2 class="ds-section-title">The five roles</h2>
     <p class="ds-section-desc">Counted across the whole app: 32 gradient primaries, ~35 outlined secondaries,
-    7 danger solids, 63 icon buttons, 5 text links, 2 tonal, 1 inverse, and the full-width auth primary. There
-    is <strong>no ghost button</strong> — an action without a box is a text link, not a borderless button.</p>
+    7 danger solids, 63 icon buttons and 5 text links, plus the full-width auth primary below. There is
+    <strong>no ghost button</strong> — an action without a box is a text link, not a borderless one.</p>
     <div class="ds-example" style="padding:40px;gap:32px;flex-direction:column;align-items:stretch;">
       <div class="btn-row"><span class="btn-tag">Primary</span>
         <button class="nb-btn nb-primary">Add Activity</button>
@@ -230,33 +206,12 @@ body.dark-mode .lift-cap { color: #8B8FA8; }
       <div class="btn-row"><span class="btn-tag">Danger</span>
         <button class="nb-btn nb-danger">Delete Note</button>
         <code class="btn-note">solid <code>#EF4444</code> · <code>#DC2626</code> when discarding edits</code></div>
-      <div class="btn-row"><span class="btn-tag">Tonal</span>
-        <button class="nb-btn nb-tonal">Book Roll</button>
-        <code class="btn-note">brand tint at 8–10% · <code>radius 12px</code> · lifts on hover</code></div>
-      <div class="btn-row"><span class="btn-tag">Inverse</span>
-        <span class="inv-chip"><button class="nb-btn nb-inverse">See contest details</button></span>
-        <code class="btn-note">white on a promo card · lifts <code>1px</code> on hover</code></div>
       <div class="btn-row"><span class="btn-tag">Text</span>
         <button class="nb-text">Reset</button>
         <code class="btn-note">gradient-clipped text · underline at <code>offset 3px</code></code></div>
       <div class="btn-row"><span class="btn-tag">Icon</span>
         <button class="nb-icon"><span class="material-icons-round">close</span></button>
         <code class="btn-note"><code>padding 6px</code> · <code>radius 6px</code> · 16px glyph</code></div>
-    </div>
-  </div>
-
-  <div class="ds-divider"></div>
-
-  <div class="ds-section" id="lift">
-    <h2 class="ds-section-title">The lift</h2>
-    <p class="ds-section-desc">Two roles — tonal and inverse — rise <code>1px</code> on hover and deepen their
-    shadow. They are the only buttons in the product that <em>move</em>; everything else changes colour in
-    place. Hover each to see it.</p>
-    <div class="ds-example" style="padding:40px;gap:40px;">
-      <div class="lift-demo"><button class="nb-btn nb-tonal">Book Roll</button>
-        <span class="lift-cap">rest <code>none</code> → hover <code>0 4px 12px rgba(166,20,195,.18)</code></span></div>
-      <div class="lift-demo lift-dark"><button class="nb-btn nb-inverse">See contest details</button>
-        <span class="lift-cap">rest <code>0 2px 8px rgba(0,0,0,.10)</code> → hover <code>0 4px 12px rgba(0,0,0,.15)</code></span></div>
     </div>
   </div>
 
@@ -321,8 +276,6 @@ body.dark-mode .lift-cap { color: #8B8FA8; }
         <tr><td>Primary</td><td>Brand gradient</td><td>None</td><td>12px / 600 <code>#fff</code></td><td><code>filter: brightness(1.08)</code></td></tr>
         <tr><td>Secondary</td><td>Transparent</td><td><code>1px #E5E7EB</code></td><td>12px / 600, text or muted</td><td>Fill <code>#F9FAFB</code></td></tr>
         <tr><td>Danger</td><td><code>#EF4444</code></td><td>None</td><td>12px / 600 <code>#fff</code></td><td><code>brightness(1.10)</code></td></tr>
-        <tr><td>Tonal</td><td><code>linear-gradient(88.54deg, rgba(92,46,212,.08), rgba(166,20,195,.10))</code></td><td><code>1px rgba(166,20,195,.22)</code></td><td>12px / 600</td><td><code>brightness(.96)</code> + lift</td></tr>
-        <tr><td>Inverse</td><td><code>#ffffff</code></td><td>None</td><td>12px / 600 <code>#5C2ED4</code></td><td>Lift + deeper shadow</td></tr>
         <tr><td>Text</td><td>None</td><td>None</td><td>13px / 700, gradient-clipped</td><td><code>opacity .7</code></td></tr>
         <tr><td>Icon</td><td>Transparent</td><td>None</td><td>— (16px glyph, <code>#6B7280</code>)</td><td>Fill <code>#F9FAFB</code></td></tr>
       </tbody>
@@ -340,7 +293,7 @@ body.dark-mode .lift-cap { color: #8B8FA8; }
     </table></div>
 
     <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
-      <tr><td>An outline is <strong>almost</strong> always the neutral border colour. Two buttons outline in brand purple instead — Generate Code (<code>1px #A855F7</code>, hover <code>rgba(168,85,247,.08)</code>) and a PDF action (<code>1px #A614C3</code>). At two sites across the app, treat it as a one-off, not a role.</td></tr>
+      <tr><td>A handful of <strong>one-offs</strong> exist and are deliberately not roles — each appears once or twice and should not be reached for: a brand-purple outline on Generate Code (<code>1px #A855F7</code>) and a PDF action (<code>1px #A614C3</code>); a tonal fill on Book Roll (brand at 8–10% inside <code>rgba(166,20,195,.22)</code> at <code>radius 12px</code>); and a white CTA on the Marketplace promo card (<code>#5C2ED4</code> text, <code>0 2px 8px rgba(0,0,0,.10)</code>). The last two also rise <code>1px</code> on hover — the only buttons in the product that move. Use a role above instead.</td></tr>
       <tr><td><strong>Two roles lift on hover</strong> — tonal and inverse rise 1px and deepen their shadow. That is the only place a button moves, and the inverse is the only button with a resting shadow outside the auth screens.</td></tr>
       <tr><td>Primary hover is a <strong>brightness filter</strong>, not a darker gradient or a shadow — 23 sites use <code>1.08</code> and 19 use <code>1.10</code>. Everything else hovers by filling with <code>#F9FAFB</code>.</td></tr>
       <tr><td>Only the auth primary has a resting shadow. Elsewhere a primary sits flat, including in dialogs.</td></tr>
