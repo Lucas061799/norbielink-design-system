@@ -22,8 +22,6 @@
 .nb-danger { background: #EF4444; color: #fff; }
 .nb-danger:hover { filter: brightness(1.10); }
 
-.nb-ghost { background: transparent; font-weight: 500; color: var(--gray-500); }
-.nb-ghost:hover { background: var(--gray-50); }
 
 .nb-btn:disabled, .nb-btn[disabled] { opacity: .5; cursor: not-allowed; filter: none; }
 .nb-secondary:disabled:hover { background: transparent; }
@@ -65,8 +63,8 @@ body.dark-mode .nb-primary, body.dark-mode .nb-auth {
     rgba(0,0,0,0.3) 74%, rgba(0,0,0,0) 100%), linear-gradient(88.34deg, #5C2ED4 0.11%, #A614C3 63.8%); }
 body.dark-mode .nb-secondary { border-color: rgba(255,255,255,0.10); color: #F9FAFB; }
 body.dark-mode .nb-secondary:hover, body.dark-mode .nb-secondary.nb-hover,
-body.dark-mode .nb-ghost:hover, body.dark-mode .nb-icon:hover { background: rgba(255,255,255,0.05); }
-body.dark-mode .nb-ghost, body.dark-mode .nb-icon { color: #8B8FA8; }
+body.dark-mode .nb-icon:hover { background: rgba(255,255,255,0.05); }
+body.dark-mode .nb-icon { color: #8B8FA8; }
 body.dark-mode .nb-text { background: linear-gradient(90deg,#C9A6FF 0%,#E68BF2 65%);
   -webkit-background-clip: text; background-clip: text; }
 body.dark-mode .btn-note { color: #8B8FA8; }
@@ -212,15 +210,16 @@ body.dark-mode .lift-cap { color: #8B8FA8; }
       <a class="ds-nav-arrow-btn" href="ds-31-button-group.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">Eight button roles ship. Only one is filled with the brand gradient; the rest are an
-  outline, a soft brand tint, a transparent surface, bare text, or white on a dark card. Hover is not uniform
-  either — the primary shifts <strong>brightness</strong>, most fill with a tint, and two roles physically
+    <p class="ds-page-desc">Seven button roles ship. Only one is filled with the brand gradient; the rest are an
+  outline, a soft brand tint, bare text, an icon, or white on a dark card. Hover is not uniform either — the
+  primary shifts <strong>brightness</strong>, most fill with a tint, and two roles physically
   <strong>lift</strong>.</p>
 
   <div class="ds-section" id="roles">
-    <h2 class="ds-section-title">The eight roles</h2>
+    <h2 class="ds-section-title">The seven roles</h2>
     <p class="ds-section-desc">Counted across the whole app: 32 gradient primaries, ~35 outlined secondaries,
-    7 danger solids, 63 icon buttons, 5 text links, 2 tonal, 1 inverse, and the full-width auth primary.</p>
+    7 danger solids, 63 icon buttons, 5 text links, 2 tonal, 1 inverse, and the full-width auth primary. There
+    is <strong>no ghost button</strong> — an action without a box is a text link, not a borderless button.</p>
     <div class="ds-example" style="padding:40px;gap:32px;flex-direction:column;align-items:stretch;">
       <div class="btn-row"><span class="btn-tag">Primary</span>
         <button class="nb-btn nb-primary">Add Activity</button>
@@ -237,9 +236,6 @@ body.dark-mode .lift-cap { color: #8B8FA8; }
       <div class="btn-row"><span class="btn-tag">Inverse</span>
         <span class="inv-chip"><button class="nb-btn nb-inverse">See contest details</button></span>
         <code class="btn-note">white on a promo card · lifts <code>1px</code> on hover</code></div>
-      <div class="btn-row"><span class="btn-tag">Ghost</span>
-        <button class="nb-btn nb-ghost">View all</button>
-        <code class="btn-note">transparent · weight 500 · hover tint only</code></div>
       <div class="btn-row"><span class="btn-tag">Text</span>
         <button class="nb-text">Reset</button>
         <code class="btn-note">gradient-clipped text · underline at <code>offset 3px</code></code></div>
@@ -327,7 +323,6 @@ body.dark-mode .lift-cap { color: #8B8FA8; }
         <tr><td>Danger</td><td><code>#EF4444</code></td><td>None</td><td>12px / 600 <code>#fff</code></td><td><code>brightness(1.10)</code></td></tr>
         <tr><td>Tonal</td><td><code>linear-gradient(88.54deg, rgba(92,46,212,.08), rgba(166,20,195,.10))</code></td><td><code>1px rgba(166,20,195,.22)</code></td><td>12px / 600</td><td><code>brightness(.96)</code> + lift</td></tr>
         <tr><td>Inverse</td><td><code>#ffffff</code></td><td>None</td><td>12px / 600 <code>#5C2ED4</code></td><td>Lift + deeper shadow</td></tr>
-        <tr><td>Ghost</td><td>Transparent</td><td>None</td><td>12px / <strong>500</strong></td><td>Fill <code>#F9FAFB</code></td></tr>
         <tr><td>Text</td><td>None</td><td>None</td><td>13px / 700, gradient-clipped</td><td><code>opacity .7</code></td></tr>
         <tr><td>Icon</td><td>Transparent</td><td>None</td><td>— (16px glyph, <code>#6B7280</code>)</td><td>Fill <code>#F9FAFB</code></td></tr>
       </tbody>
@@ -345,7 +340,7 @@ body.dark-mode .lift-cap { color: #8B8FA8; }
     </table></div>
 
     <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
-      <tr><td>There is <strong>no outlined-brand button</strong> — an outline is always the neutral border colour. The <em>filled</em> gradient stays reserved for the action that commits; the tonal is its quiet cousin, used for a secondary brand action like Book Roll.</td></tr>
+      <tr><td>An outline is <strong>almost</strong> always the neutral border colour. Two buttons outline in brand purple instead — Generate Code (<code>1px #A855F7</code>, hover <code>rgba(168,85,247,.08)</code>) and a PDF action (<code>1px #A614C3</code>). At two sites across the app, treat it as a one-off, not a role.</td></tr>
       <tr><td><strong>Two roles lift on hover</strong> — tonal and inverse rise 1px and deepen their shadow. That is the only place a button moves, and the inverse is the only button with a resting shadow outside the auth screens.</td></tr>
       <tr><td>Primary hover is a <strong>brightness filter</strong>, not a darker gradient or a shadow — 23 sites use <code>1.08</code> and 19 use <code>1.10</code>. Everything else hovers by filling with <code>#F9FAFB</code>.</td></tr>
       <tr><td>Only the auth primary has a resting shadow. Elsewhere a primary sits flat, including in dialogs.</td></tr>
