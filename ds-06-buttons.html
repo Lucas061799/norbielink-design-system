@@ -4,6 +4,68 @@
 <link rel="stylesheet" href="ds-shared.css">
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
+/* ── BUTTONS ── six roles; one gradient fill, everything else outline, ghost or text. */
+.nb-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 8px 16px; border: none; border-radius: 8px; cursor: pointer;
+  font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; line-height: 1.5;
+  transition: all .15s; }
+.nb-sm { padding: 6px 12px; }
+.nb-lg { padding: 9px 17px; }
+
+.nb-primary { background: linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%); color: #fff; }
+.nb-primary:hover, .nb-primary.nb-hover { filter: brightness(1.08); }
+
+.nb-secondary { background: transparent; border: 1px solid var(--gray-200); color: var(--gray-800); }
+.nb-secondary:hover, .nb-secondary.nb-hover { background: var(--gray-50); }
+
+.nb-danger { background: #EF4444; color: #fff; }
+.nb-danger:hover { filter: brightness(1.10); }
+
+.nb-ghost { background: transparent; font-weight: 500; color: var(--gray-500); }
+.nb-ghost:hover { background: var(--gray-50); }
+
+.nb-btn:disabled, .nb-btn[disabled] { opacity: .5; cursor: not-allowed; filter: none; }
+.nb-secondary:disabled:hover { background: transparent; }
+
+.nb-text { padding: 0; border: none; background: linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  color: transparent; cursor: pointer; font-family: 'Montserrat', sans-serif;
+  font-size: 13px; font-weight: 700; line-height: 1.5;
+  text-decoration: underline; text-underline-offset: 3px; }
+.nb-text:hover { opacity: .7; }
+
+.nb-icon { display: inline-flex; padding: 6px; border: none; border-radius: 6px;
+  background: transparent; cursor: pointer; color: var(--gray-500); transition: background .15s; }
+.nb-icon .material-icons-round { font-size: 16px; }
+.nb-icon:hover { background: var(--gray-50); }
+
+.nb-auth { width: 100%; padding: 12px 28px; border: none; border-radius: 10px;
+  background: linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%); color: #fff;
+  font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 600; line-height: 1.5;
+  cursor: pointer; box-shadow: 0 4px 14px rgba(166,20,195,0.25); transition: all .15s; }
+.nb-auth:hover { filter: brightness(1.08); }
+.nb-auth:disabled { opacity: .5; cursor: not-allowed; box-shadow: none; filter: none; }
+
+.btn-row { display: grid; grid-template-columns: 90px 160px 1fr; align-items: center; gap: 20px;
+  font-family: 'Montserrat', sans-serif; }
+.btn-row .nb-btn, .btn-row .nb-text, .btn-row .nb-icon { justify-self: start; }
+.btn-tag { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--gray-400); }
+.btn-note { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px;
+  line-height: 1.5; color: var(--gray-500); }
+.btn-note code { font-size: 11px; }
+
+body.dark-mode .nb-primary, body.dark-mode .nb-auth {
+  background: radial-gradient(171.32% 99.33% at 33.13% -9%, #282550 0%, #191735 55.82%,
+    rgba(0,0,0,0.3) 74%, rgba(0,0,0,0) 100%), linear-gradient(88.34deg, #5C2ED4 0.11%, #A614C3 63.8%); }
+body.dark-mode .nb-secondary { border-color: rgba(255,255,255,0.10); color: #F9FAFB; }
+body.dark-mode .nb-secondary:hover, body.dark-mode .nb-secondary.nb-hover,
+body.dark-mode .nb-ghost:hover, body.dark-mode .nb-icon:hover { background: rgba(255,255,255,0.05); }
+body.dark-mode .nb-ghost, body.dark-mode .nb-icon { color: #8B8FA8; }
+body.dark-mode .nb-text { background: linear-gradient(90deg,#C9A6FF 0%,#E68BF2 65%);
+  -webkit-background-clip: text; background-clip: text; }
+body.dark-mode .btn-note { color: #8B8FA8; }
+body.dark-mode .btn-tag { color: #6B7280; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -104,9 +166,10 @@
 </nav>
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
-  <a class="ds-toc-item active" href="#overview">Overview</a>
-  <a class="ds-toc-item" href="#sizes">Sizes</a>
+  <a class="ds-toc-item active" href="#roles">The six roles</a>
+  <a class="ds-toc-item" href="#sizes">Primary sizes</a>
   <a class="ds-toc-item" href="#states">States</a>
+  <a class="ds-toc-item" href="#auth">Auth primary</a>
   <a class="ds-toc-item" href="#specs">Specs</a>
 </aside>
 
@@ -120,83 +183,123 @@
       <a class="ds-nav-arrow-btn" href="ds-31-button-group.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
     </div>
   </div>
-    <p class="ds-page-desc">Buttons communicate actions users can take. Norbielink uses a single gradient button style — purple-to-magenta in both light and dark mode — available in three sizes.</p>
+    <p class="ds-page-desc">Six button roles ship. Only one of them is filled with the brand gradient — everything
+  else is an outline, a transparent surface, or bare text. The gradient primary is also the only button whose
+  hover is a <strong>brightness shift</strong> rather than a background change.</p>
 
-    <!-- OVERVIEW -->
-    <div class="ds-section" id="overview">
-      <h2 class="ds-section-title">Overview</h2>
-      <p class="ds-section-desc">The primary button is a horizontal gradient, <code>radius 10px</code>, <code>13px / 600</code>. Elevation is <strong>conditional</strong>: toolbar primaries sit flat, while confirming primaries in dialogs and wizards carry a brand glow — <code>0 4px 14px rgba(166,20,195,.25)</code> (<code>0 2px 10px</code> on wizard Continue). A disabled primary always drops to <code>box-shadow: none</code>.</p>
-      <div class="ds-example" style="gap:16px; flex-wrap:wrap; padding:48px;">
-        <button style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:white;border:none;border-radius:10px;padding:11px 20px;font-family:'Montserrat',sans-serif;font-size:15px;font-weight:600;cursor:pointer;">+ Start a Quote</button>
-        <button style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:white;border:none;border-radius:10px;padding:9px 16px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Add User</button>
-        <button style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:white;border:none;border-radius:10px;padding:7px 13px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;cursor:pointer;">Submit</button>
+  <div class="ds-section" id="roles">
+    <h2 class="ds-section-title">The six roles</h2>
+    <p class="ds-section-desc">Counted across the whole app: 32 gradient primaries, ~35 outlined secondaries,
+    7 danger solids, 63 icon buttons, 5 text links, and the full-width auth primary.</p>
+    <div class="ds-example" style="padding:40px;gap:32px;flex-direction:column;align-items:stretch;">
+      <div class="btn-row"><span class="btn-tag">Primary</span>
+        <button class="nb-btn nb-primary">Add Activity</button>
+        <code class="btn-note">gradient fill · hover <code>brightness(1.08)</code></code></div>
+      <div class="btn-row"><span class="btn-tag">Secondary</span>
+        <button class="nb-btn nb-secondary">Cancel Edit</button>
+        <code class="btn-note">1px border · hover fills <code>#F9FAFB</code></code></div>
+      <div class="btn-row"><span class="btn-tag">Danger</span>
+        <button class="nb-btn nb-danger">Delete Note</button>
+        <code class="btn-note">solid <code>#EF4444</code> · <code>#DC2626</code> when discarding edits</code></div>
+      <div class="btn-row"><span class="btn-tag">Ghost</span>
+        <button class="nb-btn nb-ghost">View all</button>
+        <code class="btn-note">transparent · weight 500 · hover tint only</code></div>
+      <div class="btn-row"><span class="btn-tag">Text</span>
+        <button class="nb-text">Reset</button>
+        <code class="btn-note">gradient-clipped text · underline at <code>offset 3px</code></code></div>
+      <div class="btn-row"><span class="btn-tag">Icon</span>
+        <button class="nb-icon"><span class="material-icons-round">close</span></button>
+        <code class="btn-note"><code>padding 6px</code> · <code>radius 6px</code> · 16px glyph</code></div>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Primary sizes</h2>
+    <p class="ds-section-desc">Three paddings, one type size. The 12px/600 label never changes — only the box
+    around it does.</p>
+    <div class="ds-example" style="padding:40px;gap:20px;">
+      <button class="nb-btn nb-primary nb-sm">Small</button>
+      <button class="nb-btn nb-primary">Medium</button>
+      <button class="nb-btn nb-primary nb-lg">Large</button>
+    </div>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Size</th><th>Padding</th><th>Used for</th></tr></thead>
+      <tbody>
+        <tr><td>Small</td><td><code>6px 12px</code></td><td>Inside a toolbar or a table header</td></tr>
+        <tr><td>Medium</td><td><code>8px 16px</code></td><td>The default — most actions</td></tr>
+        <tr><td>Large</td><td><code>9px 17px</code></td><td>The main action on a panel, e.g. Add Activity</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Disabled is the same everywhere: half opacity and a not-allowed cursor. The fill
+    is never swapped for grey.</p>
+    <div class="ds-example" style="padding:40px;gap:20px;flex-wrap:wrap;">
+      <button class="nb-btn nb-primary">Rest</button>
+      <button class="nb-btn nb-primary nb-hover">Hover</button>
+      <button class="nb-btn nb-primary" disabled>Disabled</button>
+      <button class="nb-btn nb-secondary">Rest</button>
+      <button class="nb-btn nb-secondary nb-hover">Hover</button>
+      <button class="nb-btn nb-secondary" disabled>Disabled</button>
+    </div>
+  </div>
+
+  <div class="ds-divider"></div>
+
+  <div class="ds-section" id="auth">
+    <h2 class="ds-section-title">Auth primary</h2>
+    <p class="ds-section-desc">The sign-in screens use a wider, full-width variant of the primary — the only
+    button in the product that carries a resting shadow.</p>
+    <div class="ds-example" style="padding:40px;">
+      <div style="width:100%;max-width:420px;display:flex;flex-direction:column;gap:16px;">
+        <button class="nb-auth">Verify</button>
+        <button class="nb-auth" disabled>Verify</button>
       </div>
     </div>
+  </div>
 
-    <div class="ds-divider"></div>
+  <div class="ds-divider"></div>
 
-    <!-- SIZES -->
-    <div class="ds-section" id="sizes">
-      <h2 class="ds-section-title">Sizes</h2>
-      <p class="ds-section-desc">Three sizes are available: Large for hero CTAs, Medium for standard actions, Small for compact contexts like inline form submissions.</p>
-      <div class="ds-example" style="flex-direction:column; align-items:flex-start; gap:24px; padding:40px 48px;">
-        <div style="display:flex;align-items:center;gap:24px;">
-          <div style="width:80px;font-size:11px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:.08em;">Large</div>
-          <button style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:white;border:none;border-radius:10px;padding:11px 20px;font-family:'Montserrat',sans-serif;font-size:15px;font-weight:600;cursor:pointer;">+ Start a Quote</button>
-          <div style="font-size:12px;color:var(--gray-400);">18px · 10.8/19.2px padding · 10px radius</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:24px;">
-          <div style="width:80px;font-size:11px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:.08em;">Medium</div>
-          <button style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:white;border:none;border-radius:10px;padding:9px 16px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Add User</button>
-          <div style="font-size:12px;color:var(--gray-400);">14.5px · 9/16px padding · 10px radius</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:24px;">
-          <div style="width:80px;font-size:11px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:.08em;">Small</div>
-          <button style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:white;border:none;border-radius:10px;padding:7px 13px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;cursor:pointer;">Submit</button>
-          <div style="font-size:12px;color:var(--gray-400);">11.68px · 7.25/12.89px padding · 10px radius</div>
-        </div>
-      </div>
-    </div>
+  <div class="ds-section" id="specs">
+    <h2 class="ds-section-title">Specs</h2>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th>Role</th><th>Fill</th><th>Border</th><th>Label</th><th>Hover</th></tr></thead>
+      <tbody>
+        <tr><td>Primary</td><td>Brand gradient</td><td>None</td><td>12px / 600 <code>#fff</code></td><td><code>filter: brightness(1.08)</code></td></tr>
+        <tr><td>Secondary</td><td>Transparent</td><td><code>1px #E5E7EB</code></td><td>12px / 600, text or muted</td><td>Fill <code>#F9FAFB</code></td></tr>
+        <tr><td>Danger</td><td><code>#EF4444</code></td><td>None</td><td>12px / 600 <code>#fff</code></td><td><code>brightness(1.10)</code></td></tr>
+        <tr><td>Ghost</td><td>Transparent</td><td>None</td><td>12px / <strong>500</strong></td><td>Fill <code>#F9FAFB</code></td></tr>
+        <tr><td>Text</td><td>None</td><td>None</td><td>13px / 700, gradient-clipped</td><td><code>opacity .7</code></td></tr>
+        <tr><td>Icon</td><td>Transparent</td><td>None</td><td>— (16px glyph, <code>#6B7280</code>)</td><td>Fill <code>#F9FAFB</code></td></tr>
+      </tbody>
+    </table></div>
 
-    <div class="ds-divider"></div>
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table">
+      <thead><tr><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Radius</td><td><code>8px</code> on every labelled button; <code>6px</code> on an icon button; <code>10px</code> on the auth primary</td></tr>
+        <tr><td>Gradient</td><td><code>linear-gradient(90deg, #5C2ED4 0%, #A614C3 65%)</code>; in dark mode a radial haze is layered under it at <code>88.34deg</code></td></tr>
+        <tr><td>Icon + label</td><td><code>gap 6px</code> · glyph 14×14</td></tr>
+        <tr><td>Disabled</td><td><code>opacity .5</code> · <code>cursor: not-allowed</code> · the fill is kept, never greyed</td></tr>
+        <tr><td>Auth primary</td><td><code>padding 12px 28px</code> · <code>radius 10px</code> · 14px / 600 · <code>width 100%</code> · <code>shadow 0 4px 14px rgba(166,20,195,.25)</code>, dropped when disabled</td></tr>
+      </tbody>
+    </table></div>
 
-    <!-- STATES -->
-    <div class="ds-section" id="states">
-      <h2 class="ds-section-title">States</h2>
-      <p class="ds-section-desc">Hover adds a <code>rgba(213,213,213,0.2)</code> white-grey overlay over the gradient. Inactive reduces opacity to 50%.</p>
-      <div class="ds-example" style="flex-direction:column; align-items:flex-start; gap:20px; padding:40px 48px;">
-        <div style="display:flex;align-items:center;gap:20px;">
-          <button style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:white;border:none;border-radius:10px;padding:9px 16px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;cursor:pointer;width:120px;box-shadow:0 4px 14px rgba(166,20,195,0.25);">Default</button>
-          <button style="background:linear-gradient(90deg,rgba(213,213,213,0.2),rgba(213,213,213,0.2)),linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:white;border:none;border-radius:10px;padding:9px 16px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;cursor:pointer;width:120px;box-shadow:0 4px 14px rgba(166,20,195,0.25);">Hover</button>
-          <button style="background:linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%);color:white;border:none;border-radius:10px;padding:9px 16px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;cursor:not-allowed;opacity:0.5;width:120px;" disabled>Inactive</button>
-        </div>
-      </div>
-    </div>
+    <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table"><tbody>
+      <tr><td><strong>There is no outlined-brand button and no tonal button.</strong> A non-primary action is either an outline in the neutral border colour, or plain text. The gradient is reserved for the one action that commits.</td></tr>
+      <tr><td>Primary hover is a <strong>brightness filter</strong>, not a darker gradient or a shadow — 23 sites use <code>1.08</code> and 19 use <code>1.10</code>. Everything else hovers by filling with <code>#F9FAFB</code>.</td></tr>
+      <tr><td>Only the auth primary has a resting shadow. Elsewhere a primary sits flat, including in dialogs.</td></tr>
+      <tr><td>The icon button is by far the most common — 63 sites against 32 gradient primaries. Most actions in this product are icons in a row, not labelled buttons.</td></tr>
+    </tbody></table></div>
+  </div>
 
-    <div class="ds-divider"></div>
-
-    <!-- SPECS -->
-    <div class="ds-section" id="specs">
-      <h2 class="ds-section-title">Specs</h2>
-      <div class="ds-table-wrap"><table class="ds-table">
-        <thead><tr><th>Property</th><th>Large</th><th>Medium</th><th>Small</th></tr></thead>
-        <tbody>
-          <tr><td>Font size</td><td>18px</td><td>14.5px</td><td>11.68px</td></tr>
-          <tr><td>Font weight</td><td colspan="3">400 (Regular)</td></tr>
-          <tr><td>Padding (V / H)</td><td>10.8px / 19.2px</td><td>9px / 16px</td><td>7.25px / 12.89px</td></tr>
-          <tr><td>Border radius</td><td colspan="3">10px</td></tr>
-          <tr><td>Gradient (light)</td><td colspan="3"><code>linear-gradient(90deg, #5C2ED4 0%, #A614C3 65%)</code></td></tr>
-          <tr><td>Gradient (dark)</td><td colspan="3"><code>radial-gradient(171.32% 99.33% at 33.13% -9%, #282550 0%, #191735 55.82%, rgba(0,0,0,0.3) 74%, rgba(0,0,0,0) 100%), linear-gradient(88.34deg, #5C2ED4 0.11%, #A614C3 63.8%)</code></td></tr>
-          <tr><td>Box shadow</td><td colspan="3"><code>0 4px 14px rgba(166,20,195,0.25)</code></td></tr>
-          <tr><td>Text color</td><td colspan="3">white</td></tr>
-          <tr><td>Hover overlay</td><td colspan="3"><code>rgba(213, 213, 213, 0.2)</code></td></tr>
-          <tr><td>Inactive opacity</td><td colspan="3">50%</td></tr>
-        </tbody>
-      </table></div>
-    </div>
-
-  
-    <!-- ── Prev / Next navigation ── -->
+  <!-- ── Prev / Next navigation ── -->
         <div class="ds-page-nav">
     <a class="ds-page-nav-btn prev" href="ds-30-breadcrumb.html">
       <span class="ds-page-nav-label">← Previous</span>
