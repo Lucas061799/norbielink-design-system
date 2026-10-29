@@ -11,6 +11,9 @@
 /* ── BRAND ASSET PAGE ──
    A mirror of the BTIS brand style guide: the same copy, the same examples, and
    the original files served from this repo so nothing has to open zeroheight. */
+/* The tabbed pages list their tabs in the right-hand rail as quick jumps. */
+.ds-toc-item.ds-toc-sub { padding-left: 22px; font-size: 12px; }
+
 .ba-p { font-size: 14px; line-height: 1.7; color: var(--body-text); margin-bottom: 18px; max-width: 70ch; }
 .ba-h3 { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700;
   color: var(--gray-800); margin: 36px 0 10px; }
@@ -98,7 +101,7 @@ body.dark-mode .ba-tab.active { color: #FFFFFF; }
 /* ── Product tiles (visual elements) ──
    A plain contact sheet: the artwork and its name, with the downloads listed
    underneath as file rows like everywhere else on these pages. */
-.ba-tilegrid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(144px, 1fr));
+.ba-tilegrid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(162px, 1fr));
   margin-bottom: 8px; }
 .ba-tilecell { margin: 0; border: 1px solid var(--gray-200); border-radius: 12px;
   overflow: hidden; background: var(--card-bg); }
@@ -112,6 +115,14 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
 .ba-tilecell figcaption { padding: 8px 10px 10px; border-top: 1px solid var(--gray-100);
   font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600;
   line-height: 1.35; color: var(--gray-800); }
+.ba-tilecell-dl { display: flex; gap: 5px; margin-top: 6px; }
+.ba-tilecell-dl a { display: inline-flex; align-items: center; gap: 2px;
+  font-size: 10px; font-weight: 600; letter-spacing: .02em; color: var(--gray-500);
+  text-decoration: none; border: 1px solid var(--gray-200); border-radius: 6px;
+  padding: 2px 6px 2px 4px; transition: color .12s, border-color .12s, background .12s; }
+.ba-tilecell-dl a:hover { color: var(--gray-800); border-color: var(--gray-300);
+  background: var(--hover-bg); text-decoration: none; }
+.ba-tilecell-dl .material-icons-round { font-size: 12px; }
 </style>
 </head>
 <body class="btis-layout">
@@ -234,9 +245,12 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
     <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
   </div>
 </nav>
+
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
   <a class="ds-toc-item active" href="#characters">Brand Characters</a>
+  <a class="ds-toc-item ds-toc-sub" href="#tab-norbie">Norbie</a>
+  <a class="ds-toc-item ds-toc-sub" href="#tab-ainorbie">AI-Norbie</a>
 </aside>
 
 <main class="ds-main">
@@ -271,7 +285,7 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
     <h3 class="ba-h3">Usage</h3>
     <p class="ba-p">Norbie can be used to call attention to, or answer questions about, a particularly noteworthy piece of information or need for motivation.</p>
     <h3 class="ba-h3">Norbie</h3>
-    <div class="ba-shots one" style="--r:3.237;">
+    <div class="ba-shots one" style="--r:3.226;">
       <figure class="ba-shot"><div class="ba-shot-art" style="--bg:#FFFFFF"><img src="brand-assets/characters/img/norbie-hero.png" alt="" loading="lazy"></div></figure>
     </div>
     <p class="ba-p">We use two different versions of Norbie. This version is primarily for our BTIS website, social media, and podcast. If you’re looking for the Norbie used in NorbieLink, see the <strong>AI-Norbie</strong> tab.</p>
@@ -473,6 +487,8 @@ function baTab(btn,id){
 function baSyncNav(id){
   document.querySelectorAll('.ds-sidenav-subitem').forEach(a=>
     a.classList.toggle('active',(a.getAttribute('href')||'').split('#')[1]===id));
+  document.querySelectorAll('.ds-toc-item.ds-toc-sub').forEach(a=>
+    a.classList.toggle('active',a.getAttribute('href')==='#'+id));
 }
 function baApplyHash(scroll){
   const id=location.hash.slice(1);
@@ -480,6 +496,18 @@ function baApplyHash(scroll){
   if(btn){ baTab(btn,id); if(scroll) btn.closest('.ba-tabwrap').scrollIntoView({block:'start'}); }
   else { const p=document.querySelector('.ba-pane.active'); if(p) baSyncNav(p.id); }
 }
+/* The shared TOC smooth-scroller swallows its own clicks, so the rail's
+   tab links are handled first, in the capture phase. */
+document.addEventListener('click',function(e){
+  const a=e.target.closest&&e.target.closest('a[href^="#tab-"]');
+  if(!a) return;
+  const id=a.getAttribute('href').slice(1);
+  const btn=document.querySelector('.ba-tab[data-pane="'+id+'"]');
+  if(!btn) return;
+  e.preventDefault(); e.stopPropagation();
+  baTab(btn,id);
+  btn.closest('.ba-tabwrap').scrollIntoView({block:'start'});
+},true);
 window.addEventListener('DOMContentLoaded',function(){ baApplyHash(true); });
 window.addEventListener('hashchange',function(){ baApplyHash(true); });
 </script>

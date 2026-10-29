@@ -182,6 +182,9 @@ CSS = """
 /* ── BRAND ASSET PAGE ──
    A mirror of the BTIS brand style guide: the same copy, the same examples, and
    the original files served from this repo so nothing has to open zeroheight. */
+/* The tabbed pages list their tabs in the right-hand rail as quick jumps. */
+.ds-toc-item.ds-toc-sub { padding-left: 22px; font-size: 12px; }
+
 .ba-p { font-size: 14px; line-height: 1.7; color: var(--body-text); margin-bottom: 18px; max-width: 70ch; }
 .ba-h3 { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700;
   color: var(--gray-800); margin: 36px 0 10px; }
@@ -269,7 +272,7 @@ body.dark-mode .ba-tab.active { color: #FFFFFF; }
 /* ── Product tiles (visual elements) ──
    A plain contact sheet: the artwork and its name, with the downloads listed
    underneath as file rows like everywhere else on these pages. */
-.ba-tilegrid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(144px, 1fr));
+.ba-tilegrid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(162px, 1fr));
   margin-bottom: 8px; }
 .ba-tilecell { margin: 0; border: 1px solid var(--gray-200); border-radius: 12px;
   overflow: hidden; background: var(--card-bg); }
@@ -283,6 +286,14 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
 .ba-tilecell figcaption { padding: 8px 10px 10px; border-top: 1px solid var(--gray-100);
   font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600;
   line-height: 1.35; color: var(--gray-800); }
+.ba-tilecell-dl { display: flex; gap: 5px; margin-top: 6px; }
+.ba-tilecell-dl a { display: inline-flex; align-items: center; gap: 2px;
+  font-size: 10px; font-weight: 600; letter-spacing: .02em; color: var(--gray-500);
+  text-decoration: none; border: 1px solid var(--gray-200); border-radius: 6px;
+  padding: 2px 6px 2px 4px; transition: color .12s, border-color .12s, background .12s; }
+.ba-tilecell-dl a:hover { color: var(--gray-800); border-color: var(--gray-300);
+  background: var(--hover-bg); text-decoration: none; }
+.ba-tilecell-dl .material-icons-round { font-size: 12px; }
 """
 
 HEAD = """<!DOCTYPE html><html lang="en"><head>
@@ -372,6 +383,8 @@ function baTab(btn,id){{
 function baSyncNav(id){{
   document.querySelectorAll('.ds-sidenav-subitem').forEach(a=>
     a.classList.toggle('active',(a.getAttribute('href')||'').split('#')[1]===id));
+  document.querySelectorAll('.ds-toc-item.ds-toc-sub').forEach(a=>
+    a.classList.toggle('active',a.getAttribute('href')==='#'+id));
 }}
 function baApplyHash(scroll){{
   const id=location.hash.slice(1);
@@ -379,6 +392,18 @@ function baApplyHash(scroll){{
   if(btn){{ baTab(btn,id); if(scroll) btn.closest('.ba-tabwrap').scrollIntoView({{block:'start'}}); }}
   else {{ const p=document.querySelector('.ba-pane.active'); if(p) baSyncNav(p.id); }}
 }}
+/* The shared TOC smooth-scroller swallows its own clicks, so the rail's
+   tab links are handled first, in the capture phase. */
+document.addEventListener('click',function(e){{
+  const a=e.target.closest&&e.target.closest('a[href^="#tab-"]');
+  if(!a) return;
+  const id=a.getAttribute('href').slice(1);
+  const btn=document.querySelector('.ba-tab[data-pane="'+id+'"]');
+  if(!btn) return;
+  e.preventDefault(); e.stopPropagation();
+  baTab(btn,id);
+  btn.closest('.ba-tabwrap').scrollIntoView({{block:'start'}});
+}},true);
 window.addEventListener('DOMContentLoaded',function(){{ baApplyHash(true); }});
 window.addEventListener('hashchange',function(){{ baApplyHash(true); }});
 </script>
@@ -388,9 +413,13 @@ window.addEventListener('hashchange',function(){{ baApplyHash(true); }});
 
 
 def page(filename, title, desc, toc, body, prev, nxt):
-    toc_html = "".join(
-        '  <a class="ds-toc-item%s" href="#%s">%s</a>\n' % (" active" if i == 0 else "", a, l)
-        for i, (a, l) in enumerate(toc))
+    rows = []
+    for i, entry in enumerate(toc):
+        a, l = entry[0], entry[1]
+        cls = " ds-toc-sub" if len(entry) > 2 and entry[2] else ""
+        rows.append('  <a class="ds-toc-item%s%s" href="#%s">%s</a>\n'
+                    % (" active" if i == 0 else "", cls, a, l))
+    toc_html = "".join(rows)
     out = HEAD.format(title=title, css=CSS, toc=toc_html, desc=desc,
                       body=body, prev=prev, next=nxt)
     with open(os.path.join(ROOT, filename), "w") as f:
@@ -640,7 +669,9 @@ body = ('  <div class="ds-section" id="characters">\n'
 
 page("ds-brand-characters.html", "Brand Characters",
      "Norbie and AI-Norbie — the two mascots, their usage rules, and every exported format.",
-     [("characters", "Brand Characters")],
+     [("characters", "Brand Characters"),
+      ("tab-norbie", "Norbie", True),
+      ("tab-ainorbie", "AI-Norbie", True)],
      body, "ds-brand-norbielink-logo.html", "ds-brand-visual-elements.html")
 
 
@@ -674,17 +705,21 @@ LOBS = [
 ]
 
 def tile_display():
-    """The set, laid out to be looked at — no controls, the downloads follow."""
+    """The set, with each drawing's own files attached to it."""
     out = ['    <div class="ba-tilegrid">\n']
     for name, light, dark in LOBS:
         art = '<img class="light-art" src="%s%s" alt="%s" loading="lazy">' % (V, light, html.escape(name))
         if dark:
             art += '<img class="dark-art" src="%s%s" alt="" loading="lazy">' % (V, dark)
+        def pill(path, label):
+            return ('<a href="%s%s" download>'
+                    '<span class="material-icons-round">download</span>%s</a>' % (V, path, label))
+        dl = pill(light, "Light") + pill(dark, "Dark") if dark else pill(light, "SVG")
         out.append('      <figure class="ba-tilecell">\n'
                    '        <div class="ba-tilecell-art%s">%s</div>\n'
-                   '        <figcaption>%s</figcaption>\n'
+                   '        <figcaption>%s<span class="ba-tilecell-dl">%s</span></figcaption>\n'
                    '      </figure>\n'
-                   % (" has-dark" if dark else "", art, html.escape(name)))
+                   % (" has-dark" if dark else "", art, html.escape(name), dl))
     out.append("    </div>\n")
     return "".join(out)
 
@@ -746,8 +781,8 @@ tiles_pane = (
       'theme to see it.</span></div>\n'
     + h3("Lines of business")
     + tile_display()
-    + h3("Downloads")
-    + tile_files())
+    + h3("Illustration sources")
+    + files([V + "cat-ill-trade.ai", V + "category-all-illustrations-Revised.ai"]))
 
 LEAVES_USAGE = ("These items aren’t used everywhere. They’re primarily used to tie the "
                 "brand together. Examples would be leaves on an initial page or entry point to a "
@@ -799,5 +834,10 @@ body = ('  <div class="ds-section" id="visual-elements">\n'
 page("ds-brand-visual-elements.html", "Visual Elements",
      "Product tiles, Monstera leaves, the banana, the Marketplace awning and the jungle "
      "background — every brand illustration, with its light and dark drawing.",
-     [("visual-elements", "Visual Elements")],
+     [("visual-elements", "Visual Elements"),
+      ("tab-tiles", "Tiles / Product icon", True),
+      ("tab-monstera", "Monstera Leaves", True),
+      ("tab-banana", "Banana", True),
+      ("tab-awning", "Marketplace awning", True),
+      ("tab-jungle", "Jungle Background", True)],
      body, "ds-brand-characters.html", "ds-nav-resources.html")
