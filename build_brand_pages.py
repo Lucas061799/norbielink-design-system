@@ -66,6 +66,24 @@ def files(paths):
     return "".join(out)
 
 
+def one_ratio(path):
+    try:
+        with Image.open(os.path.join(ROOT, path)) as im:
+            return im.width / im.height
+    except Exception:
+        return None
+
+
+def fill_class(path, box):
+    """Fill the box when the image is no wider than it, letterbox when it is.
+
+    Cropping top and bottom is safe — these are centred compositions with
+    headroom. Cropping the sides is not: it ate the first letter of the
+    wordmark."""
+    r = one_ratio(path)
+    return " fill" if r is not None and r <= box + 0.001 else ""
+
+
 def ratio_of(paths):
     """One box ratio for the whole grid, so its cards line up.
 
@@ -128,9 +146,9 @@ def shots(items, cols=None):
     for it in items:
         src, cap = (it if isinstance(it, tuple) else (it, None))
         out.append('      <figure class="ba-shot">'
-                   '<div class="ba-shot-art" style="--bg:%s">'
+                   '<div class="ba-shot-art%s" style="--bg:%s">'
                    '<img src="%s" alt="%s" loading="lazy"></div>%s</figure>\n'
-                   % (canvas_colour(src), src, html.escape(cap or ""),
+                   % ("" if one else fill_class(src, r), canvas_colour(src), src, html.escape(cap or ""),
                       '<figcaption>%s</figcaption>' % html.escape(cap) if cap else ""))
     out.append("    </div>\n")
     return "".join(out)
@@ -138,14 +156,15 @@ def shots(items, cols=None):
 
 def dodont(items):
     """items: (kind, src, caption) where kind is 'do' or 'dont'."""
-    out = ['    <div class="ba-dd" style="--r:%s;">\n' % ratio_of([i[1] for i in items])]
+    box = ratio_of([i[1] for i in items])
+    out = ['    <div class="ba-dd" style="--r:%s;">\n' % box]
     for kind, src, cap in items:
         out.append(
             '      <figure class="ba-dd-card">\n'
-            '        <div class="ba-dd-img"><img src="%s" alt="" loading="lazy"></div>\n'
+            '        <div class="ba-dd-img%s"><img src="%s" alt="" loading="lazy"></div>\n'
             '        <figcaption><span class="badge-status-pill %s">%s</span>%s</figcaption>\n'
             '      </figure>\n'
-            % (src,
+            % (fill_class(src, box), src,
                "badge-sp-active" if kind == "do" else "badge-sp-declined",
                "Do" if kind == "do" else "Don’t",
                html.escape(cap)))
@@ -208,6 +227,8 @@ CSS = """
 .ba-shot-art { aspect-ratio: var(--r, 16 / 9); display: flex; align-items: center;
   justify-content: center; background: var(--bg, #FFFFFF); }
 .ba-shot-art img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+.ba-shot-art.fill img { width: 100%; height: 100%; max-width: none; max-height: none;
+  object-fit: cover; }
 /* A lone example is the page's hero: the artwork sits well inside its box
    rather than filling it. */
 .ba-shots.one .ba-shot-art { padding: 30px 40px; }
@@ -248,6 +269,7 @@ CSS = """
   overflow: hidden; background: var(--card-bg); }
 .ba-dd-img { background: #FFFFFF; aspect-ratio: var(--r, 3 / 2); }
 .ba-dd-img img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.ba-dd-img.fill img { object-fit: cover; }
 .ba-dd-card figcaption { padding: 11px 13px 13px; font-size: 12px; line-height: 1.55;
   color: var(--gray-600); border-top: 1px solid var(--gray-100); background: var(--card-bg); }
 /* The Do / Don't label is the product's own tonal status pill — teal for the

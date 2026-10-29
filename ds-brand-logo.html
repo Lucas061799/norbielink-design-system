@@ -37,6 +37,8 @@
 .ba-shot-art { aspect-ratio: var(--r, 16 / 9); display: flex; align-items: center;
   justify-content: center; background: var(--bg, #FFFFFF); }
 .ba-shot-art img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+.ba-shot-art.fill img { width: 100%; height: 100%; max-width: none; max-height: none;
+  object-fit: cover; }
 /* A lone example is the page's hero: the artwork sits well inside its box
    rather than filling it. */
 .ba-shots.one .ba-shot-art { padding: 30px 40px; }
@@ -77,6 +79,7 @@
   overflow: hidden; background: var(--card-bg); }
 .ba-dd-img { background: #FFFFFF; aspect-ratio: var(--r, 3 / 2); }
 .ba-dd-img img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.ba-dd-img.fill img { object-fit: cover; }
 .ba-dd-card figcaption { padding: 11px 13px 13px; font-size: 12px; line-height: 1.55;
   color: var(--gray-600); border-top: 1px solid var(--gray-100); background: var(--card-bg); }
 /* The Do / Don't label is the product's own tonal status pill — teal for the
@@ -363,9 +366,9 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
     <h3 class="ba-h3">Brand</h3>
     <p class="ba-p">Brand app logos are used in situations that demand a bold brand presence against a neutral background.</p>
     <div class="ba-shots" style="--r:1.429;">
-      <figure class="ba-shot"><div class="ba-shot-art" style="--bg:#FFFFFF"><img src="brand-assets/btis-logo/img/brand-1.png" alt="" loading="lazy"></div></figure>
-      <figure class="ba-shot"><div class="ba-shot-art" style="--bg:#FFFFFF"><img src="brand-assets/btis-logo/img/brand-2.jpg" alt="" loading="lazy"></div></figure>
-      <figure class="ba-shot"><div class="ba-shot-art" style="--bg:#FFFFFF"><img src="brand-assets/btis-logo/img/brand-3.jpg" alt="" loading="lazy"></div></figure>
+      <figure class="ba-shot"><div class="ba-shot-art fill" style="--bg:#FFFFFF"><img src="brand-assets/btis-logo/img/brand-1.png" alt="" loading="lazy"></div></figure>
+      <figure class="ba-shot"><div class="ba-shot-art fill" style="--bg:#FFFFFF"><img src="brand-assets/btis-logo/img/brand-2.jpg" alt="" loading="lazy"></div></figure>
+      <figure class="ba-shot"><div class="ba-shot-art fill" style="--bg:#FFFFFF"><img src="brand-assets/btis-logo/img/brand-3.jpg" alt="" loading="lazy"></div></figure>
     </div>
     <div class="ba-files">
       <a class="ba-file" href="brand-assets/btis-logo/Logo_blue.svg" download>
@@ -436,8 +439,8 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
     <h3 class="ba-h3">Neutral</h3>
     <p class="ba-p">Neutral app logos can be used when the hierarchy calls for the logo to recede, but should always be evaluated for adequate contrast.</p>
     <div class="ba-shots" style="--r:1.429;">
-      <figure class="ba-shot"><div class="ba-shot-art" style="--bg:#FFFFFF"><img src="brand-assets/btis-logo/img/neutral-1.jpg" alt="" loading="lazy"></div></figure>
-      <figure class="ba-shot"><div class="ba-shot-art" style="--bg:#040809"><img src="brand-assets/btis-logo/img/neutral-2.jpg" alt="" loading="lazy"></div></figure>
+      <figure class="ba-shot"><div class="ba-shot-art fill" style="--bg:#FFFFFF"><img src="brand-assets/btis-logo/img/neutral-1.jpg" alt="" loading="lazy"></div></figure>
+      <figure class="ba-shot"><div class="ba-shot-art fill" style="--bg:#040809"><img src="brand-assets/btis-logo/img/neutral-2.jpg" alt="" loading="lazy"></div></figure>
     </div>
     <div class="ba-files">
       <a class="ba-file" href="brand-assets/btis-logo/Logo_Fullblack.svg" download>
@@ -497,51 +500,51 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
     <p class="ba-p">Here are our do's, and also the BTIS logo exists mainly in the two-color version.</p>
     <div class="ba-dd" style="--r:1.429;">
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/do-1.png" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/do-1.png" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-active">Do</span>The primary color logo is preferred over all others.</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/do-2.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/do-2.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-active">Do</span>If necessary, it can be represented on our purple background with white letters</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/do-3.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/do-3.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-active">Do</span>For strictly black and white situations, the entire logo will contrast with the black or white background.</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/do-4.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/do-4.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-active">Do</span>For strictly black and white situations, the entire logo will contrast with the black or white background.</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/do-5.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/do-5.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-active">Do</span>Additional color combination-1</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/do-6.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/do-6.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-active">Do</span>Additional color combination-2</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/do-7.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/do-7.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-active">Do</span>Additional color combination-3</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/do-8.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/do-8.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-active">Do</span>Additional color combination-4</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/do-9.png" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/do-9.png" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-active">Do</span>When specifically referencing the Marketplace or its features, the full BTIS Marketplace logo may be used.</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/do-10.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/do-10.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-active">Do</span>When specifically referencing the Marketplace or its features, the full BTIS Marketplace logo may be used.</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/do-11.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/do-11.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-active">Do</span>The “b” mark can be used situationally as a background element or in social media.</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/do-12.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/do-12.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-active">Do</span>The “b” mark can be used situationally as a background element or in social media.</figcaption>
       </figure>
     </div>
@@ -554,35 +557,35 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
     <p class="ba-p">Ouch.... These are some painful examples of unacceptable uses of the BTIS logo.</p>
     <div class="ba-dd" style="--r:1.429;">
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/dont-1.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/dont-1.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-declined">Don’t</span>Stretching or squeezing. Never deform the logo.</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/dont-2.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/dont-2.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-declined">Don’t</span>Stretching or squeezing. Never deform the logo.</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/dont-3.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/dont-3.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-declined">Don’t</span>Moving elements. Don’t rearrange the elements of the logo.</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/dont-4.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/dont-4.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-declined">Don’t</span>Changing colors. Do not alter the colors of the logo.</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/dont-5.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/dont-5.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-declined">Don’t</span>Obscuring. Never place the logo on a background that makes the logo blend in or disappear.</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/dont-6.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/dont-6.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-declined">Don’t</span>Obscuring. Never place the logo on a background that makes the logo blend in or disappear.</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/dont-7.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/dont-7.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-declined">Don’t</span>Crowding. Always leave the prescribed space around the logo, away from other elements.</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="ba-dd-img"><img src="brand-assets/btis-logo/img/dont-8.jpg" alt="" loading="lazy"></div>
+        <div class="ba-dd-img fill"><img src="brand-assets/btis-logo/img/dont-8.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-declined">Don’t</span>Visual effects. Do not add effects like drop-shadows, strokes, embossing etc. to the logo.</figcaption>
       </figure>
     </div>
