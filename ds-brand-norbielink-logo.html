@@ -117,8 +117,10 @@ body.dark-mode .ba-tab.active { color: #FFFFFF; }
 body.dark-mode .ba-tilecell-art { background: #0F1120; }
 
 /* ── Built Don'ts ── the lockup put through each mistake, live. */
-.nl-stage { aspect-ratio: var(--r, 1.43); display: flex; align-items: center;
-  justify-content: center; overflow: hidden; background: #FFFFFF; }
+.nl-stage { position: relative; aspect-ratio: var(--r, 1.43); display: flex;
+  align-items: center; justify-content: center; overflow: hidden; background: #FFFFFF; }
+.nl-busy-bg { position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: bottom; }
 .nl-stage img { display: block; }
 .nl-row { display: flex; align-items: center; gap: 10px; width: 86%; justify-content: center; }
 .nl-crowd { position: relative; display: flex; align-items: center; justify-content: center;
@@ -508,7 +510,7 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
         <figcaption><span class="badge-status-pill badge-sp-declined">Don’t</span>Obscuring. Never place the logo on a background that makes the logo blend in or disappear.</figcaption>
       </figure>
       <figure class="ba-dd-card">
-        <div class="nl-stage" style="background:repeating-linear-gradient(54deg,#2D3653 0 14px,#5C2ED4 14px 28px,#9CA3AF 28px 42px);"><img src="brand-assets/norbielink-logo/NorbieLink-ALL_NL-btis-on_white.svg" alt="" style="width:66%;"></div>
+        <div class="nl-stage" style="background:linear-gradient(135deg,#5C2ED4,#A614C3);"><img class="nl-busy-bg" src="brand-assets/visual-elements/img/jungle-hero.png" alt=""><img src="brand-assets/norbielink-logo/NorbieLink-ALL_NL-btis-on_white.svg" alt="" style="position:relative;width:66%;"></div>
         <figcaption><span class="badge-status-pill badge-sp-declined">Don’t</span>Obscuring. Never place the logo on a background that makes the logo blend in or disappear.</figcaption>
       </figure>
       <figure class="ba-dd-card">

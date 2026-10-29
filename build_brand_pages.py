@@ -193,9 +193,12 @@ def nl_donts():
          "", '<img src="%s" alt="" style="width:66%%;filter:hue-rotate(118deg) saturate(1.6);">' % LOCK),
         ("Obscuring. Never place the logo on a background that makes the logo blend in or disappear.",
          "background:#ECE6F8;", '<img src="%s" alt="" style="width:66%%;">' % LIGHT),
+        # The brand's own jungle over the brand gradient — a background the
+        # team actually reaches for, not a made-up stripe pattern.
         ("Obscuring. Never place the logo on a background that makes the logo blend in or disappear.",
-         "background:repeating-linear-gradient(54deg,#2D3653 0 14px,#5C2ED4 14px 28px,#9CA3AF 28px 42px);",
-         '<img src="%s" alt="" style="width:66%%;">' % LOCK),
+         "background:linear-gradient(135deg,#5C2ED4,#A614C3);",
+         '<img class="nl-busy-bg" src="brand-assets/visual-elements/img/jungle-hero.png" alt="">'
+         '<img src="%s" alt="" style="position:relative;width:66%%;">' % LOCK),
         ("Crowding. Always leave the prescribed space around the logo, away from other elements.",
          "", '<span class="nl-crowd"><i></i><i></i><i></i><i></i>'
              '<img src="%s" alt="" style="width:100%%;"></span>' % LOCK),
@@ -379,8 +382,10 @@ body.dark-mode .ba-tab.active { color: #FFFFFF; }
 body.dark-mode .ba-tilecell-art { background: #0F1120; }
 
 /* ── Built Don'ts ── the lockup put through each mistake, live. */
-.nl-stage { aspect-ratio: var(--r, 1.43); display: flex; align-items: center;
-  justify-content: center; overflow: hidden; background: #FFFFFF; }
+.nl-stage { position: relative; aspect-ratio: var(--r, 1.43); display: flex;
+  align-items: center; justify-content: center; overflow: hidden; background: #FFFFFF; }
+.nl-busy-bg { position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: bottom; }
 .nl-stage img { display: block; }
 .nl-row { display: flex; align-items: center; gap: 10px; width: 86%; justify-content: center; }
 .nl-crowd { position: relative; display: flex; align-items: center; justify-content: center;
