@@ -92,13 +92,14 @@ body.dark-mode .ba-tab.active { color: #FFFFFF; }
 .ba-pane.active { display: block; }
 
 /* ── Product tile grid (visual elements) ── */
-.ba-tiles { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+.ba-tiles { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 720px) { .ba-tiles { grid-template-columns: 1fr; } }
 .ba-tile { border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden;
   background: var(--card-bg); }
-.ba-tile-art { height: 96px; display: flex; align-items: center; justify-content: center;
+.ba-tile-art { height: 140px; display: flex; align-items: center; justify-content: center;
   background: #FFFFFF; }
 body.dark-mode .ba-tile-art { background: #0F1120; }
-.ba-tile-art img { max-width: 64px; max-height: 64px; object-fit: contain; }
+.ba-tile-art img { max-width: 96px; max-height: 96px; object-fit: contain; }
 .ba-tile-art .dark-art { display: none; }
 body.dark-mode .ba-tile-art.has-dark .light-art { display: none; }
 body.dark-mode .ba-tile-art .dark-art { display: block; }
