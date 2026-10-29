@@ -18,25 +18,30 @@
 
 .ba-note { display: flex; gap: 10px; align-items: flex-start; background: var(--gray-50);
   border: 1px solid var(--gray-200); border-radius: 10px; padding: 12px 14px;
-  font-size: 13px; line-height: 1.65; color: var(--gray-600); margin-bottom: 14px; }
+  font-size: 13px; line-height: 1.65; color: var(--gray-600); margin: 16px 0 24px; }
+.ds-section-title + .ba-note { margin-top: 18px; }
 .ba-note .material-icons-round { font-size: 18px; color: #A614C3; flex-shrink: 0; }
 .ba-note a { color: #A614C3; font-weight: 600; text-decoration: none; }
 .ba-note a:hover { text-decoration: underline; }
 
+/* A grid of examples shares one box (--r, the median ratio of its own images)
+   so the row lines up; a lone example runs the full column at its own ratio. */
 .ba-shots { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   margin-bottom: 18px; }
-.ba-shots.one { grid-template-columns: minmax(0, 560px); }
+.ba-shots.one { grid-template-columns: 1fr; }
 .ba-shot { border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden;
-  background: var(--card-bg); margin: 0; }
-.ba-shot img { display: block; width: 100%; height: auto; max-height: 340px; object-fit: contain; }
+  background: #FFFFFF; margin: 0; }
+.ba-shot img { display: block; width: 100%; height: auto; }
+.ba-shots:not(.one) .ba-shot img { aspect-ratio: var(--r, 16 / 9); object-fit: contain;
+  background: #FFFFFF; }
 .ba-shot figcaption { font-size: 12px; line-height: 1.5; color: var(--gray-500);
-  padding: 9px 12px; border-top: 1px solid var(--gray-100); }
+  padding: 9px 12px; border-top: 1px solid var(--gray-100); background: var(--card-bg); }
 
 .ba-files { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
 .ba-file, .ba-link { display: flex; align-items: center; gap: 11px; padding: 10px 12px;
   border: 1px solid var(--gray-200); border-radius: 10px; background: var(--card-bg);
   text-decoration: none; transition: border-color .15s, box-shadow .15s; }
-.ba-file:hover, .ba-link:hover { border-color: #A614C3; box-shadow: 0 4px 16px rgba(166,20,195,.10);
+.ba-file:hover, .ba-link:hover { background: var(--hover-bg); border-color: var(--gray-300);
   text-decoration: none; }
 .ba-thumb { width: 40px; height: 40px; border-radius: 8px; background: #F3F4F6;
   border: 1px solid rgba(0,0,0,.06); display: flex; align-items: center; justify-content: center;
@@ -51,19 +56,22 @@
   color: var(--gray-800); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ba-fsub { font-size: 11px; color: var(--gray-400); }
 .ba-dl { font-size: 18px; color: var(--gray-300); flex-shrink: 0; }
-.ba-file:hover .ba-dl { color: #A614C3; }
+.ba-file:hover .ba-dl { color: var(--gray-500); }
 .ba-link .material-icons-round:first-child { font-size: 18px; color: var(--gray-400); flex-shrink: 0; }
 .ba-links { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   margin-bottom: 18px; }
 
 /* ── Do's & Don'ts ── the brand guide's own pairing, image above its rule. */
-.ba-dd { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+/* Two to a row, each filling half the column: the pairs in the brand guide
+   are meant to be read side by side. */
+.ba-dd { display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 720px) { .ba-dd { grid-template-columns: 1fr; } }
 .ba-dd-card { margin: 0; border: 1px solid var(--gray-200); border-radius: 12px;
   overflow: hidden; background: var(--card-bg); }
-.ba-dd-img { background: var(--gray-100); }
-.ba-dd-img img { display: block; width: 100%; height: auto; }
+.ba-dd-img { background: #FFFFFF; aspect-ratio: var(--r, 3 / 2); }
+.ba-dd-img img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .ba-dd-card figcaption { padding: 11px 13px 13px; font-size: 12px; line-height: 1.55;
-  color: var(--gray-600); border-top: 1px solid var(--gray-100); }
+  color: var(--gray-600); border-top: 1px solid var(--gray-100); background: var(--card-bg); }
 /* The Do / Don't label is the product's own tonal status pill — teal for the
    positive state, red for Declined — not a new colour pair. */
 .ba-dd-card figcaption .badge-status-pill { display: flex; margin-bottom: 7px; }
@@ -98,10 +106,14 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
 .ba-tile-name { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600;
   color: var(--gray-800); margin-bottom: 5px; line-height: 1.35; }
 .ba-tile-dl { display: flex; gap: 6px; }
-.ba-tile-dl a { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600;
+.ba-tile-dl a { display: inline-flex; align-items: center; gap: 3px;
+  font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600;
   letter-spacing: .02em; color: var(--gray-500); text-decoration: none; border: 1px solid var(--gray-200);
-  border-radius: 6px; padding: 2px 7px; transition: color .12s, border-color .12s; }
-.ba-tile-dl a:hover { color: #A614C3; border-color: #A614C3; text-decoration: none; }
+  border-radius: 6px; padding: 2px 7px 2px 5px;
+  transition: color .12s, border-color .12s, background .12s; }
+.ba-tile-dl a .material-icons-round { font-size: 12px; }
+.ba-tile-dl a:hover { color: var(--gray-800); border-color: var(--gray-300);
+  background: var(--hover-bg); text-decoration: none; }
 </style>
 </head>
 <body class="btis-layout">
@@ -140,6 +152,78 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
     </div>
   </div>
 </div>
+
+<!-- SUB-NAV -->
+<nav class="ds-sidenav">
+  <div class="ds-sidenav-group">
+    <div class="ds-sidenav-group-title">Getting Started</div>
+    <a class="ds-sidenav-item" href="ds-00-home.html">Introduction</a>
+    <a class="ds-sidenav-item" href="ds-01-color.html">Colors</a>
+    <a class="ds-sidenav-item" href="ds-02-typography.html">Typography</a>
+    <a class="ds-sidenav-item" href="ds-03-elevation.html">Elevation</a>
+    <a class="ds-sidenav-item" href="ds-04-shape.html">Shape</a>
+    <a class="ds-sidenav-item" href="ds-05-spacing.html">Spacing</a>
+  </div>
+  <div class="ds-sidenav-group">
+    <div class="ds-sidenav-group-title">Brand assets</div>
+    <a class="ds-sidenav-item active" href="ds-brand-norbielink-logo.html">Norbielink Logo</a>
+    <a class="ds-sidenav-item" href="ds-brand-logo.html">BTIS Logo</a>
+    <a class="ds-sidenav-item" href="ds-brand-characters.html">Brand Characters</a>
+    <a class="ds-sidenav-item" href="ds-brand-visual-elements.html">Visual Elements</a>
+  </div>
+  <div class="ds-sidenav-group">
+    <div class="ds-sidenav-group-title">Components</div>
+    <a class="ds-sidenav-item" href="ds-26-accordion.html">Accordion</a>
+    <a class="ds-sidenav-item" href="ds-27-alert.html">Alert</a>
+    <a class="ds-sidenav-item" href="ds-28-alert-dialog.html">Alert Dialog</a>
+    <a class="ds-sidenav-item" href="ds-14-appbar.html">App Bars</a>
+    <a class="ds-sidenav-item" href="ds-29-avatar.html">Avatar</a>
+    <a class="ds-sidenav-item" href="ds-09-badges.html">Badge</a>
+    <a class="ds-sidenav-item" href="ds-30-breadcrumb.html">Breadcrumb</a>
+    <a class="ds-sidenav-item" href="ds-06-buttons.html">Button</a>
+    <a class="ds-sidenav-item" href="ds-31-button-group.html">Button Group</a>
+    <a class="ds-sidenav-item" href="ds-32-calendar.html">Calendar</a>
+    <a class="ds-sidenav-item" href="ds-33-carousel.html">Carousel</a>
+    <a class="ds-sidenav-item" href="ds-10-cards.html">Cards</a>
+    <a class="ds-sidenav-item" href="ds-15-checkbox.html">Checkbox</a>
+    <a class="ds-sidenav-item" href="ds-34-chart.html">Chart</a>
+    <a class="ds-sidenav-item" href="ds-16-chips.html">Chips</a>
+    <a class="ds-sidenav-item" href="ds-35-collapsible.html">Collapsible</a>
+    <a class="ds-sidenav-item" href="ds-36-combobox.html">Combobox</a>
+    <a class="ds-sidenav-item" href="ds-38-context-menu.html">Context Menu</a>
+    <a class="ds-sidenav-item" href="ds-39-date-picker.html">Date Picker</a>
+    <a class="ds-sidenav-item" href="ds-17-dialogs.html">Dialog</a>
+    <a class="ds-sidenav-item" href="ds-18-divider.html">Divider</a>
+    <a class="ds-sidenav-item" href="ds-40-drawer.html">Drawer</a>
+    <a class="ds-sidenav-item" href="ds-41-dropdown.html">Dropdown Menu</a>
+    <a class="ds-sidenav-item" href="ds-42-empty-state.html">Empty State</a>
+    <a class="ds-sidenav-item" href="ds-43-hover-card.html">Hover Card</a>
+    <a class="ds-sidenav-item" href="ds-44-input-otp.html">Input OTP</a>
+    <a class="ds-sidenav-item" href="ds-46-label.html">Label</a>
+    <a class="ds-sidenav-item" href="ds-19-lists.html">Lists</a>
+    <a class="ds-sidenav-item" href="ds-20-progress.html">Loading & Progress</a>
+    <a class="ds-sidenav-item" href="ds-47-menubar.html">Menubar</a>
+    <a class="ds-sidenav-item" href="ds-21-menus.html">Menus</a>
+    <a class="ds-sidenav-item" href="ds-07-navigation.html">Navigation</a>
+    <a class="ds-sidenav-item" href="ds-48-pagination.html">Pagination</a>
+    <a class="ds-sidenav-item" href="ds-49-popover.html">Popover</a>
+    <a class="ds-sidenav-item" href="ds-22-radio.html">Radio Group</a>
+    <a class="ds-sidenav-item" href="ds-50-resizable.html">Resizable</a>
+    <a class="ds-sidenav-item" href="ds-51-scroll-area.html">Scroll Area</a>
+    <a class="ds-sidenav-item" href="ds-52-select.html">Select</a>
+    <a class="ds-sidenav-item" href="ds-53-sheet.html">Sheet</a>
+    <a class="ds-sidenav-item" href="ds-54-skeleton.html">Skeleton</a>
+    <a class="ds-sidenav-item" href="ds-23-sliders.html">Slider</a>
+    <a class="ds-sidenav-item" href="ds-24-snackbar.html">Snackbar</a>
+    <a class="ds-sidenav-item" href="ds-55-spinner.html">Spinner</a>
+    <a class="ds-sidenav-item" href="ds-12-switches.html">Switch</a>
+    <a class="ds-sidenav-item" href="ds-11-tabs.html">Tabs</a>
+    <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
+    <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
+    <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
+    <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
+  </div>
+</nav>
 
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
@@ -195,7 +279,7 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
     </div>
     <h3 class="ba-h3">Lockup</h3>
     <p class="ba-p">A lockup is the combination of wordmark (the brand or app name) and its icon, generally referred altogether as a logo.</p>
-    <div class="ba-shots" style="grid-template-columns:repeat(2,1fr);">
+    <div class="ba-shots" style="--r:1.965;grid-template-columns:repeat(2,1fr);">
       <figure class="ba-shot"><img src="brand-assets/norbielink-logo/img/lockup-dark.png" alt="Norbielink_lockup on Dark" loading="lazy"><figcaption>Norbielink_lockup on Dark</figcaption></figure>
       <figure class="ba-shot"><img src="brand-assets/norbielink-logo/img/lockup-white.png" alt="Norbielink_lockup on White" loading="lazy"><figcaption>Norbielink_lockup on White</figcaption></figure>
     </div>
@@ -242,7 +326,7 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
     <p class="ba-p">By default, the lockup and icon inherit their colors from the parent element, however, this can lead to incorrect color combinations. Moving forward, all usages should choose between the brand-approved appearances below.</p>
     <h3 class="ba-h3">Brand</h3>
     <p class="ba-p">Brand app logos are used in situations that demand a bold brand presence against a neutral background.</p>
-    <div class="ba-shots" style="grid-template-columns:repeat(2,1fr);">
+    <div class="ba-shots" style="--r:1.965;grid-template-columns:repeat(2,1fr);">
       <figure class="ba-shot"><img src="brand-assets/norbielink-logo/img/brand-1.png" alt="" loading="lazy"></figure>
       <figure class="ba-shot"><img src="brand-assets/norbielink-logo/img/brand-2.png" alt="" loading="lazy"></figure>
     </div>
@@ -282,7 +366,7 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
     </div>
     <h3 class="ba-h3">Neutral</h3>
     <p class="ba-p">Neutral app logos can be used when the hierarchy calls for the logo to recede, but should always be evaluated for adequate contrast.</p>
-    <div class="ba-shots" style="grid-template-columns:repeat(2,1fr);">
+    <div class="ba-shots" style="--r:1.965;grid-template-columns:repeat(2,1fr);">
       <figure class="ba-shot"><img src="brand-assets/norbielink-logo/img/neutral-1.png" alt="" loading="lazy"></figure>
       <figure class="ba-shot"><img src="brand-assets/norbielink-logo/img/neutral-2.png" alt="" loading="lazy"></figure>
     </div>
@@ -327,7 +411,7 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
   <div class="ds-section" id="dos">
     <h2 class="ds-section-title">Do's</h2>
     <p class="ba-p">Here are our do's, and also the BTIS logo exists mainly in the two-color version.</p>
-    <div class="ba-dd">
+    <div class="ba-dd" style="--r:1.965;">
       <figure class="ba-dd-card">
         <div class="ba-dd-img"><img src="brand-assets/norbielink-logo/img/do-1.png" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-active">Do</span>The primary color logo is preferred over all others.</figcaption>
@@ -368,7 +452,7 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
   <div class="ds-section" id="donts">
     <h2 class="ds-section-title">Don'ts</h2>
     <p class="ba-p">Ouch.... These are some painful examples of unacceptable uses of the BTIS logo.</p>
-    <div class="ba-dd">
+    <div class="ba-dd" style="--r:1.429;">
       <figure class="ba-dd-card">
         <div class="ba-dd-img"><img src="brand-assets/norbielink-logo/img/dont-1.jpg" alt="" loading="lazy"></div>
         <figcaption><span class="badge-status-pill badge-sp-declined">Don’t</span>Stretching or squeezing. Never deform the logo.</figcaption>
