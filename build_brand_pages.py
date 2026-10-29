@@ -169,6 +169,50 @@ def shots(items, cols=None):
     return "".join(out)
 
 
+def nl_donts():
+    """The Norbielink Don'ts, built rather than mirrored.
+
+    The brand guide's Don'ts are screenshots of the BTIS mark — the page was
+    copied from the BTIS logo page and the examples were never redrawn. These
+    put the Norbielink lockup through the same eight mistakes, live, from the
+    real SVGs, so they stay sharp and correct if the logo is reissued."""
+    LOCK = N + "NorbieLink-ALL_NL-btis-on_white.svg"       # dark art, for light
+    LIGHT = N + "NorbieLink-ALL_NL-btis.svg"               # light art, for dark
+    WORD = N + "NorbieLink-Brandlogo-on_white.svg"         # NORBIELINK alone
+    BTIS = "brand-assets/btis-logo/Logo_with_name.svg"
+
+    cards = [
+        ("Stretching or squeezing. Never deform the logo.",
+         "", '<img src="%s" alt="" style="width:58%%;transform:scaleX(1.55);">' % LOCK),
+        ("Stretching or squeezing. Never deform the logo.",
+         "", '<img src="%s" alt="" style="width:58%%;transform:scaleX(0.52);">' % LOCK),
+        ("Moving elements. Don\u2019t rearrange the elements of the logo.",
+         "", '<span class="nl-row"><img src="%s" alt="" style="width:62%%;">'
+             '<img src="%s" alt="" style="width:13%%;"></span>' % (WORD, BTIS)),
+        ("Changing colors. Do not alter the colors of the logo.",
+         "", '<img src="%s" alt="" style="width:66%%;filter:hue-rotate(118deg) saturate(1.6);">' % LOCK),
+        ("Obscuring. Never place the logo on a background that makes the logo blend in or disappear.",
+         "background:#ECE6F8;", '<img src="%s" alt="" style="width:66%%;">' % LIGHT),
+        ("Obscuring. Never place the logo on a background that makes the logo blend in or disappear.",
+         "background:repeating-linear-gradient(54deg,#2D3653 0 14px,#5C2ED4 14px 28px,#9CA3AF 28px 42px);",
+         '<img src="%s" alt="" style="width:66%%;">' % LOCK),
+        ("Crowding. Always leave the prescribed space around the logo, away from other elements.",
+         "", '<span class="nl-crowd"><i></i><i></i><i></i><i></i>'
+             '<img src="%s" alt="" style="width:100%%;"></span>' % LOCK),
+        ("Visual effects. Do not add effects like drop-shadows, strokes, embossing etc. to the logo.",
+         "", '<img src="%s" alt="" style="width:62%%;'
+             'filter:drop-shadow(0 8px 6px rgba(45,54,83,.55)) drop-shadow(0 -2px 0 #73C9B7);">' % LOCK),
+    ]
+    out = ['    <div class="ba-dd" style="--r:1.43;">\n']
+    for cap, bg, inner in cards:
+        out.append('      <figure class="ba-dd-card">\n'
+                   '        <div class="nl-stage" style="%s">%s</div>\n'
+                   '        <figcaption><span class="badge-status-pill badge-sp-declined">Don\u2019t</span>%s</figcaption>\n'
+                   '      </figure>\n' % (bg, inner, html.escape(cap)))
+    out.append("    </div>\n")
+    return "".join(out)
+
+
 def stage(bg, asset, alt=""):
     """A painted canvas with the real logo file on it.
 
@@ -333,6 +377,19 @@ body.dark-mode .ba-tab.active { color: #FFFFFF; }
 .ba-tilecell-art { height: 104px; display: flex; align-items: center; justify-content: center;
   background: #FFFFFF; }
 body.dark-mode .ba-tilecell-art { background: #0F1120; }
+
+/* ── Built Don'ts ── the lockup put through each mistake, live. */
+.nl-stage { aspect-ratio: var(--r, 1.43); display: flex; align-items: center;
+  justify-content: center; overflow: hidden; background: #FFFFFF; }
+.nl-stage img { display: block; }
+.nl-row { display: flex; align-items: center; gap: 10px; width: 86%; justify-content: center; }
+.nl-crowd { position: relative; display: flex; align-items: center; justify-content: center;
+  width: 62%; padding: 2px 4px; }
+.nl-crowd i { position: absolute; background: var(--gray-300); border-radius: 2px; }
+.nl-crowd i:nth-child(1) { left: -46px; top: 50%; transform: translateY(-50%); width: 42px; height: 10px; }
+.nl-crowd i:nth-child(2) { right: -46px; top: 50%; transform: translateY(-50%); width: 42px; height: 10px; }
+.nl-crowd i:nth-child(3) { top: -14px; left: 12%; width: 56%; height: 8px; }
+.nl-crowd i:nth-child(4) { bottom: -14px; left: 26%; width: 40%; height: 8px; }
 .ba-tilecell-art img { max-width: 64px; max-height: 64px; object-fit: contain; }
 .ba-tilecell-art .dark-art { display: none; }
 body.dark-mode .ba-tilecell-art.has-dark .light-art { display: none; }
@@ -632,8 +689,13 @@ body += section("dos", "Do's",
     ]))
 
 body += section("donts", "Don'ts",
-    p("Ouch.... These are some painful examples of unacceptable uses of the BTIS logo.")
-    + dodont([(k, N + "img/" + f, c) for k, f, c in DONTS]))
+    p("Ouch.... These are some painful examples of unacceptable uses of the Norbielink logo.")
+    + '    <div class="ba-note"><span class="material-icons-round">error</span>'
+      '<span>The brand guide\u2019s Don\u2019ts for this page are screenshots of the '
+      '<strong>BTIS</strong> mark \u2014 the page was copied from the BTIS logo page and the '
+      'examples were never redrawn. These are the same eight mistakes applied to the '
+      'Norbielink lockup, drawn live from the SVGs on this page.</span></div>\n'
+    + nl_donts())
 
 page("ds-brand-norbielink-logo.html", "Norbielink Logo",
      "A logo is a visual representation of a brand or app. It can be a word, an image, or a "
