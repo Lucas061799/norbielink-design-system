@@ -102,28 +102,41 @@ def ratio_of(paths):
     return round(statistics.median(rs), 3) if rs else 1.6
 
 
-def canvas_colour(path):
-    """The flat background an example is painted on, or white.
+def _hex(p):
+    return "#%02X%02X%02X" % p[:3]
 
-    Only answers when the image really is full-bleed on one colour: all four
-    corners and all four edge midpoints have to agree. Guessing from the
-    dominant colour put yellow bars around the banana and grey ones around a
-    white jungle silhouette."""
+
+def _same(a, b, tol=6):
+    return all(abs(a[i] - b[i]) <= tol for i in range(3))
+
+
+def canvas_colour(path):
+    """What to paint behind an example so its letterbox bars disappear.
+
+    Flat full-bleed artwork gives a solid colour; artwork on a vertical ramp
+    (several of these are navy-to-teal or purple-to-white) gives the matching
+    linear-gradient. Anything else gives white rather than a guess — taking
+    the dominant colour put yellow bars around the banana, and sampling the
+    border gave the white jungle silhouette grey ones."""
     try:
         with Image.open(os.path.join(ROOT, path)) as im:
             im = im.convert("RGBA")
             w, h = im.size
-            pts = [(1, 1), (w - 2, 1), (1, h - 2), (w - 2, h - 2),
-                   (w // 2, 1), (w // 2, h - 2), (1, h // 2), (w - 2, h // 2)]
-            px = [im.getpixel(p) for p in pts]
-            if any(p[3] < 250 for p in px):
+            top = [im.getpixel((x, 1)) for x in (1, w // 2, w - 2)]
+            bot = [im.getpixel((x, h - 2)) for x in (1, w // 2, w - 2)]
+            mid = [im.getpixel((1, h // 2)), im.getpixel((w - 2, h // 2))]
+            if any(p[3] < 250 for p in top + bot + mid):
                 return "#FFFFFF"
-            r, g, b = px[0][:3]
-            if any(abs(p[i] - [r, g, b][i]) > 6 for p in px for i in range(3)):
+            if not (_same(top[0], top[1]) and _same(top[1], top[2])):
                 return "#FFFFFF"
-            if min(r, g, b) >= 248:
+            if not (_same(bot[0], bot[1]) and _same(bot[1], bot[2])):
                 return "#FFFFFF"
-            return "#%02X%02X%02X" % (r, g, b)
+            if _same(top[0], bot[0]):                      # flat
+                return "#FFFFFF" if min(top[0][:3]) >= 248 else _hex(top[0])
+            blend = tuple((top[0][i] + bot[0][i]) // 2 for i in range(3))
+            if not (_same(mid[0], blend, 24) and _same(mid[1], blend, 24)):
+                return "#FFFFFF"                           # not a clean ramp
+            return "linear-gradient(180deg,%s,%s)" % (_hex(top[0]), _hex(bot[0]))
     except Exception:
         return "#FFFFFF"
 
@@ -145,13 +158,28 @@ def shots(items, cols=None):
     out = ['    <div class="ba-shots%s"%s>\n' % (" one" if one else "", style)]
     for it in items:
         src, cap = (it if isinstance(it, tuple) else (it, None))
+        bg = canvas_colour(src)
         out.append('      <figure class="ba-shot">'
-                   '<div class="ba-shot-art%s" style="--bg:%s">'
+                   '<div class="ba-shot-art%s%s" style="--bg:%s">'
                    '<img src="%s" alt="%s" loading="lazy"></div>%s</figure>\n'
-                   % ("" if one else fill_class(src, r), canvas_colour(src), src, html.escape(cap or ""),
+                   % ("" if one else fill_class(src, r),
+                      "" if bg == "#FFFFFF" else " on-canvas", bg, src, html.escape(cap or ""),
                       '<figcaption>%s</figcaption>' % html.escape(cap) if cap else ""))
     out.append("    </div>\n")
     return "".join(out)
+
+
+def stage(bg, asset, alt=""):
+    """A painted canvas with the real logo file on it.
+
+    The brand guide's own screenshot of the icon is a JPEG with the gradient
+    baked in; letterboxing it against a CSS gradient never matched exactly,
+    because the compression noise does not. Painting the ramp and dropping the
+    vector on top has no seam to match."""
+    return ('    <div class="ba-shots one">\n'
+            '      <figure class="ba-shot"><div class="ba-shot-art" style="--bg:%s">'
+            '<img src="%s" alt="%s" loading="lazy"></div></figure>\n'
+            '    </div>\n' % (bg, asset, html.escape(alt)))
 
 
 def dodont(items):
@@ -229,10 +257,14 @@ CSS = """
 .ba-shot-art img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
 .ba-shot-art.fill img { width: 100%; height: 100%; max-width: none; max-height: none;
   object-fit: cover; }
-/* A lone example is the page's hero: the artwork sits well inside its box
-   rather than filling it. */
+/* A lone example is the page's hero: artwork on white sits well inside its
+   box rather than filling it. Artwork that carries its own canvas runs the
+   full height instead, so the stage's matching colour — or its matching
+   vertical ramp — continues past the edges without a seam. */
 .ba-shots.one .ba-shot-art { padding: 30px 40px; }
 .ba-shots.one .ba-shot-art img { max-height: 165px; }
+.ba-shots.one .ba-shot-art.on-canvas { padding: 0; }
+.ba-shots.one .ba-shot-art.on-canvas img { max-height: 100%; height: 100%; width: auto; }
 .ba-shot figcaption { font-size: 12px; line-height: 1.5; color: var(--gray-500);
   padding: 9px 12px; border-top: 1px solid var(--gray-100); background: var(--card-bg); }
 
@@ -481,7 +513,8 @@ body += section("types", "Types",
     + h3("Icon")
     + p("An icon is an image or symbol that represents a brand or app. It generally does not "
         "contain the name of the brand or app.")
-    + shots([B + "img/icon.jpg"])
+    + stage("linear-gradient(180deg,#1F1A50,#67ACA7)",
+            B + "Icon_Logo_blue.svg", "BTIS icon")
     + files([B + "Icon_Logo_blue.svg", B + "Icon_Logo_blue.png",
              B + "Icon_Logo_yellow.svg", B + "Icon_Logo_yellow.png"])
     + h3("Lockup")

@@ -39,10 +39,14 @@
 .ba-shot-art img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
 .ba-shot-art.fill img { width: 100%; height: 100%; max-width: none; max-height: none;
   object-fit: cover; }
-/* A lone example is the page's hero: the artwork sits well inside its box
-   rather than filling it. */
+/* A lone example is the page's hero: artwork on white sits well inside its
+   box rather than filling it. Artwork that carries its own canvas runs the
+   full height instead, so the stage's matching colour — or its matching
+   vertical ramp — continues past the edges without a seam. */
 .ba-shots.one .ba-shot-art { padding: 30px 40px; }
 .ba-shots.one .ba-shot-art img { max-height: 165px; }
+.ba-shots.one .ba-shot-art.on-canvas { padding: 0; }
+.ba-shots.one .ba-shot-art.on-canvas img { max-height: 100%; height: 100%; width: auto; }
 .ba-shot figcaption { font-size: 12px; line-height: 1.5; color: var(--gray-500);
   padding: 9px 12px; border-top: 1px solid var(--gray-100); background: var(--card-bg); }
 
@@ -294,7 +298,7 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
     <h3 class="ba-h3">Usage</h3>
     <p class="ba-p">These tiles act as the visual representation of our product suite. They serve as intuitive entry points, designed to help users instantly recognize and navigate to specific lines of business.</p>
     <div class="ba-shots one" style="--r:2.8;">
-      <figure class="ba-shot"><div class="ba-shot-art" style="--bg:#70C7B1"><img src="brand-assets/visual-elements/img/tiles-hero.png" alt="" loading="lazy"></div></figure>
+      <figure class="ba-shot"><div class="ba-shot-art on-canvas" style="--bg:#70C7B1"><img src="brand-assets/visual-elements/img/tiles-hero.png" alt="" loading="lazy"></div></figure>
     </div>
     <div class="ba-links">
       <a class="ba-link" href="https://www.canva.com/folder/FAFIa4luGRg" target="_blank" rel="noopener">

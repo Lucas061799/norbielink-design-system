@@ -39,10 +39,14 @@
 .ba-shot-art img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
 .ba-shot-art.fill img { width: 100%; height: 100%; max-width: none; max-height: none;
   object-fit: cover; }
-/* A lone example is the page's hero: the artwork sits well inside its box
-   rather than filling it. */
+/* A lone example is the page's hero: artwork on white sits well inside its
+   box rather than filling it. Artwork that carries its own canvas runs the
+   full height instead, so the stage's matching colour — or its matching
+   vertical ramp — continues past the edges without a seam. */
 .ba-shots.one .ba-shot-art { padding: 30px 40px; }
 .ba-shots.one .ba-shot-art img { max-height: 165px; }
+.ba-shots.one .ba-shot-art.on-canvas { padding: 0; }
+.ba-shots.one .ba-shot-art.on-canvas img { max-height: 100%; height: 100%; width: auto; }
 .ba-shot figcaption { font-size: 12px; line-height: 1.5; color: var(--gray-500);
   padding: 9px 12px; border-top: 1px solid var(--gray-100); background: var(--card-bg); }
 

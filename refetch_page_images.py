@@ -15,7 +15,6 @@ SRGB = ImageCms.createProfile("sRGB")
 
 IMAGES = {
     "brand-assets/btis-logo/img": {
-        "icon.jpg": "4yOZbCzY05GwZ8MlEaCdww.jpg",
         "lockup.jpg": "tMpGx3kkEAKooNrbZWB4jA.jpg",
         "brand-1.png": "m1LZPZdnSBMa9sUZ88KDBg.png",
         "brand-2.jpg": "trjW9OSf473-pYDjsJ_mRA.jpg",

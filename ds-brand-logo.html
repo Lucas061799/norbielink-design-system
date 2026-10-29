@@ -39,10 +39,14 @@
 .ba-shot-art img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
 .ba-shot-art.fill img { width: 100%; height: 100%; max-width: none; max-height: none;
   object-fit: cover; }
-/* A lone example is the page's hero: the artwork sits well inside its box
-   rather than filling it. */
+/* A lone example is the page's hero: artwork on white sits well inside its
+   box rather than filling it. Artwork that carries its own canvas runs the
+   full height instead, so the stage's matching colour — or its matching
+   vertical ramp — continues past the edges without a seam. */
 .ba-shots.one .ba-shot-art { padding: 30px 40px; }
 .ba-shots.one .ba-shot-art img { max-height: 165px; }
+.ba-shots.one .ba-shot-art.on-canvas { padding: 0; }
+.ba-shots.one .ba-shot-art.on-canvas img { max-height: 100%; height: 100%; width: auto; }
 .ba-shot figcaption { font-size: 12px; line-height: 1.5; color: var(--gray-500);
   padding: 9px 12px; border-top: 1px solid var(--gray-100); background: var(--card-bg); }
 
@@ -280,8 +284,8 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
     </div>
     <h3 class="ba-h3">Icon</h3>
     <p class="ba-p">An icon is an image or symbol that represents a brand or app. It generally does not contain the name of the brand or app.</p>
-    <div class="ba-shots one" style="--r:2.8;">
-      <figure class="ba-shot"><div class="ba-shot-art" style="--bg:#FFFFFF"><img src="brand-assets/btis-logo/img/icon.jpg" alt="" loading="lazy"></div></figure>
+    <div class="ba-shots one">
+      <figure class="ba-shot"><div class="ba-shot-art" style="--bg:linear-gradient(180deg,#1F1A50,#67ACA7)"><img src="brand-assets/btis-logo/Icon_Logo_blue.svg" alt="BTIS icon" loading="lazy"></div></figure>
     </div>
     <div class="ba-files">
       <a class="ba-file" href="brand-assets/btis-logo/Icon_Logo_blue.svg" download>
@@ -367,7 +371,7 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
     <p class="ba-p">Brand app logos are used in situations that demand a bold brand presence against a neutral background.</p>
     <div class="ba-shots" style="--r:1.429;">
       <figure class="ba-shot"><div class="ba-shot-art fill" style="--bg:#FFFFFF"><img src="brand-assets/btis-logo/img/brand-1.png" alt="" loading="lazy"></div></figure>
-      <figure class="ba-shot"><div class="ba-shot-art fill" style="--bg:#FFFFFF"><img src="brand-assets/btis-logo/img/brand-2.jpg" alt="" loading="lazy"></div></figure>
+      <figure class="ba-shot"><div class="ba-shot-art fill on-canvas" style="--bg:linear-gradient(180deg,#201B51,#5E9C9B)"><img src="brand-assets/btis-logo/img/brand-2.jpg" alt="" loading="lazy"></div></figure>
       <figure class="ba-shot"><div class="ba-shot-art fill" style="--bg:#FFFFFF"><img src="brand-assets/btis-logo/img/brand-3.jpg" alt="" loading="lazy"></div></figure>
     </div>
     <div class="ba-files">
@@ -440,7 +444,7 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
     <p class="ba-p">Neutral app logos can be used when the hierarchy calls for the logo to recede, but should always be evaluated for adequate contrast.</p>
     <div class="ba-shots" style="--r:1.429;">
       <figure class="ba-shot"><div class="ba-shot-art fill" style="--bg:#FFFFFF"><img src="brand-assets/btis-logo/img/neutral-1.jpg" alt="" loading="lazy"></div></figure>
-      <figure class="ba-shot"><div class="ba-shot-art fill" style="--bg:#040809"><img src="brand-assets/btis-logo/img/neutral-2.jpg" alt="" loading="lazy"></div></figure>
+      <figure class="ba-shot"><div class="ba-shot-art fill on-canvas" style="--bg:#040809"><img src="brand-assets/btis-logo/img/neutral-2.jpg" alt="" loading="lazy"></div></figure>
     </div>
     <div class="ba-files">
       <a class="ba-file" href="brand-assets/btis-logo/Logo_Fullblack.svg" download>
@@ -479,7 +483,7 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
     <h3 class="ba-h3">Inverse</h3>
     <p class="ba-p">Inverse app logos should be used to contrast against bold backgrounds.</p>
     <div class="ba-shots one" style="--r:2.8;">
-      <figure class="ba-shot"><div class="ba-shot-art" style="--bg:#3B2967"><img src="brand-assets/btis-logo/img/inverse-1.jpg" alt="" loading="lazy"></div></figure>
+      <figure class="ba-shot"><div class="ba-shot-art on-canvas" style="--bg:#3B2967"><img src="brand-assets/btis-logo/img/inverse-1.jpg" alt="" loading="lazy"></div></figure>
     </div>
     <div class="ba-files">
       <a class="ba-file" href="brand-assets/btis-logo/InverseLogo.jpg" download>
