@@ -17,10 +17,12 @@ COMPONENTS = [(l, h) for h, l in
 
 # Visual Elements is one page with five sections, so it expands in place.
 VE = "ds-brand-visual-elements.html"
+# Plain labels — the emoji belong on the page's own tabs, where the brand
+# guide puts them, not in the rail.
 VE_SECTIONS = [
     ("Tiles / Product icon", "tab-tiles"),
-    ("\U0001F334 Monstera Leaves", "tab-monstera"),
-    ("\U0001F34C Banana", "tab-banana"),
+    ("Monstera Leaves", "tab-monstera"),
+    ("Banana", "tab-banana"),
     ("Marketplace awning", "tab-awning"),
     ("Jungle Background", "tab-jungle"),
 ]
@@ -56,7 +58,7 @@ def nav_for(current):
                 continue
             here = href == current
             out.append('    <div class="ds-sidenav-nest%s">' % (" open" if here else ""))
-            out.append('      <div class="ds-sidenav-nest-row">')
+            out.append('      <div class="ds-sidenav-nest-row%s">' % a)
             out.append('        <a class="ds-sidenav-item%s" href="%s">%s</a>' % (a, href, label))
             out.append('        <button class="ds-sidenav-nest-btn" type="button" '
                        'aria-label="Toggle %s sections" aria-expanded="%s" '

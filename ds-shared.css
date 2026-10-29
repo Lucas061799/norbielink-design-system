@@ -1581,13 +1581,23 @@ body.dark-mode .ds-sidenav::-webkit-scrollbar-thumb:hover { background: rgba(255
    to the tabs on it. No icon, no section-level collapsing — the rest of the
    rail stays a flat list. */
 .ds-sidenav-nest { display: flex; flex-direction: column; align-items: flex-start; }
-.ds-sidenav-nest-row { display: flex; align-items: center; gap: 2px; }
+/* The row is the hit area, so the fill runs under the chevron too. */
+.ds-sidenav-nest-row {
+  display: flex; align-items: center; gap: 2px;
+  padding-right: 6px; border-radius: 6px;
+  transition: background .1s;
+}
+.ds-sidenav-nest-row:hover,
+.ds-sidenav-nest-row.active { background: #f4f4f5; }
+.ds-sidenav-nest-row .ds-sidenav-item,
+.ds-sidenav-nest-row .ds-sidenav-item:hover,
+.ds-sidenav-nest-row .ds-sidenav-item.active { background: transparent; }
 .ds-sidenav-nest-btn {
   display: flex; align-items: center; justify-content: center;
   padding: 2px; border: none; border-radius: 4px; background: transparent;
   cursor: pointer; color: #a1a1aa;
 }
-.ds-sidenav-nest-btn:hover { background: #f4f4f5; color: #52525b; }
+.ds-sidenav-nest-btn:hover { color: #52525b; }
 .ds-sidenav-nest-btn .material-icons-round { font-size: 16px; transition: transform .15s; }
 .ds-sidenav-nest.open .ds-sidenav-nest-btn .material-icons-round { transform: rotate(180deg); }
 
@@ -1605,8 +1615,10 @@ body.dark-mode .ds-sidenav::-webkit-scrollbar-thumb:hover { background: rgba(255
 }
 .ds-sidenav-subitem:hover { background: #f4f4f5; color: #18181b; text-decoration: none; }
 .ds-sidenav-subitem.active { background: #f4f4f5; color: #18181b; }
+body.dark-mode .ds-sidenav-nest-row:hover { background: rgba(255,255,255,0.06); }
+body.dark-mode .ds-sidenav-nest-row.active { background: rgba(255,255,255,0.09); }
 body.dark-mode .ds-sidenav-nest-btn { color: rgba(255,255,255,0.35); }
-body.dark-mode .ds-sidenav-nest-btn:hover { background: rgba(255,255,255,0.06); }
+body.dark-mode .ds-sidenav-nest-btn:hover { color: rgba(255,255,255,0.7); }
 body.dark-mode .ds-sidenav-nest-sub { border-left-color: rgba(255,255,255,0.12); }
 body.dark-mode .ds-sidenav-subitem { color: rgba(255,255,255,0.55); }
 body.dark-mode .ds-sidenav-subitem:hover,

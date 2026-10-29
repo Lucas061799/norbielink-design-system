@@ -205,8 +205,10 @@ CSS = """
 .ba-shot-art { aspect-ratio: var(--r, 16 / 9); display: flex; align-items: center;
   justify-content: center; background: var(--bg, #FFFFFF); }
 .ba-shot-art img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
-/* A lone example is the page's hero, so give the artwork room inside its box. */
+/* A lone example is the page's hero: the artwork sits well inside its box
+   rather than filling it. */
 .ba-shots.one .ba-shot-art { padding: 30px 40px; }
+.ba-shots.one .ba-shot-art img { max-height: 165px; }
 .ba-shot figcaption { font-size: 12px; line-height: 1.5; color: var(--gray-500);
   padding: 9px 12px; border-top: 1px solid var(--gray-100); background: var(--card-bg); }
 
