@@ -15,8 +15,18 @@ COMPONENTS = [(l, h) for h, l in
               ((m.group(2), m.group(1)) for m in
                re.finditer(r"\{ label: '([^']+)',\s*href: '([^']+)' \}", blk))]
 
+# Visual Elements is one page with five sections, so it expands in place.
+VE = "ds-brand-visual-elements.html"
+VE_SECTIONS = [
+    ("Tiles / Product icon", "tab-tiles"),
+    ("\U0001F334 Monstera Leaves", "tab-monstera"),
+    ("\U0001F34C Banana", "tab-banana"),
+    ("Marketplace awning", "tab-awning"),
+    ("Jungle Background", "tab-jungle"),
+]
+
 GROUPS = [
-    ("Getting Started", "school", [
+    ("Getting Started", [
         ("Introduction", "ds-00-home.html"),
         ("Colors",       "ds-01-color.html"),
         ("Typography",   "ds-02-typography.html"),
@@ -24,36 +34,41 @@ GROUPS = [
         ("Shape",        "ds-04-shape.html"),
         ("Spacing",      "ds-05-spacing.html"),
     ]),
-    ("Brand assets", "palette", [
+    ("Brand assets", [
         ("Norbielink Logo",  "ds-brand-norbielink-logo.html"),
         ("BTIS Logo",        "ds-brand-logo.html"),
         ("Brand Characters", "ds-brand-characters.html"),
-        ("Visual Elements",  "ds-brand-visual-elements.html"),
+        ("Visual Elements",  VE),
     ]),
-    ("Components", "widgets", COMPONENTS),
+    ("Components", COMPONENTS),
 ]
 
 
 def nav_for(current):
-    """Collapsible sections, the same shape as the app's own 'Tools & Resources'
-    rail: an icon, the label, a chevron, and the children indented under a
-    guide line. The section holding the current page starts open."""
     out = ['<!-- SUB-NAV -->', '<nav class="ds-sidenav">']
-    for title, icon, items in GROUPS:
-        here = any(h == current for _, h in items)
-        out.append('  <div class="ds-sidenav-group%s">' % (" open" if here else ""))
-        out.append('    <button class="ds-sidenav-sec" type="button" '
-                   'onclick="toggleSidenavSection(this)" aria-expanded="%s">'
-                   % ("true" if here else "false"))
-        out.append('      <span class="material-icons-round ds-sidenav-sec-icon">%s</span>' % icon)
-        out.append('      <span class="ds-sidenav-sec-label">%s</span>' % title)
-        out.append('      <span class="material-icons-round ds-sidenav-chev">expand_more</span>')
-        out.append('    </button>')
-        out.append('    <div class="ds-sidenav-sub">')
+    for title, items in GROUPS:
+        out.append('  <div class="ds-sidenav-group">')
+        out.append('    <div class="ds-sidenav-group-title">%s</div>' % title)
         for label, href in items:
             a = " active" if href == current else ""
-            out.append('      <a class="ds-sidenav-item%s" href="%s">%s</a>' % (a, href, label))
-        out.append('    </div>')
+            if href != VE:
+                out.append('    <a class="ds-sidenav-item%s" href="%s">%s</a>' % (a, href, label))
+                continue
+            here = href == current
+            out.append('    <div class="ds-sidenav-nest%s">' % (" open" if here else ""))
+            out.append('      <div class="ds-sidenav-nest-row">')
+            out.append('        <a class="ds-sidenav-item%s" href="%s">%s</a>' % (a, href, label))
+            out.append('        <button class="ds-sidenav-nest-btn" type="button" '
+                       'aria-label="Toggle %s sections" aria-expanded="%s" '
+                       'onclick="toggleSidenavNest(this)">'
+                       '<span class="material-icons-round">expand_more</span></button>'
+                       % (label, "true" if here else "false"))
+            out.append('      </div>')
+            out.append('      <div class="ds-sidenav-nest-sub">')
+            for sub, pane in VE_SECTIONS:
+                out.append('        <a class="ds-sidenav-subitem" href="%s#%s">%s</a>' % (href, pane, sub))
+            out.append('      </div>')
+            out.append('    </div>')
         out.append('  </div>')
     out.append('</nav>')
     return "\n".join(out) + "\n"

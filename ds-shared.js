@@ -222,9 +222,9 @@ function toggleDarkMode() {
 }
 
 /* ─── TOC SCROLL + ACTIVE HIGHLIGHT ─── */
-function toggleSidenavSection(btn) {
-  const sec = btn.closest('.ds-sidenav-group');
-  const open = sec.classList.toggle('open');
+function toggleSidenavNest(btn) {
+  const nest = btn.closest('.ds-sidenav-nest');
+  const open = nest.classList.toggle('open');
   btn.setAttribute('aria-expanded', open ? 'true' : 'false');
 }
 

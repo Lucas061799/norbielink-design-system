@@ -84,26 +84,26 @@ def ratio_of(paths):
     return round(statistics.median(rs), 3) if rs else 1.6
 
 
-def edge_colour(path):
-    """The colour the image's own border runs in, so a letterboxed example
-    still reads as one rectangle. Transparent edges fall back to white."""
+def canvas_colour(path):
+    """The flat background an example is painted on, or white.
+
+    Only answers when the image really is full-bleed on one colour: all four
+    corners and all four edge midpoints have to agree. Guessing from the
+    dominant colour put yellow bars around the banana and grey ones around a
+    white jungle silhouette."""
     try:
         with Image.open(os.path.join(ROOT, path)) as im:
             im = im.convert("RGBA")
             w, h = im.size
-            px = im.load()
-            ring = [px[x, 0] for x in range(0, w, max(1, w // 40))]
-            ring += [px[x, h - 1] for x in range(0, w, max(1, w // 40))]
-            ring += [px[0, y] for y in range(0, h, max(1, h // 40))]
-            ring += [px[w - 1, y] for y in range(0, h, max(1, h // 40))]
-            ring = [c for c in ring if c[3] > 250]
-            if not ring:
+            pts = [(1, 1), (w - 2, 1), (1, h - 2), (w - 2, h - 2),
+                   (w // 2, 1), (w // 2, h - 2), (1, h // 2), (w - 2, h // 2)]
+            px = [im.getpixel(p) for p in pts]
+            if any(p[3] < 250 for p in px):
                 return "#FFFFFF"
-            top = collections.Counter((c[0] // 8, c[1] // 8, c[2] // 8) for c in ring).most_common(1)[0]
-            if top[1] < len(ring) * 0.6:          # no single edge colour — don't guess
+            r, g, b = px[0][:3]
+            if any(abs(p[i] - [r, g, b][i]) > 6 for p in px for i in range(3)):
                 return "#FFFFFF"
-            r, g, b = (min(v * 8 + 4, 255) for v in top[0])
-            if min(r, g, b) >= 248:   # near-white edges: snap, or the bars show
+            if min(r, g, b) >= 248:
                 return "#FFFFFF"
             return "#%02X%02X%02X" % (r, g, b)
     except Exception:
@@ -130,7 +130,7 @@ def shots(items, cols=None):
         out.append('      <figure class="ba-shot">'
                    '<div class="ba-shot-art" style="--bg:%s">'
                    '<img src="%s" alt="%s" loading="lazy"></div>%s</figure>\n'
-                   % (edge_colour(src), src, html.escape(cap or ""),
+                   % (canvas_colour(src), src, html.escape(cap or ""),
                       '<figcaption>%s</figcaption>' % html.escape(cap) if cap else ""))
     out.append("    </div>\n")
     return "".join(out)
@@ -363,7 +363,22 @@ function baTab(btn,id){{
   wrap.querySelectorAll('.ba-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
   wrap.querySelectorAll('.ba-pane').forEach(p=>p.classList.toggle('active',p.id===id));
+  if(history.replaceState) history.replaceState(null,'','#'+id);
+  baSyncNav(id);
 }}
+/* The sub-nav deep-links to these tabs, so keep it in step with the page. */
+function baSyncNav(id){{
+  document.querySelectorAll('.ds-sidenav-subitem').forEach(a=>
+    a.classList.toggle('active',(a.getAttribute('href')||'').split('#')[1]===id));
+}}
+function baApplyHash(scroll){{
+  const id=location.hash.slice(1);
+  const btn=id&&document.querySelector('.ba-tab[data-pane="'+id+'"]');
+  if(btn){{ baTab(btn,id); if(scroll) btn.closest('.ba-tabwrap').scrollIntoView({{block:'start'}}); }}
+  else {{ const p=document.querySelector('.ba-pane.active'); if(p) baSyncNav(p.id); }}
+}}
+window.addEventListener('DOMContentLoaded',function(){{ baApplyHash(true); }});
+window.addEventListener('hashchange',function(){{ baApplyHash(true); }});
 </script>
 <script src="ds-shared.js"></script>
 </body></html>
@@ -548,8 +563,8 @@ page("ds-brand-norbielink-logo.html", "Norbielink Logo",
 def tabwrap(tabs):
     """tabs: list of (pane_id, label, html)."""
     bar = "".join(
-        '      <button class="ba-tab%s" onclick="baTab(this,\'%s\')">%s</button>\n'
-        % (" active" if i == 0 else "", pid, html.escape(lbl))
+        '      <button class="ba-tab%s" data-pane="%s" onclick="baTab(this,\'%s\')">%s</button>\n'
+        % (" active" if i == 0 else "", pid, pid, html.escape(lbl))
         for i, (pid, lbl, _) in enumerate(tabs))
     panes = "".join(
         '    <div class="ba-pane%s" id="%s">\n%s    </div>\n'
