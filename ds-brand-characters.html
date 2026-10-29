@@ -1,0 +1,379 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Brand Characters - Norbielink Design System</title>
+<link rel="stylesheet" href="ds-shared.css">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
+<style>
+/* .ds-main is a flex item: without min-width:0 the widest image in these grids
+   pushes it past the TOC instead of shrinking. */
+.ds-main { min-width: 0; }
+
+/* ── BRAND ASSET PAGE ──
+   A mirror of the BTIS brand style guide: the same copy, the same examples, and
+   the original files served from this repo so nothing has to open zeroheight. */
+.ba-p { font-size: 14px; line-height: 1.7; color: var(--body-text); margin-bottom: 18px; max-width: 70ch; }
+.ba-h3 { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700;
+  color: var(--gray-800); margin: 36px 0 10px; }
+.ba-section-lead { margin-top: 0; }
+
+.ba-note { display: flex; gap: 10px; align-items: flex-start; background: var(--gray-50);
+  border: 1px solid var(--gray-200); border-radius: 10px; padding: 12px 14px;
+  font-size: 13px; line-height: 1.65; color: var(--gray-600); margin-bottom: 14px; }
+.ba-note .material-icons-round { font-size: 18px; color: #A614C3; flex-shrink: 0; }
+.ba-note a { color: #A614C3; font-weight: 600; text-decoration: none; }
+.ba-note a:hover { text-decoration: underline; }
+
+.ba-shots { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-bottom: 18px; }
+.ba-shots.one { grid-template-columns: minmax(0, 560px); }
+.ba-shot { border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden;
+  background: var(--card-bg); margin: 0; }
+.ba-shot img { display: block; width: 100%; height: auto; max-height: 340px; object-fit: contain; }
+.ba-shot figcaption { font-size: 12px; line-height: 1.5; color: var(--gray-500);
+  padding: 9px 12px; border-top: 1px solid var(--gray-100); }
+
+.ba-files { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.ba-file, .ba-link { display: flex; align-items: center; gap: 11px; padding: 10px 12px;
+  border: 1px solid var(--gray-200); border-radius: 10px; background: var(--card-bg);
+  text-decoration: none; transition: border-color .15s, box-shadow .15s; }
+.ba-file:hover, .ba-link:hover { border-color: #A614C3; box-shadow: 0 4px 16px rgba(166,20,195,.10);
+  text-decoration: none; }
+.ba-thumb { width: 40px; height: 40px; border-radius: 8px; background: #F3F4F6;
+  border: 1px solid rgba(0,0,0,.06); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; overflow: hidden; }
+.ba-thumb.on-dark { background: #2D3653; border-color: rgba(255,255,255,.10); }
+.ba-thumb img { max-width: 74%; max-height: 74%; object-fit: contain; }
+.ba-ext { font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 700;
+  letter-spacing: .04em; color: #6B7280; }
+.ba-thumb.on-dark .ba-ext { color: #D1D5DB; }
+.ba-fmeta { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.ba-fname { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600;
+  color: var(--gray-800); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ba-fsub { font-size: 11px; color: var(--gray-400); }
+.ba-dl { font-size: 18px; color: var(--gray-300); flex-shrink: 0; }
+.ba-file:hover .ba-dl { color: #A614C3; }
+.ba-link .material-icons-round:first-child { font-size: 18px; color: var(--gray-400); flex-shrink: 0; }
+.ba-links { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  margin-bottom: 18px; }
+
+/* ── Do's & Don'ts ── the brand guide's own pairing, image above its rule. */
+.ba-dd { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.ba-dd-card { margin: 0; border: 1px solid var(--gray-200); border-radius: 12px;
+  overflow: hidden; background: var(--card-bg); }
+.ba-dd-img { background: var(--gray-100); }
+.ba-dd-img img { display: block; width: 100%; height: auto; }
+.ba-dd-card figcaption { padding: 11px 13px 13px; font-size: 12px; line-height: 1.55;
+  color: var(--gray-600); border-top: 1px solid var(--gray-100); }
+/* The Do / Don't label is the product's own tonal status pill — teal for the
+   positive state, red for Declined — not a new colour pair. */
+.ba-dd-card figcaption .badge-status-pill { display: flex; margin-bottom: 7px; }
+
+/* ── Tabs ── the product's own tab bar. */
+.ba-tabs { display: flex; align-items: center; gap: 4px; border-bottom: 1px solid var(--gray-200);
+  margin-bottom: 26px; width: 100%; overflow-x: auto; }
+.ba-tab { position: relative; display: inline-flex; align-items: center; padding: 12px 16px;
+  border: none; background: transparent; cursor: pointer; font-family: 'Montserrat', sans-serif;
+  font-size: 13px; font-weight: 400; line-height: 1.5; letter-spacing: .01em;
+  color: var(--gray-500); white-space: nowrap; transition: color .12s; }
+.ba-tab:hover { color: var(--gray-800); }
+.ba-tab.active { color: #A614C3; }
+body.dark-mode .ba-tab.active { color: #FFFFFF; }
+.ba-tab.active::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: linear-gradient(90deg,#5C2ED4 0%,#A614C3 65%); }
+.ba-pane { display: none; }
+.ba-pane.active { display: block; }
+
+/* ── Product tile grid (visual elements) ── */
+.ba-tiles { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+.ba-tile { border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden;
+  background: var(--card-bg); }
+.ba-tile-art { height: 96px; display: flex; align-items: center; justify-content: center;
+  background: #FFFFFF; }
+body.dark-mode .ba-tile-art { background: #0F1120; }
+.ba-tile-art img { max-width: 64px; max-height: 64px; object-fit: contain; }
+.ba-tile-art .dark-art { display: none; }
+body.dark-mode .ba-tile-art.has-dark .light-art { display: none; }
+body.dark-mode .ba-tile-art .dark-art { display: block; }
+.ba-tile-foot { padding: 9px 11px 11px; border-top: 1px solid var(--gray-100); }
+.ba-tile-name { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600;
+  color: var(--gray-800); margin-bottom: 5px; line-height: 1.35; }
+.ba-tile-dl { display: flex; gap: 6px; }
+.ba-tile-dl a { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600;
+  letter-spacing: .02em; color: var(--gray-500); text-decoration: none; border: 1px solid var(--gray-200);
+  border-radius: 6px; padding: 2px 7px; transition: color .12s, border-color .12s; }
+.ba-tile-dl a:hover { color: #A614C3; border-color: #A614C3; text-decoration: none; }
+</style>
+</head>
+<body class="btis-layout">
+<header class="btis-header">
+  <div class="btis-header-inner">
+    <a class="btis-brand" href="ds-00-home.html">
+      <img src="BTIS.png" class="btis-logo-img" alt="NorbieLink">
+    </a>
+    <nav class="btis-top-nav">
+      <a class="btis-top-nav-link" href="ds-nav-foundations.html">Foundations</a>      <a class="btis-top-nav-link" href="ds-nav-components.html">Components</a>
+      <a class="btis-top-nav-link active" href="ds-nav-resources.html">Resources</a>
+    </nav>
+    <div class="btis-header-right">
+      <button class="btis-icon-btn" onclick="toggleSearch()"><span class="material-icons-round">search</span></button>
+      <button class="btis-theme-pill" id="darkModeBtn" onclick="toggleDarkMode()">
+        <span class="material-icons-round" id="darkModeIcon">dark_mode</span>
+        <span>Theme</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="ds-shell">
+
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay" onclick="if(event.target===this)closeSearch()">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <span class="material-icons-round">search</span>
+      <input id="search-input" type="text" placeholder="Search components, foundations…" oninput="renderResults(this.value)" onkeydown="searchKeydown(event)">
+      <span class="material-icons-round search-close" onclick="closeSearch()">close</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+    <div class="search-hint">
+      <kbd>↑</kbd><kbd>↓</kbd> navigate &nbsp;·&nbsp; <kbd>↵</kbd> open &nbsp;·&nbsp; <kbd>Esc</kbd> close &nbsp;·&nbsp; <kbd>⌘K</kbd> open
+    </div>
+  </div>
+</div>
+
+<aside class="ds-toc">
+  <div class="ds-toc-title">In this article</div>
+  <a class="ds-toc-item active" href="#characters">Brand Characters</a>
+</aside>
+
+<main class="ds-main">
+  <div class="ds-content">
+    <div class="ds-breadcrumb">
+      <a href="ds-00-home.html">Home</a><span class="ds-breadcrumb-sep">›</span>
+      <a href="ds-nav-resources.html">Resources</a><span class="ds-breadcrumb-sep">›</span><span>Brand Characters</span>
+    </div>
+    <div class="ds-title-row">
+      <h1 class="ds-page-title">Brand Characters</h1>
+      <div class="ds-title-actions">
+        <a class="ds-nav-arrow-btn" href="ds-brand-norbielink-logo.html" title="Previous"><span class="material-icons-round">arrow_back</span></a>
+        <a class="ds-nav-arrow-btn" href="ds-brand-visual-elements.html" title="Next"><span class="material-icons-round">arrow_forward</span></a>
+      </div>
+    </div>
+    <p class="ds-page-desc">Norbie and AI-Norbie — the two mascots, their usage rules, and every exported format.</p>
+
+  <div class="ds-section" id="characters">
+    <div class="ba-note">
+      <span class="material-icons-round">info</span>
+      <span>Mirrored from the BTIS brand style guide — <a href="https://zeroheight.com/741749006/p/02fa9b-norbie" target="_blank" rel="noopener">Norbie</a>. Every file below is the original, served from this site; nothing opens in another tab.</span>
+    </div>
+    <p class="ba-p">Norbie is a tribute to Norbert Hohlbein, the original owner of btis and father of our co-presidents, Paul and Jeff Hohlbein. Norbert was known for his boldness, sternness, and likability. Norbert was affectionately referred to as a gorilla by those who knew him, and his legacy lives on through our new mascot.</p>
+  </div>
+
+  <div class="ba-tabwrap">
+    <div class="ba-tabs">
+      <button class="ba-tab active" onclick="baTab(this,'tab-norbie')">Norbie</button>
+      <button class="ba-tab" onclick="baTab(this,'tab-ainorbie')">AI-Norbie</button>
+    </div>
+    <div class="ba-pane active" id="tab-norbie">
+    <h3 class="ba-h3">Usage</h3>
+    <p class="ba-p">Norbie can be used to call attention to, or answer questions about, a particularly noteworthy piece of information or need for motivation.</p>
+    <h3 class="ba-h3">Norbie</h3>
+    <div class="ba-shots one">
+      <figure class="ba-shot"><img src="brand-assets/characters/img/norbie-hero.png" alt="" loading="lazy"></figure>
+    </div>
+    <p class="ba-p">We use two different versions of Norbie. This version is primarily for our BTIS website, social media, and podcast. If you’re looking for the Norbie used in NorbieLink, see the <strong>AI-Norbie</strong> tab.</p>
+    <div class="ba-files">
+      <a class="ba-file" href="brand-assets/characters/Norbie.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/characters/Norbie.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Norbie.svg</span>
+          <span class="ba-fsub">SVG · 17.8 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/characters/Norbie.png" download>
+        <span class="ba-thumb"><img src="brand-assets/characters/Norbie.png" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Norbie.png</span>
+          <span class="ba-fsub">PNG · 330.3 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/characters/gorilla-all-rgb_Grad-01-Norbie.png" download>
+        <span class="ba-thumb"><img src="brand-assets/characters/gorilla-all-rgb_Grad-01-Norbie.png" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">gorilla-all-rgb_Grad 01 Norbie.png</span>
+          <span class="ba-fsub">PNG · 74.4 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/characters/gorilla-all-rgb_Grad-02-Norbie.png" download>
+        <span class="ba-thumb"><img src="brand-assets/characters/gorilla-all-rgb_Grad-02-Norbie.png" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">gorilla-all-rgb_Grad 02 Norbie.png</span>
+          <span class="ba-fsub">PNG · 81.3 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/characters/gorilla-all-rgb_Grad-03-Norbie.png" download>
+        <span class="ba-thumb"><img src="brand-assets/characters/gorilla-all-rgb_Grad-03-Norbie.png" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">gorilla-all-rgb_Grad 03 Norbie.png</span>
+          <span class="ba-fsub">PNG · 60.3 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/characters/gorilla-all-cmyk.ai" download>
+        <span class="ba-thumb"><span class="ba-ext">AI</span></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">gorilla-all-cmyk.ai</span>
+          <span class="ba-fsub">AI · 731.0 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+    </div>
+    <h3 class="ba-h3">More formats</h3>
+    <div class="ba-links">
+      <a class="ba-link" href="https://www.canva.com/folder/FAFIa4luGRg" target="_blank" rel="noopener">
+        <span class="material-icons-round">open_in_new</span>
+        <span class="ba-fmeta"><span class="ba-fname">Canva Asset Link</span><span class="ba-fsub">Norbie’s Canva assets folder.</span></span>
+      </a>
+      <a class="ba-link" href="https://www.dropbox.com/scl/fo/2hqzjf28b9c5tk1cwqt3u/h?rlkey=0gdaemg90medqwgnp7uwnzmjl&st=ciyjud9n&dl=0" target="_blank" rel="noopener">
+        <span class="material-icons-round">open_in_new</span>
+        <span class="ba-fmeta"><span class="ba-fname">Dropbox Asset Link</span><span class="ba-fsub">Norbie’s Dropbox assets folder (more formats).</span></span>
+      </a>
+    </div>
+    <h3 class="ba-h3">Do's &amp; Don'ts</h3>
+    <div class="ba-dd">
+      <figure class="ba-dd-card">
+        <div class="ba-dd-img"><img src="brand-assets/characters/img/norbie-do-gradient.png" alt="" loading="lazy"></div>
+        <figcaption><span class="badge-status-pill badge-sp-active">Do</span>You can use our brand color to add gradient effect to Norbie.</figcaption>
+      </figure>
+      <figure class="ba-dd-card">
+        <div class="ba-dd-img"><img src="brand-assets/characters/img/norbie-dont-color.png" alt="" loading="lazy"></div>
+        <figcaption><span class="badge-status-pill badge-sp-declined">Don’t</span>Please don&#x27;t use other color beside our brand color.</figcaption>
+      </figure>
+      <figure class="ba-dd-card">
+        <div class="ba-dd-img"><img src="brand-assets/characters/img/norbie-do-dressup.jpg" alt="" loading="lazy"></div>
+        <figcaption><span class="badge-status-pill badge-sp-active">Do</span>You may dress Norbie up with relevant items (like hats or glasses) to match the theme.</figcaption>
+      </figure>
+      <figure class="ba-dd-card">
+        <div class="ba-dd-img"><img src="brand-assets/characters/img/norbie-dont-style.jpg" alt="" loading="lazy"></div>
+        <figcaption><span class="badge-status-pill badge-sp-declined">Don’t</span>Do not change the illustration style or modify Norbie&#x27;s physical form.</figcaption>
+      </figure>
+    </div>
+    </div>
+    <div class="ba-pane" id="tab-ainorbie">
+    <h3 class="ba-h3">Usage</h3>
+    <p class="ba-p">AI-Norbie can be used to call attention to, or answer questions about, a particularly noteworthy piece of information or need for motivation.</p>
+    <h3 class="ba-h3">AI-Norbie</h3>
+    <div class="ba-shots one">
+      <figure class="ba-shot"><img src="brand-assets/characters/img/ainorbie-hero.jpeg" alt="" loading="lazy"></figure>
+    </div>
+    <p class="ba-p">The AI version of Norbie is used mainly for Norbielink and any other Norbielink promotions. The AI-Norbie persona embodies the intelligence and precision of Norbielink. He represents a high-tech, efficient partner that agents can trust to power their success.</p>
+    <div class="ba-files">
+      <a class="ba-file" href="brand-assets/characters/Norbieface.png" download>
+        <span class="ba-thumb"><img src="brand-assets/characters/Norbieface.png" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Norbieface.png</span>
+          <span class="ba-fsub">PNG · 14.7 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/characters/Norbieface.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/characters/Norbieface.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Norbieface.svg</span>
+          <span class="ba-fsub">SVG · 1.1 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/characters/Norbieface_Teal.png" download>
+        <span class="ba-thumb"><img src="brand-assets/characters/Norbieface_Teal.png" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Norbieface_Teal.png</span>
+          <span class="ba-fsub">PNG · 238.4 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/characters/Norbieface_Teal.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/characters/Norbieface_Teal.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Norbieface_Teal.svg</span>
+          <span class="ba-fsub">SVG · 1.6 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/characters/Norbieface_Raspberry.png" download>
+        <span class="ba-thumb"><img src="brand-assets/characters/Norbieface_Raspberry.png" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Norbieface_Raspberry.png</span>
+          <span class="ba-fsub">PNG · 259.2 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/characters/Norbirlink_Raspberry.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/characters/Norbirlink_Raspberry.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Norbirlink_Raspberry.svg</span>
+          <span class="ba-fsub">SVG · 1.6 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/characters/Dark.gif" download>
+        <span class="ba-thumb"><span class="ba-ext">GIF</span></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Dark.gif</span>
+          <span class="ba-fsub">GIF · 40.7 MB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/characters/Light.gif" download>
+        <span class="ba-thumb"><span class="ba-ext">GIF</span></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Light.gif</span>
+          <span class="ba-fsub">GIF · 9.0 MB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+    </div>
+    <div class="ba-note"><span class="material-icons-round">info</span><span><strong>Dark.gif</strong> and <strong>Light.gif</strong> are the full-resolution animations — 40.7&nbsp;MB and 9&nbsp;MB. They download directly, but they are large; the Dropbox link below carries lighter exports.</span></div>
+    <h3 class="ba-h3">More formats</h3>
+    <div class="ba-links">
+      <a class="ba-link" href="https://www.canva.com/folder/FAFIa4luGRg" target="_blank" rel="noopener">
+        <span class="material-icons-round">open_in_new</span>
+        <span class="ba-fmeta"><span class="ba-fname">Notion code Link</span><span class="ba-fsub">Norbie’s Canva assets folder.</span></span>
+      </a>
+      <a class="ba-link" href="https://www.dropbox.com/scl/fo/2hqzjf28b9c5tk1cwqt3u/h?rlkey=0gdaemg90medqwgnp7uwnzmjl&st=ciyjud9n&dl=0" target="_blank" rel="noopener">
+        <span class="material-icons-round">open_in_new</span>
+        <span class="ba-fmeta"><span class="ba-fname">Dropbox Asset Link</span><span class="ba-fsub">Norbie’s Dropbox assets folder (more formats).</span></span>
+      </a>
+      <a class="ba-link" href="https://www.dropbox.com/scl/fo/rqkfon1t16s4rawwe14in/AHnAisEa7rBRIRS6v6xsfXQ?rlkey=0y1h74loegvwdn15v9d8his37&st=1r1g2lt2&dl=0" target="_blank" rel="noopener">
+        <span class="material-icons-round">open_in_new</span>
+        <span class="ba-fmeta"><span class="ba-fname">Dropbox GIF Link</span><span class="ba-fsub">The Norbielink GIF folder on Dropbox.</span></span>
+      </a>
+    </div>
+    </div>
+  </div>
+
+
+  </div>
+</main>
+</div>
+<script src="ds-search.js"></script>
+<script>
+function toggleDarkMode(){
+  const b=document.body,ic=document.getElementById('darkModeIcon'),bt=document.getElementById('darkModeBtn');
+  b.classList.toggle('dark-mode');
+  if(b.classList.contains('dark-mode')){ic.textContent='light_mode';bt.classList.add('active');}
+  else{ic.textContent='dark_mode';bt.classList.remove('active');}
+}
+function baTab(btn,id){
+  const wrap=btn.closest('.ba-tabwrap');
+  wrap.querySelectorAll('.ba-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  wrap.querySelectorAll('.ba-pane').forEach(p=>p.classList.toggle('active',p.id===id));
+}
+</script>
+<script src="ds-shared.js"></script>
+</body></html>

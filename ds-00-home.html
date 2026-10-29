@@ -1850,7 +1850,12 @@ function closeMobileMenu(){
       {l:'Text Fields',u:'ds-08-textfields.html'},{l:'Textarea',u:'ds-56-textarea.html'},
       {l:'Toggle',u:'ds-57-toggle.html'},
       {l:'Tooltip',u:'ds-25-tooltips.html'}]},
-    {l:'Resources',u:'ds-nav-resources.html',pages:[]}
+    {l:'Resources',u:'ds-nav-resources.html',pages:[
+      {l:'Norbielink Logo',u:'ds-brand-norbielink-logo.html'},
+      {l:'BTIS Logo',u:'ds-brand-logo.html'},
+      {l:'Brand Characters',u:'ds-brand-characters.html'},
+      {l:'Visual Elements',u:'ds-brand-visual-elements.html'},
+    ]}
   ];
   function buildSec(sec){
     const subs=sec.pages.map(p=>`<a class="btis-mdr-sub" href="${p.u}">${p.l}</a>`).join('');
@@ -1926,6 +1931,10 @@ const DS_SEARCH_INDEX = [
   { title:'Spinner', section:'Components', href:'ds-55-spinner.html', icon:'autorenew' },
   { title:'Textarea', section:'Components', href:'ds-56-textarea.html', icon:'notes' },
   { title:'Toggle', section:'Components', href:'ds-57-toggle.html', icon:'toggle_off' },
+  { title:'Norbielink Logo', section:'Resources', href:'ds-brand-norbielink-logo.html', icon:'auto_awesome' },
+  { title:'BTIS Logo', section:'Resources', href:'ds-brand-logo.html', icon:'workspace_premium' },
+  { title:'Brand Characters', section:'Resources', href:'ds-brand-characters.html', icon:'emoji_emotions' },
+  { title:'Visual Elements', section:'Resources', href:'ds-brand-visual-elements.html', icon:'category' },
 ];
 let focusedIndex = -1;
 function openSearch(){const o=document.getElementById('search-overlay');if(!o)return;o.classList.add('open');setTimeout(()=>document.getElementById('search-input').focus(),50);renderResults('');}
