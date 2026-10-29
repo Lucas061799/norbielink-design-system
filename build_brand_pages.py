@@ -629,8 +629,6 @@ body += section("dos", "Do's",
         ("do", N + "img/do-4.png", "For strictly black and white situations, the entire logo will contrast with the black or white background."),
         ("do", N + "img/do-5.png", "When specifically referencing the Marketplace or its features, the full BTIS Marketplace logo may be used."),
         ("do", N + "img/do-6.png", "When specifically referencing the Marketplace or its features, the full BTIS Marketplace logo may be used."),
-        ("do", N + "img/do-7.jpg", "The “b” mark can be used situationally as a background element or in social media."),
-        ("do", N + "img/do-8.jpg", "The “b” mark can be used situationally as a background element or in social media."),
     ]))
 
 body += section("donts", "Don'ts",

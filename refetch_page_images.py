@@ -56,8 +56,6 @@ IMAGES = {
         "do-4.png": "PlwPn5aUe184SvCSfFKV0g.png",
         "do-5.png": "lgeoRcYA0Z2zHaNJBKEMqg.png",
         "do-6.png": "lLBaKtKyYYBJNEELitI54w.png",
-        "do-7.jpg": "lJpEvYfGu_6THTwpzN1TwA.jpg",
-        "do-8.jpg": "ndwWkGpDgaEVMx2rDtNg-w.jpg",
         "dont-1.jpg": "COHuRYiTKLJi6Oh5Qt-XZw.jpg",
         "dont-2.jpg": "W7EHl-IMGstFLdAIAnFgfw.jpg",
         "dont-3.jpg": "6NEO3ypc8CzVmPuuryq4uQ.jpg",
