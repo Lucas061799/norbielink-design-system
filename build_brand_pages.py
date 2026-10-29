@@ -203,7 +203,7 @@ def nl_donts():
          "", '<img src="%s" alt="" style="width:62%%;'
              'filter:drop-shadow(0 8px 6px rgba(45,54,83,.55)) drop-shadow(0 -2px 0 #73C9B7);">' % LOCK),
     ]
-    out = ['    <div class="ba-dd" style="--r:1.43;">\n']
+    out = ['    <div class="ba-dd" style="--r:1.97;">\n']
     for cap, bg, inner in cards:
         out.append('      <figure class="ba-dd-card">\n'
                    '        <div class="nl-stage" style="%s">%s</div>\n'
