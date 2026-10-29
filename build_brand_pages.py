@@ -209,7 +209,7 @@ CSS = """
   color: var(--gray-800); margin: 36px 0 10px; }
 .ba-section-lead { margin-top: 0; }
 
-.ba-note { display: flex; gap: 10px; align-items: flex-start; background: var(--gray-50);
+.ba-note { display: flex; gap: 10px; align-items: center; background: var(--gray-50);
   border: 1px solid var(--gray-200); border-radius: 10px; padding: 12px 14px;
   font-size: 13px; line-height: 1.65; color: var(--gray-600); margin: 16px 0 24px; }
 .ds-section-title + .ba-note { margin-top: 18px; }
