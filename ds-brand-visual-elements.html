@@ -30,10 +30,9 @@
   margin-bottom: 18px; }
 .ba-shots.one { grid-template-columns: 1fr; }
 .ba-shot { border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden;
-  background: #FFFFFF; margin: 0; }
-.ba-shot img { display: block; width: 100%; height: auto; }
-.ba-shots:not(.one) .ba-shot img { aspect-ratio: var(--r, 16 / 9); object-fit: contain;
-  background: #FFFFFF; }
+  background: var(--bg, #FFFFFF); margin: 0; }
+.ba-shot img { display: block; width: 100%; height: 100%;
+  aspect-ratio: var(--r, 16 / 9); object-fit: contain; }
 .ba-shot figcaption { font-size: 12px; line-height: 1.5; color: var(--gray-500);
   padding: 9px 12px; border-top: 1px solid var(--gray-100); background: var(--card-bg); }
 
@@ -91,30 +90,23 @@ body.dark-mode .ba-tab.active { color: #FFFFFF; }
 .ba-pane { display: none; }
 .ba-pane.active { display: block; }
 
-/* ── Product tile grid (visual elements) ── */
-.ba-tiles { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-@media (max-width: 720px) { .ba-tiles { grid-template-columns: 1fr; } }
-.ba-tile { border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden;
-  background: var(--card-bg); }
-.ba-tile-art { height: 140px; display: flex; align-items: center; justify-content: center;
+/* ── Product tiles (visual elements) ──
+   A plain contact sheet: the artwork and its name, with the downloads listed
+   underneath as file rows like everywhere else on these pages. */
+.ba-tilegrid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(144px, 1fr));
+  margin-bottom: 8px; }
+.ba-tilecell { margin: 0; border: 1px solid var(--gray-200); border-radius: 12px;
+  overflow: hidden; background: var(--card-bg); }
+.ba-tilecell-art { height: 104px; display: flex; align-items: center; justify-content: center;
   background: #FFFFFF; }
-body.dark-mode .ba-tile-art { background: #0F1120; }
-.ba-tile-art img { max-width: 96px; max-height: 96px; object-fit: contain; }
-.ba-tile-art .dark-art { display: none; }
-body.dark-mode .ba-tile-art.has-dark .light-art { display: none; }
-body.dark-mode .ba-tile-art .dark-art { display: block; }
-.ba-tile-foot { padding: 9px 11px 11px; border-top: 1px solid var(--gray-100); }
-.ba-tile-name { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600;
-  color: var(--gray-800); margin-bottom: 5px; line-height: 1.35; }
-.ba-tile-dl { display: flex; gap: 6px; }
-.ba-tile-dl a { display: inline-flex; align-items: center; gap: 3px;
-  font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600;
-  letter-spacing: .02em; color: var(--gray-500); text-decoration: none; border: 1px solid var(--gray-200);
-  border-radius: 6px; padding: 2px 7px 2px 5px;
-  transition: color .12s, border-color .12s, background .12s; }
-.ba-tile-dl a .material-icons-round { font-size: 12px; }
-.ba-tile-dl a:hover { color: var(--gray-800); border-color: var(--gray-300);
-  background: var(--hover-bg); text-decoration: none; }
+body.dark-mode .ba-tilecell-art { background: #0F1120; }
+.ba-tilecell-art img { max-width: 64px; max-height: 64px; object-fit: contain; }
+.ba-tilecell-art .dark-art { display: none; }
+body.dark-mode .ba-tilecell-art.has-dark .light-art { display: none; }
+body.dark-mode .ba-tilecell-art .dark-art { display: block; }
+.ba-tilecell figcaption { padding: 8px 10px 10px; border-top: 1px solid var(--gray-100);
+  font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600;
+  line-height: 1.35; color: var(--gray-800); }
 </style>
 </head>
 <body class="btis-layout">
@@ -265,8 +257,8 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
     <div class="ba-pane active" id="tab-tiles">
     <h3 class="ba-h3">Usage</h3>
     <p class="ba-p">These tiles act as the visual representation of our product suite. They serve as intuitive entry points, designed to help users instantly recognize and navigate to specific lines of business.</p>
-    <div class="ba-shots one">
-      <figure class="ba-shot"><img src="brand-assets/visual-elements/img/tiles-hero.png" alt="" loading="lazy"></figure>
+    <div class="ba-shots one" style="--r:2.0;">
+      <figure class="ba-shot" style="--bg:#74C4B4"><img src="brand-assets/visual-elements/img/tiles-hero.png" alt="" loading="lazy"></figure>
     </div>
     <div class="ba-links">
       <a class="ba-link" href="https://www.canva.com/folder/FAFIa4luGRg" target="_blank" rel="noopener">
@@ -280,156 +272,93 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
     </div>
     <div class="ba-note"><span class="material-icons-round">error</span><span>Norbielink has a dark mode and a light mode. A file named <code>Abc Dark</code> is the dark-mode drawing; anything else is the light-mode one. Where only a light version exists, the same file is used in both themes. The grid below already does the swap — toggle the theme to see it.</span></div>
     <h3 class="ba-h3">Lines of business</h3>
-    <div class="ba-tiles">
-      <div class="ba-tile">
-        <div class="ba-tile-art"><img class="light-art" src="brand-assets/visual-elements/Bonds.svg" alt="Bonds" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Bonds</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Bonds.svg" download><span class="material-icons-round">download</span>SVG</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Builders_Risk.svg" alt="Builders Risk" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Builders_Risk_Dark.svg" alt="" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Builders Risk</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Builders_Risk.svg" download><span class="material-icons-round">download</span>Light</a><a href="brand-assets/visual-elements/Builders_Risk_Dark.svg" download><span class="material-icons-round">download</span>Dark</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Business_Owners.svg" alt="Business Owners" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Business_Owners_Dark.svg" alt="" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Business Owners</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Business_Owners.svg" download><span class="material-icons-round">download</span>Light</a><a href="brand-assets/visual-elements/Business_Owners_Dark.svg" download><span class="material-icons-round">download</span>Dark</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Cannabis.svg" alt="Cannabis" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Cannabis_Dark.svg" alt="" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Cannabis</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Cannabis.svg" download><span class="material-icons-round">download</span>Light</a><a href="brand-assets/visual-elements/Cannabis_Dark.svg" download><span class="material-icons-round">download</span>Dark</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art"><img class="light-art" src="brand-assets/visual-elements/Cell_Phone_Stores.svg" alt="Cell Phone Stores" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Cell Phone Stores</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Cell_Phone_Stores.svg" download><span class="material-icons-round">download</span>SVG</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Commercial_Auto.svg" alt="Commercial Auto" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Commercial_Auto_Dark.svg" alt="" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Commercial Auto</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Commercial_Auto.svg" download><span class="material-icons-round">download</span>Light</a><a href="brand-assets/visual-elements/Commercial_Auto_Dark.svg" download><span class="material-icons-round">download</span>Dark</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Cyber.svg" alt="Cyber" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Cyber_Dark.svg" alt="" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Cyber</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Cyber.svg" download><span class="material-icons-round">download</span>Light</a><a href="brand-assets/visual-elements/Cyber_Dark.svg" download><span class="material-icons-round">download</span>Dark</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Excess.svg" alt="Excess" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Excess_Dark.svg" alt="" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Excess</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Excess.svg" download><span class="material-icons-round">download</span>Light</a><a href="brand-assets/visual-elements/Excess_Dark.svg" download><span class="material-icons-round">download</span>Dark</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art has-dark"><img class="light-art" src="brand-assets/visual-elements/General_Liability.svg" alt="General Liability" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/General_Liability_Dark.svg" alt="" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">General Liability</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/General_Liability.svg" download><span class="material-icons-round">download</span>Light</a><a href="brand-assets/visual-elements/General_Liability_Dark.svg" download><span class="material-icons-round">download</span>Dark</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Home_Based_Business.svg" alt="Home Based Business" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Home_Based_Business_Dark.svg" alt="" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Home Based Business</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Home_Based_Business.svg" download><span class="material-icons-round">download</span>Light</a><a href="brand-assets/visual-elements/Home_Based_Business_Dark.svg" download><span class="material-icons-round">download</span>Dark</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Inland_Marine.svg" alt="Inland Marine" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Inland_Marine_Dark.svg" alt="" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Inland Marine</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Inland_Marine.svg" download><span class="material-icons-round">download</span>Light</a><a href="brand-assets/visual-elements/Inland_Marine_Dark.svg" download><span class="material-icons-round">download</span>Dark</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Lessor_s_Risk.svg" alt="Lessor&#x27;s Risk" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Lessor_s_Risk_Dark.svg" alt="" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Lessor&#x27;s Risk</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Lessor_s_Risk.svg" download><span class="material-icons-round">download</span>Light</a><a href="brand-assets/visual-elements/Lessor_s_Risk_Dark.svg" download><span class="material-icons-round">download</span>Dark</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Marine_Contractors.svg" alt="Marine Contractors" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Marine_Contractors_Dark.svg" alt="" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Marine Contractors</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Marine_Contractors.svg" download><span class="material-icons-round">download</span>Light</a><a href="brand-assets/visual-elements/Marine_Contractors_Dark.svg" download><span class="material-icons-round">download</span>Dark</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Non-Profit.svg" alt="Non-Profit" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Non-Profit_Dark.svg" alt="" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Non-Profit</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Non-Profit.svg" download><span class="material-icons-round">download</span>Light</a><a href="brand-assets/visual-elements/Non-Profit_Dark.svg" download><span class="material-icons-round">download</span>Dark</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Pollution.svg" alt="Pollution" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Pollution_Dark.svg" alt="" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Pollution</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Pollution.svg" download><span class="material-icons-round">download</span>Light</a><a href="brand-assets/visual-elements/Pollution_Dark.svg" download><span class="material-icons-round">download</span>Dark</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Professional_Liability.svg" alt="Professional Liability" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Professional_Liability_Dark.svg" alt="" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Professional Liability</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Professional_Liability.svg" download><span class="material-icons-round">download</span>Light</a><a href="brand-assets/visual-elements/Professional_Liability_Dark.svg" download><span class="material-icons-round">download</span>Dark</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art"><img class="light-art" src="brand-assets/visual-elements/Special_Events.svg" alt="Special Events" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Special Events</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Special_Events.svg" download><span class="material-icons-round">download</span>SVG</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art"><img class="light-art" src="brand-assets/visual-elements/Sports_Advantage.svg" alt="Sports Advantage" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Sports Advantage</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Sports_Advantage.svg" download><span class="material-icons-round">download</span>SVG</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Truckers_GL.svg" alt="Truckers GL" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Truckers_GL_Dark.svg" alt="" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Truckers GL</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Truckers_GL.svg" download><span class="material-icons-round">download</span>Light</a><a href="brand-assets/visual-elements/Truckers_GL_Dark.svg" download><span class="material-icons-round">download</span>Dark</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Vacant_Risks.svg" alt="Vacant Risks" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Vacant_Risks_Dark.svg" alt="" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Vacant Risks</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Vacant_Risks.svg" download><span class="material-icons-round">download</span>Light</a><a href="brand-assets/visual-elements/Vacant_Risks_Dark.svg" download><span class="material-icons-round">download</span>Dark</a></div>
-        </div>
-      </div>
-      <div class="ba-tile">
-        <div class="ba-tile-art"><img class="light-art" src="brand-assets/visual-elements/Worker_s_Comp.svg" alt="Worker&#x27;s Comp" loading="lazy"></div>
-        <div class="ba-tile-foot">
-          <div class="ba-tile-name">Worker&#x27;s Comp</div>
-          <div class="ba-tile-dl"><a href="brand-assets/visual-elements/Worker_s_Comp.svg" download><span class="material-icons-round">download</span>SVG</a></div>
-        </div>
-      </div>
+    <div class="ba-tilegrid">
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art"><img class="light-art" src="brand-assets/visual-elements/Bonds.svg" alt="Bonds" loading="lazy"></div>
+        <figcaption>Bonds</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Builders_Risk.svg" alt="Builders Risk" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Builders_Risk_Dark.svg" alt="" loading="lazy"></div>
+        <figcaption>Builders Risk</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Business_Owners.svg" alt="Business Owners" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Business_Owners_Dark.svg" alt="" loading="lazy"></div>
+        <figcaption>Business Owners</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Cannabis.svg" alt="Cannabis" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Cannabis_Dark.svg" alt="" loading="lazy"></div>
+        <figcaption>Cannabis</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art"><img class="light-art" src="brand-assets/visual-elements/Cell_Phone_Stores.svg" alt="Cell Phone Stores" loading="lazy"></div>
+        <figcaption>Cell Phone Stores</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Commercial_Auto.svg" alt="Commercial Auto" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Commercial_Auto_Dark.svg" alt="" loading="lazy"></div>
+        <figcaption>Commercial Auto</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Cyber.svg" alt="Cyber" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Cyber_Dark.svg" alt="" loading="lazy"></div>
+        <figcaption>Cyber</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Excess.svg" alt="Excess" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Excess_Dark.svg" alt="" loading="lazy"></div>
+        <figcaption>Excess</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art has-dark"><img class="light-art" src="brand-assets/visual-elements/General_Liability.svg" alt="General Liability" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/General_Liability_Dark.svg" alt="" loading="lazy"></div>
+        <figcaption>General Liability</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Home_Based_Business.svg" alt="Home Based Business" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Home_Based_Business_Dark.svg" alt="" loading="lazy"></div>
+        <figcaption>Home Based Business</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Inland_Marine.svg" alt="Inland Marine" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Inland_Marine_Dark.svg" alt="" loading="lazy"></div>
+        <figcaption>Inland Marine</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Lessor_s_Risk.svg" alt="Lessor&#x27;s Risk" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Lessor_s_Risk_Dark.svg" alt="" loading="lazy"></div>
+        <figcaption>Lessor&#x27;s Risk</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Marine_Contractors.svg" alt="Marine Contractors" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Marine_Contractors_Dark.svg" alt="" loading="lazy"></div>
+        <figcaption>Marine Contractors</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Non-Profit.svg" alt="Non-Profit" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Non-Profit_Dark.svg" alt="" loading="lazy"></div>
+        <figcaption>Non-Profit</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Pollution.svg" alt="Pollution" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Pollution_Dark.svg" alt="" loading="lazy"></div>
+        <figcaption>Pollution</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Professional_Liability.svg" alt="Professional Liability" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Professional_Liability_Dark.svg" alt="" loading="lazy"></div>
+        <figcaption>Professional Liability</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art"><img class="light-art" src="brand-assets/visual-elements/Special_Events.svg" alt="Special Events" loading="lazy"></div>
+        <figcaption>Special Events</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art"><img class="light-art" src="brand-assets/visual-elements/Sports_Advantage.svg" alt="Sports Advantage" loading="lazy"></div>
+        <figcaption>Sports Advantage</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Truckers_GL.svg" alt="Truckers GL" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Truckers_GL_Dark.svg" alt="" loading="lazy"></div>
+        <figcaption>Truckers GL</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art has-dark"><img class="light-art" src="brand-assets/visual-elements/Vacant_Risks.svg" alt="Vacant Risks" loading="lazy"><img class="dark-art" src="brand-assets/visual-elements/Vacant_Risks_Dark.svg" alt="" loading="lazy"></div>
+        <figcaption>Vacant Risks</figcaption>
+      </figure>
+      <figure class="ba-tilecell">
+        <div class="ba-tilecell-art"><img class="light-art" src="brand-assets/visual-elements/Worker_s_Comp.svg" alt="Worker&#x27;s Comp" loading="lazy"></div>
+        <figcaption>Worker&#x27;s Comp</figcaption>
+      </figure>
     </div>
-    <h3 class="ba-h3">Illustration sources</h3>
+    <h3 class="ba-h3">Downloads</h3>
     <div class="ba-files">
       <a class="ba-file" href="brand-assets/visual-elements/cat-ill-trade.ai" download>
         <span class="ba-thumb"><span class="ba-ext">AI</span></span>
@@ -447,14 +376,310 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
         </span>
         <span class="material-icons-round ba-dl">download</span>
       </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Bonds.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Bonds.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Bonds.svg</span>
+          <span class="ba-fsub">SVG · 16.4 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Builders_Risk_Dark.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Builders_Risk_Dark.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Builders Risk Dark.svg</span>
+          <span class="ba-fsub">SVG · 2.7 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Builders_Risk.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Builders_Risk.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Builders Risk.svg</span>
+          <span class="ba-fsub">SVG · 2.7 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Business_Owners_Dark.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Business_Owners_Dark.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Business Owners Dark.svg</span>
+          <span class="ba-fsub">SVG · 9.4 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Business_Owners.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Business_Owners.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Business Owners.svg</span>
+          <span class="ba-fsub">SVG · 9.4 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Cannabis_Dark.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Cannabis_Dark.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Cannabis Dark.svg</span>
+          <span class="ba-fsub">SVG · 45.7 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Cannabis.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Cannabis.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Cannabis.svg</span>
+          <span class="ba-fsub">SVG · 45.7 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Commercial_Auto_Dark.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Commercial_Auto_Dark.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Commercial Auto Dark.svg</span>
+          <span class="ba-fsub">SVG · 7.8 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Commercial_Auto.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Commercial_Auto.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Commercial Auto.svg</span>
+          <span class="ba-fsub">SVG · 7.8 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Excess_Dark.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Excess_Dark.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Excess Dark.svg</span>
+          <span class="ba-fsub">SVG · 5.2 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Excess.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Excess.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Excess.svg</span>
+          <span class="ba-fsub">SVG · 5.2 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/General_Liability_Dark.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/General_Liability_Dark.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">General Liability Dark.svg</span>
+          <span class="ba-fsub">SVG · 9.4 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/General_Liability.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/General_Liability.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">General Liability.svg</span>
+          <span class="ba-fsub">SVG · 9.4 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Home_Based_Business_Dark.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Home_Based_Business_Dark.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Home Based Business Dark.svg</span>
+          <span class="ba-fsub">SVG · 9.7 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Home_Based_Business.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Home_Based_Business.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Home Based Business.svg</span>
+          <span class="ba-fsub">SVG · 9.7 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Inland_Marine_Dark.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Inland_Marine_Dark.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Inland Marine Dark.svg</span>
+          <span class="ba-fsub">SVG · 1001 B</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Inland_Marine.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Inland_Marine.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Inland Marine.svg</span>
+          <span class="ba-fsub">SVG · 1007 B</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Lessor_s_Risk_Dark.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Lessor_s_Risk_Dark.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Lessor&#x27;s Risk Dark.svg</span>
+          <span class="ba-fsub">SVG · 21.0 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Lessor_s_Risk.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Lessor_s_Risk.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Lessor&#x27;s Risk.svg</span>
+          <span class="ba-fsub">SVG · 21.0 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Marine_Contractors_Dark.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Marine_Contractors_Dark.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Marine Contractors Dark.svg</span>
+          <span class="ba-fsub">SVG · 12.3 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Marine_Contractors.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Marine_Contractors.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Marine Contractors.svg</span>
+          <span class="ba-fsub">SVG · 12.3 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Non-Profit_Dark.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Non-Profit_Dark.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Non-Profit Dark.svg</span>
+          <span class="ba-fsub">SVG · 9.0 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Non-Profit.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Non-Profit.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Non-Profit.svg</span>
+          <span class="ba-fsub">SVG · 9.0 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Pollution_Dark.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Pollution_Dark.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Pollution Dark.svg</span>
+          <span class="ba-fsub">SVG · 14.1 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Pollution.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Pollution.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Pollution.svg</span>
+          <span class="ba-fsub">SVG · 14.1 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Professional_Liability_Dark.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Professional_Liability_Dark.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Professional Liability Dark.svg</span>
+          <span class="ba-fsub">SVG · 8.2 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Professional_Liability.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Professional_Liability.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Professional Liability.svg</span>
+          <span class="ba-fsub">SVG · 8.2 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Special_Events.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Special_Events.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Special Events.svg</span>
+          <span class="ba-fsub">SVG · 12.0 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Sports_Advantage.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Sports_Advantage.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Sports Advantage.svg</span>
+          <span class="ba-fsub">SVG · 8.3 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Truckers_GL_Dark.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Truckers_GL_Dark.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Truckers GL Dark.svg</span>
+          <span class="ba-fsub">SVG · 8.6 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Truckers_GL.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Truckers_GL.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Truckers GL.svg</span>
+          <span class="ba-fsub">SVG · 8.6 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Vacant_Risks_Dark.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Vacant_Risks_Dark.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Vacant Risks Dark.svg</span>
+          <span class="ba-fsub">SVG · 22.6 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Vacant_Risks.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Vacant_Risks.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Vacant Risks.svg</span>
+          <span class="ba-fsub">SVG · 22.6 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Worker_s_Comp.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Worker_s_Comp.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Worker&#x27;s Comp.svg</span>
+          <span class="ba-fsub">SVG · 72.0 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Cell_Phone_Stores.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Cell_Phone_Stores.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Cell Phone Stores.svg</span>
+          <span class="ba-fsub">SVG · 8.5 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Cyber_Dark.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Cyber_Dark.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Cyber Dark.svg</span>
+          <span class="ba-fsub">SVG · 25.6 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
+      <a class="ba-file" href="brand-assets/visual-elements/Cyber.svg" download>
+        <span class="ba-thumb"><img src="brand-assets/visual-elements/Cyber.svg" alt=""></span>
+        <span class="ba-fmeta">
+          <span class="ba-fname">Cyber.svg</span>
+          <span class="ba-fsub">SVG · 25.6 KB</span>
+        </span>
+        <span class="material-icons-round ba-dl">download</span>
+      </a>
     </div>
     </div>
     <div class="ba-pane" id="tab-monstera">
     <h3 class="ba-h3">Usage</h3>
     <p class="ba-p">These items aren’t used everywhere. They’re primarily used to tie the brand together. Examples would be leaves on an initial page or entry point to a branding piece, like letterhead, envelopes, business cards, the home page of the website, or the cover of a quarterly report.</p>
     <h3 class="ba-h3">Monstera Leaves</h3>
-    <div class="ba-shots one">
-      <figure class="ba-shot"><img src="brand-assets/visual-elements/img/monstera-hero.png" alt="" loading="lazy"></figure>
+    <div class="ba-shots one" style="--r:2.0;">
+      <figure class="ba-shot" style="--bg:#FCFCFC"><img src="brand-assets/visual-elements/img/monstera-hero.png" alt="" loading="lazy"></figure>
     </div>
     <p class="ba-p">Monstera leaves. Named from the Latin word for “monstrous” or “abnormal”, referring to the unusually large leaves, they are native to Norbie’s environment.</p>
     <div class="ba-files">
@@ -488,8 +713,8 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
     <h3 class="ba-h3">Usage</h3>
     <p class="ba-p">These items aren’t used everywhere. They’re primarily used to tie the brand together. Examples would be leaves on an initial page or entry point to a branding piece, like letterhead, envelopes, business cards, the home page of the website, or the cover of a quarterly report.</p>
     <h3 class="ba-h3">Banana</h3>
-    <div class="ba-shots one">
-      <figure class="ba-shot"><img src="brand-assets/visual-elements/img/banana-hero.png" alt="" loading="lazy"></figure>
+    <div class="ba-shots one" style="--r:2.0;">
+      <figure class="ba-shot" style="--bg:#FFFFFF"><img src="brand-assets/visual-elements/img/banana-hero.png" alt="" loading="lazy"></figure>
     </div>
     <div class="ba-files">
       <a class="ba-file" href="brand-assets/visual-elements/Banana.png" download>
@@ -506,8 +731,8 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
     <h3 class="ba-h3">Usage</h3>
     <p class="ba-p">This graphic is used specifically in conjunction with the BTIS Marketplace logo, and is present within the digital insurance marketplaces. It may also be used when describing the Marketplace, lines of business, or ease of use associated with the online raters.</p>
     <h3 class="ba-h3">Marketplace awning</h3>
-    <div class="ba-shots one">
-      <figure class="ba-shot"><img src="brand-assets/visual-elements/img/awning-hero.png" alt="" loading="lazy"></figure>
+    <div class="ba-shots one" style="--r:8.182;">
+      <figure class="ba-shot" style="--bg:#FFFFFF"><img src="brand-assets/visual-elements/img/awning-hero.png" alt="" loading="lazy"></figure>
     </div>
     <div class="ba-files">
       <a class="ba-file" href="brand-assets/visual-elements/Marketplace_awning.svg" download>
@@ -532,8 +757,8 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
     <h3 class="ba-h3">Usage</h3>
     <p class="ba-p">We utilize a jungle background across social media, email campaigns, and promotional materials to establish Norbie’s home environment. Designers are encouraged to explore different colors and formats to keep the visuals dynamic, provided the setting remains unmistakably a lush tropical rainforest.</p>
     <h3 class="ba-h3">Jungle Background</h3>
-    <div class="ba-shots one">
-      <figure class="ba-shot"><img src="brand-assets/visual-elements/img/jungle-hero.png" alt="" loading="lazy"></figure>
+    <div class="ba-shots one" style="--r:2.0;">
+      <figure class="ba-shot" style="--bg:#9C9C9C"><img src="brand-assets/visual-elements/img/jungle-hero.png" alt="" loading="lazy"></figure>
     </div>
     <p class="ba-p">Monstera leaves. Named from the Latin word for “monstrous” or “abnormal”, referring to the unusually large leaves, they are native to Norbie’s environment.</p>
     <div class="ba-files">

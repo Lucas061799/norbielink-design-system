@@ -30,10 +30,9 @@
   margin-bottom: 18px; }
 .ba-shots.one { grid-template-columns: 1fr; }
 .ba-shot { border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden;
-  background: #FFFFFF; margin: 0; }
-.ba-shot img { display: block; width: 100%; height: auto; }
-.ba-shots:not(.one) .ba-shot img { aspect-ratio: var(--r, 16 / 9); object-fit: contain;
-  background: #FFFFFF; }
+  background: var(--bg, #FFFFFF); margin: 0; }
+.ba-shot img { display: block; width: 100%; height: 100%;
+  aspect-ratio: var(--r, 16 / 9); object-fit: contain; }
 .ba-shot figcaption { font-size: 12px; line-height: 1.5; color: var(--gray-500);
   padding: 9px 12px; border-top: 1px solid var(--gray-100); background: var(--card-bg); }
 
@@ -91,30 +90,23 @@ body.dark-mode .ba-tab.active { color: #FFFFFF; }
 .ba-pane { display: none; }
 .ba-pane.active { display: block; }
 
-/* ── Product tile grid (visual elements) ── */
-.ba-tiles { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-@media (max-width: 720px) { .ba-tiles { grid-template-columns: 1fr; } }
-.ba-tile { border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden;
-  background: var(--card-bg); }
-.ba-tile-art { height: 140px; display: flex; align-items: center; justify-content: center;
+/* ── Product tiles (visual elements) ──
+   A plain contact sheet: the artwork and its name, with the downloads listed
+   underneath as file rows like everywhere else on these pages. */
+.ba-tilegrid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(144px, 1fr));
+  margin-bottom: 8px; }
+.ba-tilecell { margin: 0; border: 1px solid var(--gray-200); border-radius: 12px;
+  overflow: hidden; background: var(--card-bg); }
+.ba-tilecell-art { height: 104px; display: flex; align-items: center; justify-content: center;
   background: #FFFFFF; }
-body.dark-mode .ba-tile-art { background: #0F1120; }
-.ba-tile-art img { max-width: 96px; max-height: 96px; object-fit: contain; }
-.ba-tile-art .dark-art { display: none; }
-body.dark-mode .ba-tile-art.has-dark .light-art { display: none; }
-body.dark-mode .ba-tile-art .dark-art { display: block; }
-.ba-tile-foot { padding: 9px 11px 11px; border-top: 1px solid var(--gray-100); }
-.ba-tile-name { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600;
-  color: var(--gray-800); margin-bottom: 5px; line-height: 1.35; }
-.ba-tile-dl { display: flex; gap: 6px; }
-.ba-tile-dl a { display: inline-flex; align-items: center; gap: 3px;
-  font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600;
-  letter-spacing: .02em; color: var(--gray-500); text-decoration: none; border: 1px solid var(--gray-200);
-  border-radius: 6px; padding: 2px 7px 2px 5px;
-  transition: color .12s, border-color .12s, background .12s; }
-.ba-tile-dl a .material-icons-round { font-size: 12px; }
-.ba-tile-dl a:hover { color: var(--gray-800); border-color: var(--gray-300);
-  background: var(--hover-bg); text-decoration: none; }
+body.dark-mode .ba-tilecell-art { background: #0F1120; }
+.ba-tilecell-art img { max-width: 64px; max-height: 64px; object-fit: contain; }
+.ba-tilecell-art .dark-art { display: none; }
+body.dark-mode .ba-tilecell-art.has-dark .light-art { display: none; }
+body.dark-mode .ba-tilecell-art .dark-art { display: block; }
+.ba-tilecell figcaption { padding: 8px 10px 10px; border-top: 1px solid var(--gray-100);
+  font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600;
+  line-height: 1.35; color: var(--gray-800); }
 </style>
 </head>
 <body class="btis-layout">
@@ -257,8 +249,8 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
     </div>
     <h3 class="ba-h3">Icon</h3>
     <p class="ba-p">An icon is an image or symbol that represents a brand or app. It generally does not contain the name of the brand or app.</p>
-    <div class="ba-shots one">
-      <figure class="ba-shot"><img src="brand-assets/btis-logo/img/icon.jpg" alt="" loading="lazy"></figure>
+    <div class="ba-shots one" style="--r:2.0;">
+      <figure class="ba-shot" style="--bg:#FFFFFF"><img src="brand-assets/btis-logo/img/icon.jpg" alt="" loading="lazy"></figure>
     </div>
     <div class="ba-files">
       <a class="ba-file" href="brand-assets/btis-logo/Icon_Logo_blue.svg" download>
@@ -296,8 +288,8 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
     </div>
     <h3 class="ba-h3">Lockup</h3>
     <p class="ba-p">A lockup is the combination of wordmark (the brand or app name) and its icon, generally referred altogether as a logo.</p>
-    <div class="ba-shots one">
-      <figure class="ba-shot"><img src="brand-assets/btis-logo/img/lockup.jpg" alt="" loading="lazy"></figure>
+    <div class="ba-shots one" style="--r:2.0;">
+      <figure class="ba-shot" style="--bg:#FCFCFC"><img src="brand-assets/btis-logo/img/lockup.jpg" alt="" loading="lazy"></figure>
     </div>
     <div class="ba-files">
       <a class="ba-file" href="brand-assets/btis-logo/Logo_with_name.svg" download>
@@ -343,9 +335,9 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
     <h3 class="ba-h3">Brand</h3>
     <p class="ba-p">Brand app logos are used in situations that demand a bold brand presence against a neutral background.</p>
     <div class="ba-shots" style="--r:1.429;">
-      <figure class="ba-shot"><img src="brand-assets/btis-logo/img/brand-1.png" alt="" loading="lazy"></figure>
-      <figure class="ba-shot"><img src="brand-assets/btis-logo/img/brand-2.jpg" alt="" loading="lazy"></figure>
-      <figure class="ba-shot"><img src="brand-assets/btis-logo/img/brand-3.jpg" alt="" loading="lazy"></figure>
+      <figure class="ba-shot" style="--bg:#FCFCFC"><img src="brand-assets/btis-logo/img/brand-1.png" alt="" loading="lazy"></figure>
+      <figure class="ba-shot" style="--bg:#FFFFFF"><img src="brand-assets/btis-logo/img/brand-2.jpg" alt="" loading="lazy"></figure>
+      <figure class="ba-shot" style="--bg:#FFFFFF"><img src="brand-assets/btis-logo/img/brand-3.jpg" alt="" loading="lazy"></figure>
     </div>
     <div class="ba-files">
       <a class="ba-file" href="brand-assets/btis-logo/Logo_blue.svg" download>
@@ -416,8 +408,8 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
     <h3 class="ba-h3">Neutral</h3>
     <p class="ba-p">Neutral app logos can be used when the hierarchy calls for the logo to recede, but should always be evaluated for adequate contrast.</p>
     <div class="ba-shots" style="--r:1.429;">
-      <figure class="ba-shot"><img src="brand-assets/btis-logo/img/neutral-1.jpg" alt="" loading="lazy"></figure>
-      <figure class="ba-shot"><img src="brand-assets/btis-logo/img/neutral-2.jpg" alt="" loading="lazy"></figure>
+      <figure class="ba-shot" style="--bg:#FCFCFC"><img src="brand-assets/btis-logo/img/neutral-1.jpg" alt="" loading="lazy"></figure>
+      <figure class="ba-shot" style="--bg:#040C04"><img src="brand-assets/btis-logo/img/neutral-2.jpg" alt="" loading="lazy"></figure>
     </div>
     <div class="ba-files">
       <a class="ba-file" href="brand-assets/btis-logo/Logo_Fullblack.svg" download>
@@ -455,8 +447,8 @@ body.dark-mode .ba-tile-art .dark-art { display: block; }
     </div>
     <h3 class="ba-h3">Inverse</h3>
     <p class="ba-p">Inverse app logos should be used to contrast against bold backgrounds.</p>
-    <div class="ba-shots one">
-      <figure class="ba-shot"><img src="brand-assets/btis-logo/img/inverse-1.jpg" alt="" loading="lazy"></figure>
+    <div class="ba-shots one" style="--r:2.0;">
+      <figure class="ba-shot" style="--bg:#14049C"><img src="brand-assets/btis-logo/img/inverse-1.jpg" alt="" loading="lazy"></figure>
     </div>
     <div class="ba-files">
       <a class="ba-file" href="brand-assets/btis-logo/InverseLogo.jpg" download>
