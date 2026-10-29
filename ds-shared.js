@@ -222,6 +222,12 @@ function toggleDarkMode() {
 }
 
 /* ─── TOC SCROLL + ACTIVE HIGHLIGHT ─── */
+function toggleSidenavSection(btn) {
+  const sec = btn.closest('.ds-sidenav-group');
+  const open = sec.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+
 function initTOC() {
   const tocLinks = document.querySelectorAll('.ds-toc-item[href^="#"]');
   if (!tocLinks.length) return;

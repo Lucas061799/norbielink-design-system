@@ -30,9 +30,12 @@
   margin-bottom: 18px; }
 .ba-shots.one { grid-template-columns: 1fr; }
 .ba-shot { border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden;
-  background: var(--bg, #FFFFFF); margin: 0; }
-.ba-shot img { display: block; width: 100%; height: 100%;
-  aspect-ratio: var(--r, 16 / 9); object-fit: contain; }
+  background: var(--card-bg); margin: 0; }
+.ba-shot-art { aspect-ratio: var(--r, 16 / 9); display: flex; align-items: center;
+  justify-content: center; background: var(--bg, #FFFFFF); }
+.ba-shot-art img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+/* A lone example is the page's hero, so give the artwork room inside its box. */
+.ba-shots.one .ba-shot-art { padding: 30px 40px; }
 .ba-shot figcaption { font-size: 12px; line-height: 1.5; color: var(--gray-500);
   padding: 9px 12px; border-top: 1px solid var(--gray-100); background: var(--card-bg); }
 
@@ -149,75 +152,92 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
 <!-- SUB-NAV -->
 <nav class="ds-sidenav">
   <div class="ds-sidenav-group">
-    <div class="ds-sidenav-group-title">Getting Started</div>
-    <a class="ds-sidenav-item" href="ds-00-home.html">Introduction</a>
-    <a class="ds-sidenav-item" href="ds-01-color.html">Colors</a>
-    <a class="ds-sidenav-item" href="ds-02-typography.html">Typography</a>
-    <a class="ds-sidenav-item" href="ds-03-elevation.html">Elevation</a>
-    <a class="ds-sidenav-item" href="ds-04-shape.html">Shape</a>
-    <a class="ds-sidenav-item" href="ds-05-spacing.html">Spacing</a>
+    <button class="ds-sidenav-sec" type="button" onclick="toggleSidenavSection(this)" aria-expanded="false">
+      <span class="material-icons-round ds-sidenav-sec-icon">school</span>
+      <span class="ds-sidenav-sec-label">Getting Started</span>
+      <span class="material-icons-round ds-sidenav-chev">expand_more</span>
+    </button>
+    <div class="ds-sidenav-sub">
+      <a class="ds-sidenav-item" href="ds-00-home.html">Introduction</a>
+      <a class="ds-sidenav-item" href="ds-01-color.html">Colors</a>
+      <a class="ds-sidenav-item" href="ds-02-typography.html">Typography</a>
+      <a class="ds-sidenav-item" href="ds-03-elevation.html">Elevation</a>
+      <a class="ds-sidenav-item" href="ds-04-shape.html">Shape</a>
+      <a class="ds-sidenav-item" href="ds-05-spacing.html">Spacing</a>
+    </div>
+  </div>
+  <div class="ds-sidenav-group open">
+    <button class="ds-sidenav-sec" type="button" onclick="toggleSidenavSection(this)" aria-expanded="true">
+      <span class="material-icons-round ds-sidenav-sec-icon">palette</span>
+      <span class="ds-sidenav-sec-label">Brand assets</span>
+      <span class="material-icons-round ds-sidenav-chev">expand_more</span>
+    </button>
+    <div class="ds-sidenav-sub">
+      <a class="ds-sidenav-item" href="ds-brand-norbielink-logo.html">Norbielink Logo</a>
+      <a class="ds-sidenav-item" href="ds-brand-logo.html">BTIS Logo</a>
+      <a class="ds-sidenav-item active" href="ds-brand-characters.html">Brand Characters</a>
+      <a class="ds-sidenav-item" href="ds-brand-visual-elements.html">Visual Elements</a>
+    </div>
   </div>
   <div class="ds-sidenav-group">
-    <div class="ds-sidenav-group-title">Brand assets</div>
-    <a class="ds-sidenav-item" href="ds-brand-norbielink-logo.html">Norbielink Logo</a>
-    <a class="ds-sidenav-item" href="ds-brand-logo.html">BTIS Logo</a>
-    <a class="ds-sidenav-item active" href="ds-brand-characters.html">Brand Characters</a>
-    <a class="ds-sidenav-item" href="ds-brand-visual-elements.html">Visual Elements</a>
-  </div>
-  <div class="ds-sidenav-group">
-    <div class="ds-sidenav-group-title">Components</div>
-    <a class="ds-sidenav-item" href="ds-26-accordion.html">Accordion</a>
-    <a class="ds-sidenav-item" href="ds-27-alert.html">Alert</a>
-    <a class="ds-sidenav-item" href="ds-28-alert-dialog.html">Alert Dialog</a>
-    <a class="ds-sidenav-item" href="ds-14-appbar.html">App Bars</a>
-    <a class="ds-sidenav-item" href="ds-29-avatar.html">Avatar</a>
-    <a class="ds-sidenav-item" href="ds-09-badges.html">Badge</a>
-    <a class="ds-sidenav-item" href="ds-30-breadcrumb.html">Breadcrumb</a>
-    <a class="ds-sidenav-item" href="ds-06-buttons.html">Button</a>
-    <a class="ds-sidenav-item" href="ds-31-button-group.html">Button Group</a>
-    <a class="ds-sidenav-item" href="ds-32-calendar.html">Calendar</a>
-    <a class="ds-sidenav-item" href="ds-33-carousel.html">Carousel</a>
-    <a class="ds-sidenav-item" href="ds-10-cards.html">Cards</a>
-    <a class="ds-sidenav-item" href="ds-15-checkbox.html">Checkbox</a>
-    <a class="ds-sidenav-item" href="ds-34-chart.html">Chart</a>
-    <a class="ds-sidenav-item" href="ds-16-chips.html">Chips</a>
-    <a class="ds-sidenav-item" href="ds-35-collapsible.html">Collapsible</a>
-    <a class="ds-sidenav-item" href="ds-36-combobox.html">Combobox</a>
-    <a class="ds-sidenav-item" href="ds-38-context-menu.html">Context Menu</a>
-    <a class="ds-sidenav-item" href="ds-39-date-picker.html">Date Picker</a>
-    <a class="ds-sidenav-item" href="ds-17-dialogs.html">Dialog</a>
-    <a class="ds-sidenav-item" href="ds-18-divider.html">Divider</a>
-    <a class="ds-sidenav-item" href="ds-40-drawer.html">Drawer</a>
-    <a class="ds-sidenav-item" href="ds-41-dropdown.html">Dropdown Menu</a>
-    <a class="ds-sidenav-item" href="ds-42-empty-state.html">Empty State</a>
-    <a class="ds-sidenav-item" href="ds-43-hover-card.html">Hover Card</a>
-    <a class="ds-sidenav-item" href="ds-44-input-otp.html">Input OTP</a>
-    <a class="ds-sidenav-item" href="ds-46-label.html">Label</a>
-    <a class="ds-sidenav-item" href="ds-19-lists.html">Lists</a>
-    <a class="ds-sidenav-item" href="ds-20-progress.html">Loading & Progress</a>
-    <a class="ds-sidenav-item" href="ds-47-menubar.html">Menubar</a>
-    <a class="ds-sidenav-item" href="ds-21-menus.html">Menus</a>
-    <a class="ds-sidenav-item" href="ds-07-navigation.html">Navigation</a>
-    <a class="ds-sidenav-item" href="ds-48-pagination.html">Pagination</a>
-    <a class="ds-sidenav-item" href="ds-49-popover.html">Popover</a>
-    <a class="ds-sidenav-item" href="ds-22-radio.html">Radio Group</a>
-    <a class="ds-sidenav-item" href="ds-50-resizable.html">Resizable</a>
-    <a class="ds-sidenav-item" href="ds-51-scroll-area.html">Scroll Area</a>
-    <a class="ds-sidenav-item" href="ds-52-select.html">Select</a>
-    <a class="ds-sidenav-item" href="ds-53-sheet.html">Sheet</a>
-    <a class="ds-sidenav-item" href="ds-54-skeleton.html">Skeleton</a>
-    <a class="ds-sidenav-item" href="ds-23-sliders.html">Slider</a>
-    <a class="ds-sidenav-item" href="ds-24-snackbar.html">Snackbar</a>
-    <a class="ds-sidenav-item" href="ds-55-spinner.html">Spinner</a>
-    <a class="ds-sidenav-item" href="ds-12-switches.html">Switch</a>
-    <a class="ds-sidenav-item" href="ds-11-tabs.html">Tabs</a>
-    <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
-    <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
-    <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
-    <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
+    <button class="ds-sidenav-sec" type="button" onclick="toggleSidenavSection(this)" aria-expanded="false">
+      <span class="material-icons-round ds-sidenav-sec-icon">widgets</span>
+      <span class="ds-sidenav-sec-label">Components</span>
+      <span class="material-icons-round ds-sidenav-chev">expand_more</span>
+    </button>
+    <div class="ds-sidenav-sub">
+      <a class="ds-sidenav-item" href="ds-26-accordion.html">Accordion</a>
+      <a class="ds-sidenav-item" href="ds-27-alert.html">Alert</a>
+      <a class="ds-sidenav-item" href="ds-28-alert-dialog.html">Alert Dialog</a>
+      <a class="ds-sidenav-item" href="ds-14-appbar.html">App Bars</a>
+      <a class="ds-sidenav-item" href="ds-29-avatar.html">Avatar</a>
+      <a class="ds-sidenav-item" href="ds-09-badges.html">Badge</a>
+      <a class="ds-sidenav-item" href="ds-30-breadcrumb.html">Breadcrumb</a>
+      <a class="ds-sidenav-item" href="ds-06-buttons.html">Button</a>
+      <a class="ds-sidenav-item" href="ds-31-button-group.html">Button Group</a>
+      <a class="ds-sidenav-item" href="ds-32-calendar.html">Calendar</a>
+      <a class="ds-sidenav-item" href="ds-33-carousel.html">Carousel</a>
+      <a class="ds-sidenav-item" href="ds-10-cards.html">Cards</a>
+      <a class="ds-sidenav-item" href="ds-15-checkbox.html">Checkbox</a>
+      <a class="ds-sidenav-item" href="ds-34-chart.html">Chart</a>
+      <a class="ds-sidenav-item" href="ds-16-chips.html">Chips</a>
+      <a class="ds-sidenav-item" href="ds-35-collapsible.html">Collapsible</a>
+      <a class="ds-sidenav-item" href="ds-36-combobox.html">Combobox</a>
+      <a class="ds-sidenav-item" href="ds-38-context-menu.html">Context Menu</a>
+      <a class="ds-sidenav-item" href="ds-39-date-picker.html">Date Picker</a>
+      <a class="ds-sidenav-item" href="ds-17-dialogs.html">Dialog</a>
+      <a class="ds-sidenav-item" href="ds-18-divider.html">Divider</a>
+      <a class="ds-sidenav-item" href="ds-40-drawer.html">Drawer</a>
+      <a class="ds-sidenav-item" href="ds-41-dropdown.html">Dropdown Menu</a>
+      <a class="ds-sidenav-item" href="ds-42-empty-state.html">Empty State</a>
+      <a class="ds-sidenav-item" href="ds-43-hover-card.html">Hover Card</a>
+      <a class="ds-sidenav-item" href="ds-44-input-otp.html">Input OTP</a>
+      <a class="ds-sidenav-item" href="ds-46-label.html">Label</a>
+      <a class="ds-sidenav-item" href="ds-19-lists.html">Lists</a>
+      <a class="ds-sidenav-item" href="ds-20-progress.html">Loading & Progress</a>
+      <a class="ds-sidenav-item" href="ds-47-menubar.html">Menubar</a>
+      <a class="ds-sidenav-item" href="ds-21-menus.html">Menus</a>
+      <a class="ds-sidenav-item" href="ds-07-navigation.html">Navigation</a>
+      <a class="ds-sidenav-item" href="ds-48-pagination.html">Pagination</a>
+      <a class="ds-sidenav-item" href="ds-49-popover.html">Popover</a>
+      <a class="ds-sidenav-item" href="ds-22-radio.html">Radio Group</a>
+      <a class="ds-sidenav-item" href="ds-50-resizable.html">Resizable</a>
+      <a class="ds-sidenav-item" href="ds-51-scroll-area.html">Scroll Area</a>
+      <a class="ds-sidenav-item" href="ds-52-select.html">Select</a>
+      <a class="ds-sidenav-item" href="ds-53-sheet.html">Sheet</a>
+      <a class="ds-sidenav-item" href="ds-54-skeleton.html">Skeleton</a>
+      <a class="ds-sidenav-item" href="ds-23-sliders.html">Slider</a>
+      <a class="ds-sidenav-item" href="ds-24-snackbar.html">Snackbar</a>
+      <a class="ds-sidenav-item" href="ds-55-spinner.html">Spinner</a>
+      <a class="ds-sidenav-item" href="ds-12-switches.html">Switch</a>
+      <a class="ds-sidenav-item" href="ds-11-tabs.html">Tabs</a>
+      <a class="ds-sidenav-item" href="ds-08-textfields.html">Text Fields</a>
+      <a class="ds-sidenav-item" href="ds-56-textarea.html">Textarea</a>
+      <a class="ds-sidenav-item" href="ds-57-toggle.html">Toggle</a>
+      <a class="ds-sidenav-item" href="ds-25-tooltips.html">Tooltip</a>
+    </div>
   </div>
 </nav>
-
 <aside class="ds-toc">
   <div class="ds-toc-title">In this article</div>
   <a class="ds-toc-item active" href="#characters">Brand Characters</a>
@@ -256,7 +276,7 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
     <p class="ba-p">Norbie can be used to call attention to, or answer questions about, a particularly noteworthy piece of information or need for motivation.</p>
     <h3 class="ba-h3">Norbie</h3>
     <div class="ba-shots one" style="--r:3.237;">
-      <figure class="ba-shot" style="--bg:#FCFCFC"><img src="brand-assets/characters/img/norbie-hero.png" alt="" loading="lazy"></figure>
+      <figure class="ba-shot"><div class="ba-shot-art" style="--bg:#FFFFFF"><img src="brand-assets/characters/img/norbie-hero.png" alt="" loading="lazy"></div></figure>
     </div>
     <p class="ba-p">We use two different versions of Norbie. This version is primarily for our BTIS website, social media, and podcast. If you’re looking for the Norbie used in NorbieLink, see the <strong>AI-Norbie</strong> tab.</p>
     <div class="ba-files">
@@ -344,8 +364,8 @@ body.dark-mode .ba-tilecell-art .dark-art { display: block; }
     <h3 class="ba-h3">Usage</h3>
     <p class="ba-p">AI-Norbie can be used to call attention to, or answer questions about, a particularly noteworthy piece of information or need for motivation.</p>
     <h3 class="ba-h3">AI-Norbie</h3>
-    <div class="ba-shots one" style="--r:2.0;">
-      <figure class="ba-shot" style="--bg:#FCFCFC"><img src="brand-assets/characters/img/ainorbie-hero.jpeg" alt="" loading="lazy"></figure>
+    <div class="ba-shots one" style="--r:2.8;">
+      <figure class="ba-shot"><div class="ba-shot-art" style="--bg:#FFFFFF"><img src="brand-assets/characters/img/ainorbie-hero.jpeg" alt="" loading="lazy"></div></figure>
     </div>
     <p class="ba-p">The AI version of Norbie is used mainly for Norbielink and any other Norbielink promotions. The AI-Norbie persona embodies the intelligence and precision of Norbielink. He represents a high-tech, efficient partner that agents can trust to power their success.</p>
     <div class="ba-files">
